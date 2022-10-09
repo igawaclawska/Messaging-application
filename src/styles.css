@@ -1,79 +1,65 @@
-
-    body{
-        background-color: #6078EA;
-    }
-  .formContainer {
-    background-color: #a7bcff;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
+body{
+  background-color: #6078EA;
 }
-  
-    .formWrapper {
-      background-color: white;
-      padding: 20px 60px;
-      border-radius: 10px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      align-items: center;}
-  
-      .logo {
-        color: #6078EA;
-        font-weight: bold;
-        font-size: 24px;
-  
-      }
-  
-      .title {
-        color: #6078EA;
-        font-size: 12px;
-      }
-  
-      form {
-        display: flex;
-        flex-direction: column;
-        gap: 15px;}
-  
-        input {
-          padding: 15px;
-          border: none;
-          width: 250px;
-          border-bottom: 1px solid #a7bcff;
-      
-        }
-  
-        button {
-          background-color: #6078EA;
-          color: white;
-          padding: 10px;
-          font-weight: bold;
-          border: none;
-          cursor: pointer;
-        }
-  
-        label {
-          display: flex;
-          align-items: center;
-          gap: 10px;
-          color: #6078EA;
-          font-size: 12px;
-          cursor: pointer;
-        }
-      
-      p {
-        color: #6078EA;
-        font-size: 12px;
-        margin-top: 10px;
-      }
-    
-  
-  .home {
-    background-color: #6078EA;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+.formContainer {
+  background-color: #a7bcff;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.formWrapper {
+  float: right;
+  background-color: white;
+  padding: 30px 10px;
+  margin-top: 14%;
+  margin-right: 33%;
+  border-radius: 10px;
+  height: 50%;
+  width: 33%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+.logo {
+  color: #6078EA;
+  font-weight: bold;
+  font-size: 24px;
+}
+.title {
+  color: #6078EA;
+  font-size: 12px;
+}
+form {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  gap: 15px;
+}
+input {
+  padding: 15px;
+  border: none;
+  border-bottom: 1px solid #abb2c9;
+  width: 80%;
+}
+button {
+  background-color: #6078EA;
+  color: white;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+}
+label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #6078EA;
+  font-size: 12px;
+  cursor: pointer;
+}
+p {
+  color: #6078EA;
+  font-size: 12px;
+  margin-top: 10px;
+}
