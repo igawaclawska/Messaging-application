@@ -6,7 +6,7 @@ export const Register = () => {
   return (
     <div className="formCotainer">
         <div className="formWrapper">
-            <span className="logo">S I M P L E C H A T</span>
+            <span className="logo">I T U  C H A T</span>
             <h2 className="title">Register</h2>
             <form action="">
                 <label htmlFor="name" className="">Name</label>
@@ -17,7 +17,7 @@ export const Register = () => {
                 <input type="password" className="inputPassword" placeholder="Enter a password"></input>                
                 <label> Repeat password</label>
                 <input type="repeatPassword" className="inputRepeatPassword" placeholder="Repeat password"></input>                
-                <Button className="signUpBttn">Create account</Button>
+                <Button className="primaryBtn" text='Create account'></Button>
             </form>
             <span className="loginLink">Already have an account? <a href="#">Login</a></span>
         </div>

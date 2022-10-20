@@ -44,7 +44,7 @@ input {
   border-radius: 12px;
   width: 90%;
 }
-Button {
+.primaryBtn {
   margin-top: 10%;
   background-color: #6078EA;
   color: white;
