@@ -4,25 +4,24 @@ body{
 }
 .formContainer {
   background-color: #6078EA;
+  height: 100vh;
   display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .formWrapper {
-  float: right;
   background-color: white;
-  margin-top: 5%;
-  margin-right: 38%;
   border-radius: 16px;
-  height: 672px;
   width: 396px;
   display: flex;
   flex-direction: column;
-  gap: 5%;
   align-items: center;
+  padding: 32px 16px 48px 16px;
 }
 
 .logo {
-  margin-top: 5%;
+  margin: 5% 0;
   color: #6078EA;
   font-weight: bold;
   font-size: 36px;
@@ -45,7 +44,7 @@ input {
   width: 90%;
 }
 .primaryBtn {
-  margin-top: 10%;
+  margin: 10% 0 5% 0;
   background-color: #6078EA;
   color: white;
   padding: 10px;

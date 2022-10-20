@@ -3,7 +3,7 @@ import '../styles.css'
 
 export const Login = () => {
   return (
-    <div className="formCotainer">
+    <div className="formContainer">
         <div className="formWrapper">
             <span className="logo">I T U  C H A T</span>
             <h2 className="title">Login</h2>

@@ -4,7 +4,7 @@ import '../styles.css'
 
 export const Register = () => {
   return (
-    <div className="formCotainer">
+    <div className="formContainer">
         <div className="formWrapper">
             <span className="logo">I T U  C H A T</span>
             <h2 className="title">Register</h2>
