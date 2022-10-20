@@ -1,9 +1,20 @@
+
+/* Color variables start here */
+:root{
+  --white:white;
+  --blue:#6078EA;
+  --grey:#484848;
+  --lightgrey:#A7A4A4;
+}
+/* Color variables end here */
+
+
 body{
-  background-color: #6078EA;
-  color: #484848;
+  background-color: var(--blue);
+  color: var(--grey);
 }
 .formContainer {
-  background-color: #6078EA;
+  background-color: var(--blue);
   height: 100vh;
   display: flex;
   align-items: center;
@@ -11,7 +22,7 @@ body{
 }
 
 .formWrapper {
-  background-color: white;
+  background-color: var(--white);
   border-radius: 16px;
   width: 396px;
   display: flex;
@@ -22,12 +33,12 @@ body{
 
 .logo {
   margin: 5% 0;
-  color: #6078EA;
+  color: var(--blue);
   font-weight: bold;
   font-size: 36px;
 }
 .title {
-  color: #484848;;
+  color: var(--grey);
   font-size: 24px;
 }
 form {
@@ -39,14 +50,14 @@ form {
 }
 input {
   padding: 10px;
-  border: 1px solid #A7A4A4;
+  border: 1px solid var(--lightgrey);
   border-radius: 12px;
   width: 90%;
 }
 .primaryBtn {
   margin: 10% 0 5% 0;
-  background-color: #6078EA;
-  color: white;
+  background-color: var(--blue);
+  color: var(--white);
   padding: 10px;
   border: none;
   border-radius: 24px;
@@ -56,11 +67,11 @@ input {
 label {
   display: flex;
   gap: 10px;
-  color: #484848;
+  color: var(--grey);
   font-size: 16px;
   cursor: pointer;
 }
 p {
-  color: #484848;;
+  color: var(--grey);
   font-size: 12px;
 }
