@@ -1,5 +1,6 @@
 import React from 'react'
 import Button from '../components/Button'
+import InputField from '../components/InputField'
 import '../styles.css'
 
 export const Register = () => {
@@ -9,15 +10,11 @@ export const Register = () => {
             <span className="logo">I T U  C H A T</span>
             <h2 className="title">Register</h2>
             <form action="">
-                <label htmlFor="name" className="">Name</label>
-                <input type="text" className="inputName" placeholder="Enter your name" ></input>
-                <label htmlFor="email" className=""> E-mail</label>
-                <input type="email" className="inputEmail" placeholder="example@itu.dk"></input>
-                <label> Password</label>
-                <input type="password" className="inputPassword" placeholder="Enter a password"></input>                
-                <label> Repeat password</label>
-                <input type="repeatPassword" className="inputRepeatPassword" placeholder="Repeat password"></input>                
-                <Button className="primaryBtn" text='Create account'></Button>
+              <InputField className='inputName' id='name' label='name' placeholder='Enter your name' type='text'></InputField>
+              <InputField className='inputEmail' id='email' label='e-mail' placeholder='example@itu.dk' type='email'></InputField>
+              <InputField className='inputPassword' id='password' label='password' placeholder='Enter a password' type='password'></InputField> 
+              <InputField className='inputRepeatPassword' id='repratPassword' label='repeat password' placeholder='Repeat password' type='password'></InputField>                              
+              <Button className="primaryBtn" text='Create account'></Button>
             </form>
             <span className="loginLink">Already have an account? <a href="#">Login</a></span>
         </div>
