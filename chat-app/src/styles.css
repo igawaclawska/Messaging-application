@@ -106,8 +106,40 @@ nav {
   float: left;
   width: 80%;
 }
+
 .logOutSection{
   float:right;
   width: 20%;
   padding: none;
 }
+
+
+
+.thread-header {
+  width: 40%;
+  float:left;
+}
+
+.thread-header-wrapper{
+  background-color: var(--white);
+  color: var(--grey);
+  display: flex;
+  flex-direction: row;
+}
+
+.thread-header-title{
+  margin: 5% 3% 5% 3%;
+  color: var(--grey);
+  font-weight: bold;
+  font-size: 16px;
+  float: left;
+  width: 60%;
+}
+
+.createChatSection{
+  float:right;
+  width: 40%;
+  padding: none;
+}
+
+
