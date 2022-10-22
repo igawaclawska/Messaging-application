@@ -1,21 +1,20 @@
-import React from "react";
 import PropTypes from 'prop-types';
 
-const Button = ({ onClick, children }) => {
+const Button = ({ onClick, text }) => {
 	return (
-	<button type="button" onClick={onClick}>
-		Whatever
+	<button type="button" className="primaryBtn" onClick={onClick}>
+		{text}
     </button>
   );
 }
 
-Button.propTypes = {
-	variant: PropTypes.oneOf(['tertiary', 'secondary', 'primary']),
-	disabled: PropTypes.bool,
+Button.defaultProps = {
+	text: 'Primary Button',
 };
 
-Button.defaultProps = {
-	variant: 'primary',
-};
+// Button.propTypes = {
+// 	variant: PropTypes.oneOf(['tertiary', 'secondary', 'primary']),
+// 	disabled: PropTypes.bool,
+// };
 
 export default Button;
