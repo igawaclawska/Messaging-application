@@ -64,6 +64,16 @@ input {
   cursor: pointer;
   width: 95%;
 }
+.tertiaryBtn {
+  background-color: transparent;
+  font-weight: bold;
+  font-size: 16px;
+  color: var(--white);
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  width: 95%;
+}
 label {
   display: flex;
   gap: 10px;
@@ -74,4 +84,30 @@ label {
 p {
   color: var(--grey);
   font-size: 12px;
+}
+
+nav {
+  background-color:var(--grey);
+  color: var(--white);
+  width: 100%;
+}
+.navbarWrapper {
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+  padding: 1%;
+}
+.logoNav{
+  margin: 1% 0 1% 3%;
+  text-align: left;
+  color: var(--white);
+  font-weight: bold;
+  font-size: 20px;
+  float: left;
+  width: 80%;
+}
+.logOutSection{
+  float:right;
+  width: 20%;
+  padding: none;
 }
