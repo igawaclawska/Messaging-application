@@ -68,7 +68,6 @@ input {
   background-color: transparent;
   font-weight: bold;
   font-size: 16px;
-  color: var(--white);
   padding: 10px;
   border: none;
   cursor: pointer;
@@ -88,7 +87,6 @@ p {
 
 nav {
   background-color:var(--grey);
-  color: var(--white);
   width: 100%;
 }
 .navbarWrapper {
@@ -96,11 +94,11 @@ nav {
   flex-direction: row;
   overflow: hidden;
   padding: 1%;
+  color: var(--white);
 }
 .logoNav{
   margin: 1% 0 1% 3%;
   text-align: left;
-  color: var(--white);
   font-weight: bold;
   font-size: 20px;
   float: left;
@@ -112,7 +110,6 @@ nav {
   width: 20%;
   padding: none;
 }
-
 
 
 .thread-header {
@@ -149,19 +146,20 @@ nav {
 
 .chat-header-wrapper {
   background-color: var(--white);
-  color: var(--grey);
   display: flex;
   flex-direction: row;
 }
 
 .backBtn {
+  color: var(--grey);
+  margin: 1.28%;
   float:left;
   width: 20%;
+  color: var(--grey);
   }
 
 .chat-header-title{
-  margin: 3%;
-  margin: 3%;
+  margin: 2%;
   font-weight: bold;
   font-size: 16px;
   float: right;

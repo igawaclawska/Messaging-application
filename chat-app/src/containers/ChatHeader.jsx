@@ -6,7 +6,7 @@ const ChatHeader = ({ onLoad }) => {
     return (
         <header className="chat-header">
             <div className="chat-header-wrapper">
-                <div className="backBtn"><TertiaryButton className="tertiaryBtn" text='<Back'></TertiaryButton>                </div>
+                <div className="backBtn"><TertiaryButton className="tertiaryBtn" text='<'></TertiaryButton>                </div>
                 <span className="chat-header-title">Name Secondname</span>
             </div>
         </header>
