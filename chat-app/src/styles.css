@@ -246,3 +246,27 @@ nav {
 }
 
 .main-div{ height: 95%;}
+
+.bubble-wrapper{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  padding: 2%;
+  justify-content: right;
+}
+
+.right-bubble{
+  background-color: var(--blue);
+  padding: 2%;
+  color: var(--white);
+  border-radius: 16px 16px 0px 16px;
+  min-width: 20%;  
+  max-width: 50%;
+}
+
+.messageSent{
+  text-align: left;
+  word-break: break-word;
+  width:fit-content;
+  height: fit-content;
+}
