@@ -8,6 +8,12 @@
 }
 /* Color variables end here */
 
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 
 body{
   background-color: var(--blue);
@@ -54,6 +60,7 @@ input {
   border-radius: 12px;
   width: 90%;
 }
+
 .primaryBtn {
   margin: 10% 0 5% 0;
   background-color: var(--blue);
@@ -111,9 +118,22 @@ nav {
   padding: none;
 }
 
+.main-container{
+  background-color: var(--blue);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.threads-bar {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  float:left
+}
+
 
 .thread-header {
-  width: 30%;
   float:left;
 }
 
@@ -131,6 +151,23 @@ nav {
   font-size: 16px;
   float: left;
   width: 50%;
+}
+
+
+.thread-list{
+  display: flex;
+  flex-direction: column;
+  background-color: var(--white);
+  height: 90vh;
+}
+
+.single-thread{
+  display: block;
+  padding: 16px;
+  color: var(--grey);
+  width: 100%;
+  max-width: 100%;
+
 }
 
 .createChatSection{
