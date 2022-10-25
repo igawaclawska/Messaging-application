@@ -247,11 +247,11 @@ nav {
 
 .main-div{ height: 95%;}
 
-.bubble-wrapper{
+.right-bubble-wrapper{
   display: flex;
   flex-direction: row;
   width: 100%;
-  padding: 2%;
+  padding: 0% 5% 1% 0%;
   justify-content: right;
 }
 
@@ -260,13 +260,29 @@ nav {
   padding: 2%;
   color: var(--white);
   border-radius: 16px 16px 0px 16px;
-  min-width: 20%;  
+  width:fit-content; 
   max-width: 50%;
 }
 
 .messageSent{
-  text-align: left;
   word-break: break-word;
-  width:fit-content;
   height: fit-content;
 }
+
+.left-bubble-wrapper{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  padding: 0% 0% 1% 5%;
+  justify-content: left;
+}
+
+.left-bubble{
+  background-color: var(--grey);
+  padding: 2%;
+  color: var(--white);
+  border-radius: 16px 16px 16px 0px;
+  width:fit-content; 
+  max-width: 50%;
+}
+

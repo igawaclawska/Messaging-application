@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 
 const RightChatBubble = ({ onClick, text }) => {
 	return (
-	<div className="bubble-wrapper">
+	<div className="right-bubble-wrapper">
         <div className="right-bubble">
             <span className="messageSent"> {text}</span>
         </div>
