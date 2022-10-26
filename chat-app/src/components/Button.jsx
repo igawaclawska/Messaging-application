@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 
-const Button = ({ onClick, text }) => {
+const Button = ({ onClick, text, className }) => {
 	return (
-	<button type="button" className="primaryBtn" onClick={onClick}>
+	<button type="button" className={className} onClick={onClick}>
 		{text}
     </button>
   );
@@ -10,6 +10,7 @@ const Button = ({ onClick, text }) => {
 
 Button.defaultProps = {
 	text: 'Primary Button',
+	className: "primaryBtn"
 };
 
 // Button.propTypes = {

@@ -53,9 +53,11 @@ body{
   font-size: 24px;
 }
 form {
+  /* align-items: center; */
   margin-top: 5%;
   display: flex;
   flex-direction: column;
+ /* justify-content: stretch; */
   width: 90%;
   gap: 10px;
 }
@@ -63,7 +65,7 @@ input {
   padding: 10px;
   border: 1px solid var(--lightgrey);
   border-radius: 12px;
-  width: 90%;
+  width: 100%;
 }
 
 /* Primary, Secondary and Tertiary Button styling starts here */
@@ -76,14 +78,24 @@ input {
   border: none;
   border-radius: 24px;
   cursor: pointer;
-  width: 95%;
+  width: 100%;
 }
 
-.primaryBtn:hover {
+.primaryBtn-fixed-size {
+  padding: 8px 24px;
+  background-color: var(--blue1);
+  color: var(--white);
+  font-size: 12px;
+  border: none;
+  border-radius: 16px;
+  cursor: pointer;
+}
+
+.primaryBtn:hover, .primaryBtn-fixed-size:hover {
   background-color: var(--blue2);
 }
 
-.primaryBtn:active {
+.primaryBtn:active, .primaryBtn-fixed-size:active {
   background-color: var(--blue3);
 }
 
@@ -97,7 +109,7 @@ input {
   border: solid 1px var(--grey2);
   border-radius: 24px;
   cursor: pointer;
-  width: 95%;
+  width: 100%;
 }
 
 .secondaryBtn:hover{
@@ -115,7 +127,16 @@ input {
   padding: 10px;
   border: none;
   cursor: pointer;
-  width: 95%;
+  width: 100%;
+}
+
+.tertiaryBtn-fixed-size {
+  background-color: transparent;
+  font-weight: bold;
+  font-size: 12px;
+  padding: 8px 16px;
+  border: none;
+  cursor: pointer;
 }
 
 .tertiaryBtn-white {
@@ -185,24 +206,25 @@ nav {
 
 .thread-header {
   float:left;
+
 }
 
 .thread-header-wrapper{
+  padding: 12px 16px;
   background-color: var(--white);
   color: var(--grey);
   display: flex;
   flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .thread-header-title{
-  margin: 5% 3% 5% 3%;
+  margin: 0 16px 0 0;
   color: var(--grey);
   font-weight: bold;
   font-size: 16px;
-  float: left;
-  width: 50%;
 }
-
 
 .thread-list{
   display: flex;
@@ -233,38 +255,41 @@ nav {
 }
 
 .chat-header-wrapper {
+  padding: 12px;
   background-color: var(--white);
   display: flex;
+  align-items: center;
   flex-direction: row;
 }
 
 .backBtn {
   color: var(--grey);
-  margin: 1.28%;
-  float:left;
-  width: 10%;
+  margin-right: 12px;
   }
 
 .chat-area{
   float: right;
-  height: 100%;
+  display:flex;
+  flex-direction: column;
+  align-items: stretch;
+  height:100vh;
   width: 70%;
   border-left: .5px solid var(--lightgrey);
 }
 
 .chat-header-title{
-  margin: 2%;
-  width: 90%;
   font-weight: bold;
   font-size: 16px;
 }
+
+
 
 .send-message-wrapper{
   background-color: var(--white);
   display: flex;
   flex-direction: row;
-  width: 100%;
-  padding: 0% 5% 5% 5%;
+  padding: 2px 24px 16px 24px;
+  transform: translateY(-77%);
 }
 
 .sendBtn{
@@ -290,12 +315,13 @@ nav {
 
 .bubbles-scrollable{
     background-color: var(--white);
-    width: 100%;
-    height: 80%;
+    max-width: 100%;
+    height: 100vh;
     overflow-y: scroll;
+    padding-bottom: 56px;
 }
 
-.main-div{ height: 95%;}
+.main-div{ height: 100%;}
 
 .right-bubble-wrapper{
   display: flex;
@@ -334,5 +360,26 @@ nav {
   border-radius: 16px 16px 16px 0px;
   width:fit-content; 
   max-width: 50%;
+}
+
+@media (max-width: 767px) {
+  .chat-header-wrapper {
+    padding: 14px;
+  }
+
+  .thread-header-wrapper{
+    padding: 6px 16px;
+  }
+}
+
+@media (max-width: 585px) {
+  .chat-header-wrapper {
+    padding: 14px;
+  }
+
+  .thread-header-wrapper{
+    padding: 6px 16px;
+    flex-direction: column;
+  }
 }
 
