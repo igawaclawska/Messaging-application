@@ -1,5 +1,6 @@
 import React from 'react'
 import Button from '../components/Button'
+import SecondaryButton from '../components/SecondaryButton'
 import InputField from '../components/InputField'
 import '../styles.css'
 
@@ -14,7 +15,7 @@ export const Register = () => {
               <InputField className='inputEmail' id='email' label='e-mail' placeholder='example@itu.dk' type='email'></InputField>
               <InputField className='inputPassword' id='password' label='password' placeholder='Enter a password' type='password'></InputField> 
               <InputField className='inputRepeatPassword' id='repratPassword' label='repeat password' placeholder='Repeat password' type='password'></InputField>                              
-              <Button className="primaryBtn" text='Create account'></Button>
+              <SecondaryButton className="primaryBtn" text='Create account'></SecondaryButton>
             </form>
             <span className="loginLink">Already have an account? <a href="#">Login</a></span>
         </div>

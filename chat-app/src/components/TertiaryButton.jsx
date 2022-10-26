@@ -1,13 +1,14 @@
-const TertiaryButton = ({ onClick, text }) => {
+const TertiaryButton = ({ onClick, text, className }) => {
 	return (
-	<button type="button" className="tertiaryBtn" onClick={onClick}>
+	<button type="button" className={className} onClick={onClick}>
 		{text}
     </button>
   );
 }
 
 TertiaryButton.defaultProps = {
-    text: 'Tertiary Button'
+    text: 'Tertiary Button',
+    className: 'tertiaryBtn'
 }
 
 export default TertiaryButton;
