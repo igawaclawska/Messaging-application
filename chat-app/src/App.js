@@ -6,7 +6,7 @@ import './styles.css'
 
 function App() {
   return (
-   // <Register/>
+  //  <Register/>
    <Home/>
   );
 }

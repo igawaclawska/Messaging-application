@@ -7,9 +7,7 @@ const ThreadHeader = ({ onLoad }) => {
         <header className="thread-header">
             <div className="thread-header-wrapper">
                 <span className="thread-header-title">Chats</span>
-                <div className="createChatSection">
-                    <Button className="primaryBtn" text='Create Message'></Button>
-                </div>
+                    <Button className="primaryBtn-fixed-size" text='Create Message'></Button>
             </div>
         </header>
     );
