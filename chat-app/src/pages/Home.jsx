@@ -21,7 +21,7 @@ export const Home = () => {
                 </div>
                 <sidebar className="threads-bar">
                     <ThreadHeader></ThreadHeader>
-                    <ThreadList></ThreadList>
+                    <ThreadList threadslist={threadsArray}></ThreadList>
                 </sidebar>
                 <content className="chat-area">
                     <ChatHeader></ChatHeader>
@@ -33,3 +33,14 @@ export const Home = () => {
     )
 }
 export default Home;
+
+
+  //  fake hardcoded data for generating dynamic single threads, this data will be later taken from the db
+  const threadsArray = [
+    {id: 1, author: 'John K.', message: "Hi!"},
+    {id: 2, author: 'Ana S.', message: "Are you available tomorrow?"},
+    {id: 3, author: 'Max P.', message: "This is sooo cool!"},
+    {id: 4, author: 'Siri A.', message: "LOL"},
+    {id: 5, author: 'Tom N.', message: "Are you sure?"},
+    {id: 6, author: 'Natalie N.', message: "Hahahaha :D"},
+]

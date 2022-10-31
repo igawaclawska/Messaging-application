@@ -1,16 +1,13 @@
 import SingleThread from "../components/SingleThread";
 
-const ThreadList = ({ onLoad, singleThread }) => {
+const ThreadList = ({ onLoad, threadslist }) => {
+
     return (
+        //creates dynamic thread components
         <div className="thread-list">
-                <SingleThread className='single-thread-new-message'></SingleThread>
-                <SingleThread></SingleThread>
-                <SingleThread></SingleThread>
-                <SingleThread></SingleThread>
-                <SingleThread></SingleThread>
-                <SingleThread></SingleThread>
-                <SingleThread></SingleThread>
-                <SingleThread></SingleThread>
+            {threadslist.map((thread, index) => (
+                <SingleThread receiver={thread.author} message={thread.message}></SingleThread>)
+            )}
         </div>
     );
 }
