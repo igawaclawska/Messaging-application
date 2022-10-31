@@ -188,7 +188,6 @@ nav {
   font-size: 20px;
 }
 
-
 .main-container{
   background-color: var(--blue1);
   height: 100vh;
@@ -206,7 +205,6 @@ nav {
 
 .thread-header {
   float:left;
-
 }
 
 .thread-header-wrapper{
@@ -327,48 +325,71 @@ nav {
   display: flex;
   flex-direction: row;
   width: 100%;
-  padding: 0% 5% 1% 0%;
+  padding: 4px 16px;
   justify-content: right;
 }
 
 .right-bubble{
   background-color: var(--blue1);
-  padding: 2%;
+  padding: 12px;
   color: var(--white);
-  border-radius: 16px 16px 0px 16px;
+  border-radius: 16px 16px 2px 16px;
   width:fit-content; 
   max-width: 50%;
+  transition: 400ms;
 }
 
 .messageSent{
   word-break: break-word;
   height: fit-content;
+  font-size: 14px;
+  line-height: 1;
+  font-weight: 400;
 }
 
 .left-bubble-wrapper{
   display: flex;
   flex-direction: row;
   width: 100%;
-  padding: 0% 0% 1% 5%;
+  padding: 4px 16px;
   justify-content: left;
 }
 
 .left-bubble{
   background-color: var(--grey);
-  padding: 2%;
+  padding: 12px;
   color: var(--white);
-  border-radius: 16px 16px 16px 0px;
+  border-radius: 16px 16px 16px 2px;
   width:fit-content; 
   max-width: 50%;
+  transition: 400ms;
 }
 
-@media (max-width: 767px) {
-  .chat-header-wrapper {
-    padding: 14px;
+@media (max-width: 992px) {
+  .left-bubble, .right-bubble{
+    max-width: 60%;
+    transition:400ms;
   }
+  .left-bubble-wrapper, .right-bubble-wrapper{
+    padding: 2px 16px;
+  }
+}
 
+
+
+@media (max-width: 768px) {
+  .left-bubble, .right-bubble{
+    max-width: 70%;
+    padding: 8px;
+    transition: 400ms;
+  }
+  
   .thread-header-wrapper{
     padding: 6px 16px;
+  }
+
+  .chat-header-wrapper {
+    padding: 14px;
   }
 }
 
@@ -382,6 +403,15 @@ nav {
     flex-direction: column;
   }
 }
+
+@media (max-width: 576px) {
+  .left-bubble, .right-bubble{
+    max-width: 85%;
+    transition: 400ms;
+  }
+}
+
+
 
 .create-message-wrapper {
   background-color: var(--white);
