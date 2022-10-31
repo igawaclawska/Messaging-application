@@ -251,10 +251,6 @@ nav {
   background-color: var(--grey3);
 }
 
-.single-thread:hover, .single-thread-new-message:hover{
-  background-color: var(--grey2);
-}
-
 .single-thread-new-message{
   display: flex;
   flex-direction: column;
