@@ -21,7 +21,7 @@ export const Home = () => {
                 </div>
                 <sidebar className="threads-bar">
                     <ThreadHeader></ThreadHeader>
-                    <ThreadList threadslist={threadsArray}></ThreadList>
+                    <ThreadList threadInput={threadsArray}></ThreadList>
                 </sidebar>
                 <content className="chat-area">
                     <ChatHeader></ChatHeader>
@@ -35,7 +35,9 @@ export const Home = () => {
 export default Home;
 
 
-  //  fake hardcoded data for generating dynamic single threads, this data will be later taken from the db
+  //Fake hardcoded data for generating dynamic single threads, it is inserted into the threadInput prop of the ThreadList
+  //component. This data will be later taken from the db
+
   const threadsArray = [
     {id: 1, author: 'John K.', message: "Hi!"},
     {id: 2, author: 'Ana S.', message: "Are you available tomorrow?"},

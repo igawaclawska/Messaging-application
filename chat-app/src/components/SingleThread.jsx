@@ -1,19 +1,19 @@
 import { useState } from 'react';
 
 const SingleThread = ({ onClick, receiver, message, className }) => {
-  const [isActive, setIsActive] = useState(false);
+  // const [isActive, setIsActive] = useState(false);
 
-const handleClick = () => {
-  setIsActive(current => !current);
-};
+// const handleClick = () => {
+//   setIsActive(current => !current);
+// };
   return (
-    <div className={className}
-     style={{
+    <div className={className}  onClick={onClick}>
+     {/* style={{
       backgroundColor: isActive ? '#F3F3F3' : '',
       color: isActive ? 'white' : '',
-    }}
+    }} */}
 
-      onClick={handleClick}>
+      
   
         <p><b>{receiver}</b></p>
         <p>{message}</p>

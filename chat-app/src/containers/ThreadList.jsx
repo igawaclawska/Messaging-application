@@ -1,12 +1,20 @@
 import SingleThread from "../components/SingleThread";
+import React, { useState } from "react";
 
-const ThreadList = ({ onLoad, threadslist }) => {
+const ThreadList = ({ onLoad, threadInput }) => {
+
+    const [isActive, setIsActive] = useState(false);
 
     return (
-        //creates dynamic thread components
+        //create dynamic thread components 
         <div className="thread-list">
-            {threadslist.map((thread, index) => (
-                <SingleThread receiver={thread.author} message={thread.message}></SingleThread>)
+            {threadInput.map((thread, index) => (
+                <SingleThread 
+                    onClick={() => setIsActive(thread)} 
+                    receiver={thread.author} 
+                    message={thread.message} 
+                    className={`single-thread ${isActive == thread && "active"}`}
+                    ></SingleThread>)
             )}
         </div>
     );

@@ -11,6 +11,7 @@
   --grey2:#C0BFBF;
   --lightgrey:#A7A4A4;
   --grey2:#fafafa;
+  --grey3:#f3f3f3;
   --turquoise:#32ACD4;
 }
 /* Color variables end here */
@@ -244,7 +245,10 @@ nav {
   color: var(--grey);
   width: 100%;
   max-width: 100%;
+}
 
+.single-thread.active{
+  background-color: var(--grey3);
 }
 
 .single-thread:hover, .single-thread-new-message:hover{
