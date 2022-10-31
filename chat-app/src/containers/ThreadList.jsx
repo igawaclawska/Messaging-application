@@ -1,9 +1,9 @@
 import SingleThread from "../components/SingleThread";
 
-const ThreadList = ({ onLoad }) => {
+const ThreadList = ({ onLoad, singleThread }) => {
     return (
         <div className="thread-list">
-                <SingleThread></SingleThread>
+                <SingleThread className='single-thread-new-message'></SingleThread>
                 <SingleThread></SingleThread>
                 <SingleThread></SingleThread>
                 <SingleThread></SingleThread>
