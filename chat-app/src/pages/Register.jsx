@@ -1,24 +1,60 @@
-import React from 'react'
-import Button from '../components/Button'
+import React, { useEffect, useState } from "react";
 import SecondaryButton from '../components/SecondaryButton'
 import InputField from '../components/InputField'
 import '../styles.css'
+import { useNavigate } from "react-router-dom";
 
 export const Register = () => {
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+  const [fullname, setName] = useState();
+  const [passwordRepeated, setPasswordRepeated] = useState();
+  var user = { fullname, email, password };
+
+
+  function reg() {
+    if (
+      (/^[A-Za-z0-9._%+-]+@itu\.dk$/.test(email)) &&
+      (password.length >= 5) && (password == passwordRepeated)
+    ) {
+      alert("Successfully registered");
+      localStorage.setItem("user", user);
+      return true;
+    }
+    else {
+      alert(
+        "You have entered an invalid email or a password with less than 5 characters."
+      );
+      return false;
+    }
+  }
+
+  let navigate = useNavigate();
+  const toMain = () => {
+    let path = `/home`;
+    navigate(path);
+  }
+
+  function successfulRegistration() {
+    if(reg()) {
+      toMain();
+    } 
+  }
+
   return (
     <div className="formContainer">
-        <div className="formWrapper">
-            <span className="logo">I T U  C H A T</span>
-            <h2 className="title">Register</h2>
-            <form action="">
-              <InputField className='inputName' id='name' label='name' placeholder='Enter your name' type='text'></InputField>
-              <InputField className='inputEmail' id='email' label='e-mail' placeholder='example@itu.dk' type='email'></InputField>
-              <InputField className='inputPassword' id='password' label='password' placeholder='Enter a password' type='password'></InputField> 
-              <InputField className='inputRepeatPassword' id='repratPassword' label='repeat password' placeholder='Repeat password' type='password'></InputField>                              
-              <SecondaryButton className="primaryBtn" text='Create account'></SecondaryButton>
-            </form>
-            <span className="loginLink">Already have an account? <a href="#">Login</a></span>
-        </div>
+      <div className="formWrapper">
+        <span className="logo">I T U  C H A T</span>
+        <h2 className="title">Register</h2>
+        <form action="">
+          <InputField className='inputName' id='fullname' label='fullname' value={fullname} placeholder='Enter your name' type='text' onChange={(e) => setName(e.target.value)}></InputField>
+          <InputField className='inputEmail' id='email' value={email} label='e-mail' placeholder='example@itu.dk' type='email' onChange={(e) => setEmail(e.target.value)}></InputField>
+          <InputField className='inputPassword' id='password' value={password} label='password' placeholder='Enter a password' type='password' onChange={(e) => setPassword(e.target.value)}></InputField>
+          <InputField className='inputRepeatPassword' id='repeatPassword' value={passwordRepeated} label='repeat password' placeholder='Repeat password' type='password' onChange={(e) => setPasswordRepeated(e.target.value)}></InputField>
+          <SecondaryButton className="primaryBtn" text='Create account' onClick={successfulRegistration}></SecondaryButton>
+        </form>
+        <span className="loginLink">Already have an account? <a href="/login">Login</a></span>
+      </div>
     </div>
   )
 }
