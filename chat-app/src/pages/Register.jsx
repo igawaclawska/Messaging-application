@@ -18,7 +18,7 @@ export const Register = () => {
       (password.length >= 5) && (password == passwordRepeated)
     ) {
       alert("Successfully registered");
-      localStorage.setItem("user", user);
+      localStorage.setItem("User", user);
       return true;
     }
     else {
