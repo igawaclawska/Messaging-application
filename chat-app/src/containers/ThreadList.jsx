@@ -9,12 +9,12 @@ const ThreadList = ({ onLoad, threadInput }) => {
         //create dynamic thread components 
         <div className="thread-list">
             {threadInput.map((thread, index) => (
-                <SingleThread 
-                    onClick={() => setIsActive(thread)} 
-                    receiver={thread.author} 
-                    message={thread.message} 
+                <SingleThread
+                    onClick={() => setIsActive(thread)}
+                    receiver={thread.author}
+                    message={thread.message}
                     className={`single-thread ${isActive == thread && "active"}`}
-                    ></SingleThread>)
+                ></SingleThread>)
             )}
         </div>
     );
