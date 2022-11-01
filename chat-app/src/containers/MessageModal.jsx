@@ -4,6 +4,8 @@ import SecondaryButton from '../components/SecondaryButton'
 import TertiaryButton from '../components/TertiaryButton'
 import Button from '../components/Button'
 import '../styles.css'
+import { useState } from 'react';
+
 
 const MessageModal = props => {
     if (!props.show) {
@@ -26,7 +28,7 @@ const MessageModal = props => {
                     <TertiaryButton text="Cancel"></TertiaryButton>
                 </div>
                 <div className="create-btn">
-                    <Button text="Create chat"></Button>
+                    <Button text="Create chat" ></Button>
                 </div>
             </div>
         </div>

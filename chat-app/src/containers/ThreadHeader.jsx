@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import Button from '../components/Button'
+import Button from '../components/Button';
 import MessageModal from './MessageModal';
 import '../styles.css'
 
@@ -13,9 +13,9 @@ const ThreadHeader = ({ onLoad }) => {
                 <span className="thread-header-title">Chats</span>
                 <Button className="primaryBtn-fixed-size" text='Create Message' onClick={() => setShow(true)}></Button>
             </div> 
-            <div >
+            { show && <div className="modal-div" onClick={() => setShow(false)}>
                 <MessageModal show={show}/>
-            </div>
+            </div>}
         </header>
 
     );

@@ -16,9 +16,9 @@ export const Home = () => {
         <div className="main-container">
             <Navbar></Navbar>
             <div className="main-div">
-                <div className="modal-div" show={show} >
+                {/* <div className="modal-div" show={show} >
                 <MessageModal />
-                </div>
+                </div> */}
                 <sidebar className="threads-bar">
                     <ThreadHeader></ThreadHeader>
                     <ThreadList threadInput={threadsArray}></ThreadList>

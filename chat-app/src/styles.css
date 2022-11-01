@@ -8,6 +8,7 @@
   --blue2:#3957E5;
   --blue3:#1C3CD4;
   --grey:#484848;
+  --grayOpaque:#484848ac;
   --grey2:#C0BFBF;
   --lightgrey:#A7A4A4;
   --grey2:#fafafa;
@@ -459,4 +460,19 @@ nav {
 .add-btn{
   padding: 1%;
   width: 60%;
+}
+
+.modal-div{ 
+  position: absolute;
+  padding: 10%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  background-color:var(--grayOpaque);
+}
+
+.create-message-wrapper{
+  position: relative;
 }
