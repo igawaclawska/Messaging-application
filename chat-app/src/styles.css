@@ -489,4 +489,7 @@ nav {
     flex-direction: column-reverse;
     gap: 0px;
   }
+  .add-btn{
+    width: 100%;
+  }
 }
