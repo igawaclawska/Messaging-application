@@ -13,23 +13,21 @@ const MessageModal = props => {
     }
     return (
         <div className="create-message-wrapper">
-            <h1>Create new chat</h1>
-            <subtitle><b>receivers:</b></subtitle>
-            <div className="add-receivers">
-                <div className="receivers-mail">
-                <InputField placeholder="Receiver's ITU e-mail"></InputField>
-                </div>
-                <div className="add-btn">
-                <SecondaryButton text="+ Add receivers"></SecondaryButton>
+            <div className='create-message-header'>
+                <h1>Create new chat</h1>
+            </div>
+            <div className='create-message-body'>
+                <subtitle><b>receivers:</b></subtitle>
+                <div className="add-receivers">
+                    <InputField placeholder="Receiver's ITU e-mail"></InputField>
+                    <div className="add-btn">
+                    <SecondaryButton text="+ Add receivers"></SecondaryButton>
+                    </div>
                 </div>
             </div>
-            <div className="cancel-or-create">
-                <div className="cancel-btn">
-                    <TertiaryButton text="Cancel"></TertiaryButton>
-                </div>
-                <div className="create-btn">
-                    <Button text="Create chat" ></Button>
-                </div>
+            <div className='create-message-footer'>
+                <TertiaryButton text="Cancel"></TertiaryButton>
+                <Button text="Create chat" ></Button>
             </div>
         </div>
 
