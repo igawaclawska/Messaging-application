@@ -7,30 +7,29 @@ import '../styles.css'
 import { useState } from 'react';
 
 
-const MessageModal = props => {
-    if (!props.show) {
-        return 
-    }
+const MessageModal = ({ show }) => {
+
     return (
-        <div className="create-message-wrapper">
-            <div className='create-message-header'>
-                <h1>Create new chat</h1>
-            </div>
-            <div className='create-message-body'>
-                <subtitle><b>receivers:</b></subtitle>
-                <div className="add-receivers">
-                    <InputField placeholder="Receiver's ITU e-mail"></InputField>
-                    <div className="add-btn">
-                    <SecondaryButton text="+ Add receivers"></SecondaryButton>
+        <div onClick={() => show(false)} className='modal-div'>
+            <div onClick={close => close.stopPropagation()} className="create-message-wrapper">
+                <div className='create-message-header'>
+                    <h1>Create new chat</h1>
+                </div>
+                <div className='create-message-body'>
+                    <subtitle><b>receivers:</b></subtitle>
+                    <div className="add-receivers">
+                        <InputField placeholder="Receiver's ITU e-mail"></InputField>
+                        <div className="add-btn">
+                        <SecondaryButton text="+ Add receivers"></SecondaryButton>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div className='create-message-footer'>
-                <TertiaryButton text="Cancel"></TertiaryButton>
-                <Button text="Create chat" ></Button>
+                <div className='create-message-footer'>
+                    <TertiaryButton onClick={() => show(false)} text="Cancel"></TertiaryButton>
+                    <Button onClick={() => show(false)} text="Create chat" ></Button>
+                </div>
             </div>
         </div>
-
     );
 };
 
