@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import SecondaryButton from '../components/SecondaryButton'
 import InputField from '../components/InputField'
 import '../styles.css'
@@ -15,10 +15,12 @@ export const Register = () => {
   function reg() {
     if (
       (/^[A-Za-z0-9._%+-]+@itu\.dk$/.test(email)) &&
-      (password.length >= 5) && (password == passwordRepeated)
+      (password.length >= 5) && (password === passwordRepeated)
     ) {
       alert("Successfully registered");
-      localStorage.setItem("User", user);
+      localStorage.setItem("name", fullname);
+      localStorage.setItem("email", email);
+      localStorage.setItem("password", password);
       return true;
     }
     else {
