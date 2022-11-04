@@ -13,11 +13,8 @@ const ThreadHeader = ({ onLoad }) => {
                 <span className="thread-header-title">Chats</span>
                 <Button className="primaryBtn-fixed-size" text='Create Message' onClick={() => setShow(true)}></Button>
             </div> 
-            { show && <div className="modal-div" onClick={() => setShow(false)}>
-                <MessageModal show={show}/>
-            </div>}
+            { show && <MessageModal show={setShow}/>}
         </header>
-
     );
 }
 
