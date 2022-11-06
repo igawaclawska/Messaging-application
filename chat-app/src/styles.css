@@ -205,6 +205,7 @@ nav {
   height: 100%;
   width: 30%;
   float:left;
+  /* display: none; */
 }
 
 
@@ -290,6 +291,7 @@ nav {
 .backBtn {
   color: var(--grey);
   margin-right: 12px;
+  display: none;
   }
 
 .chat-area{
@@ -467,22 +469,12 @@ nav {
   }
 }
 
-@media (max-width: 585px) {
+
+@media (max-width: 576px) {
+
   .chat-header-wrapper {
     padding: 14px;
   }
-
-  .thread-header-wrapper{
-    padding: 6px 16px;
-    flex-direction: column;
-  }
-
-  .thread-header-title{
-    padding-bottom: 4px;
-  }
-}
-
-@media (max-width: 576px) {
   .left-bubble, .right-bubble{
     max-width: 85%;
     transition: 400ms;
@@ -494,5 +486,22 @@ nav {
   .add-btn{
     width: 100%;
   }
+
+  .threads-bar {
+    width: 100%;
+    /* display: none; */
+  }
+
+  .chat-area{
+    width: 100%;
+    border: none;
+  }
+  .chat-area.invisible{
+    display: none;
+  }
+
+  .backBtn {
+    display: inline-block;
+    }
 
 }
