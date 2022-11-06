@@ -236,6 +236,7 @@ nav {
   height:100%;
   overflow-y: scroll;
   gap: 4px;
+  padding: 0 0 56px 0;
 }
 
 .single-thread{
@@ -475,6 +476,10 @@ nav {
     padding: 6px 16px;
     flex-direction: column;
   }
+
+  .thread-header-title{
+    padding-bottom: 4px;
+  }
 }
 
 @media (max-width: 576px) {
@@ -489,4 +494,5 @@ nav {
   .add-btn{
     width: 100%;
   }
+
 }
