@@ -1,31 +1,41 @@
-import Navbar from '../containers/Navbar'
-import ThreadHeader from '../containers/ThreadHeader'
-import ThreadList from '../containers/ThreadList'
-import ChatHeader from '../containers/ChatHeader'
-import BubblesScrollable from '../containers/BubblesScrollable'
-import SendMessage from '../containers/SendMessage'
-import '../styles.css'
 import { useState } from 'react';
-import MessageModal from '../containers/MessageModal'
-import Button from '../components/Button'
+import { useEffect } from 'react';
+import Navbar from '../containers/Navbar'
+import ThreadsBar from '../containers/ThreadsBar'
+import ChatArea from '../containers/ChatArea'
+import '../styles.css'
 
 export const Home = () => {
-    const [show, setShow] = useState(false);
+
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+    // updates the width variable value in real time
+    useEffect(() => {
+        const handleResize = () => {setWindowWidth(window.innerWidth)};
+        window.addEventListener('resize', handleResize);
+        return () => { window.removeEventListener('resize', handleResize)};
+    }, []);
+
+    const [isThreadsBarVisible, setIsThreadsBarVisible] = useState(true);
+    const handleClick = () => {
+        setIsThreadsBarVisible(current => !current);
+    };
   
     return (
-        <div className="main-container">
-            <Navbar></Navbar>
-            <div className="main-div">
-                <sidebar className="threads-bar">
-                    <ThreadHeader></ThreadHeader>
-                    <ThreadList threadInput={threadsArray}></ThreadList>
-                </sidebar>
-                <content className="chat-area">
-                    <ChatHeader></ChatHeader>
-                    <BubblesScrollable></BubblesScrollable>
-                    <SendMessage></SendMessage>
-                </content>
-            </div>
+        <div className='main-container'>
+            <Navbar/>
+            {/* condition below toggles between mobile and desktop view */}
+            {windowWidth <= 576 ? (
+            <div className='main-div'>
+                {/* condition below works for small screens and allows to toggle visibility between the ThreadsBar and the ChatArea  */}
+                {isThreadsBarVisible ? (<ThreadsBar visibility={handleClick} threadInput={threadsArray}/>) : (
+                <ChatArea visibility={handleClick}/>)}
+            </div> ) : (
+            <>
+            <ThreadsBar threadInput={threadsArray}/>
+            <ChatArea/>
+            </> 
+            )}
         </div>
     )
 }
@@ -36,10 +46,10 @@ export default Home;
   //component. This data will be later taken from the db
 
   const threadsArray = [
-    {id: 1, author: 'John K.', message: "Hi!"},
-    {id: 2, author: 'Ana S.', message: "Are you available tomorrow?"},
-    {id: 3, author: 'Max P.', message: "This is sooo cool!"},
-    {id: 4, author: 'Siri A.', message: "LOL"},
-    {id: 5, author: 'Tom N.', message: "Are you sure?"},
-    {id: 6, author: 'Natalie N.', message: "Hahahaha :D"},
+    {id: 1, author: 'John K.', message: 'Hi!'},
+    {id: 2, author: 'Ana S.', message: 'Are you available tomorrow?'},
+    {id: 3, author: 'Max P.', message: 'This is sooo cool!'},
+    {id: 4, author: 'Siri A.', message: 'LOL'},
+    {id: 5, author: 'Tom N.', message: 'Are you sure?'},
+    {id: 6, author: 'Natalie N.', message: 'Hahahaha :D'},
 ]

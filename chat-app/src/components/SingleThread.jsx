@@ -1,4 +1,3 @@
-import { useState } from 'react';
 
 const SingleThread = ({ onClick, receiver, message, className }) => {
   
