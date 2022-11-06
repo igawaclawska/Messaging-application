@@ -8,7 +8,7 @@ const SendMessage = ({ onLoad }) => {
     return (
             <div className="send-message-wrapper">
                 <MessageInput></MessageInput>
-                <MessageButton text='Send'></MessageButton>
+                <MessageButton></MessageButton>
             </div>
     );
 }

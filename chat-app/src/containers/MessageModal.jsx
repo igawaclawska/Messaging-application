@@ -20,13 +20,13 @@ const MessageModal = ({ show }) => {
                     <div className="add-receivers">
                         <InputField placeholder="Receiver's ITU e-mail"></InputField>
                         <div className="add-btn">
-                        <SecondaryButton text="+ Add receivers"></SecondaryButton>
+                        <SecondaryButton icon="" text="+ Add receivers" ></SecondaryButton>
                         </div>
                     </div>
                 </div>
                 <div className='create-message-footer'>
-                    <TertiaryButton onClick={() => show(false)} text="Cancel"></TertiaryButton>
-                    <Button onClick={() => show(false)} text="Create chat" ></Button>
+                    <TertiaryButton onClick={() => show(false)} text="Cancel" icon=""></TertiaryButton>
+                    <Button onClick={() => show(false)} text="Create chat" icon=""></Button>
                 </div>
             </div>
         </div>
