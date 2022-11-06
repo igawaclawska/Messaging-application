@@ -1,13 +1,16 @@
-const TertiaryButton = ({ onClick, text, className }) => {
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+
+const TertiaryButton = ({ onClick, text, icon, className }) => {
 	return (
 	<button type="button" className={className} onClick={onClick}>
-		{text}
+		{text} {icon}
     </button>
   );
 }
 
 TertiaryButton.defaultProps = {
     text: 'Tertiary Button',
+    icon: <ArrowBackIosIcon/>,
     className: 'tertiaryBtn'
 }
 

@@ -53,7 +53,7 @@ export const Register = () => {
           <InputField className='inputEmail' id='email' value={email} label='e-mail' placeholder='example@itu.dk' type='email' onChange={(e) => setEmail(e.target.value)}></InputField>
           <InputField className='inputPassword' id='password' value={password} label='password' placeholder='Enter a password' type='password' onChange={(e) => setPassword(e.target.value)}></InputField>
           <InputField className='inputRepeatPassword' id='repeatPassword' value={passwordRepeated} label='repeat password' placeholder='Repeat password' type='password' onChange={(e) => setPasswordRepeated(e.target.value)}></InputField>
-          <SecondaryButton className="primaryBtn" text='Create account' onClick={successfulRegistration}></SecondaryButton>
+          <SecondaryButton className="primaryBtn" text='Create account' icon='' onClick={successfulRegistration}></SecondaryButton>
         </form>
         <span className="loginLink">Already have an account? <a href="/login">Login</a></span>
       </div>
