@@ -1,5 +1,5 @@
 import React from 'react';
-import SecondaryButton from '../components/SecondaryButton'
+import Button from '../components/Button'
 import { useNavigate } from "react-router-dom";
 import '../styles.css'
 
@@ -13,7 +13,7 @@ const NavBar = ({ onLoad }) => {
     <nav className="nav-bar">
       <div className="navbarWrapper">
         <span className="logoNav">I T U  C H A T</span>
-        <SecondaryButton text='Logout' className='fixed-btn secondary-white small' onClick={toLogin} icon={''}></SecondaryButton>
+        <Button text='Logout' className='fixed-btn secondary-white small' onClick={toLogin} icon={''}></Button>
       </div>
     </nav>
   );

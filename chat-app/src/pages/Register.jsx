@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import SecondaryButton from '../components/SecondaryButton'
+import Button from '../components/Button'
 import InputField from '../components/InputField'
 import '../styles.css'
 import { useNavigate } from "react-router-dom";
@@ -53,7 +53,7 @@ export const Register = () => {
           <InputField className='inputEmail' id='email' value={email} label='e-mail' placeholder='example@itu.dk' type='email' onChange={(e) => setEmail(e.target.value)}></InputField>
           <InputField className='inputPassword' id='password' value={password} label='password' placeholder='Enter a password' type='password' onChange={(e) => setPassword(e.target.value)}></InputField>
           <InputField className='inputRepeatPassword' id='repeatPassword' value={passwordRepeated} label='repeat password' placeholder='Repeat password' type='password' onChange={(e) => setPasswordRepeated(e.target.value)}></InputField>
-          <SecondaryButton className="primaryBtn" text='Create account' icon='' onClick={successfulRegistration}></SecondaryButton>
+          <Button className="fluid-btn primary" text='Create account' icon='' onClick={successfulRegistration}></Button>
         </form>
         <span className="loginLink">Already have an account? <a href="/login">Login</a></span>
       </div>

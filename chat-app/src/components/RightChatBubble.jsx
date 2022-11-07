@@ -1,4 +1,3 @@
-
 const RightChatBubble = ({ onClick, text }) => {
 	return (
 	<div className="right-bubble-wrapper">

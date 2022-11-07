@@ -1,5 +1,3 @@
-import PropTypes from 'prop-types';
-
 const LeftChatBubble = ({ onClick, text }) => {
 	return (
 	<div className="left-bubble-wrapper">

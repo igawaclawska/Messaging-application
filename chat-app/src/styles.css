@@ -320,11 +320,17 @@ nav {
   margin: 1%;
   background-color: var(--white);
   color: var(--blue1);
-  padding: 5px;
+  padding: 6px;
   border: none;
-  border-radius: 8px;
   cursor: pointer;
-  width: 10%;
+}
+
+.sendBtn:hover{
+  color: var(--blue2);
+}
+
+.sendBtn:active{
+  color:var(--blue3);
 }
 
 .messageInput{
@@ -466,6 +472,7 @@ nav {
   .chat-header-wrapper {
     padding: 14px;
   }
+
 }
 
 
@@ -488,7 +495,6 @@ nav {
 
   .threads-bar {
     width: 100%;
-    /* display: none; */
   }
 
   .chat-area{

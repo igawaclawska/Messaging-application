@@ -1,7 +1,5 @@
 import React from 'react';
 import InputField from '../components/InputField'
-import SecondaryButton from '../components/SecondaryButton'
-import TertiaryButton from '../components/TertiaryButton'
 import Button from '../components/Button'
 import '../styles.css'
 
@@ -18,12 +16,12 @@ const MessageModal = ({ show }) => {
                     <div className="add-receivers">
                         <InputField placeholder="Receiver's ITU e-mail"></InputField>
                         <div className="add-btn">
-                        <SecondaryButton className='fluid-btn secondary' icon="" text="+ Add receivers" ></SecondaryButton>
+                        <Button className='fluid-btn secondary' icon="" text="+ Add receivers" ></Button>
                         </div>
                     </div>
                 </div>
                 <div className='create-message-footer'>
-                    <TertiaryButton className='fluid-btn tertiary' onClick={() => show(false)} text="Cancel" icon=""></TertiaryButton>
+                    <Button className='fluid-btn tertiary' onClick={() => show(false)} text="Cancel" icon=""></Button>
                     <Button className='fluid-btn primary' onClick={() => show(false)} text="Create chat" icon=""></Button>
                 </div>
             </div>

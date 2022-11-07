@@ -1,6 +1,3 @@
-import AddCommentIcon from '@mui/icons-material/AddComment';
-
-
 const Button = ({ onClick, text, icon, className }) => {
 	return (
 	<button type="button" className={className} onClick={onClick}>
@@ -10,9 +7,8 @@ const Button = ({ onClick, text, icon, className }) => {
 }
 
 Button.defaultProps = {
-	text: 'Primary Button',
-	icon: <AddCommentIcon/>,
-	className: "primaryBtn"
+	text: 'Button',
+	className: "fixed-btn primary"
 };
 
 export default Button;
