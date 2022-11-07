@@ -4,8 +4,6 @@ import SecondaryButton from '../components/SecondaryButton'
 import TertiaryButton from '../components/TertiaryButton'
 import Button from '../components/Button'
 import '../styles.css'
-import { useState } from 'react';
-
 
 const MessageModal = ({ show }) => {
 
@@ -20,13 +18,13 @@ const MessageModal = ({ show }) => {
                     <div className="add-receivers">
                         <InputField placeholder="Receiver's ITU e-mail"></InputField>
                         <div className="add-btn">
-                        <SecondaryButton icon="" text="+ Add receivers" ></SecondaryButton>
+                        <SecondaryButton className='fluid-btn secondary' icon="" text="+ Add receivers" ></SecondaryButton>
                         </div>
                     </div>
                 </div>
                 <div className='create-message-footer'>
-                    <TertiaryButton onClick={() => show(false)} text="Cancel" icon=""></TertiaryButton>
-                    <Button onClick={() => show(false)} text="Create chat" icon=""></Button>
+                    <TertiaryButton className='fluid-btn tertiary' onClick={() => show(false)} text="Cancel" icon=""></TertiaryButton>
+                    <Button className='fluid-btn primary' onClick={() => show(false)} text="Create chat" icon=""></Button>
                 </div>
             </div>
         </div>

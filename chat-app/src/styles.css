@@ -70,93 +70,92 @@ input {
   width: 100%;
 }
 
-/* Primary, Secondary and Tertiary Button styling starts here */
+/* Button styling starts here */
 
-.primaryBtn {
+.fluid-btn{
   margin: 5% 0 5% 0;
-  background-color: var(--blue1);
-  color: var(--white);
+  font-size: 16px;
   padding: 10px;
-  border: none;
-  border-radius: 24px;
   cursor: pointer;
   width: 100%;
+  border-radius: 24px;
+  font-weight: 600;
 }
 
-.primaryBtn-fixed-size {
-  padding: 8px 24px;
+.fixed-btn{
+  display: flex;
+  padding: 8px 20px;
+  font-size: 16px;
+  border-radius: 24px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.small{
+  font-size: 14px;
+}
+
+.with-icon{
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.primary{
   background-color: var(--blue1);
   color: var(--white);
-  font-size: 12px;
   border: none;
-  border-radius: 16px;
-  cursor: pointer;
 }
 
-.primaryBtn:hover, .primaryBtn-fixed-size:hover {
+.primary:hover{
   background-color: var(--blue2);
 }
 
-.primaryBtn:active, .primaryBtn-fixed-size:active {
+.primary:active{
   background-color: var(--blue3);
 }
 
-.secondaryBtn {
-  margin: 5% 0 5% 0;
+.secondary{
   background-color: transparent;
-  font-weight: bold;
   color: var(--blue1);
-  font-size: 16px;
-  padding: 10px;
-  border: solid 1px var(--grey2);
-  border-radius: 24px;
-  cursor: pointer;
-  width: 100%;
+  border: solid 1px var(--blue0);
 }
 
-.secondaryBtn:hover{
-  background-color: var(--blue);
-}
-
-.secondaryBtn:active{
-  background-color: var(--blue0);
-}
-
-.tertiaryBtn {
-  background-color: transparent;
-  font-weight: bold;
-  font-size: 16px;
-  padding: 10px;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-}
-
-.tertiaryBtn-fixed-size {
-  background-color: transparent;
-  font-weight: bold;
-  font-size: 12px;
-  padding: 8px 16px;
-  border: none;
-  cursor: pointer;
-}
-
-.tertiaryBtn-white {
+.secondary-white{
   background-color: transparent;
   color: var(--white);
-  font-size: 16px;
-  padding: 6px 24px;
-  border: 1px solid var(--white);
-  border-radius: 24px;
-  cursor: pointer;
+  border: solid 1px var(--white);
 }
 
-.tertiaryBtn-white:hover{
+.secondary-white:hover{
   background-color: var(--white);
   color: var(--grey)
 }
 
-/* Primary, Secondary and Tertiary Button styling ends here */
+.secondary:hover{
+  background-color: var(--blue);
+}
+
+.secondary:active{
+  background-color: var(--blue0);
+}
+
+.tertiary{
+  background-color: transparent;
+  border: none;
+  color: var(--grey)
+}
+
+.tertiary:hover{
+  color: var(--blue2)
+}
+
+.tertiary:active{
+  color: var(--blue3)
+}
+
+/* Button styling ends here */
 
 
 label {
@@ -292,7 +291,7 @@ nav {
   color: var(--grey);
   margin-right: 12px;
   display: none;
-  }
+}
 
 .chat-area{
   float: right;

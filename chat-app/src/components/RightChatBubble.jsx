@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 
 const RightChatBubble = ({ onClick, text }) => {
 	return (

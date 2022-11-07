@@ -3,7 +3,7 @@ import AddCommentIcon from '@mui/icons-material/AddComment';
 const SecondaryButton = ({ onClick, text, icon, className }) => {
 	return (
 	<button type="button" className={className} onClick={onClick}>
-		{text} {icon}
+		 {icon} {text} 
     </button>
   );
 }

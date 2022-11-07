@@ -34,7 +34,7 @@ export const Login = () => {
         <form action="">
           <InputField className='inputEmail' id='email' label='e-mail' placeholder='example@itu.dk' type='email' onChange={(e) => setEmail(e.target.value)}></InputField>
           <InputField className='inputPassword' id='password' label='password' placeholder='Enter a password' type='password' onChange={(e) => setPassword(e.target.value)}></InputField>
-          <Button className="primaryBtn" text='Login' icon='' onClick={successfulRegistration}></Button>
+          <Button className="fluid-btn primary" text='Login' icon='' onClick={successfulRegistration}></Button>
         </form>
         <span className="loginLink">Don't have an account yet? <a href="/Register">Create an account</a></span>
       </div>

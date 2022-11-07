@@ -3,7 +3,7 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 const TertiaryButton = ({ onClick, text, icon, className }) => {
 	return (
 	<button type="button" className={className} onClick={onClick}>
-		{text} {icon}
+		{icon} {text}
     </button>
   );
 }

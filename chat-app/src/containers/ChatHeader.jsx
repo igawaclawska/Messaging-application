@@ -8,7 +8,7 @@ const ChatHeader = ({ onLoad, onClick }) => {
     return (
         <header className="chat-header">
             <div className="chat-header-wrapper">
-                <div onClick={onClick} className="backBtn"><TertiaryButton className="tertiaryBtn-fixed-size" text='' icon={<ArrowBackIosIcon/>}></TertiaryButton>                </div>
+                <div onClick={onClick} className="backBtn"><TertiaryButton className="fixed-btn tertiary with-icon" text='' icon={<ArrowBackIosIcon/>}></TertiaryButton>                </div>
                 <span className="chat-header-title">Name Secondname</span>
             </div>
         </header>
