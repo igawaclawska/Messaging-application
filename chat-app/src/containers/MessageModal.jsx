@@ -1,11 +1,8 @@
 import React from 'react';
 import InputField from '../components/InputField'
-import SecondaryButton from '../components/SecondaryButton'
-import TertiaryButton from '../components/TertiaryButton'
 import Button from '../components/Button'
 import '../styles.css'
-import { useState } from 'react';
-
+import '../buttons.css'
 
 const MessageModal = ({ show }) => {
 
@@ -16,17 +13,17 @@ const MessageModal = ({ show }) => {
                     <h1>Create new chat</h1>
                 </div>
                 <div className='create-message-body'>
-                    <subtitle><b>receivers:</b></subtitle>
+                    <h3><b>receivers:</b></h3>
                     <div className="add-receivers">
                         <InputField placeholder="Receiver's ITU e-mail"></InputField>
                         <div className="add-btn">
-                        <SecondaryButton icon="" text="+ Add receivers" ></SecondaryButton>
+                        <Button className='fluid-btn secondary' icon="" text="+ Add receivers" ></Button>
                         </div>
                     </div>
                 </div>
                 <div className='create-message-footer'>
-                    <TertiaryButton onClick={() => show(false)} text="Cancel" icon=""></TertiaryButton>
-                    <Button onClick={() => show(false)} text="Create chat" icon=""></Button>
+                    <Button className='fluid-btn tertiary' onClick={() => show(false)} text="Cancel" icon=""></Button>
+                    <Button className='fluid-btn primary' onClick={() => show(false)} text="Create chat" icon=""></Button>
                 </div>
             </div>
         </div>

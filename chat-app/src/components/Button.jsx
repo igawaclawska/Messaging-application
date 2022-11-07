@@ -1,24 +1,14 @@
-import PropTypes from 'prop-types';
-import AddCommentIcon from '@mui/icons-material/AddComment';
-
-
 const Button = ({ onClick, text, icon, className }) => {
 	return (
 	<button type="button" className={className} onClick={onClick}>
-		{text} {icon}
+		{icon} {text} 
     </button>
   );
 }
 
 Button.defaultProps = {
-	text: 'Primary Button',
-	icon: <AddCommentIcon/>,
-	className: "primaryBtn"
+	text: 'Button',
+	className: "fixed-btn primary"
 };
-
-// Button.propTypes = {
-// 	variant: PropTypes.oneOf(['tertiary', 'secondary', 'primary']),
-// 	disabled: PropTypes.bool,
-// };
 
 export default Button;

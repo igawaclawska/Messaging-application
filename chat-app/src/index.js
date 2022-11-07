@@ -9,6 +9,7 @@ import {
         Route,
 } from "react-router-dom";
 import "./styles.css";
+import "./buttons.css"
 
 const router = createBrowserRouter([
         {
