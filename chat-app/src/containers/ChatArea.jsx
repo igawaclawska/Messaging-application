@@ -5,11 +5,11 @@ import SendMessage from "./SendMessage";
 const ChatArea = ({ onLoad, visibility }) => {
 
     return (
-        <content className="chat-area">
+        <div className="chat-area">
                     <ChatHeader onClick={visibility}></ChatHeader>
                     <BubblesScrollable></BubblesScrollable>
                     <SendMessage></SendMessage>
-        </content>
+        </div>
     );
 }
 

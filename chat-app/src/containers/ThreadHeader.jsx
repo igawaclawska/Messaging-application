@@ -4,6 +4,7 @@ import Button from '../components/Button';
 import MessageModal from './MessageModal';
 import MapsUgcIcon from '@mui/icons-material/MapsUgc';
 import '../styles.css'
+import '../buttons.css'
 
 const ThreadHeader = ({ onLoad }) => {
     const [show, setShow] = useState(false);

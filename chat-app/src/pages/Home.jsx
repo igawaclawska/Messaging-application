@@ -20,6 +20,10 @@ export const Home = () => {
     const handleClick = () => {
         setIsThreadsBarVisible(current => !current);
     };
+
+    const placeholderHandleClick = () => {
+        setIsThreadsBarVisible(true);
+    }
   
     return (
         <div className='main-container'>
@@ -32,8 +36,8 @@ export const Home = () => {
                 <ChatArea visibility={handleClick}/>)}
             </div> ) : (
             <>
-            <ThreadsBar threadInput={threadsArray}/>
-            <ChatArea/>
+            <ThreadsBar visibility={placeholderHandleClick} threadInput={threadsArray}/>
+            <ChatArea visibility={placeholderHandleClick}/>
             </> 
             )}
         </div>

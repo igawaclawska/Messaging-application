@@ -2,6 +2,7 @@ import React from 'react';
 import Button from '../components/Button'
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import '../styles.css'
+import '../buttons.css'
 
 const ChatHeader = ({ onLoad, onClick }) => {
     
