@@ -17,12 +17,19 @@ export const Home = () => {
     }, []);
 
     const [isThreadsBarVisible, setIsThreadsBarVisible] = useState(true);
+
+
+    // toggles visibility between <ChatArea> and <ThreadsBar> components, is called only when the screen withh is <= 576px
+    // is passed as a second onclick function to the <SingleThread> as a visibility prop
     const handleClick = () => {
         setIsThreadsBarVisible(current => !current);
     };
 
+    // this function does nothing, is called when the screen width is above 576px,
+    // it exists only because the <SingleThread> component still expects this function to be executed from its prop
+    // this is a temporary solution
     const placeholderHandleClick = () => {
-        setIsThreadsBarVisible(true);
+        setIsThreadsBarVisible(null);
     }
   
     return (
