@@ -14,7 +14,7 @@ import "./buttons.css"
 const router = createBrowserRouter([
         {
                 path: "/",
-                element: <Home />,
+                element: <Login />,
         }, {
                 path: "/Home",
                 element: <Home />,
