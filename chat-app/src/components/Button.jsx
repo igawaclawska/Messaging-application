@@ -1,21 +1,14 @@
-import PropTypes from 'prop-types';
-
-const Button = ({ onClick, text, className }) => {
-	return (
-	<button type="button" className={className} onClick={onClick}>
-		{text}
+const Button = ({ onClick, text, icon, className }) => {
+  return (
+    <button type="button" className={className} onClick={onClick}>
+      {icon} {text}
     </button>
   );
-}
-
-Button.defaultProps = {
-	text: 'Primary Button',
-	className: "primaryBtn"
 };
 
-// Button.propTypes = {
-// 	variant: PropTypes.oneOf(['tertiary', 'secondary', 'primary']),
-// 	disabled: PropTypes.bool,
-// };
+Button.defaultProps = {
+  text: "Button",
+  className: "fixed-btn primary",
+};
 
 export default Button;

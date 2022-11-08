@@ -1,13 +1,11 @@
-const MessageButton = ({ onClick, text }) => {
-	return (
-	<button type="button" className="sendBtn" onClick={onClick}>
-		{text}
+import SendIcon from "@mui/icons-material/Send";
+
+const MessageButton = ({ onClick }) => {
+  return (
+    <button type="button" className="sendBtn" onClick={onClick}>
+      <SendIcon />{" "}
     </button>
   );
-}
-
-MessageButton.defaultProps = {
-	text: 'Send',
 };
 
 export default MessageButton;
