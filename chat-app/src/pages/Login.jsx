@@ -2,12 +2,15 @@ import React, { useState } from "react";
 import Button from "../components/Button";
 import { useNavigate } from "react-router-dom";
 import InputField from "../components/InputField";
+import {auth} from "../firebase"
+import {useAuthState} from "react-firebase-hooks/auth"
 import "../styles.css";
 import "../buttons.css";
 
 export const Login = () => {
   const [e, setEmail] = useState();
   const [p, setPassword] = useState();
+  // const [user] = useAuthState(auth);
 
   let localStorageE = localStorage.getItem("email");
   let localStorageP = localStorage.getItem("password");
