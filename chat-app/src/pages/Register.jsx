@@ -24,7 +24,7 @@ export const Register = () => {
           displayName,
         });
         console.log(res);
-        const addUser = await addDoc(collection(db, "users", res.user.uid, displayName), {
+        const addUser = await addDoc(collection(db, "users"), {
           uid: res.user.uid,
           displayName,
           email,
