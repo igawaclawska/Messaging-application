@@ -5,7 +5,7 @@ import "../styles.css";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import "../buttons.css";
 import { auth, db, storage } from "../firebase";
-import { doc, setDoc } from "firebase/firestore";
+import { doc, addDoc, collection } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import { ref, set } from "firebase/database";
 
@@ -23,17 +23,19 @@ export const Register = () => {
       const res = await createUserWithEmailAndPassword(auth, email, password);
       try {
         // Update profile
-        await updateProfile(res.user, {
-          displayName,
-        });
-        //create user on firestore
-        await setDoc(doc(db, "users", res.user.uid), {
+        // await updateProfile(res.user, {
+        //   displayName,
+        // });
+        console.log(res);
+        const addUser = await addDoc(collection(db, "users"), {
           uid: res.user.uid,
           displayName,
           email,
         });
+        console.log(addUser, "database");
         // toMain()
       } catch (err) {
+        console.log("error" , err)
         setErr(true);
       }
     } catch (err) {
