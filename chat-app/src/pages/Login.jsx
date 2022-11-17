@@ -3,31 +3,31 @@ import Button from "../components/Button";
 import { useNavigate } from "react-router-dom";
 import InputField from "../components/InputField";
 import {auth} from "../firebase"
-import {useAuthState} from "react-firebase-hooks/auth"
+import { signInWithEmailAndPassword } from "firebase/auth";
+
 import "../styles.css";
 import "../buttons.css";
 
 export const Login = () => {
-  const [e, setEmail] = useState();
-  const [p, setPassword] = useState();
-  // const [user] = useAuthState(auth);
-
-  let localStorageE = localStorage.getItem("email");
-  let localStorageP = localStorage.getItem("password");
-
+  const [err, setErr] = useState(false);
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+  const [displayName, setName] = useState(null);
+  const [passwordRepeated, setPasswordRepeated] = useState();
+  const handleSubmit = async () => {
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      toMain();
+    } catch (err) {
+      alert("Please enter an existing user");
+      setErr(true);
+    }
+  };
   let navigate = useNavigate();
   const toMain = () => {
     let path = `/home`;
     navigate(path);
   };
-
-  function successfulRegistration() {
-    if (localStorageE === e && localStorageP === p) {
-      toMain();
-    } else {
-      alert("Please enter an existing user");
-    }
-  }
 
   return (
     <div className="formContainer">
@@ -59,7 +59,7 @@ export const Login = () => {
             className="fluid-btn primary"
             text="Login"
             icon=""
-            onClick={successfulRegistration}
+            onClick={handleSubmit}
           ></Button>
         </form>
         <span className="loginLink">
