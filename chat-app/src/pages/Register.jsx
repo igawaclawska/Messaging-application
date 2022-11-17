@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import Button from "../components/Button";
 import InputField from "../components/InputField";
-import "../styles.css";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import "../buttons.css";
-import { auth, db, storage } from "../firebase";
-import { doc, addDoc, collection } from "firebase/firestore";
+import { auth, db } from "../firebase";
+import { addDoc, collection, doc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
-import { ref, set } from "firebase/database";
+import "../buttons.css";
+import "../styles.css";
 
 export const Register = () => {
   const [err, setErr] = useState(false);
@@ -19,23 +18,22 @@ export const Register = () => {
 
   const writeUserData = async () => {
     try {
-      // Create user
       const res = await createUserWithEmailAndPassword(auth, email, password);
       try {
-        // Update profile
-        // await updateProfile(res.user, {
-        //   displayName,
-        // });
+        await updateProfile(res.user, {
+          displayName,
+        });
         console.log(res);
-        const addUser = await addDoc(collection(db, "users"), {
+        const addUser = await addDoc(collection(db, "users", res.user.uid, displayName), {
           uid: res.user.uid,
           displayName,
           email,
         });
-        console.log(addUser, "database");
-        // toMain()
+        //create empty chats
+        const addChat = await addDoc(collection(db, "userChats", res.user.uid, displayName ), {});
+        toMain()
       } catch (err) {
-        console.log("error" , err)
+        console.log("error", err)
         setErr(true);
       }
     } catch (err) {
@@ -74,7 +72,7 @@ export const Register = () => {
     }
   }
   const toMain = () => {
-    let path = `/home`;
+    let path = "/home";
     navigate(path);
   };
 
@@ -132,7 +130,6 @@ export const Register = () => {
             icon=""
             onClick={validateCredentials}
           ></Button>
-          {err && <span>Something went wrong</span>}
         </form>
         <span className="loginLink">
           Already have an account? <a href="/login">Login</a>

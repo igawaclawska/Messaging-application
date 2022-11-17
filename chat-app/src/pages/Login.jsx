@@ -25,7 +25,7 @@ export const Login = () => {
   };
   let navigate = useNavigate();
   const toMain = () => {
-    let path = `/home`;
+    let path = "/home";
     navigate(path);
   };
 

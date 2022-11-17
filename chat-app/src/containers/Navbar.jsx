@@ -1,13 +1,14 @@
-import React from "react";
+import React, { useContext } from 'react'
 import Button from "../components/Button";
 import { useNavigate } from "react-router-dom";
+import {signOut} from "firebase/auth"
+import { AuthContext } from '../context/AuthContext'
 import {auth} from "../firebase"
-import {useAuthState} from "react-firebase-hooks/auth"
 import "../styles.css";
 import "../buttons.css";
 
-const NavBar = ({ onLoad }) => {
-  const [user] = useAuthState(auth);
+const NavBar = () => {
+  const {userLogged} = useContext(AuthContext)
   let navigate = useNavigate();
   const toLogin = () => {
     let path = `/login`;
@@ -17,10 +18,11 @@ const NavBar = ({ onLoad }) => {
     <nav className="nav-bar">
       <div className="navbarWrapper">
         <span className="logoNav">I T U C H A T</span>
+        <span>{userLogged.displayName}</span>
         <Button
           text="Logout"
           className="fixed-btn secondary-white small"
-          onClick={toLogin}
+          onClick={()=>{signOut(auth); toLogin()}}
           icon={""}
         ></Button>
       </div>
