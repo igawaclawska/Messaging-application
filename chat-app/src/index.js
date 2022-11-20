@@ -7,10 +7,8 @@ import { ChatsContext } from "./context/ChatsContext";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <AuthContextProvider>
-    {/* <ChatsContext> */}
       <React.StrictMode>
         <App />
       </React.StrictMode>
-      {/* </ChatsContext> */}
   </AuthContextProvider>
 );
