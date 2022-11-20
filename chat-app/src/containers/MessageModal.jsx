@@ -1,15 +1,19 @@
 import React, {useState} from "react";
 import InputField from "../components/InputField";
 import Button from "../components/Button";
+import { AuthContext } from "../context/AuthContext";
 import { db } from "../firebase";
-import { collection, query, where, getDocs} from "firebase/firestore";
+import { collection, query, where, doc, getDocs, getDoc, updateDoc, setDoc} from "firebase/firestore";
 import "../styles.css";
 import "../buttons.css";
+import { useContext } from "react";
 
 const MessageModal = ({ show }) => {
   const [username, setUsername] = useState("");
   const [user, setUser] = useState(null);
   const [err, setErr] = useState(false);
+
+  const {userLogged} = useContext(AuthContext);
 
   const handleSearch = async () => {
     const q = query(
@@ -29,6 +33,47 @@ const MessageModal = ({ show }) => {
   };
   const handleKey = (e) => {
     e.code === "Enter" && handleSearch();
+  };
+
+
+  const createChat = async () => {
+
+    const chatsId = userLogged.uid  + user.uid 
+
+    try {
+      const res = await getDoc(doc(db, "chats", chatsId));
+
+      if (!res.exists()) {
+
+        await setDoc(doc(db, "chats", chatsId), { messages: [] });
+
+        await updateDoc(doc(db, "userChats", userLogged.uid), {
+          [chatsId + ".messageReceiver"]: {
+            uid: user.uid,
+            displayName: user.displayName,
+            email: user.email,
+          },
+          [chatsId + ".sender"]: {
+            name: userLogged.displayName,
+          } 
+        });
+
+        await updateDoc(doc(db, "userChats", user.uid), {
+          [chatsId + ".messageReceiver"]: {
+            uid: userLogged.uid,
+            displayName: userLogged.displayName,
+            email: userLogged.email,
+          },
+          [chatsId + ".sender"]: {
+            name: user.displayName,
+          }
+          
+        });
+      }
+    } catch (err) {}
+
+    setUser(null);
+    setUsername("")
   };
 
 
@@ -67,7 +112,7 @@ const MessageModal = ({ show }) => {
           ></Button>
           <Button
             className="fluid-btn primary"
-            onClick={() => show(false)}
+            onClick={createChat}
             text="Create chat"
             icon=""
           ></Button>
