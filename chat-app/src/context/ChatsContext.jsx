@@ -15,7 +15,7 @@ export const ChatsContextProvider = ({ children }) => {
         case "another_user":
           return {
             user: action.payload,
-            chatsId: userLogged.uid + action.payload.uid 
+            chatsId: userLogged.uid > action.payload.uid ? userLogged.uid + action.payload.uid : action.payload.uid + userLogged.uid
           };
   
         default:

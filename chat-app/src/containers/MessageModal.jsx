@@ -38,7 +38,7 @@ const MessageModal = ({ show }) => {
 
   const createChat = async () => {
 
-    const chatsId = userLogged.uid  + user.uid 
+    const chatsId = userLogged.uid > user.uid ? userLogged.uid + user.uid : user.uid + userLogged.uid 
 
     try {
       const res = await getDoc(doc(db, "chats", chatsId));
