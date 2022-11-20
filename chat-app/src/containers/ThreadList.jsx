@@ -2,17 +2,14 @@ import SingleThread from "../components/SingleThread";
 import React, { useState, useContext, useEffect } from "react";
 import { doc, onSnapshot } from "firebase/firestore";
 import { AuthContext } from "../context/AuthContext";
-import { ChatsContext } from "../context/ChatsContext";
 import { db } from "../firebase";
 
 
-const ThreadList = ({ threadInput, visibility }) => {
+const ThreadList = ({ visibility }) => {
   const [isActive, setIsActive] = useState(null);
   const [chats, setChats] = useState([]);
 
   const {userLogged} = useContext(AuthContext);
-
-  // const {dispatch} = useContext(ChatsContext);
 
   useEffect(() => {
     const getChats = () => {
@@ -27,12 +24,6 @@ const ThreadList = ({ threadInput, visibility }) => {
   }, [userLogged.uid]);
 
   console.log(chats);
-
-  // dispatch breaks everything, must figure out why
-
-  // const handleSelect = (u) => {
-  //   dispatch({ type: "CHANGE_USER", payload: u });
-  // };
 
   return (
     //create dynamic thread components
@@ -53,16 +44,3 @@ const ThreadList = ({ threadInput, visibility }) => {
 };
 
 export default ThreadList;
-
-      {/* {threadInput.map((thread) => (
-        <SingleThread
-          key={thread.id}
-          onClick={() => {
-            setIsActive(thread);
-            visibility();
-          }}
-          receiver={thread.author}
-          message={thread.message}
-          className={`single-thread ${isActive === thread && "active"}`}
-        ></SingleThread>
-      ))} */}

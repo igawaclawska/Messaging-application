@@ -3,7 +3,7 @@ import InputField from "../components/InputField";
 import Button from "../components/Button";
 import { AuthContext } from "../context/AuthContext";
 import { db } from "../firebase";
-import { collection, query, where, doc, getDocs, getDoc, updateDoc, setDoc, serverTimestamp} from "firebase/firestore";
+import { collection, query, where, doc, getDocs, getDoc, updateDoc, setDoc} from "firebase/firestore";
 import "../styles.css";
 import "../buttons.css";
 import { useContext } from "react";
@@ -38,7 +38,7 @@ const MessageModal = ({ show }) => {
 
   const createChat = async () => {
 
-    const chatsId = userLogged.uid > user.uid ? userLogged.uid + user.uid : user.uid + userLogged.uid;
+    const chatsId = userLogged.uid  + user.uid 
 
     try {
       const res = await getDoc(doc(db, "chats", chatsId));
@@ -56,8 +56,6 @@ const MessageModal = ({ show }) => {
           [chatsId + ".sender"]: {
             name: userLogged.displayName,
           } 
-
-
         });
 
         await updateDoc(doc(db, "userChats", user.uid), {
