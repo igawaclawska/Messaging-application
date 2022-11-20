@@ -41,11 +41,15 @@ export const Home = () => {
             {windowWidth <= 576 ? (
             <div className='main-div'>
                 {/* condition below works for small screens and allows to toggle visibility between the ThreadsBar and the ChatArea  */}
-                {isThreadsBarVisible ? (<ThreadsBar visibility={handleClick} threadInput={threadsArray}/>) : (
+                {isThreadsBarVisible ? (<ThreadsBar visibility={handleClick} 
+                // threadInput={threadsArray}
+                />) : (
                 <ChatArea visibility={handleClick}/>)}
             </div> ) : (
             <>
-            <ThreadsBar visibility={placeholderHandleClick} threadInput={threadsArray}/>
+            <ThreadsBar visibility={placeholderHandleClick} 
+            // threadInput={threadsArray}
+            />
             <ChatArea visibility={placeholderHandleClick}/>
             </> 
             )}
@@ -58,11 +62,11 @@ export default Home;
   //Fake hardcoded data for generating dynamic single threads, it is inserted into the threadInput prop of the ThreadList
   //component. This data will be later taken from the db
 
-  const threadsArray = [
-    {id: 1, author: 'John K.', message: 'Hi!'},
-    {id: 2, author: 'Ana S.', message: 'Are you available tomorrow?'},
-    {id: 3, author: 'Max P.', message: 'This is sooo cool!'},
-    {id: 4, author: 'Siri A.', message: 'LOL'},
-    {id: 5, author: 'Tom N.', message: 'Are you sure?'},
-    {id: 6, author: 'Natalie N.', message: 'Hahahaha :D'},
-]
+//   const threadsArray = [
+//     {id: 1, author: 'John K.', message: 'Hi!'},
+//     {id: 2, author: 'Ana S.', message: 'Are you available tomorrow?'},
+//     {id: 3, author: 'Max P.', message: 'This is sooo cool!'},
+//     {id: 4, author: 'Siri A.', message: 'LOL'},
+//     {id: 5, author: 'Tom N.', message: 'Are you sure?'},
+//     {id: 6, author: 'Natalie N.', message: 'Hahahaha :D'},
+// ]

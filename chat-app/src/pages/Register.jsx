@@ -3,7 +3,7 @@ import Button from "../components/Button";
 import InputField from "../components/InputField";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth, db } from "../firebase";
-import { addDoc, collection, doc } from "firebase/firestore";
+import { addDoc, collection, doc, setDoc} from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import "../buttons.css";
 import "../styles.css";
@@ -24,13 +24,13 @@ export const Register = () => {
           displayName,
         });
         console.log(res);
-        const addUser = await addDoc(collection(db, "users"), {
+        const addUser = await setDoc(doc(db, "users", res.user.uid), {
           uid: res.user.uid,
           displayName,
           email,
         });
         //create empty chats
-        const addChat = await addDoc(collection(db, "userChats", res.user.uid, displayName ), {});
+        const addChat = await setDoc(doc(db, "userChats", res.user.uid ), {});
         toMain()
       } catch (err) {
         console.log("error", err)
