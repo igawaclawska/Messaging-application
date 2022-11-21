@@ -1,6 +1,6 @@
 const SingleThread = ({ onClick, receiver, message, className }) => {
   return (
-    <div className={className} onClick={onClick}>
+    <div className={className} onClick={onClick} >
       <p>
         <b>{receiver}</b>
       </p>
