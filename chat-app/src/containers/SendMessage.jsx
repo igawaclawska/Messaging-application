@@ -19,13 +19,18 @@ const SendMessage = () => {
   const { userLogged } = useContext(AuthContext);
   const { data } = useContext(ChatsContext);
 
+  const handleKey = (e) => {
+    e.code === "Enter" && handleSend();
+  };
   const handleSend = async () => {
-    try {
-      const res = await getDoc(doc(db, "chats", data.chatsId));
-      if (res.exists()) {
-        console.log("exists", res)}
-          else{ console.log("doesnt exist")}
-        
+    if(text != ""){
+      try {
+        const res = await getDoc(doc(db, "chats", data.chatsId));
+        if (res.exists()) {
+          console.log("exists", res)
+        }
+        else { console.log("doesnt exist") }
+  
         await updateDoc(doc(db, "chats", data.chatsId), {
           messages: arrayUnion({
             id: uuid(),
@@ -33,30 +38,29 @@ const SendMessage = () => {
             senderId: userLogged.uid,
           }),
         });
-
+  
         await updateDoc(doc(db, "userChats", userLogged.uid), {
           [data.chatsId + ".lastMessage"]: {
             message: text,
           }
         });
-
+  
         await updateDoc(doc(db, "userChats", data.user.uid), {
           [data.chatsId + ".lastMessage"]: {
             message: text,
           }
         });
-      // } 
-      // else{
-      //   console.log("doesnt exist") 
-      // }
-    } catch (err) { console.log("error") }
-
-    setText("");
+      } catch (err) { console.log("error") }
+      setText("");
+    }
+   
   };
+
 
   return (
     <div className="send-message-wrapper">
       <MessageInput type="text"
+        onKeyDown={handleKey}
         onChange={(e) => setText(e.target.value)}
         value={text}></MessageInput>
       <MessageButton onClick={handleSend}></MessageButton>
