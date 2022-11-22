@@ -36,20 +36,18 @@ const ThreadList = ({ visibility }) => {
     //create dynamic thread components
     <div className="thread-list">
       {Object.entries(chats)?.map((chat) => (
-        <div key={chat[0]}>
           <SingleThread
             onClick={() => {
+              setIsActive(chat[1]);
               handleSelect(chat[1].messageReceiver);
-              setIsActive(chat);
               visibility();
             }}
+            key={chat[0]}
             className={`single-thread ${isActive === chat && "active"}`}
             receiver={chat[1].messageReceiver.displayName}
-            message={chat[1].lastMessage?.text}
+            message={chat[1]?.lastMessage.message}
           >
           </SingleThread>
-        </div>
-
       ))}
 
     </div>

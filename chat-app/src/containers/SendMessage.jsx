@@ -34,17 +34,17 @@ const SendMessage = () => {
           }),
         });
 
-        // await updateDoc(doc(db, "userChats", userLogged.uid), {
-        //   [data.chatsId + ".lastMessage"]: {
-        //     text,
-        //   }
-        // });
+        await updateDoc(doc(db, "userChats", userLogged.uid), {
+          [data.chatsId + ".lastMessage"]: {
+            message: text,
+          }
+        });
 
-        // await updateDoc(doc(db, "userChats", data.user.uid), {
-        //   [data.chatsId + ".lastMessage"]: {
-        //     text,
-        //   }
-        // });
+        await updateDoc(doc(db, "userChats", data.user.uid), {
+          [data.chatsId + ".lastMessage"]: {
+            message: text,
+          }
+        });
       // } 
       // else{
       //   console.log("doesnt exist") 
