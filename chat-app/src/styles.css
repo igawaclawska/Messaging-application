@@ -167,6 +167,19 @@ nav {
   max-width: 100%;
 }
 
+.single-thread-header{
+  font-size: 12px;
+}
+
+.single-thread-message {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-height: 16px;
+  height:16px;
+  max-width: 100vh;
+  white-space: nowrap;
+}
+
 .single-thread.active {
   background-color: var(--grey3);
 }
@@ -403,6 +416,10 @@ nav {
   }
 }
 @media (max-width: 576px) {
+  .single-thread-header{
+    font-size: 14px;
+  }
+
   .chat-header-wrapper {
     padding: 14px;
   }

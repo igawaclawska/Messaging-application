@@ -1,10 +1,10 @@
 const SingleThread = ({ onClick, receiver, message, className }) => {
   return (
     <div className={className} onClick={onClick} >
-      <p>
+      <p className="single-thread-header">
         <b>{receiver}</b>
       </p>
-      <p>{message}</p>
+      <p className="single-thread-message">{message}</p>
     </div>
   );
 };
