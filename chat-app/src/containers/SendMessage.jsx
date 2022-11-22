@@ -23,35 +23,37 @@ const SendMessage = () => {
     e.code === "Enter" && handleSend();
   };
   const handleSend = async () => {
-    try {
-      const res = await getDoc(doc(db, "chats", data.chatsId));
-      if (res.exists()) {
-        console.log("exists", res)
-      }
-      else { console.log("doesnt exist") }
-
-      await updateDoc(doc(db, "chats", data.chatsId), {
-        messages: arrayUnion({
-          id: uuid(),
-          text,
-          senderId: userLogged.uid,
-        }),
-      });
-
-      await updateDoc(doc(db, "userChats", userLogged.uid), {
-        [data.chatsId + ".lastMessage"]: {
-          message: text,
+    if(text != ""){
+      try {
+        const res = await getDoc(doc(db, "chats", data.chatsId));
+        if (res.exists()) {
+          console.log("exists", res)
         }
-      });
-
-      await updateDoc(doc(db, "userChats", data.user.uid), {
-        [data.chatsId + ".lastMessage"]: {
-          message: text,
-        }
-      });
-    } catch (err) { console.log("error") }
-    setText("");
-
+        else { console.log("doesnt exist") }
+  
+        await updateDoc(doc(db, "chats", data.chatsId), {
+          messages: arrayUnion({
+            id: uuid(),
+            text,
+            senderId: userLogged.uid,
+          }),
+        });
+  
+        await updateDoc(doc(db, "userChats", userLogged.uid), {
+          [data.chatsId + ".lastMessage"]: {
+            message: text,
+          }
+        });
+  
+        await updateDoc(doc(db, "userChats", data.user.uid), {
+          [data.chatsId + ".lastMessage"]: {
+            message: text,
+          }
+        });
+      } catch (err) { console.log("error") }
+      setText("");
+    }
+   
   };
 
 
