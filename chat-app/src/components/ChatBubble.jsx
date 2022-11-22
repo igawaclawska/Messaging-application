@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useRef } from "react";
 import { ChatsContext } from "../context/ChatsContext"
 import { AuthContext } from "../context/AuthContext"
 
-const RightChatBubble = ({ message, text }) => {
+const ChatBubble = ({ message, text }) => {
   const { userLogged } = useContext(AuthContext);
   const { data } = useContext(ChatsContext);
   const ref = useRef();
@@ -15,16 +15,16 @@ const RightChatBubble = ({ message, text }) => {
       ref={ref}
       className={`message ${message.senderId === userLogged.uid}`}
     >
-      <div className="right-bubble-wrapper">
-        <div className="right-bubble">
+      <div className={message.senderId === userLogged.uid ? "right-bubble-wrapper" : "left-bubble-wrapper"}>
+        <div className={message.senderId === userLogged.uid ? "right-bubble" : "left-bubble"}>
           <span className="messageSent">{message.text}</span>
         </div>
       </div> </div>
   );
 };
 
-RightChatBubble.defaultProps = {
+ChatBubble.defaultProps = {
   text: "This is a message sent",
 };
 
-export default RightChatBubble;
+export default ChatBubble;
