@@ -67,7 +67,6 @@ const MessageModal = ({ show }) => {
           [chatsId + ".sender"]: {
             name: user.displayName,
           }
-          
         });
       }
     } catch (err) {}
