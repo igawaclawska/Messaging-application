@@ -3,6 +3,7 @@ const MessageInput = ({
   id,
   label,
   placeholder,
+  value,
   type,
   onChange,
 }) => (
@@ -13,6 +14,7 @@ const MessageInput = ({
       placeholder={"Type a message..."}
       onChange={onChange}
       required={true}
+      value={value}
     />
   </>
 );
