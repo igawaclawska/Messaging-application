@@ -37,15 +37,16 @@ const ThreadList = ({ visibility }) => {
     <div className="thread-list">
       {Object.entries(chats)?.map((chat) => (
           <SingleThread
+ 
+            key={chat[0]}
+            className={`single-thread ${isActive === chat[1] && "active"}`}
+            receiver={chat[1].messageReceiver.displayName}
+            message={chat[1]?.lastMessage?.message}
             onClick={() => {
-              setIsActive(chat[1]);
               handleSelect(chat[1].messageReceiver);
               visibility();
+              setIsActive(chat[1]);
             }}
-            key={chat[0]}
-            className={`single-thread ${isActive === chat && "active"}`}
-            receiver={chat[1].messageReceiver.displayName}
-            message={chat[1]?.lastMessage.message}
           >
           </SingleThread>
       ))}
