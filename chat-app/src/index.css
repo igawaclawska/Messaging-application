@@ -359,11 +359,9 @@ nav {
 }
 
 .add-receivers {
-  display: flex;
-  flex-direction: column;
+  width: 100%;
+  padding: 10%;
   align-items: center;
-  padding: 20px 0 0 0;
-  gap: 4px;
 }
 
 .create-message-footer {

@@ -1,45 +1,60 @@
-import React, {useState} from "react";
+import React, { useContext, useEffect, useState } from "react";
 import InputField from "../components/InputField";
 import Button from "../components/Button";
 import { AuthContext } from "../context/AuthContext";
 import { db } from "../firebase";
-import { collection, query, where, doc, getDocs, getDoc, updateDoc, setDoc} from "firebase/firestore";
+import { collection, query, where, doc, getDocs, getDoc, updateDoc, setDoc } from "firebase/firestore";
 import "../styles.css";
 import "../buttons.css";
-import { useContext } from "react";
+import UserInfo from "../components/UserInfo"
+
 
 const MessageModal = ({ show }) => {
+  const [foundUser, userFound] = useState(false);
   const [username, setUsername] = useState("");
   const [user, setUser] = useState(null);
   const [err, setErr] = useState(false);
-
-  const {userLogged} = useContext(AuthContext);
+  const [users, setUserList] = useState([]);
+  const { userLogged } = useContext(AuthContext);
 
   const handleSearch = async () => {
-    const q = query(
+    const filter = query(
       collection(db, "users"),
       where("displayName", "==", username)
       // todo: check for names toLoweCase
     );
 
     try {
-      const querySnapshot = await getDocs(q);
-      querySnapshot.forEach((doc) => {
-        setUser(doc.data());
+      const filteredDocs = await getDocs(filter);
+      await filteredDocs.forEach((doc) => {
+          users.push(doc.data());
+          setUserList(users);
       });
+      console.info(users);
+   
     } catch (err) {
       setErr(true);
+    } finally {
+        if(users.length > 0){
+          userFound(true);
+          if (foundUser){
+            console.log("yep")
+          }
+        } else {
+          userFound(false);
+          if (!foundUser){
+            console.log("nope")
+          }
+        } 
     }
   };
+
   const handleKey = (e) => {
     e.code === "Enter" && handleSearch();
   };
 
-
   const createChat = async () => {
-
-    const chatsId = userLogged.uid > user.uid ? userLogged.uid + user.uid : user.uid + userLogged.uid 
-
+    const chatsId = userLogged.uid > user.uid ? userLogged.uid + user.uid : user.uid + userLogged.uid
     try {
       const res = await getDoc(doc(db, "chats", chatsId));
 
@@ -55,9 +70,8 @@ const MessageModal = ({ show }) => {
           },
           [chatsId + ".sender"]: {
             name: userLogged.displayName,
-          } 
+          }
         });
-
         await updateDoc(doc(db, "userChats", user.uid), {
           [chatsId + ".messageReceiver"]: {
             uid: userLogged.uid,
@@ -69,12 +83,11 @@ const MessageModal = ({ show }) => {
           }
         });
       }
-    } catch (err) {}
-
+    } catch (err) { }
     setUser(null);
     setUsername("")
-  };
-
+    userFound(false);
+  };    
 
   return (
     <div onClick={() => show(false)} className="modal-div">
@@ -87,21 +100,28 @@ const MessageModal = ({ show }) => {
         </div>
         <div className="create-message-body">
           <h3>
-            <b>receivers:</b>
+            <b>Receivers:</b>
           </h3>
           <div className="add-receivers">
             <InputField placeholder="Receiver's ITU e-mail" onKeyDown={handleKey}
-              onChange={(e) => setUsername(e.target.value)} value={username}></InputField>
-            {user && ( <span>{[user.displayName, ': ' , user.email]} </span>)}
-            <div className="add-btn">
+              onChange={(e) => setUsername(e.target.value)} value={username}>
+            </InputField>
+            <div className="list-of-users">
+            {foundUser ? (
+            <ul>
+            {users.map((user, idx) => <UserInfo onClick={() => setUser(user)} value={user} key={user.uid} displayName={user.displayName} uid={user.uid} email={user.email} idx={idx}/>)}
+            </ul>
+              ) : ( <span>No users with name: {username} found</span>)}
+            </div>
+          </div>
+        </div>
+        <div className="add-btn">
               <Button
                 className="fluid-btn secondary"
                 icon=""
                 text="+ Add receivers"
               ></Button>
             </div>
-          </div>
-        </div>
         <div className="create-message-footer">
           <Button
             className="fluid-btn tertiary"

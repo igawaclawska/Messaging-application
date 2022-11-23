@@ -179,6 +179,33 @@ nav {
   max-width: 100vh;
   white-space: nowrap;
 }
+.list-of-users{
+  height: 15vh;
+  max-height: 50%;
+  overflow-y: scroll;
+  padding: 5px 0 0 0;
+
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
+  color: var(--grey);
+  width: 100%;
+  background-color: var(--blue);
+}
+.user-info-name{
+  font-size: 12px;
+}
+.user-info-email {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-height: 18px;
+  height:16px;
+  max-width: 100vh;
+  white-space: nowrap;
+}
 
 .single-thread.active {
   background-color: var(--grey3);
@@ -332,10 +359,11 @@ nav {
 }
 
 .create-message-wrapper {
+  display: flex-box;
   background-color: var(--white);
   width: 100%;
   padding: 10%;
-  align-items: center;
+ justify-content: center;
 }
 
 /* chat styling ends here */
@@ -372,11 +400,10 @@ nav {
 }
 
 .add-receivers {
-  display: flex;
+  display:block;
   flex-direction: column;
   align-items: center;
   padding: 20px 0 0 0;
-  gap: 4px;
 }
 
 .create-message-footer {
