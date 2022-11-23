@@ -7,6 +7,7 @@ import { collection, query, where, doc, getDocs, getDoc, updateDoc, setDoc } fro
 import "../styles.css";
 import "../buttons.css";
 import UserInfo from "../components/UserInfo"
+import MailTag from "../components/MailTag"
 
 
 const MessageModal = ({ show }) => {
@@ -106,10 +107,13 @@ const MessageModal = ({ show }) => {
             <InputField placeholder="Receiver's ITU e-mail" onKeyDown={handleKey}
               onChange={(e) => setUsername(e.target.value)} value={username}>
             </InputField>
+            {(user != null) ? (
+            <MailTag text={user.email} onClick={() => setUser(null)}></MailTag>) : ""}
+            
             <div className="list-of-users">
             {foundUser ? (
             <ul>
-            {users.map((user, idx) => <UserInfo onClick={() => setUser(user)} value={user} key={user.uid} displayName={user.displayName} uid={user.uid} email={user.email} idx={idx}/>)}
+            {users.map((user, idx) => <UserInfo onClick={() => setUser(user)} key={user.uid} displayName={user.displayName} uid={user.uid} email={user.email} idx={idx}/>)}
             </ul>
               ) : ( <span>No users with name: {username} found</span>)}
             </div>

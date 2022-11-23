@@ -412,6 +412,10 @@ nav {
   gap: 4px;
 }
 
+.tags-container{
+  width:fit-content;
+}
+
 /* modal styling ends here */
 
 @media (max-width: 992px) {
