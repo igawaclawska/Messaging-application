@@ -16,7 +16,7 @@ const ChatHeader = ({ onLoad, onClick }) => {
             icon={<ArrowBackIosIcon />}
           ></Button>{" "}
         </div>
-        <span className="chat-header-title">{data.user?.displayName}</span>
+        <span className="chat-header-title">{data.user1?.displayName} {data.user2?.displayName}</span>
       </div>
     </header>
   );

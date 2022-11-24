@@ -13,9 +13,10 @@ import MailTag from "../components/MailTag"
 const MessageModal = ({ show }) => {
   const [foundUser, userFound] = useState(false);
   const [username, setUsername] = useState("");
-  const [user, setUser] = useState(null);
+  const [usersSelected, setUserSelected] = useState([]);
+  const [user, setUser] = useState({})
   const [err, setErr] = useState(false);
-  const [users, setUserList] = useState([]);
+  const [searchReslts, setSearchResults] = useState([]);
   const { userLogged } = useContext(AuthContext);
 
   const handleSearch = async () => {
@@ -24,71 +25,135 @@ const MessageModal = ({ show }) => {
       where("displayName", "==", username)
       // todo: check for names toLoweCase
     );
-
     try {
       const filteredDocs = await getDocs(filter);
       await filteredDocs.forEach((doc) => {
-          users.push(doc.data());
-          setUserList(users);
+        searchReslts.push(doc.data());
+        setSearchResults(searchReslts);
       });
-      console.info(users);
-   
     } catch (err) {
       setErr(true);
     } finally {
-        if(users.length > 0){
-          userFound(true);
-          if (foundUser){
-            console.log("yep")
-          }
-        } else {
-          userFound(false);
-          if (!foundUser){
-            console.log("nope")
-          }
-        } 
+      if (searchReslts.length > 0) {
+        userFound(true);
+      } else {
+        userFound(false);
+      }
     }
   };
 
   const handleKey = (e) => {
     e.code === "Enter" && handleSearch();
   };
-
+  // console.log("selected array:" + JSON.stringify(usersSelected) + "length: " + (usersSelected.length));
   const createChat = async () => {
-    const chatsId = userLogged.uid > user.uid ? userLogged.uid + user.uid : user.uid + userLogged.uid
-    try {
-      const res = await getDoc(doc(db, "chats", chatsId));
+      const chatsId = userLogged.uid > usersSelected[0].uid ? userLogged.uid + usersSelected[0].uid : usersSelected[0].uid + userLogged.uid
+      try {
+        const res = await getDoc(doc(db, "chats", chatsId));
+        if (!res.exists()) {
+          await setDoc(doc(db, "chats", chatsId), { messages: [] });
+          await updateDoc(doc(db, "userChats", userLogged.uid), {
+            [chatsId + ".messageReceiver"]: {
+              uid: usersSelected[0].uid,
+              displayName: usersSelected[0].displayName,
+              email: usersSelected[0].email,
+            },
+            [chatsId + ".sender"]: {
+              name: userLogged.displayName,
+            }
+          });
+          await updateDoc(doc(db, "userChats", usersSelected[0].uid), {
+            [chatsId + ".messageReceiver"]: {
+              uid: userLogged.uid,
+              displayName: userLogged.displayName,
+              email: userLogged.email,
+            },
+            [chatsId + ".sender"]: {
+              name: usersSelected[0].displayName,
+            }
+          });
+        }
+      } catch (err) { }
+      setUserSelected(null);
+      setUsername("")
+      userFound(false);
+    
+  };
 
-      if (!res.exists()) {
+  const createGroup = async () => {
+      const chatsId = userLogged.uid > usersSelected[0].uid ? userLogged.uid + usersSelected[0].uid + usersSelected[1].uid : usersSelected[1].uid + usersSelected[0].uid + userLogged.uid
+      try {
+        // const group = await setDoc(doc(db, "groupChat", res.userLogged.uid), {});
+        const res = await getDoc(doc(db, "chats", chatsId));
+        if (!res.exists()) {
+          await setDoc(doc(db, "chats", chatsId), { messages: [] });
+          await updateDoc(doc(db, "groupChat", userLogged.uid), {
+            [chatsId + ".messageReceiver1"]: {
+              uid: usersSelected[0].uid,
+              displayName: usersSelected[0].displayName,
+              email: usersSelected[0].email,
+            },
+            [chatsId + ".messageReceiver2"]: {
+              uid: usersSelected[1].uid,
+              displayName: usersSelected[1].displayName,
+              email: usersSelected[1].email,
+            },
+            [chatsId + ".sender"]: {
+              name: userLogged.displayName,
+            }
+          });
+          await updateDoc(doc(db, "groupChat", usersSelected[0].uid), {
+            [chatsId + ".messageReceiver1"]: {
+              uid: userLogged.uid,
+              displayName: userLogged.displayName,
+              email: userLogged.email,
+            },
+            [chatsId + ".messageReceiver2"]: {
+              uid: usersSelected[1].uid,
+              displayName: usersSelected[1].displayName,
+              email: usersSelected[1].email,
+            },
+            [chatsId + ".sender"]: {
+              name: usersSelected[0].displayName,
+            }
+          });
+          await updateDoc(doc(db, "groupChat", usersSelected[1].uid), {
+            [chatsId + ".messageReceiver1"]: {
+              uid: userLogged.uid,
+              displayName: userLogged.displayName,
+              email: userLogged.email,
+            },
+            [chatsId + ".messageReceiver2"]: {
+              uid: usersSelected[0].uid,
+              displayName: usersSelected[0].displayName,
+              email: usersSelected[0].email,
+            },
+            [chatsId + ".sender"]: {
+              name: usersSelected[1].displayName,
+            }
+          });
+        }
+      } catch (err) { }
+      setUserSelected(null);
+      setUsername("")
+      userFound(false);
+    
+  };
 
-        await setDoc(doc(db, "chats", chatsId), { messages: [] });
-
-        await updateDoc(doc(db, "userChats", userLogged.uid), {
-          [chatsId + ".messageReceiver"]: {
-            uid: user.uid,
-            displayName: user.displayName,
-            email: user.email,
-          },
-          [chatsId + ".sender"]: {
-            name: userLogged.displayName,
-          }
-        });
-        await updateDoc(doc(db, "userChats", user.uid), {
-          [chatsId + ".messageReceiver"]: {
-            uid: userLogged.uid,
-            displayName: userLogged.displayName,
-            email: userLogged.email,
-          },
-          [chatsId + ".sender"]: {
-            name: user.displayName,
-          }
-        });
-      }
-    } catch (err) { }
-    setUser(null);
-    setUsername("")
-    userFound(false);
-  };    
+  const handleChatCreation = () => {
+      if ((usersSelected.length - 1) == 1){ //if there are 2 recievers
+         createGroup();
+      } else if ((usersSelected.length -1) == 0){ //if there's just 1
+         createChat();
+    }
+  }
+  const handleSelect = (u) => {
+    setUser(u);
+    if (!usersSelected.includes(u)) {
+      usersSelected.push(u);
+    } 
+    setUserSelected(usersSelected);
+  };
 
   return (
     <div onClick={() => show(false)} className="modal-div">
@@ -97,35 +162,38 @@ const MessageModal = ({ show }) => {
         className="create-message-wrapper"
       >
         <div className="create-message-header">
-          <h1>Create new chat</h1>
+          <h2>Create new chat</h2>
         </div>
         <div className="create-message-body">
-          <h3>
-            <b>Receivers:</b>
-          </h3>
+          <h3> Receivers:</h3>
           <div className="add-receivers">
             <InputField placeholder="Receiver's ITU e-mail" onKeyDown={handleKey}
               onChange={(e) => setUsername(e.target.value)} value={username}>
             </InputField>
-            {(user != null) ? (
-            <MailTag text={user.email} onClick={() => setUser(null)}></MailTag>) : ""}
-            
+            <div>
+                {(usersSelected != null) ? (
+                  <span>
+              {usersSelected.map((u) => <MailTag text={u.email} onClick={() => searchReslts.pop()}></MailTag>)}
+                  </span>
+              ) : (<span></span>)}
+            </div>
+          
             <div className="list-of-users">
-            {foundUser ? (
-            <ul>
-            {users.map((user, idx) => <UserInfo onClick={() => setUser(user)} key={user.uid} displayName={user.displayName} uid={user.uid} email={user.email} idx={idx}/>)}
-            </ul>
-              ) : ( <span>No users with name: {username} found</span>)}
+              {foundUser ? (
+                <ul>
+                  {searchReslts.map((u, idx) => <UserInfo onClick={() => handleSelect(u)} key={u.uid} displayName={u.displayName} uid={u.uid} value={user} email={u.email} idx={idx} />)}
+                </ul>
+              ) : (<span></span>)}
             </div>
           </div>
         </div>
-        <div className="add-btn">
+        {/* <div className="add-btn">
               <Button
                 className="fluid-btn secondary"
                 icon=""
                 text="+ Add receivers"
               ></Button>
-            </div>
+            </div> */}
         <div className="create-message-footer">
           <Button
             className="fluid-btn tertiary"
@@ -135,7 +203,7 @@ const MessageModal = ({ show }) => {
           ></Button>
           <Button
             className="fluid-btn primary"
-            onClick={createChat}
+            onClick={() => handleChatCreation()}
             text="Create chat"
             icon=""
           ></Button>

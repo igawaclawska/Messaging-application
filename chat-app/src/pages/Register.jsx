@@ -31,6 +31,8 @@ export const Register = () => {
         });
         //create empty chats
         const addChat = await setDoc(doc(db, "userChats", res.user.uid ), {});
+        //create empty group chats
+        const addGroupChat = await setDoc(doc(db, "groupChat", res.user.uid ), {});
         toMain()
       } catch (err) {
         console.log("error", err)
