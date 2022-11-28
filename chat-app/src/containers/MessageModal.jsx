@@ -20,6 +20,7 @@ const MessageModal = ({ show }) => {
   const { userLogged } = useContext(AuthContext);
 
   const handleSearch = async () => {
+    if(username != ""){
     const filter = query(
       collection(db, "users"),
       where("displayName", "==", username)
@@ -40,10 +41,13 @@ const MessageModal = ({ show }) => {
         userFound(false);
       }
     }
+    setUsername("");
+  }
   };
 
   const handleKey = (e) => {
     e.code === "Enter" && handleSearch();
+
   };
   // console.log("selected array:" + JSON.stringify(usersSelected) + "length: " + (usersSelected.length));
   const createChat = async () => {
@@ -75,9 +79,7 @@ const MessageModal = ({ show }) => {
         }
       } catch (err) { }
       setUserSelected(null);
-      setUsername("")
       userFound(false);
-    
   };
 
   const createGroup = async () => {
@@ -135,9 +137,7 @@ const MessageModal = ({ show }) => {
         }
       } catch (err) { }
       setUserSelected(null);
-      setUsername("")
       userFound(false);
-    
   };
 
   const handleChatCreation = () => {
@@ -167,7 +167,7 @@ const MessageModal = ({ show }) => {
         <div className="create-message-body">
           <h3> Receivers:</h3>
           <div className="add-receivers">
-            <InputField placeholder="Receiver's ITU e-mail" onKeyDown={handleKey}
+            <InputField className="add-input" placeholder="Receiver's ITU e-mail" onKeyDown={handleKey}
               onChange={(e) => setUsername(e.target.value)} value={username}>
             </InputField>
             <div>
