@@ -50,9 +50,8 @@ const ThreadList = ({ visibility }) => {
           <SingleThread
             key={chat[0]}
             className={`single-thread ${isActive === chat[1] && "active"}`}
-            receiver={chat[1].messageReceiver.displayName}
+            receiver1={chat[1].messageReceiver.displayName}
             receiver2={""}
-            receiver3={""}
             message={chat[1]?.lastMessage?.message}
             onClick={() => {
               handleSelect(chat[1].messageReceiver);
@@ -66,9 +65,8 @@ const ThreadList = ({ visibility }) => {
           <SingleThread
             key={g[0]}
             className={`single-thread ${isActive === g[1] && "active"}`}
-            receiver={""}
-            receiver2={g[1].messageReceiver1.displayName}
-            receiver3={g[1].messageReceiver2.displayName}
+            receiver1={g[1].messageReceiver1.displayName}
+            receiver2={g[1].messageReceiver2.displayName}
             message={g[1]?.lastMessage?.message}
             onClick={() => {
               handleSelectG(g[1].messageReceiver1, g[1].messageReceiver2);
