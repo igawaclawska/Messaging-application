@@ -84,7 +84,10 @@ const MessageModal = ({ show }) => {
   };
 
   const createGroup = async () => {
-      const chatsId = userLogged.uid > usersSelected[0].uid ? userLogged.uid + usersSelected[0].uid + usersSelected[1].uid : usersSelected[1].uid + usersSelected[0].uid + userLogged.uid
+    var user1 = usersSelected[0];
+    var user2 = usersSelected[1];
+    
+      const chatsId = userLogged.uid > user1.uid ? userLogged.uid + user1.uid + user2.uid : user2.uid + user1.uid + userLogged.uid
       try {
         // const group = await setDoc(doc(db, "groupChat", res.userLogged.uid), {});
         const res = await getDoc(doc(db, "chats", chatsId));
@@ -92,32 +95,32 @@ const MessageModal = ({ show }) => {
           await setDoc(doc(db, "chats", chatsId), { messages: [] });
           await updateDoc(doc(db, "groupChat", userLogged.uid), {
             [chatsId + ".messageReceiver1"]: {
-              uid: usersSelected[0].uid,
-              displayName: usersSelected[0].displayName,
-              email: usersSelected[0].email,
+              uid: user1.uid,
+              displayName: user1.displayName,
+              email: user1.email,
             },
             [chatsId + ".messageReceiver2"]: {
-              uid: usersSelected[1].uid,
-              displayName: usersSelected[1].displayName,
-              email: usersSelected[1].email,
+              uid: user2.uid,
+              displayName: user2.displayName,
+              email: user2.email,
             },
             [chatsId + ".sender"]: {
               name: userLogged.displayName,
             }
           });
-          await updateDoc(doc(db, "groupChat", usersSelected[0].uid), {
+          await updateDoc(doc(db, "groupChat", user1.uid), {
             [chatsId + ".messageReceiver1"]: {
               uid: userLogged.uid,
               displayName: userLogged.displayName,
               email: userLogged.email,
             },
             [chatsId + ".messageReceiver2"]: {
-              uid: usersSelected[1].uid,
-              displayName: usersSelected[1].displayName,
-              email: usersSelected[1].email,
+              uid: user2.uid,
+              displayName: user2.displayName,
+              email: user2.email,
             },
             [chatsId + ".sender"]: {
-              name: usersSelected[0].displayName,
+              name: user1.displayName,
             }
           });
           await updateDoc(doc(db, "groupChat", usersSelected[1].uid), {
@@ -127,12 +130,12 @@ const MessageModal = ({ show }) => {
               email: userLogged.email,
             },
             [chatsId + ".messageReceiver2"]: {
-              uid: usersSelected[0].uid,
-              displayName: usersSelected[0].displayName,
-              email: usersSelected[0].email,
+              uid: user1.uid,
+              displayName: user1.displayName,
+              email: user1.email,
             },
             [chatsId + ".sender"]: {
-              name: usersSelected[1].displayName,
+              name: user2.displayName,
             }
           });
         }

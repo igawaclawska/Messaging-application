@@ -40,9 +40,9 @@ const ThreadList = ({ visibility }) => {
     dispatch({ type: "ANOTHER_USER", payload: u });
     console.log(u);
   };
-  const handleSelectG = (u) => {
-    dispatch({ type: "TWO_USERS", payload: u });
-    console.log(u);
+  const handleSelectG = (u, v) => {
+    dispatch({ type: "TWO_USERS", payload: u, payload2: v, });
+    console.log(u, v);
   };
 
   return (
@@ -52,7 +52,7 @@ const ThreadList = ({ visibility }) => {
           <SingleThread
             key={chat[0]}
             className={`single-thread ${isActive === chat[1] && "active"}`}
-            receiver={chat[1].messageReceiver.displayName}
+            // receiver={chat[1].messageReceiver.displayName}
             receiver2={""}
             receiver3={""}
             message={chat[1]?.lastMessage?.message}
@@ -73,7 +73,7 @@ const ThreadList = ({ visibility }) => {
             receiver3={g[1].messageReceiver2.displayName}
             message={g[1]?.lastMessage?.message}
             onClick={() => {
-              handleSelectG(g[1].messageReceiver1);
+              handleSelectG(g[1].messageReceiver1, g[1].messageReceiver2);
               visibility();
               setIsActive(g[1]);
             }}
