@@ -50,6 +50,14 @@ const SendMessage = () => {
             message: text,
           }
         });
+
+        if(data.user2.uid != ""){
+          await updateDoc(doc(db, "userChats", data.user2.uid), {
+            [data.chatsId + ".lastMessage"]: {
+              message: text,
+            }
+          });
+        }
       } catch (err) { console.log("error") }
       setText("");
     }

@@ -146,7 +146,8 @@ const MessageModal = ({ show }) => {
          createGroup();
       } else if ((usersSelected.length -1) == 0){ //if there's just 1
          createChat();
-    }
+      }
+      show(false);
   }
   const handleSelect = (u, idx) => {
     setUser(u);
