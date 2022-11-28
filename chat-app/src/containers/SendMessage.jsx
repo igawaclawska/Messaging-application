@@ -38,26 +38,46 @@ const SendMessage = () => {
             senderId: userLogged.uid,
           }),
         });
-  
-        await updateDoc(doc(db, "userChats", userLogged.uid), {
-          [data.chatsId + ".lastMessage"]: {
-            message: text,
-          }
-        });
-  
-        await updateDoc(doc(db, "userChats", data.user1.uid), {
-          [data.chatsId + ".lastMessage"]: {
-            message: text,
-          }
-        });
 
-        if(data.user2.uid != ""){
-          await updateDoc(doc(db, "userChats", data.user2.uid), {
+        if(data.user2.uid == null){
+          await updateDoc(doc(db, "userChats", userLogged.uid), {
+            [data.chatsId + ".lastMessage"]: {
+              message: text,
+            }
+          });
+    
+          await updateDoc(doc(db, "userChats", data.user1.uid), {
+            [data.chatsId + ".lastMessage"]: {
+              message: text,
+            }
+          });
+        } else if (data.user2.uid != null){
+          await updateDoc(doc(db, "groupChat", userLogged.uid), {
+            [data.chatsId + ".lastMessage"]: {
+              message: text,
+            }
+          });
+    
+          await updateDoc(doc(db, "groupChat", data.user1.uid), {
+            [data.chatsId + ".lastMessage"]: {
+              message: text,
+            }
+          });
+          await updateDoc(doc(db, "groupChat", data.user1.uid), {
             [data.chatsId + ".lastMessage"]: {
               message: text,
             }
           });
         }
+
+
+        // if(data.user2.uid != ""){
+        //   await updateDoc(doc(db, "userChats", data.user2.uid), {
+        //     [data.chatsId + ".lastMessage"]: {
+        //       message: text,
+        //     }
+        //   });
+        // }
       } catch (err) { console.log("error") }
       setText("");
     }

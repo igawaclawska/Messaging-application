@@ -52,7 +52,7 @@ const ThreadList = ({ visibility }) => {
           <SingleThread
             key={chat[0]}
             className={`single-thread ${isActive === chat[1] && "active"}`}
-            // receiver={chat[1].messageReceiver.displayName}
+            receiver={chat[1].messageReceiver.displayName}
             receiver2={""}
             receiver3={""}
             message={chat[1]?.lastMessage?.message}
