@@ -16,7 +16,7 @@ const MessageModal = ({ show }) => {
   const [usersSelected, setUserSelected] = useState([]);
   const [user, setUser] = useState({})
   const [err, setErr] = useState(false);
-  const [searchReslts, setSearchResults] = useState([]);
+  const [searchResults, setSearchResults] = useState([]);
   const { userLogged } = useContext(AuthContext);
 
   const handleSearch = async () => {
@@ -29,18 +29,19 @@ const MessageModal = ({ show }) => {
     try {
       const filteredDocs = await getDocs(filter);
       await filteredDocs.forEach((doc) => {
-        searchReslts.push(doc.data());
-        setSearchResults(searchReslts);
+        searchResults.push(doc.data());
+        setSearchResults(searchResults);
       });
     } catch (err) {
       setErr(true);
     } finally {
-      if (searchReslts.length > 0) {
+      if (searchResults.length > 0) {
         userFound(true);
       } else {
         userFound(false);
       }
     }
+    // console.log("search array:" + JSON.stringify(searchResults) + "length: " + (searchResults.length));
     setUsername("");
   }
   };
@@ -147,13 +148,23 @@ const MessageModal = ({ show }) => {
          createChat();
     }
   }
-  const handleSelect = (u) => {
+  const handleSelect = (u, idx) => {
     setUser(u);
-    if (!usersSelected.includes(u)) {
-      usersSelected.push(u);
+    if (!usersSelected.includes(u)) { 
+      searchResults.splice(idx, 1); // remove object from the search Array
+      usersSelected.push(u); //adding the specific user from the searchResults to the usersSelected 
     } 
     setUserSelected(usersSelected);
-  };
+    console.log("search array after selection:" + JSON.stringify(searchResults) + "length: " + (searchResults.length));
+};
+
+const handleSelect2 = (u, idx) => {
+  setUser({});
+  if (!searchResults.includes(u)) { 
+    usersSelected.splice(idx, 1); // remove object from the selectedUsers Array
+  } 
+  console.log("usersSelected array after selection:" + JSON.stringify(usersSelected) + "length: " + (usersSelected.length));
+};
 
   return (
     <div onClick={() => show(false)} className="modal-div">
@@ -173,7 +184,7 @@ const MessageModal = ({ show }) => {
             <div>
                 {(usersSelected != null) ? (
                   <span>
-              {usersSelected.map((u) => <MailTag text={u.email} onClick={() => searchReslts.pop()}></MailTag>)}
+                  {usersSelected.map((u, idx) => <MailTag text={u.email} onClick={() => handleSelect2(u, idx)}></MailTag>)}
                   </span>
               ) : (<span></span>)}
             </div>
@@ -181,7 +192,7 @@ const MessageModal = ({ show }) => {
             <div className="list-of-users">
               {foundUser ? (
                 <ul>
-                  {searchReslts.map((u, idx) => <UserInfo onClick={() => handleSelect(u)} key={u.uid} displayName={u.displayName} uid={u.uid} value={user} email={u.email} idx={idx} />)}
+                  {searchResults.map((u, idx) => <UserInfo onClick={() => handleSelect(u, idx)} key={u.uid} displayName={u.displayName} uid={u.uid} value={username} email={u.email} idx={idx} />)}
                 </ul>
               ) : (<span></span>)}
             </div>
