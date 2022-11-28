@@ -7,8 +7,8 @@ export const ChatsContextProvider = ({ children }) => {
     const { userLogged } = useContext(AuthContext);
     const INITIAL_STATE = {
       chatsId: "null",
-      user1: {},
-      user2: {},
+      user1: null,
+      user2: null,
     };
   
     const chatReducer = (state, action) => {

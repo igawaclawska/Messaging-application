@@ -39,7 +39,7 @@ const SendMessage = () => {
           }),
         });
 
-        if(data.user2.uid == null){
+        if((data.user2 == null)){
           await updateDoc(doc(db, "userChats", userLogged.uid), {
             [data.chatsId + ".lastMessage"]: {
               message: text,
@@ -51,7 +51,7 @@ const SendMessage = () => {
               message: text,
             }
           });
-        } else if (data.user2.uid != null){
+        } else {
           await updateDoc(doc(db, "groupChat", userLogged.uid), {
             [data.chatsId + ".lastMessage"]: {
               message: text,
@@ -69,15 +69,6 @@ const SendMessage = () => {
             }
           });
         }
-
-
-        // if(data.user2.uid != ""){
-        //   await updateDoc(doc(db, "userChats", data.user2.uid), {
-        //     [data.chatsId + ".lastMessage"]: {
-        //       message: text,
-        //     }
-        //   });
-        // }
       } catch (err) { console.log("error") }
       setText("");
     }

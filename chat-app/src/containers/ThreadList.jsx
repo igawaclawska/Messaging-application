@@ -3,9 +3,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { doc, onSnapshot } from "firebase/firestore";
 import { AuthContext } from "../context/AuthContext";
 import { ChatsContext } from "../context/ChatsContext";
-
 import { db } from "../firebase";
-
 
 const ThreadList = ({ visibility }) => {
   const [isActive, setIsActive] = useState(null);
