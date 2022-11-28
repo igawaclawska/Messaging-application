@@ -4,7 +4,7 @@ import { ChatsContext } from "../context/ChatsContext";
 import "../styles.css";
 import "../buttons.css";
 
-const ChatHeader = ({ onLoad, onClick }) => {
+const ChatHeader = ({ onClick }) => {
   const { data } = useContext(ChatsContext);
   return (
     <header className="chat-header">
