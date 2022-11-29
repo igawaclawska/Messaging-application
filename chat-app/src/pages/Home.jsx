@@ -37,6 +37,7 @@ export const Home = () => {
     return (
         <div className='main-container'>
             <Navbar/>
+            <div className='home-body'>
             {/* condition below toggles between mobile and desktop view */}
             {windowWidth <= 576 ? (
             <div className='main-div'>
@@ -53,6 +54,7 @@ export const Home = () => {
             <ChatArea visibility={placeholderHandleClick}/>
             </> 
             )}
+            </div>
         </div>
     )
 }
