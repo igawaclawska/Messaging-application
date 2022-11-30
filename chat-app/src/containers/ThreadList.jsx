@@ -36,11 +36,15 @@ const ThreadList = ({ visibility }) => {
 
   const handleSelect = (u) => {
     dispatch({ type: "ANOTHER_USER", payload: u });
-    console.log(u);
   };
   const handleSelectG = (u, v) => {
+    console.log("two users method called");
+
     dispatch({ type: "TWO_USERS", payload: u, payload2: v, });
-    console.log(u, v);
+  };
+  const handleSelectG2 = (u, v) => {
+    console.log("owner method called");
+    dispatch({ type: "TWO_USER_OWNER", payload: v, payload2: u, });
   };
 
   return (
@@ -68,8 +72,8 @@ const ThreadList = ({ visibility }) => {
             receiver1={g[1].messageReceiver1.displayName}
             receiver2={g[1].messageReceiver2.displayName}
             message={g[1]?.lastMessage?.message}
-            onClick={() => {
-              handleSelectG(g[1].messageReceiver1, g[1].messageReceiver2);
+            onClick={() => { (userLogged.uid === g[1].groupOwner.uid) ?
+              handleSelectG2(g[1].messageReceiver1, g[1].messageReceiver2) : handleSelectG(g[1].messageReceiver1, g[1].messageReceiver2) ;
               visibility();
               setIsActive(g[1]);
             }}

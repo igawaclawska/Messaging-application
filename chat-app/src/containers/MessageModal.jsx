@@ -89,7 +89,6 @@ const MessageModal = ({ show }) => {
     
       const chatsId = userLogged.uid > user1.uid ? userLogged.uid + user1.uid + user2.uid : user2.uid + user1.uid + userLogged.uid
       try {
-        // const group = await setDoc(doc(db, "groupChat", res.userLogged.uid), {});
         const res = await getDoc(doc(db, "chats", chatsId));
         if (!res.exists()) {
           await setDoc(doc(db, "chats", chatsId), { messages: [] });
@@ -103,6 +102,9 @@ const MessageModal = ({ show }) => {
               uid: user2.uid,
               displayName: user2.displayName,
               email: user2.email,
+            },
+            [chatsId + ".groupOwner"]:{
+              uid: userLogged.uid
             },
             [chatsId + ".sender"]: {
               name: userLogged.displayName,
@@ -119,6 +121,9 @@ const MessageModal = ({ show }) => {
               displayName: user2.displayName,
               email: user2.email,
             },
+            [chatsId + ".groupOwner"]:{
+              uid: userLogged.uid
+            },
             [chatsId + ".sender"]: {
               name: user1.displayName,
             }
@@ -133,6 +138,9 @@ const MessageModal = ({ show }) => {
               uid: user1.uid,
               displayName: user1.displayName,
               email: user1.email,
+            },
+            [chatsId + ".groupOwner"]:{
+              uid: userLogged.uid
             },
             [chatsId + ".sender"]: {
               name: user2.displayName,
@@ -192,6 +200,7 @@ const handleSelect2 = (u, idx) => {
                   </span>
               ) : (<span></span>)}
             </div>
+            
           
             <div className="list-of-users">
               {foundUser ? (
