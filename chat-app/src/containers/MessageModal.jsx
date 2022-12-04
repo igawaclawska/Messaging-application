@@ -89,7 +89,7 @@ const MessageModal = ({ show }) => {
     var user1 = usersSelected[0];
     var user2 = usersSelected[1];
 
-    const chatsId = groupname;
+    const chatsId = groupname.replace(/\s/g, '');
     try {
       const res = await getDoc(doc(db, "chats", chatsId));
       if (!res.exists()) {
