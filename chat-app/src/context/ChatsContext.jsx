@@ -25,7 +25,7 @@ export const ChatsContextProvider = ({ children }) => {
               user1: action.payload,
               user2: action.payload2,
               group: action.payload3,
-              chatsId:  action.payload3
+              chatsId:  action.payload3.name.replace(/\s/g,'')
             };
             
             case "TWO_USER_OWNER":
@@ -34,7 +34,7 @@ export const ChatsContextProvider = ({ children }) => {
                 user2: action.payload2,
                 group: action.payload3,
                 // chatsId: "vTqdfIcdhpea5NUEWzqVDfyUM1l1EaQzxRrC7rVB0VhLKFCj0IhtHEo2XznOMmvWi1VrJb8LVWmyBhqx9fj1" 
-                chatsId: action.payload3.name 
+                chatsId: action.payload3.name.replace(/\s/g,'') 
               };
         default:
           return state;

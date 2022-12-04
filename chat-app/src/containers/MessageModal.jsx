@@ -165,8 +165,9 @@ const MessageModal = ({ show }) => {
   };
 
   const handleChatCreation = async () => {
-    const res = await getDoc(doc(db, "chats", groupname));
+
     if (((usersSelected.length - 1) == 1) && (groupname != "")) { //if there are 2 recievers
+      const res = await getDoc(doc(db, "chats", groupname));
       try {
         if(groupname.length < 5){
           alert("Please select group name with at least 5 characters");
