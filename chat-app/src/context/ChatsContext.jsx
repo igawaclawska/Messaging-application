@@ -23,7 +23,7 @@ export const ChatsContextProvider = ({ children }) => {
             return {
               user1: action.payload,
               user2: action.payload2,
-              chatsId:  userLogged.uid < action.payload.uid ?  action.payload.uid + userLogged.uid + action.payload2.uid : action.payload.uid + action.payload2.uid + userLogged.uid
+              chatsId:  action.payload2.uid < action.payload.uid ? action.payload.uid + userLogged.uid + action.payload2.uid : action.payload.uid + action.payload2.uid + userLogged.uid
             };
             case "TWO_USER_OWNER":
               return {
