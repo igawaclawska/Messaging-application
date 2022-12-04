@@ -37,14 +37,14 @@ const ThreadList = ({ visibility }) => {
   const handleSelect = (u) => {
     dispatch({ type: "ANOTHER_USER", payload: u });
   };
-  const handleSelectG = (u, v) => {
+  const handleSelectG = (u, v, t) => {
     console.log("two users method called");
 
-    dispatch({ type: "TWO_USERS", payload: u, payload2: v, });
+    dispatch({ type: "TWO_USERS",  payload: v, payload2: u, payload3: t});
   };
-  const handleSelectG2 = (u, v) => {
+  const handleSelectG2 = (u, v, t) => {
     console.log("owner method called");
-    dispatch({ type: "TWO_USER_OWNER", payload: v, payload2: u, });
+    dispatch({ type: "TWO_USER_OWNER", payload: v, payload2: u, payload3: t});
   };
 
   return (
@@ -69,11 +69,12 @@ const ThreadList = ({ visibility }) => {
           <SingleThread
             key={g[0]}
             className={`single-thread ${isActive === g[1] && "active"}`}
+            groupName={g[1]?.groupName.name}
             receiver1={g[1].messageReceiver1.displayName}
             receiver2={g[1].messageReceiver2.displayName}
             message={g[1]?.lastMessage?.message}
             onClick={() => { (userLogged.uid === g[1].groupOwner.uid) ?
-              handleSelectG2(g[1].messageReceiver1, g[1].messageReceiver2) : handleSelectG(g[1].messageReceiver1, g[1].messageReceiver2) ;
+              handleSelectG2(g[1].messageReceiver1, g[1].messageReceiver2, g[1].groupName) : handleSelectG(g[1].messageReceiver1, g[1].messageReceiver2, g[1].groupName) ;
               visibility();
               setIsActive(g[1]);
             }}
