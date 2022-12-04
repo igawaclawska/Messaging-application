@@ -36,6 +36,7 @@ const SendMessage = () => {
             id: uuid(),
             text,
             senderId: userLogged.uid,
+            senderName: userLogged.displayName,
           }),
         });
 
