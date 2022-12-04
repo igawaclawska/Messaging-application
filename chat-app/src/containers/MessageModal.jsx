@@ -218,22 +218,19 @@ const MessageModal = ({ show }) => {
             <InputField className="add-input" placeholder="Receiver's ITU e-mail" onKeyDown={handleKey}
               onChange={(e) => setUsername(e.target.value)} value={username}>
             </InputField>
-            <div>
+    
               {(usersSelected != null) ? (
                 <span>
                   {usersSelected.map((u, idx) => <MailTag text={u.email} onClick={() => handleSelect2(u, idx)}></MailTag>)}
                 </span>
-              ) : (<span></span>)}
-            </div>
-
-
-            <div className="list-of-users">
+              ) : (null)}
+            
               {foundUser ? (
                 <ul>
                   {searchResults.map((u, idx) => <UserInfo onClick={() => handleSelect(u, idx)} key={u.uid} displayName={u.displayName} uid={u.uid} value={username} email={u.email} idx={idx} />)}
                 </ul>
-              ) : (<span></span>)}
-            </div>
+              ) : (null)}
+  
           </div>
         </div>
         {(usersSelected.length > 1) ? <InputField className="add-group-name" placeholder="Goup name" onKeyDown={handleKey}
