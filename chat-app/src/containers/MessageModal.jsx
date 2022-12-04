@@ -89,7 +89,7 @@ const MessageModal = ({ show }) => {
     var user1 = usersSelected[0];
     var user2 = usersSelected[1];
 
-    const chatsId = userLogged.uid > user1.uid ? userLogged.uid + user1.uid + user2.uid : user2.uid + user1.uid + userLogged.uid;
+    const chatsId = groupname;
     try {
       const res = await getDoc(doc(db, "chats", chatsId));
       if (!res.exists()) {
@@ -164,11 +164,23 @@ const MessageModal = ({ show }) => {
     setGroupName("");
   };
 
-  const handleChatCreation = () => {
+  const handleChatCreation = async () => {
+    const res = await getDoc(doc(db, "chats", groupname));
     if (((usersSelected.length - 1) == 1) && (groupname != "")) { //if there are 2 recievers
-      createGroup();
+      try {
+        if(groupname.length < 5){
+          alert("Please select group name with at least 5 characters");
+        } else if (res.exists()) {
+          alert("Please use another group name");
+        } else {
+          await createGroup();
+        }
+      } catch (error) {
+        
+      }
+     
     } else if (((usersSelected.length - 1) == 0)) { //if there's just 1
-        createChat();  
+        await createChat();  
     }
     show(false);
   }
