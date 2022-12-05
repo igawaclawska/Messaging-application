@@ -9,6 +9,7 @@ export const ChatsContextProvider = ({ children }) => {
       chatsId: "null",
       user1: null,
       user2: null,
+      group: null,
       owner: null,
     };
   
@@ -23,14 +24,16 @@ export const ChatsContextProvider = ({ children }) => {
             return {
               user1: action.payload,
               user2: action.payload2,
-              chatsId:  userLogged.uid < action.payload.uid ?  action.payload.uid + userLogged.uid + action.payload2.uid : action.payload.uid + action.payload2.uid + userLogged.uid
+              group: action.payload3,
+              chatsId:  action.payload3.name.replace(/\s/g,'')
             };
+            
             case "TWO_USER_OWNER":
               return {
                 user1: action.payload,
                 user2: action.payload2,
-                // chatsId: "vTqdfIcdhpea5NUEWzqVDfyUM1l1EaQzxRrC7rVB0VhLKFCj0IhtHEo2XznOMmvWi1VrJb8LVWmyBhqx9fj1" 
-                chatsId: userLogged.uid < action.payload2.uid ? userLogged.uid + action.payload.uid + action.payload2.uid : userLogged.uid + action.payload2.uid + action.payload.uid 
+                group: action.payload3,
+                chatsId: action.payload3.name.replace(/\s/g,'') 
               };
         default:
           return state;

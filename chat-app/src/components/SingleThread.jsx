@@ -1,8 +1,8 @@
-const SingleThread = ({ onClick, receiver1, receiver2, message, className }) => {
+const SingleThread = ({ onClick, receiver1, receiver2, message, className, groupName }) => {
   return (
     <div className={className} onClick={onClick} >
       <p className="single-thread-header">
-        <b> {receiver2 == "" ? receiver1 : receiver1 + ", " + receiver2}</b>
+        <b> {groupName} {receiver2 == "" ? receiver1 : " ("+ receiver1 + ", " + receiver2 + ")"}</b>
       </p>
       <p className="single-thread-message">{message}</p>
     </div>
@@ -10,6 +10,7 @@ const SingleThread = ({ onClick, receiver1, receiver2, message, className }) => 
 };
 
 SingleThread.defaultProps = {
+  groupName: "",
   className: "single-thread",
   receiver1: "name1",
   receiver2: "name2",

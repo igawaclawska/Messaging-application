@@ -15,8 +15,10 @@ const ChatBubble = ({ message, text }) => {
       ref={ref}
       className={`message ${message.senderId === userLogged.uid}`}
     >
+     
       <div className={message.senderId === userLogged.uid ? "right-bubble-wrapper" : "left-bubble-wrapper"}>
         <div className={message.senderId === userLogged.uid ? "right-bubble" : "left-bubble"}>
+        {((message.senderId != userLogged.uid) && (data.group !=null)) ? <h5>{message.senderName}</h5> : <></>}
           <span className="messageSent">{message.text}</span>
         </div>
       </div> </div>
