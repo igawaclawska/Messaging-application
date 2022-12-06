@@ -59,8 +59,8 @@ const ThreadList = ({ visibility }) => {
             message={chat[1]?.lastMessage?.message}
             onClick={() => {
               handleSelect(chat[1].messageReceiver);
-              visibility();
               setIsActive(chat[1]);
+              visibility && visibility();
             }}
           >
           </SingleThread>
@@ -75,8 +75,8 @@ const ThreadList = ({ visibility }) => {
             message={g[1]?.lastMessage?.message}
             onClick={() => { (userLogged.uid === g[1].groupOwner.uid) ?
               handleSelectG2(g[1].messageReceiver1, g[1].messageReceiver2, g[1].groupName) : handleSelectG(g[1].messageReceiver1, g[1].messageReceiver2, g[1].groupName) ;
-              visibility();
               setIsActive(g[1]);
+              visibility && visibility();
             }}
           >
           </SingleThread>
