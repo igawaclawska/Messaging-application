@@ -23,7 +23,7 @@ export const Register = () => {
       try {
         await updateProfile(res.user, {
           displayName,
-          displayNameLowerCase,
+          // displayNameLowerCase,
         });
         console.log(res);
         const addUser = await setDoc(doc(db, "users", res.user.uid), {
@@ -100,8 +100,9 @@ export const Register = () => {
             value={displayName}
             placeholder="Enter your name"
             type="text"
-            onChange={(e) => { setName(e.target.value); 
-                              let nameLowercase = e.target.value.toLowerCase();
+            onChange={(e) => {let name = e.target.value
+                              setName(name); 
+                              let nameLowercase = name.toLowerCase();
                               setDisplayNameLowerCase(nameLowercase)}}
           ></InputField>
           <InputField
