@@ -64,7 +64,7 @@ const SendMessage = () => {
               message: text,
             }
           });
-          await updateDoc(doc(db, "groupChat", data.user1.uid), {
+          await updateDoc(doc(db, "groupChat", data.user2.uid), {
             [data.chatsId + ".lastMessage"]: {
               message: text,
             }
