@@ -5,9 +5,7 @@ const ThreadsBar = ({ onLoad, visibility }) => {
   return (
     <div className="threads-bar">
       <ThreadHeader></ThreadHeader>
-      <ThreadList
-        visibility={visibility}
-      ></ThreadList>
+      <ThreadList visibility={visibility}></ThreadList>
     </div>
   );
 };
