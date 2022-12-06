@@ -9,7 +9,7 @@ const ChatHeader = ({ onClick }) => {
   return (
     <header className="chat-header">
       <div className="chat-header-wrapper">
-        <div onClick={onClick} className="backBtn">
+        <div onClick={onClick} className="back-btn">
           <Button
             className="fixed-btn tertiary with-icon"
             text=""

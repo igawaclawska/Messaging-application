@@ -30,8 +30,8 @@ export const Login = () => {
   };
 
   return (
-    <div className="formContainer">
-      <div className="formWrapper">
+    <div className="form-container">
+      <div className="form-wrapper">
         <span className="logo">I T U C H A T</span>
         <h2 className="title">Login</h2>
         <form action="">

@@ -16,8 +16,8 @@ const NavBar = () => {
   };
   return (
     <nav className="nav-bar">
-      <div className="navbarWrapper">
-        <span className="logoNav">I T U C H A T</span>
+      <div className="navbar-wrapper">
+        <span className="logo-nav">I T U C H A T</span>
         <span>{userLogged.displayName}</span>
         <Button
           text="Logout"

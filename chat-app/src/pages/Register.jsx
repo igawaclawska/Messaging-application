@@ -88,8 +88,8 @@ export const Register = () => {
   }
 
   return (
-    <div className="formContainer">
-      <div className="formWrapper">
+    <div className="form-container">
+      <div className="form-wrapper">
         <span className="logo">I T U C H A T</span>
         <h2 className="title">Register</h2>
         <form className="form" >
