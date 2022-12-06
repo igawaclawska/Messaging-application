@@ -14,6 +14,7 @@ export const Register = () => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [displayName, setName] = useState(null);
+  const [displayNameLowerCase, setDisplayNameLowerCase] = useState(null);
   const [passwordRepeated, setPasswordRepeated] = useState();
 
   const writeUserData = async () => {
@@ -22,11 +23,13 @@ export const Register = () => {
       try {
         await updateProfile(res.user, {
           displayName,
+          // displayNameLowerCase,
         });
         console.log(res);
         const addUser = await setDoc(doc(db, "users", res.user.uid), {
           uid: res.user.uid,
           displayName,
+          displayNameLowerCase,
           email,
         });
         //create empty chats
@@ -97,7 +100,10 @@ export const Register = () => {
             value={displayName}
             placeholder="Enter your name"
             type="text"
-            onChange={(e) => setName(e.target.value)}
+            onChange={(e) => {let name = e.target.value
+                              setName(name); 
+                              let nameLowercase = name.toLowerCase();
+                              setDisplayNameLowerCase(nameLowercase)}}
           ></InputField>
           <InputField
             className="inputEmail"
