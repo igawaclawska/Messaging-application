@@ -35,12 +35,12 @@ export const Home = () => {
     }
   
     return (
-        <div className='main-container'>
+        <div className='home-container'>
             <Navbar/>
             <div className='home-body'>
             {/* condition below toggles between mobile and desktop view */}
             {windowWidth <= 576 ? (
-            <div className='main-div'>
+            <div className='home-all-contents'>
                 {/* condition below works for small screens and allows to toggle visibility between the ThreadsBar and the ChatArea  */}
                 {isThreadsBarVisible ? (<ThreadsBar visibility={handleClick} 
                 // threadInput={threadsArray}
