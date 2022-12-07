@@ -103,8 +103,8 @@ export const Register = () => {
             value={displayName}
             placeholder="Enter your name"
             type="text"
-            onChange={(e) => {
-              let name = e.target.value;
+            onChange={(event) => {
+              let name = event.target.value;
               setName(name);
               let nameLowercase = name.toLowerCase();
               setDisplayNameLowerCase(nameLowercase);
@@ -117,7 +117,7 @@ export const Register = () => {
             label="e-mail"
             placeholder="example@itu.dk"
             type="email"
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(event) => setEmail(event.target.value)}
           ></InputField>
           <InputField
             className="inputPassword"
@@ -126,7 +126,7 @@ export const Register = () => {
             label="password"
             placeholder="Enter a password"
             type="password"
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(event) => setPassword(event.target.value)}
           ></InputField>
           <InputField
             className="inputRepeatPassword"
@@ -135,7 +135,7 @@ export const Register = () => {
             label="repeat password"
             placeholder="Repeat password"
             type="password"
-            onChange={(e) => setPasswordRepeated(e.target.value)}
+            onChange={(event) => setPasswordRepeated(event.target.value)}
           ></InputField>
           <Button
             className="fluid-btn primary"

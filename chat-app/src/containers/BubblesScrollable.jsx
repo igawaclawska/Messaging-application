@@ -22,8 +22,8 @@ const BubblesScrollable = () => {
   console.log(messages);
   return (
     <div className="bubbles-scrollable">
-      {messages.map((m) => (
-        <ChatBubble message={m} key={m.id} />
+      {messages.map((message) => (
+        <ChatBubble message={message} key={message.id} />
       ))}
     </div>
   );

@@ -23,11 +23,11 @@ const ThreadList = ({ visibility }) => {
       };
     };
     const getGtoupChats = () => {
-      const un = onSnapshot(doc(db, "groupChat", userLogged.uid), (doc) => {
+      const unsub = onSnapshot(doc(db, "groupChat", userLogged.uid), (doc) => {
         setGroups(doc.data());
       });
       return () => {
-        un();
+        unsub();
       };
     };
     userLogged.uid && getChats() && getGtoupChats();
@@ -63,27 +63,27 @@ const ThreadList = ({ visibility }) => {
           }}
         ></SingleThread>
       ))}
-      {Object.entries(groups)?.map((g) => (
+      {Object.entries(groups)?.map((group) => (
         <SingleThread
-          key={g[0]}
-          className={`single-thread ${isActive === g[1] && "active"}`}
-          groupName={g[1]?.groupName.name}
-          receiver1={g[1].messageReceiver1.displayName}
-          receiver2={g[1].messageReceiver2.displayName}
-          message={g[1]?.lastMessage?.message}
+          key={group[0]}
+          className={`single-thread ${isActive === group[1] && "active"}`}
+          groupName={group[1]?.groupName.name}
+          receiver1={group[1].messageReceiver1.displayName}
+          receiver2={group[1].messageReceiver2.displayName}
+          message={group[1]?.lastMessage?.message}
           onClick={() => {
-            userLogged.uid === g[1].groupOwner.uid
+            userLogged.uid === group[1].groupOwner.uid
               ? handleSelectG2(
-                  g[1].messageReceiver1,
-                  g[1].messageReceiver2,
-                  g[1].groupName
+                  group[1].messageReceiver1,
+                  group[1].messageReceiver2,
+                  group[1].groupName
                 )
               : handleSelectG(
-                  g[1].messageReceiver1,
-                  g[1].messageReceiver2,
-                  g[1].groupName
+                  group[1].messageReceiver1,
+                  group[1].messageReceiver2,
+                  group[1].groupName
                 );
-            setIsActive(g[1]);
+            setIsActive(group[1]);
             visibility && visibility();
           }}
         ></SingleThread>

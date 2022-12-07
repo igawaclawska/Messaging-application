@@ -79,7 +79,7 @@ const SendMessage = () => {
       <MessageInput
         type="text"
         onKeyDown={handleKey}
-        onChange={(e) => setText(e.target.value)}
+        onChange={(event) => setText(event.target.value)}
         value={text}
       ></MessageInput>
       <MessageButton onClick={handleSend}></MessageButton>

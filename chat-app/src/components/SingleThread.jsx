@@ -27,7 +27,7 @@ SingleThread.defaultProps = {
   className: "single-thread",
   receiver1: "name1",
   receiver2: "name2",
-  message: "Last message goes here...",
+  message: "Start conversation with this user...",
 };
 
 export default SingleThread;

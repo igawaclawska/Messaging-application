@@ -42,7 +42,7 @@ export const Login = () => {
               label="e-mail"
               placeholder="example@itu.dk"
               type="email"
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(event) => setEmail(event.target.value)}
             ></InputField>
           </div>
           <div className="input-element">
@@ -52,7 +52,7 @@ export const Login = () => {
               label="password"
               placeholder="Enter a password"
               type="password"
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(event) => setPassword(event.target.value)}
             ></InputField>
           </div>
           <Button
