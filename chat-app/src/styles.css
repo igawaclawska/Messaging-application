@@ -22,11 +22,16 @@
   padding: 0;
 }
 
+* {
+  font-family: "Open Sans", sans-serif;
+  margin: 0;
+}
+
 body {
   background-color: var(--blue1);
   color: var(--grey);
 }
-.formContainer {
+.form-container {
   background-color: var(--blue1);
   height: 100vh;
   display: flex;
@@ -34,7 +39,7 @@ body {
   justify-content: center;
 }
 
-.formWrapper {
+.form-wrapper {
   background-color: var(--white);
   border-radius: 16px;
   width: 396px;
@@ -95,7 +100,7 @@ nav {
   background-color: var(--grey);
   width: 100%;
 }
-.navbarWrapper {
+.navbar-wrapper {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -104,13 +109,13 @@ nav {
   color: var(--white);
 }
 
-.logoNav {
+.logo-nav {
   text-align: left;
   font-weight: bold;
   font-size: 20px;
 }
 
-.main-container {
+.home-container {
   display:flex;
   flex-direction: column;
   background-color: var(--blue1);
@@ -224,12 +229,6 @@ nav {
   margin-left: 4px;
 }
 
-.createChatSection {
-  float: right;
-  width: 50%;
-  padding: none;
-}
-
 /* thread styling ends here */
 
 /* chat styling stars here */
@@ -242,7 +241,7 @@ nav {
   flex-direction: row;
 }
 
-.backBtn {
+.back-btn {
   color: var(--grey);
   margin-right: 12px;
   display: none;
@@ -269,7 +268,7 @@ nav {
   transform: translateY(-48px);
 }
 
-.sendBtn {
+.send-btn {
   margin: 1%;
   background-color: var(--white);
   color: var(--blue1);
@@ -278,11 +277,11 @@ nav {
   cursor: pointer;
 }
 
-.sendBtn:hover {
+.send-btn:hover {
   color: var(--blue2);
 }
 
-.sendBtn:active {
+.send-btn:active {
   color: var(--blue3);
 }
 
@@ -304,7 +303,7 @@ nav {
   margin-bottom: 48px;
 }
 
-.main-div {
+.home-all-contents {
   height: 100%;
 }
 
@@ -326,7 +325,7 @@ nav {
   transition: 400ms;
 }
 
-.messageSent {
+.message-sent {
   word-break: break-word;
   height: fit-content;
   font-size: 14px;
@@ -478,7 +477,7 @@ nav {
     display: none;
   }
 
-  .backBtn {
+  .back-btn {
     display: inline-block;
   }
 }

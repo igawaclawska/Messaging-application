@@ -23,16 +23,15 @@ const ThreadList = ({ visibility }) => {
       };
     };
     const getGtoupChats = () => {
-      const un = onSnapshot(doc(db, "groupChat", userLogged.uid), (doc) => {
+      const unsub = onSnapshot(doc(db, "groupChat", userLogged.uid), (doc) => {
         setGroups(doc.data());
       });
       return () => {
-        un();
+        unsub();
       };
     };
     userLogged.uid && getChats() && getGtoupChats();
   }, [userLogged.uid]);
-
 
   const handleSelect = (u) => {
     dispatch({ type: "ANOTHER_USER", payload: u });
@@ -40,48 +39,55 @@ const ThreadList = ({ visibility }) => {
   const handleSelectG = (u, v, t) => {
     console.log("two users method called");
 
-    dispatch({ type: "TWO_USERS",  payload: v, payload2: u, payload3: t});
+    dispatch({ type: "TWO_USERS", payload: v, payload2: u, payload3: t });
   };
   const handleSelectG2 = (u, v, t) => {
     console.log("owner method called");
-    dispatch({ type: "TWO_USER_OWNER", payload: v, payload2: u, payload3: t});
+    dispatch({ type: "TWO_USER_OWNER", payload: v, payload2: u, payload3: t });
   };
 
   return (
     //create dynamic thread components
     <div className="thread-list">
       {Object.entries(chats)?.map((chat) => (
-          <SingleThread
-            key={chat[0]}
-            className={`single-thread ${isActive === chat[1] && "active"}`}
-            receiver1={chat[1].messageReceiver.displayName}
-            receiver2={""}
-            message={chat[1]?.lastMessage?.message}
-            onClick={() => {
-              handleSelect(chat[1].messageReceiver);
-              visibility();
-              setIsActive(chat[1]);
-            }}
-          >
-          </SingleThread>
+        <SingleThread
+          key={chat[0]}
+          className={`single-thread ${isActive === chat[1] && "active"}`}
+          receiver1={chat[1].messageReceiver.displayName}
+          receiver2={""}
+          message={chat[1]?.lastMessage?.message}
+          onClick={() => {
+            handleSelect(chat[1].messageReceiver);
+            setIsActive(chat[1]);
+            visibility && visibility();
+          }}
+        ></SingleThread>
       ))}
-         {Object.entries(groups)?.map((g) => (
-          <SingleThread
-            key={g[0]}
-            className={`single-thread ${isActive === g[1] && "active"}`}
-            groupName={g[1]?.groupName.name}
-            receiver1={g[1].messageReceiver1.displayName}
-            receiver2={g[1].messageReceiver2.displayName}
-            message={g[1]?.lastMessage?.message}
-            onClick={() => { (userLogged.uid === g[1].groupOwner.uid) ?
-              handleSelectG2(g[1].messageReceiver1, g[1].messageReceiver2, g[1].groupName) : handleSelectG(g[1].messageReceiver1, g[1].messageReceiver2, g[1].groupName) ;
-              visibility();
-              setIsActive(g[1]);
-            }}
-          >
-          </SingleThread>
+      {Object.entries(groups)?.map((group) => (
+        <SingleThread
+          key={group[0]}
+          className={`single-thread ${isActive === group[1] && "active"}`}
+          groupName={group[1]?.groupName.name}
+          receiver1={group[1].messageReceiver1.displayName}
+          receiver2={group[1].messageReceiver2.displayName}
+          message={group[1]?.lastMessage?.message}
+          onClick={() => {
+            userLogged.uid === group[1].groupOwner.uid
+              ? handleSelectG2(
+                  group[1].messageReceiver1,
+                  group[1].messageReceiver2,
+                  group[1].groupName
+                )
+              : handleSelectG(
+                  group[1].messageReceiver1,
+                  group[1].messageReceiver2,
+                  group[1].groupName
+                );
+            setIsActive(group[1]);
+            visibility && visibility();
+          }}
+        ></SingleThread>
       ))}
-
     </div>
   );
 };

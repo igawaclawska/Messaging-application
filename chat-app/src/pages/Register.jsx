@@ -3,7 +3,7 @@ import Button from "../components/Button";
 import InputField from "../components/InputField";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth, db } from "../firebase";
-import { addDoc, collection, doc, setDoc} from "firebase/firestore";
+import { addDoc, collection, doc, setDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import "../buttons.css";
 import "../styles.css";
@@ -33,18 +33,21 @@ export const Register = () => {
           email,
         });
         //create empty chats
-        const addChat = await setDoc(doc(db, "userChats", res.user.uid ), {});
+        const addChat = await setDoc(doc(db, "userChats", res.user.uid), {});
         //create empty group chats
-        const addGroupChat = await setDoc(doc(db, "groupChat", res.user.uid ), {});
-        toMain()
+        const addGroupChat = await setDoc(
+          doc(db, "groupChat", res.user.uid),
+          {}
+        );
+        toMain();
       } catch (err) {
-        console.log("error", err)
+        console.log("error", err);
         setErr(true);
       }
     } catch (err) {
       setErr(true);
     }
-  }
+  };
 
   function reg() {
     if (
@@ -88,11 +91,11 @@ export const Register = () => {
   }
 
   return (
-    <div className="formContainer">
-      <div className="formWrapper">
+    <div className="form-container">
+      <div className="form-wrapper">
         <span className="logo">I T U C H A T</span>
         <h2 className="title">Register</h2>
-        <form className="form" >
+        <form className="form">
           <InputField
             className="inputName"
             id="fullname"
@@ -100,10 +103,12 @@ export const Register = () => {
             value={displayName}
             placeholder="Enter your name"
             type="text"
-            onChange={(e) => {let name = e.target.value
-                              setName(name); 
-                              let nameLowercase = name.toLowerCase();
-                              setDisplayNameLowerCase(nameLowercase)}}
+            onChange={(event) => {
+              let name = event.target.value;
+              setName(name);
+              let nameLowercase = name.toLowerCase();
+              setDisplayNameLowerCase(nameLowercase);
+            }}
           ></InputField>
           <InputField
             className="inputEmail"
@@ -112,7 +117,7 @@ export const Register = () => {
             label="e-mail"
             placeholder="example@itu.dk"
             type="email"
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(event) => setEmail(event.target.value)}
           ></InputField>
           <InputField
             className="inputPassword"
@@ -121,7 +126,7 @@ export const Register = () => {
             label="password"
             placeholder="Enter a password"
             type="password"
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(event) => setPassword(event.target.value)}
           ></InputField>
           <InputField
             className="inputRepeatPassword"
@@ -130,7 +135,7 @@ export const Register = () => {
             label="repeat password"
             placeholder="Repeat password"
             type="password"
-            onChange={(e) => setPasswordRepeated(e.target.value)}
+            onChange={(event) => setPasswordRepeated(event.target.value)}
           ></InputField>
           <Button
             className="fluid-btn primary"
