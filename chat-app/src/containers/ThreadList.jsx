@@ -64,9 +64,7 @@ const ThreadList = ({ visibility }) => {
         ></SingleThread>
       ))}
       {Object.entries(groups)?.
-      sort((a,b)=>b[1].date?.date - a[1].date?.date)
-      .
-      map((group) => (
+      sort((a,b)=>b[1].date?.date - a[1].date?.date).map((group) => (
         <SingleThread
           key={group[0]}
           className={`single-thread ${isActive === group[1] && "active"}`}
