@@ -5,7 +5,7 @@ import "../styles.css";
 import "../buttons.css";
 import { AuthContext } from "../context/AuthContext";
 import { ChatsContext } from "../context/ChatsContext";
-import { arrayUnion, doc, updateDoc, getDoc } from "firebase/firestore";
+import { arrayUnion, doc, updateDoc, getDoc, serverTimestamp, Timestamp } from "firebase/firestore";
 import { db } from "../firebase";
 import { v4 as uuid } from "uuid";
 
@@ -34,6 +34,7 @@ const SendMessage = () => {
             text,
             senderId: userLogged.uid,
             senderName: userLogged.displayName,
+            date: Timestamp.now(),
           }),
         });
 
@@ -42,11 +43,17 @@ const SendMessage = () => {
             [data.chatsId + ".lastMessage"]: {
               message: text,
             },
+            [data.chatsId + ".date"]: {
+              date: serverTimestamp(),
+            },
           });
 
           await updateDoc(doc(db, "userChats", data.user1.uid), {
             [data.chatsId + ".lastMessage"]: {
               message: text,
+            },
+            [data.chatsId + ".date"]: {
+              date: serverTimestamp(),
             },
           });
         } else {
@@ -54,16 +61,25 @@ const SendMessage = () => {
             [data.chatsId + ".lastMessage"]: {
               message: text,
             },
+            [data.chatsId + ".date"]: {
+              date: serverTimestamp(),
+            },
           });
 
           await updateDoc(doc(db, "groupChat", data.user1.uid), {
             [data.chatsId + ".lastMessage"]: {
               message: text,
             },
+            [data.chatsId + ".date"]: {
+              date: serverTimestamp(),
+            },
           });
           await updateDoc(doc(db, "groupChat", data.user2.uid), {
             [data.chatsId + ".lastMessage"]: {
               message: text,
+            },
+            [data.chatsId + ".date"]: {
+              date: serverTimestamp(),
             },
           });
         }

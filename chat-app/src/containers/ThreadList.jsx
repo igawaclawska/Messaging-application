@@ -49,7 +49,7 @@ const ThreadList = ({ visibility }) => {
   return (
     //create dynamic thread components
     <div className="thread-list">
-      {Object.entries(chats)?.map((chat) => (
+      {Object.entries(chats)?.sort((a,b)=>b[1].date?.date - a[1].date?.date).map((chat) => (
         <SingleThread
           key={chat[0]}
           className={`single-thread ${isActive === chat[1] && "active"}`}
@@ -63,7 +63,8 @@ const ThreadList = ({ visibility }) => {
           }}
         ></SingleThread>
       ))}
-      {Object.entries(groups)?.map((group) => (
+      {Object.entries(groups)?.
+      sort((a,b)=>b[1].date?.date - a[1].date?.date).map((group) => (
         <SingleThread
           key={group[0]}
           className={`single-thread ${isActive === group[1] && "active"}`}
