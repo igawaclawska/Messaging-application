@@ -69,19 +69,19 @@ const ThreadList = ({ visibility }) => {
           key={group[0]}
           className={`single-thread ${isActive === group[1] && "active"}`}
           groupName={group[1]?.groupName.name}
-          receiver1={group[1].messageReceiver1.displayName}
-          receiver2={group[1].messageReceiver2.displayName}
+          receiver1={group[1].messageReceiver0.displayName}
+          receiver2={group[1].messageReceiver1.displayName}
           message={group[1]?.lastMessage?.message}
           onClick={() => {
             userLogged.uid === group[1].groupOwner.uid
               ? handleSelectG2(
+                  group[1].messageReceiver0,
                   group[1].messageReceiver1,
-                  group[1].messageReceiver2,
                   group[1].groupName
                 )
               : handleSelectG(
+                  group[1].messageReceiver0,
                   group[1].messageReceiver1,
-                  group[1].messageReceiver2,
                   group[1].groupName
                 );
             setIsActive(group[1]);
