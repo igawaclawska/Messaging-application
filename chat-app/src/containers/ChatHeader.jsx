@@ -23,8 +23,11 @@ const ChatHeader = ({ onClick }) => {
             ? data.user1?.displayName
             : " (" +
               data.user1?.displayName +
-              ", " +
-              data.user2?.displayName +
+              " " +
+              data.user2?.displayName + " " +
+              data.user3?.displayName + " " +
+              data.user4?.displayName + " " +
+              data.user5?.displayName +
               ")"}
         </span>
       </div>

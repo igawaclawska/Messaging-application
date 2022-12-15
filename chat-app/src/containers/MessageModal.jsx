@@ -19,7 +19,7 @@ const MessageModal = ({ show }) => {
   const [err, setErr] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
   const { userLogged } = useContext(AuthContext);
-  var c = 0;
+
   const handleSearch = async () => {
     if (username != "") {
       const filter = query(
@@ -84,8 +84,6 @@ const MessageModal = ({ show }) => {
 
 
   const createGroup = async (user) => {
-
-    // var str = '.messageReceiver'+ c++; 
     const chatsId = groupname.replace(/\s/g, '');
     console.log("Creating chat for user " + user.displayName)
     await setDoc(doc(db, "chats", chatsId), { messages: [] });
@@ -102,13 +100,8 @@ const MessageModal = ({ show }) => {
       }
     };
     try {
-      // console.log(data);
-    
       await updateDoc(doc(db, "groupChat", user.uid), data);
-      // c = 1;
-      // if(c>=usersSelected.length){
-      //   c = 0;
-      // } 
+
        usersSelected.map((u, idx) => {
         updateGroup(u, idx);
       })
@@ -119,11 +112,9 @@ const MessageModal = ({ show }) => {
     setUserSelected(null);
     userFound(false);
     setGroupName("");
-    // c=0;
   };
 
   const updateGroup = async (u, idx) => {
-    // c++;
     var str = '.messageReceiver' + idx;
     const chatsId = groupname.replace(/\s/g, '');
     const data = {
@@ -134,14 +125,9 @@ const MessageModal = ({ show }) => {
       },
     };
     try {
-      // console.log(data);
       usersSelected.map((u, idx) => {
          updateDoc(doc(db, "groupChat", usersSelected[idx].uid), data);
       })
-    
-      // if(c>=usersSelected.length){
-      //   c = 0;
-      // }
       console.log("success second loop for user" + usersSelected[idx].displayName);
     } catch (error) {
       console.log("some error");
@@ -149,7 +135,7 @@ const MessageModal = ({ show }) => {
   };
 
   const handleChatCreation = async () => {
-    if (((usersSelected.length - 1) == 1) && (groupname != "")) { //if there are 2 recievers
+    if (((usersSelected.length - 1) >= 1) && ((usersSelected.length - 1) <= 5) && (groupname != "")) { //if there are 2 recievers
       const res = await getDoc(doc(db, "chats", groupname));
       try {
         if (groupname.length < 5) {
