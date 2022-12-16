@@ -17,7 +17,7 @@ const SingleThread = ({
           {groupName}{" "}
           {receiver2 == ""
             ? receiver1
-            : " (" + receiver1 + "  " + receiver2 + "  " + receiver3 + "  " + receiver4 + "  " + receiver5 + ")."}
+            : " ( " + receiver1 + "  " + receiver2 + "  " + receiver3 + "  " + receiver4 + "  " + receiver5 + ")"}
              
         </b>
       </p>

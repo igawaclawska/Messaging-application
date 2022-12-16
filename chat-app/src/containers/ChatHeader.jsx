@@ -19,7 +19,13 @@ const ChatHeader = ({ onClick }) => {
         </div>
         <span className="chat-header-title">
           {data.group?.name}{" "}
-          {data.user2 == null
+          <br></br>
+          {data.user1?.displayName}{" "}
+          {data.user2?.displayName}{" "}
+          {data.user3?.displayName}{" "}
+          {data.user4?.displayName}{" "}
+          {data.user5?.displayName}{""}
+          {/* {data.user2 == null
             ? data.user1?.displayName
             : " (" +
               data.user1?.displayName +
@@ -28,7 +34,7 @@ const ChatHeader = ({ onClick }) => {
               data.user3?.displayName + " " +
               data.user4?.displayName + " " +
               data.user5?.displayName +
-              ")"}
+              ")"} */}
         </span>
       </div>
     </header>
