@@ -102,7 +102,7 @@ const MessageModal = ({ show }) => {
     try {
       await updateDoc(doc(db, "groupChat", user.uid), data);
 
-       usersSelected.map((u, idx) => {
+      usersSelected.map((u, idx) => {
         updateGroup(u, idx);
       })
       console.log("success");
@@ -126,7 +126,7 @@ const MessageModal = ({ show }) => {
     };
     try {
       usersSelected.map((u, idx) => {
-         updateDoc(doc(db, "groupChat", usersSelected[idx].uid), data);
+        updateDoc(doc(db, "groupChat", usersSelected[idx].uid), data);
       })
       console.log("success second loop for user" + usersSelected[idx].displayName);
     } catch (error) {
@@ -192,25 +192,22 @@ const MessageModal = ({ show }) => {
             <InputField className="add-input" placeholder="Receiver's ITU e-mail" onKeyDown={handleKey}
               onChange={(e) => setUsername(e.target.value)} value={username}>
             </InputField>
-
             {(usersSelected != null) ? (
-              <span>
+              <span className="users-selected">
                 {usersSelected.map((u, idx) => <MailTag text={u.email} onClick={() => handleSelect2(u, idx)}></MailTag>)}
               </span>
             ) : (null)}
-
             {foundUser ? (
-              <ul>
-                {searchResults.map((u, idx) => <UserInfo onClick={() => handleSelect(u, idx)} key={u.uid} displayName={u.displayName} uid={u.uid} value={username} email={u.email} idx={idx} />)}
-              </ul>
+                <ul className="search-list">
+                  {searchResults.map((u, idx) => <UserInfo onClick={() => handleSelect(u, idx)} key={u.uid} displayName={u.displayName} uid={u.uid} value={username} email={u.email} idx={idx} />)}
+                </ul>
             ) : (null)}
-
           </div>
         </div>
-        {(usersSelected.length > 1) ? <InputField className="add-group-name" placeholder="Goup name" onKeyDown={handleKey}
-          onChange={(e) => setGroupName(e.target.value)} value={groupname}>
-        </InputField> : <>
-        </>}
+          {(usersSelected.length > 1) ? <InputField className="add-group-name" placeholder="Goup name" onKeyDown={handleKey}
+            onChange={(e) => setGroupName(e.target.value)} value={groupname}>
+          </InputField> : <>
+          </>}
         <div className="create-message-footer">
           <Button
             className="fluid-btn tertiary"
