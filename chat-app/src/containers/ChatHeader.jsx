@@ -18,13 +18,14 @@ const ChatHeader = ({ onClick }) => {
           ></Button>{" "}
         </div>
         <span className="chat-header-title">
-          {data.group?.name}{" "}
-          <br></br>
+          {data.group?.name != null ?  <div>{data.group?.name}: </div> :""}
+          <span className="chat-header-title-users">
           {data.user1?.displayName}{" "}
           {data.user2?.displayName}{" "}
           {data.user3?.displayName}{" "}
           {data.user4?.displayName}{" "}
           {data.user5?.displayName}{""}
+          </span>
           {/* {data.user2 == null
             ? data.user1?.displayName
             : " (" +
