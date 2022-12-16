@@ -82,6 +82,36 @@ const SendMessage = () => {
               date: serverTimestamp(),
             },
           });
+          if (data.user3 != ""){
+            await updateDoc(doc(db, "groupChat", data.user3.uid), {
+              [data.chatsId + ".lastMessage"]: {
+                message: text,
+              },
+              [data.chatsId + ".date"]: {
+                date: serverTimestamp(),
+              },
+            });
+          }
+          if (data.user4 != ""){
+            await updateDoc(doc(db, "groupChat", data.user4.uid), {
+              [data.chatsId + ".lastMessage"]: {
+                message: text,
+              },
+              [data.chatsId + ".date"]: {
+                date: serverTimestamp(),
+              },
+            });
+          }
+          if (data.user5 != ""){
+            await updateDoc(doc(db, "groupChat", data.user5.uid), {
+              [data.chatsId + ".lastMessage"]: {
+                message: text,
+              },
+              [data.chatsId + ".date"]: {
+                date: serverTimestamp(),
+              },
+            });
+          }
         }
       } catch (err) {
         console.log("error");
