@@ -22,10 +22,10 @@ const MessageModal = ({ show }) => {
 
   const handleSearch = async () => {
     if (username != "") {
+      let caseInsensitiveUsername = username.toLowerCase();
       const filter = query(
         collection(db, "users"),
-        where("displayName", "==", username)
-        // todo: check for names toLoweCase
+        where("displayNameLowerCase", "==", caseInsensitiveUsername)
       );
       try {
         const filteredDocs = await getDocs(filter);
