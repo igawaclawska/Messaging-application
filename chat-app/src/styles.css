@@ -402,6 +402,7 @@ nav {
   display:block;
   flex-direction: column;
   align-items: center;
+  margin: 1%;
   padding: 20px 0 0 0;
 }
 
@@ -422,11 +423,12 @@ nav {
 
 .tags-container{
   width:fit-content;
-  margin-right: 1%;
+  margin: 1%;
 }
 
 .users-selected{
   width:fit-content;
+  margin-top: 2%;
   padding: 1%;
   height: 10%;
   display: flex;
