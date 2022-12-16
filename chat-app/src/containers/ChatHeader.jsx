@@ -26,16 +26,6 @@ const ChatHeader = ({ onClick }) => {
           {data.user4?.displayName}{" "}
           {data.user5?.displayName}{""}
           </span>
-          {/* {data.user2 == null
-            ? data.user1?.displayName
-            : " (" +
-              data.user1?.displayName +
-              " " +
-              data.user2?.displayName + " " +
-              data.user3?.displayName + " " +
-              data.user4?.displayName + " " +
-              data.user5?.displayName +
-              ")"} */}
         </span>
       </div>
     </header>
