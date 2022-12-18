@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import ChatBubble from "../components/ChatBubble";
 import "../styles.css";
 import { db } from "../firebase";
-import { doc, onSnapshot } from "firebase/firestore";
+import { collection, onSnapshot } from "firebase/firestore";
 import { ChatsContext } from "../context/ChatsContext";
 
 const BubblesScrollable = () => {
@@ -10,7 +10,7 @@ const BubblesScrollable = () => {
   const { data } = useContext(ChatsContext);
 
   useEffect(() => {
-    const unSub = onSnapshot(doc(db, "chats", data.chatsId), (doc) => {
+    const unSub = onSnapshot(collection(db, "chats", data.chatsId), (doc) => {
       doc.exists() && setMessages(doc.data().messages);
     });
 

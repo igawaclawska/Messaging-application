@@ -3,7 +3,7 @@ import InputField from "../components/InputField";
 import Button from "../components/Button";
 import { AuthContext } from "../context/AuthContext";
 import { db } from "../firebase";
-import { collection, query, where, doc, getDocs, getDoc, updateDoc, setDoc } from "firebase/firestore";
+import { collection, query, where, doc, getDocs, getDoc, updateDoc, addDoc } from "firebase/firestore";
 import "../styles.css";
 import "../buttons.css";
 import UserInfo from "../components/UserInfo"
@@ -55,7 +55,7 @@ const MessageModal = ({ show }) => {
     try {
       const res = await getDoc(collection(db, "chats", chatsId));
       if (!res.exists()) {
-        await setDoc(doc(db, "chats", chatsId), { messages: [] });
+        await addDoc(collection(db, "chats", chatsId), { messages: [] });
         await updateDoc(doc(db, "userChats", userLogged.uid), {
           [chatsId + ".messageReceiver"]: {
             uid: usersSelected[0].uid,
@@ -86,7 +86,7 @@ const MessageModal = ({ show }) => {
   const createGroup = async (user) => {
     const chatsId = groupname.replace(/\s/g, '');
     console.log("Creating chat for user " + user.displayName)
-    await setDoc(doc(db, "chats", chatsId), { messages: [] });
+    await addDoc(collection(db, "chats", chatsId), { messages: [] });
 
     const data = {
       [chatsId + ".groupName"]: {
@@ -136,7 +136,7 @@ const MessageModal = ({ show }) => {
 
   const handleChatCreation = async () => {
     if (((usersSelected.length - 1) >= 1) && ((usersSelected.length - 1) <= 5) && (groupname != "")) { //if there are 2 recievers
-      const res = await getDoc(doc(db, "chats", groupname));
+      const res = await getDoc(collection(db, "chats", groupname));
       try {
         if (groupname.length < 5) {
           alert("Please select group name with at least 5 characters");
