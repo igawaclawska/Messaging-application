@@ -53,7 +53,7 @@ const MessageModal = ({ show }) => {
   const createChat = async () => {
     const chatsId = userLogged.uid > usersSelected[0].uid ? userLogged.uid + usersSelected[0].uid : usersSelected[0].uid + userLogged.uid
     try {
-      const res = await getDoc(doc(db, "chats", chatsId));
+      const res = await getDoc(collection(db, "chats", chatsId));
       if (!res.exists()) {
         await setDoc(doc(db, "chats", chatsId), { messages: [] });
         await updateDoc(doc(db, "userChats", userLogged.uid), {
