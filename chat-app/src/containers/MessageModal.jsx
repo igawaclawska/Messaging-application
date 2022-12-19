@@ -3,7 +3,7 @@ import InputField from "../components/InputField";
 import Button from "../components/Button";
 import { AuthContext } from "../context/AuthContext";
 import { db } from "../firebase";
-import { collection, query, where, doc, getDocs, getDoc, updateDoc, addDoc } from "firebase/firestore";
+import { doc, query, where, getDocs, getDoc, updateDoc, addDoc } from "firebase/firestore";
 import "../styles.css";
 import "../buttons.css";
 import UserInfo from "../components/UserInfo"
@@ -24,7 +24,7 @@ const MessageModal = ({ show }) => {
     if (username != "") {
       let caseInsensitiveUsername = username.toLowerCase();
       const filter = query(
-        collection(db, "users"),
+        doc(db, "users"),
         where("displayNameLowerCase", "==", caseInsensitiveUsername)
       );
       try {
@@ -53,9 +53,9 @@ const MessageModal = ({ show }) => {
   const createChat = async () => {
     const chatsId = userLogged.uid > usersSelected[0].uid ? userLogged.uid + usersSelected[0].uid : usersSelected[0].uid + userLogged.uid
     try {
-      const res = await getDoc(collection(db, "chats", chatsId));
+      const res = await getDoc(doc(db, "chats", chatsId));
       if (!res.exists()) {
-        await addDoc(collection(db, "chats", chatsId), { messages: [] });
+        await addDoc(doc(db, "chats", chatsId), { messages: [] });
         await updateDoc(doc(db, "userChats", userLogged.uid), {
           [chatsId + ".messageReceiver"]: {
             uid: usersSelected[0].uid,
@@ -86,7 +86,7 @@ const MessageModal = ({ show }) => {
   const createGroup = async (user) => {
     const chatsId = groupname.replace(/\s/g, '');
     console.log("Creating chat for user " + user.displayName)
-    await addDoc(collection(db, "chats", chatsId), { messages: [] });
+    await addDoc(doc(db, "chats", chatsId), { messages: [] });
 
     const data = {
       [chatsId + ".groupName"]: {
@@ -136,7 +136,7 @@ const MessageModal = ({ show }) => {
 
   const handleChatCreation = async () => {
     if (((usersSelected.length - 1) >= 1) && ((usersSelected.length - 1) <= 5) && (groupname != "")) { //if there are 2 recievers
-      const res = await getDoc(collection(db, "chats", groupname));
+      const res = await getDoc(doc(db, "chats", groupname));
       try {
         if (groupname.length < 5) {
           alert("Please select group name with at least 5 characters");

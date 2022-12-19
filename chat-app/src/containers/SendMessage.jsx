@@ -5,7 +5,7 @@ import "../styles.css";
 import "../buttons.css";
 import { AuthContext } from "../context/AuthContext";
 import { ChatsContext } from "../context/ChatsContext";
-import { arrayUnion, doc, updateDoc, getDoc, serverTimestamp, Timestamp, collection } from "firebase/firestore";
+import { arrayUnion, updateDoc, getDoc, serverTimestamp, Timestamp, doc } from "firebase/firestore";
 import { db } from "../firebase";
 import { v4 as uuid } from "uuid";
 
@@ -21,14 +21,14 @@ const SendMessage = () => {
   const handleSend = async () => {
     if (text != "") {
       try {
-        // const res = await getDoc(collection(db, "chats", data.chatsId));
+        // const res = await getDoc(doc(db, "chats", data.chatsId));
         // if (res.exists()) {
         //   console.log("exists", res);
         // } else {
         //   console.log("doesnt exist");
         // }
 
-        await updateDoc(collection(db, "chats", data.chatsId), {
+        await updateDoc(doc(db, "chats", data.chatsId), {
           messages: arrayUnion({
             id: uuid(),
             text,
