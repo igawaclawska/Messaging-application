@@ -18,7 +18,7 @@ const NavBar = () => {
   return (
     <nav className="nav-bar">
       <div className="navbar-wrapper">
-        <span className="logo-nav">I T U C H A T</span>
+        <span className="logo logo-small">ITU CHAT</span>
         <Button
           text={userLogged.displayName}
           icon={<LogoutSharpIcon />}

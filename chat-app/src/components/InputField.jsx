@@ -10,7 +10,7 @@ const InputField = ({
 }) => (
   <>
     <div className="input-element">
-      {label && <label htmlFor={id}>{capitalizeFirstLetter(label)}</label>}
+      {label && <label className="form-label" htmlFor={id}>{capitalizeFirstLetter(label)}</label>}
       <input
         type={type}
         className={className}
