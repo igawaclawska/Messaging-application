@@ -23,7 +23,7 @@
 }
 
 * {
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Inter', sans-serif;
   margin: 0;
 }
 
@@ -50,15 +50,26 @@ body {
 }
 
 .logo {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 300;
+  letter-spacing: 6px;
   margin: 5% 0;
   color: var(--blue1);
-  font-weight: bold;
-  font-size: 36px;
+  font-size: 40px;
 }
+
+.logo-small{
+  margin: 0;
+  color: var(--white);
+  font-size: 20px;
+}
+
 .title {
   color: var(--grey);
   font-size: 24px;
+  font-weight: 600;
 }
+
 form {
   margin-top: 5%;
   display: flex;
@@ -84,13 +95,19 @@ input {
   width: 100%;
 }
 
-label {
+.form-label {
+  font-weight: 400;
   display: flex;
   gap: 10px;
   color: var(--grey);
   font-size: 16px;
   cursor: pointer;
 }
+
+.login-link{
+  font-size: 14px;
+}
+
 p {
   color: var(--grey);
   font-size: 12px;
@@ -104,15 +121,9 @@ nav {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: baseline;
+  align-items: center;
   padding: 12px 16px;
   color: var(--white);
-}
-
-.logo-nav {
-  text-align: left;
-  font-weight: bold;
-  font-size: 20px;
 }
 
 .home-container {
@@ -166,7 +177,7 @@ nav {
 .single-thread {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 6px;
   padding: 12px 16px;
   color: var(--grey);
   width: 100%;
@@ -175,9 +186,14 @@ nav {
 
 .single-thread-header{
   font-size: 12px;
+  max-width: 100vh;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .single-thread-message {
+  font-weight: 400;
   overflow: hidden;
   text-overflow: ellipsis;
   max-height: 16px;
@@ -185,6 +201,7 @@ nav {
   max-width: 100vh;
   white-space: nowrap;
 }
+
 .list-of-users{
   height: 15vh;
   max-height: 50%;

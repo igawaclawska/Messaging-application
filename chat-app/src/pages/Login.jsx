@@ -32,7 +32,7 @@ export const Login = () => {
   return (
     <div className="form-container">
       <div className="form-wrapper">
-        <span className="logo">I T U C H A T</span>
+        <span className="logo">ITU CHAT</span>
         <h2 className="title">Login</h2>
         <form action="">
           <div className="input-element">
@@ -62,7 +62,7 @@ export const Login = () => {
             onClick={handleSubmit}
           ></Button>
         </form>
-        <span className="loginLink">
+        <span className="login-link">
           Don't have an account yet? <a href="/Register">Create an account</a>
         </span>
       </div>
