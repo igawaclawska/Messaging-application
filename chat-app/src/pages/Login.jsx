@@ -2,33 +2,36 @@ import React, { useState } from "react";
 import Button from "../components/Button";
 import { useNavigate } from "react-router-dom";
 import InputField from "../components/InputField";
+import { auth } from "../firebase";
+import { signInWithEmailAndPassword } from "firebase/auth";
+
 import "../styles.css";
 import "../buttons.css";
 
 export const Login = () => {
-  const [e, setEmail] = useState();
-  const [p, setPassword] = useState();
-
-  let localStorageE = localStorage.getItem("email");
-  let localStorageP = localStorage.getItem("password");
-
+  const [err, setErr] = useState(false);
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+  const [displayName, setName] = useState(null);
+  const [passwordRepeated, setPasswordRepeated] = useState();
+  const handleSubmit = async () => {
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      toMain();
+    } catch (err) {
+      alert("Please enter an existing user");
+      setErr(true);
+    }
+  };
   let navigate = useNavigate();
   const toMain = () => {
-    let path = `/home`;
+    let path = "/home";
     navigate(path);
   };
 
-  function successfulRegistration() {
-    if (localStorageE === e && localStorageP === p) {
-      toMain();
-    } else {
-      alert("Please enter an existing user");
-    }
-  }
-
   return (
-    <div className="formContainer">
-      <div className="formWrapper">
+    <div className="form-container">
+      <div className="form-wrapper">
         <span className="logo">I T U C H A T</span>
         <h2 className="title">Login</h2>
         <form action="">
@@ -39,7 +42,7 @@ export const Login = () => {
               label="e-mail"
               placeholder="example@itu.dk"
               type="email"
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(event) => setEmail(event.target.value)}
             ></InputField>
           </div>
           <div className="input-element">
@@ -49,14 +52,14 @@ export const Login = () => {
               label="password"
               placeholder="Enter a password"
               type="password"
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(event) => setPassword(event.target.value)}
             ></InputField>
           </div>
           <Button
             className="fluid-btn primary"
             text="Login"
             icon=""
-            onClick={successfulRegistration}
+            onClick={handleSubmit}
           ></Button>
         </form>
         <span className="loginLink">
