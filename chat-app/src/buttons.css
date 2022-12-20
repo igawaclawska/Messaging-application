@@ -21,6 +21,11 @@
     font-size: 14px;
   }
   
+  .tiny{
+    font-size: 12px;
+    padding: 6px;
+  }
+
   .with-icon{
     flex-direction: row;
     justify-content: space-between;

@@ -1,4 +1,13 @@
-const InputField = ({ className, id, label, placeholder, type, onChange, onKeyDown }) => (
+const InputField = ({
+  value,
+  className,
+  id,
+  label,
+  placeholder,
+  type,
+  onChange,
+  onKeyDown,
+}) => (
   <>
     <div className="input-element">
       {label && <label htmlFor={id}>{capitalizeFirstLetter(label)}</label>}
@@ -6,9 +15,11 @@ const InputField = ({ className, id, label, placeholder, type, onChange, onKeyDo
         type={type}
         className={className}
         placeholder={placeholder}
-      onChange={onChange}
-      onKeyDown={onKeyDown}
-      /></div>
+        onChange={onChange}
+        onKeyDown={onKeyDown}
+        value={value}
+      />
+    </div>
   </>
 );
 

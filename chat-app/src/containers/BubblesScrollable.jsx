@@ -3,7 +3,7 @@ import ChatBubble from "../components/ChatBubble";
 import "../styles.css";
 import { db } from "../firebase";
 import { doc, onSnapshot } from "firebase/firestore";
-import {ChatsContext} from "../context/ChatsContext"
+import { ChatsContext } from "../context/ChatsContext";
 
 const BubblesScrollable = () => {
   const [messages, setMessages] = useState([]);
@@ -19,11 +19,11 @@ const BubblesScrollable = () => {
     };
   }, [data.chatsId]);
 
-  console.log(messages)
+  console.log(messages);
   return (
     <div className="bubbles-scrollable">
-        {messages.map((m) => (
-        <ChatBubble message={m} key={m.id} />
+      {messages.map((message) => (
+        <ChatBubble message={message} key={message.id} />
       ))}
     </div>
   );
