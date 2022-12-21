@@ -2,7 +2,7 @@ import SendIcon from "@mui/icons-material/Send";
 
 const MessageButton = ({ onClick }) => {
   return (
-    <button type="button" className="sendBtn" onClick={onClick}>
+    <button type="button" className="send-btn" onClick={onClick}>
       <SendIcon />{" "}
     </button>
   );

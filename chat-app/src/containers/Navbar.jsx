@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import Button from "../components/Button";
 import { useNavigate } from "react-router-dom";
+import { signOut } from "firebase/auth";
+import { AuthContext } from "../context/AuthContext";
+import { auth } from "../firebase";
+import LogoutSharpIcon from "@mui/icons-material/LogoutSharp";
 import "../styles.css";
 import "../buttons.css";
 
-const NavBar = ({ onLoad }) => {
+const NavBar = () => {
+  const { userLogged } = useContext(AuthContext);
   let navigate = useNavigate();
   const toLogin = () => {
     let path = `/login`;
@@ -12,13 +17,16 @@ const NavBar = ({ onLoad }) => {
   };
   return (
     <nav className="nav-bar">
-      <div className="navbarWrapper">
-        <span className="logoNav">I T U C H A T</span>
+      <div className="navbar-wrapper">
+        <span className="logo logo-small">ITU CHAT</span>
         <Button
-          text="Logout"
-          className="fixed-btn secondary-white small"
-          onClick={toLogin}
-          icon={""}
+          text={userLogged.displayName}
+          icon={<LogoutSharpIcon />}
+          className="fixed-btn secondary-white small with-icon"
+          onClick={() => {
+            signOut(auth);
+            toLogin();
+          }}
         ></Button>
       </div>
     </nav>

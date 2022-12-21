@@ -1,18 +1,50 @@
-const SingleThread = ({ onClick, receiver, message, className }) => {
+const SingleThread = ({
+  onClick,
+  receiver1,
+  receiver2,
+  receiver3,
+  receiver4,
+  receiver5,
+  message,
+  className,
+  groupName,
+}) => {
   return (
     <div className={className} onClick={onClick}>
-      <p>
-        <b>{receiver}</b>
+      <p className="single-thread-header">
+        <b>
+          {" "}
+          {groupName}{" "}
+          {receiver2 == ""
+            ? receiver1
+            : " ( " +
+              receiver1 +
+              "  " +
+              receiver2 +
+              "  " +
+              receiver3 +
+              "  " +
+              receiver4 +
+              "  " +
+              receiver5 +
+              ")"}
+        </b>
       </p>
-      <p>{message}</p>
+      <p className="single-thread-message">{message}</p>
     </div>
   );
 };
 
 SingleThread.defaultProps = {
+  groupName: "",
   className: "single-thread",
-  receiver: "John S",
-  message: "Message goes here...",
+  receiver1: "name1",
+  receiver2: "",
+  receiver3: "",
+  receiver4: "",
+  receiver5: "",
+  receiver6: "",
+  message: "Start conversation with this user...",
 };
 
 export default SingleThread;
