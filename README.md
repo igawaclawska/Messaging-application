@@ -1,19 +1,19 @@
 # Chat-App-TID
 
-## Required Software Requirements:
+#### How to run the app
+- cd chat-app
+- npm install
+- npm start
 
-#### Login Requirements
-- The system must work with a database.
-- The system must allow users to register in the system.
-- The system must allow users to sign in to an existing account.
-- The system must allow users to sign out.
+#### If, for some reason, dependencies did not get installed automatically, full list is as follows: 
+- npm install @mui/icons-material @mui/material @emotion/styled @emotion/react
+- npm install react-router-dom
+- npm install firebase
+- npm install react-firebase-hooks
 
-#### Messaging Requirements
-- The system must allow users to send a new text message to another single user.
-- The system must allow users to send a new text message to a group of users.
-- The system must allow users to send a text message in a current thread. 
-A thread is defined as a series of text messages to the same recipient(s) where the number of messages is
-above 0.
+#### test users
+- bob@itu.dk
+- ben@itu.dk
+- anna@itu.dk
 
-#### Other Requirements
-- The system must allow users to see a list of previous message threads.
+- their password: 123456
