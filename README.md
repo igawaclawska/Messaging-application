@@ -11,9 +11,9 @@
 - npm install firebase
 - npm install react-firebase-hooks
 
-#### test users
+#### some of test users
 - bob@itu.dk
 - ben@itu.dk
-- anna@itu.dk
+- annana@itu.dk
 
 - their password: 123456
