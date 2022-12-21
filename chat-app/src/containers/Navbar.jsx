@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { signOut } from "firebase/auth";
 import { AuthContext } from "../context/AuthContext";
 import { auth } from "../firebase";
-import LogoutSharpIcon from '@mui/icons-material/LogoutSharp';
+import LogoutSharpIcon from "@mui/icons-material/LogoutSharp";
 import "../styles.css";
 import "../buttons.css";
 

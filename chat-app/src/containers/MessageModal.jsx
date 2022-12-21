@@ -3,19 +3,27 @@ import InputField from "../components/InputField";
 import Button from "../components/Button";
 import { AuthContext } from "../context/AuthContext";
 import { db } from "../firebase";
-import { collection, doc, query, where, getDocs, getDoc, updateDoc, setDoc } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  query,
+  where,
+  getDocs,
+  getDoc,
+  updateDoc,
+  setDoc,
+} from "firebase/firestore";
 import "../styles.css";
 import "../buttons.css";
-import UserInfo from "../components/UserInfo"
-import MailTag from "../components/MailTag"
-
+import UserInfo from "../components/UserInfo";
+import MailTag from "../components/MailTag";
 
 const MessageModal = ({ show }) => {
   const [foundUser, userFound] = useState(false);
   const [username, setUsername] = useState("");
   const [groupname, setGroupName] = useState("");
   const [usersSelected, setUserSelected] = useState([]);
-  const [user, setUser] = useState({})
+  const [user, setUser] = useState({});
   const [err, setErr] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
   const { userLogged } = useContext(AuthContext);
@@ -51,7 +59,10 @@ const MessageModal = ({ show }) => {
   };
 
   const createChat = async () => {
-    const chatsId = userLogged.uid > usersSelected[0].uid ? userLogged.uid + usersSelected[0].uid : usersSelected[0].uid + userLogged.uid
+    const chatsId =
+      userLogged.uid > usersSelected[0].uid
+        ? userLogged.uid + usersSelected[0].uid
+        : usersSelected[0].uid + userLogged.uid;
     try {
       const res = await getDoc(doc(db, "chats", chatsId));
       if (!res.exists()) {
@@ -64,7 +75,7 @@ const MessageModal = ({ show }) => {
           },
           [chatsId + ".sender"]: {
             name: userLogged.displayName,
-          }
+          },
         });
         await updateDoc(doc(db, "userChats", usersSelected[0].uid), {
           [chatsId + ".messageReceiver"]: {
@@ -74,18 +85,17 @@ const MessageModal = ({ show }) => {
           },
           [chatsId + ".sender"]: {
             name: usersSelected[0].displayName,
-          }
+          },
         });
       }
-    } catch (err) { }
+    } catch (err) {}
     setUserSelected(null);
     userFound(false);
   };
 
-
   const createGroup = async (user) => {
-    const chatsId = groupname.replace(/\s/g, '');
-    console.log("Creating chat for user " + user.displayName)
+    const chatsId = groupname.replace(/\s/g, "");
+    console.log("Creating chat for user " + user.displayName);
     await setDoc(doc(db, "chats", chatsId), { messages: [] });
 
     const data = {
@@ -93,18 +103,18 @@ const MessageModal = ({ show }) => {
         name: groupname,
       },
       [chatsId + ".groupOwner"]: {
-        uid: userLogged.uid
+        uid: userLogged.uid,
       },
       [chatsId + ".sender"]: {
         name: user.displayName,
-      }
+      },
     };
     try {
       await updateDoc(doc(db, "groupChat", user.uid), data);
 
       usersSelected.map((u, idx) => {
         updateGroup(u, idx);
-      })
+      });
       console.log("success");
     } catch (error) {
       console.log("some error");
@@ -115,8 +125,8 @@ const MessageModal = ({ show }) => {
   };
 
   const updateGroup = async (u, idx) => {
-    var str = '.messageReceiver' + idx;
-    const chatsId = groupname.replace(/\s/g, '');
+    var str = ".messageReceiver" + idx;
+    const chatsId = groupname.replace(/\s/g, "");
     const data = {
       [chatsId + str]: {
         uid: usersSelected[idx].uid,
@@ -127,15 +137,22 @@ const MessageModal = ({ show }) => {
     try {
       usersSelected.map((u, idx) => {
         updateDoc(doc(db, "groupChat", usersSelected[idx].uid), data);
-      })
-      console.log("success second loop for user" + usersSelected[idx].displayName);
+      });
+      console.log(
+        "success second loop for user" + usersSelected[idx].displayName
+      );
     } catch (error) {
       console.log("some error");
     }
   };
 
   const handleChatCreation = async () => {
-    if (((usersSelected.length - 1) >= 1) && ((usersSelected.length - 1) <= 5) && (groupname != "")) { //if there are 2 recievers
+    if (
+      usersSelected.length - 1 >= 1 &&
+      usersSelected.length - 1 <= 5 &&
+      groupname != ""
+    ) {
+      //if there are 2 recievers
       const res = await getDoc(doc(db, "chats", groupname));
       try {
         if (groupname.length < 5) {
@@ -146,27 +163,29 @@ const MessageModal = ({ show }) => {
           usersSelected.push(userLogged);
 
           {
-            usersSelected.map((u) => (
-              createGroup(u)))
-          };
+            usersSelected.map((u) => createGroup(u));
+          }
         }
-      } catch (error) {
-
-      }
-
-    } else if (((usersSelected.length - 1) == 0)) { //if there's just 1
+      } catch (error) {}
+    } else if (usersSelected.length - 1 == 0) {
+      //if there's just 1
       await createChat();
     }
     show(false);
-  }
+  };
   const handleSelect = (u, idx) => {
     setUser(u);
     if (!usersSelected.includes(u)) {
       searchResults.splice(idx, 1); // remove object from the search Array
-      usersSelected.push(u); //adding the specific user from the searchResults to the usersSelected 
+      usersSelected.push(u); //adding the specific user from the searchResults to the usersSelected
     }
     setUserSelected(usersSelected);
-    console.log("search array after selection:" + JSON.stringify(searchResults) + "length: " + (searchResults.length));
+    console.log(
+      "search array after selection:" +
+        JSON.stringify(searchResults) +
+        "length: " +
+        searchResults.length
+    );
   };
 
   const handleSelect2 = (u, idx) => {
@@ -174,7 +193,12 @@ const MessageModal = ({ show }) => {
     if (!searchResults.includes(u)) {
       usersSelected.splice(idx, 1); // remove object from the selectedUsers Array
     }
-    console.log("usersSelected array after selection:" + JSON.stringify(usersSelected) + "length: " + (usersSelected.length));
+    console.log(
+      "usersSelected array after selection:" +
+        JSON.stringify(usersSelected) +
+        "length: " +
+        usersSelected.length
+    );
   };
 
   return (
@@ -189,25 +213,51 @@ const MessageModal = ({ show }) => {
         <div className="create-message-body">
           <h3> Receivers:</h3>
           <div className="add-receivers">
-            <InputField className="add-input" placeholder="Receiver's ITU e-mail" onKeyDown={handleKey}
-              onChange={(e) => setUsername(e.target.value)} value={username}>
-            </InputField>
-            {(usersSelected != null) ? (
+            <InputField
+              className="add-input"
+              placeholder="Receiver's ITU e-mail"
+              onKeyDown={handleKey}
+              onChange={(e) => setUsername(e.target.value)}
+              value={username}
+            ></InputField>
+            {usersSelected != null ? (
               <span className="users-selected">
-                {usersSelected.map((u, idx) => <MailTag text={u.email} onClick={() => handleSelect2(u, idx)}></MailTag>)}
+                {usersSelected.map((u, idx) => (
+                  <MailTag
+                    text={u.email}
+                    onClick={() => handleSelect2(u, idx)}
+                  ></MailTag>
+                ))}
               </span>
-            ) : (null)}
+            ) : null}
             {foundUser ? (
-                <ul className="search-list">
-                  {searchResults.map((u, idx) => <UserInfo onClick={() => handleSelect(u, idx)} key={u.uid} displayName={u.displayName} uid={u.uid} value={username} email={u.email} idx={idx} />)}
-                </ul>
-            ) : (null)}
+              <ul className="search-list">
+                {searchResults.map((u, idx) => (
+                  <UserInfo
+                    onClick={() => handleSelect(u, idx)}
+                    key={u.uid}
+                    displayName={u.displayName}
+                    uid={u.uid}
+                    value={username}
+                    email={u.email}
+                    idx={idx}
+                  />
+                ))}
+              </ul>
+            ) : null}
           </div>
         </div>
-          {(usersSelected.length > 1) ? <InputField className="add-group-name" placeholder="Goup name" onKeyDown={handleKey}
-            onChange={(e) => setGroupName(e.target.value)} value={groupname}>
-          </InputField> : <>
-          </>}
+        {usersSelected.length > 1 ? (
+          <InputField
+            className="add-group-name"
+            placeholder="Goup name"
+            onKeyDown={handleKey}
+            onChange={(e) => setGroupName(e.target.value)}
+            value={groupname}
+          ></InputField>
+        ) : (
+          <></>
+        )}
         <div className="create-message-footer">
           <Button
             className="fluid-btn tertiary"
