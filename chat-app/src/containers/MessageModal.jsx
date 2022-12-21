@@ -215,7 +215,7 @@ const MessageModal = ({ show }) => {
           <div className="add-receivers">
             <InputField
               className="add-input"
-              placeholder="Receiver's ITU e-mail"
+              placeholder="Receiver's name"
               onKeyDown={handleKey}
               onChange={(e) => setUsername(e.target.value)}
               value={username}
