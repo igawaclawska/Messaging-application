@@ -34,25 +34,13 @@ const ThreadList = ({ visibility }) => {
   }, [userLogged.uid]);
 
   const handleSelect = (u) => {
-    dispatch({ type: "ANOTHER_USER", payload: u });
+    dispatch({ type: "INDIVIDUAL_CHAT", payload: u });
   };
   const handleSelectG = (u, v, w, x, y, z) => {
     console.log("two users method called");
 
     dispatch({
-      type: "TWO_USERS",
-      payload: v,
-      payload2: u,
-      payload3: w,
-      payload4: x,
-      payload5: y,
-      payload6: z,
-    });
-  };
-  const handleSelectG2 = (u, v, w, x, y, z) => {
-    console.log("owner method called");
-    dispatch({
-      type: "TWO_USER_OWNER",
+      type:  "GROUP_CHAT",
       payload: v,
       payload2: u,
       payload3: w,
@@ -95,16 +83,7 @@ const ThreadList = ({ visibility }) => {
             receiver5={group[1]?.messageReceiver4?.displayName}
             message={group[1]?.lastMessage?.message}
             onClick={() => {
-              userLogged.uid === group[1].groupOwner.uid
-                ? handleSelectG2(
-                    group[1].messageReceiver0,
-                    group[1].messageReceiver1,
-                    group[1].messageReceiver2,
-                    group[1].messageReceiver3,
-                    group[1].messageReceiver4,
-                    group[1].groupName
-                  )
-                : handleSelectG(
+                handleSelectG(
                     group[1].messageReceiver0,
                     group[1].messageReceiver1,
                     group[1].messageReceiver2,
