@@ -15,7 +15,7 @@ const ThreadHeader = ({ onLoad }) => {
         <span className="thread-header-title">Chats</span>
         <Button
           className="fixed-btn primary small with-icon"
-          text="New Message"
+          text="New Chat"
           icon={<MapsUgcIcon />}
           onClick={() => setShow(true)}
         ></Button>
