@@ -326,6 +326,12 @@ nav {
   margin-bottom: 48px;
 }
 
+.sender-name {
+  color: var(--white);
+  font-weight: 400;
+  padding-bottom: 2px;
+}
+
 .home-all-contents {
   height: 100%;
 }
