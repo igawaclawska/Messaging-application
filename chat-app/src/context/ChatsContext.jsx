@@ -13,12 +13,11 @@ export const ChatsContextProvider = ({ children }) => {
     user4: null,
     user5: null,
     group: null,
-    owner: null,
   };
 
   const chatReducer = (state, action) => {
     switch (action.type) {
-      case "ANOTHER_USER":
+      case "INDIVIDUAL_CHAT":
         return {
           user1: action.payload,
           chatsId:
@@ -26,27 +25,17 @@ export const ChatsContextProvider = ({ children }) => {
               ? userLogged.uid + action.payload.uid
               : action.payload.uid + userLogged.uid,
         };
-      case "TWO_USERS":
+      case "GROUP_CHAT":
         return {
+          chatsId: action.payload6.name.replace(/\s/g, ""),
           user1: action.payload,
           user2: action.payload2,
           user3: action.payload3,
           user4: action.payload4,
           user5: action.payload5,
           group: action.payload6,
-          chatsId: action.payload6.name.replace(/\s/g, ""),
         };
 
-      case "TWO_USER_OWNER":
-        return {
-          user1: action.payload,
-          user2: action.payload2,
-          user3: action.payload3,
-          user4: action.payload4,
-          user5: action.payload5,
-          group: action.payload6,
-          chatsId: action.payload6.name.replace(/\s/g, ""),
-        };
       default:
         return state;
     }

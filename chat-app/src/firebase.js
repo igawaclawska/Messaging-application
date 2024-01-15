@@ -1,17 +1,23 @@
-import { getAuth } from "firebase/auth";
+// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import {getStorage } from "firebase/storage";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+import { getAuth } from "firebase/auth";
+import { getStorage } from "firebase/storage";
 import { getFirestore } from "firebase/firestore";
 
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyAvqjXRkAPWODxw0vyeZjsvuv6IuHwe-rM",
-  authDomain: "chat-app-test-dc04e.firebaseapp.com",
-  projectId: "chat-app-test-dc04e",
-  storageBucket: "chat-app-test-dc04e.appspot.com",
-  messagingSenderId: "920922032405",
-  appId: "1:920922032405:web:5a108fb0418afe7b56011c",
-  measurementId: "G-4KH3BKQN2V"
+  apiKey: "AIzaSyAxMDg1_byHYFIxej9AHE7xgiWRpfatztI",
+  authDomain: "chat-7e806.firebaseapp.com",
+  projectId: "chat-7e806",
+  storageBucket: "chat-7e806.appspot.com",
+  messagingSenderId: "994791669623",
+  appId: "1:994791669623:web:6b383a546e7e571950ab72",
+  measurementId: "G-P5BX2NGDJN"
 };
 
 // Initialize Firebase
