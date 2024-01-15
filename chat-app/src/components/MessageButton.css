@@ -1,0 +1,16 @@
+.send-btn {
+  margin: 1%;
+  background-color: var(--white);
+  color: var(--blue1);
+  padding: 6px;
+  border: none;
+  cursor: pointer;
+}
+
+.send-btn:hover {
+  color: var(--blue2);
+}
+
+.send-btn:active {
+  color: var(--blue3);
+}

@@ -5,8 +5,6 @@ import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth, db } from "../firebase";
 import { addDoc, collection, doc, setDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
-import "../buttons.css";
-import "../styles.css";
 
 export const Register = () => {
   const [err, setErr] = useState(false);

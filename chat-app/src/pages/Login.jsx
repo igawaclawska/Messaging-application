@@ -1,12 +1,10 @@
+import './Login.css'
 import React, { useState } from "react";
 import Button from "../components/Button";
 import { useNavigate } from "react-router-dom";
 import InputField from "../components/InputField";
 import { auth } from "../firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
-
-import "../styles.css";
-import "../buttons.css";
 
 export const Login = () => {
   const [err, setErr] = useState(false);
@@ -37,6 +35,7 @@ export const Login = () => {
         <form action="">
           <div className="input-element">
             <InputField
+            // this class seems to not exist
               className="inputEmail"
               id="email"
               label="e-mail"
@@ -47,6 +46,7 @@ export const Login = () => {
           </div>
           <div className="input-element">
             <InputField
+            // this class seems to not exist
               className="inputPassword"
               id="password"
               label="password"

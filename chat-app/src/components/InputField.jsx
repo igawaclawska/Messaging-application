@@ -1,3 +1,5 @@
+import './InputField.css'
+
 const InputField = ({
   value,
   className,

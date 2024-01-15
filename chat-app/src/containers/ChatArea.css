@@ -1,0 +1,18 @@
+.chat-area {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 70%;
+  border-left: 0.5px solid var(--lightgrey);
+}
+
+@media (max-width: 576px) {
+  .chat-area {
+    width: 100%;
+    /* flex-grow: 5; */
+    border: none;
+  }
+  .chat-area.invisible {
+    display: none;
+  }
+}

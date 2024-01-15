@@ -1,0 +1,23 @@
+.home-container {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--blue1);
+  height: 100vh;
+  overflow: hidden;
+}
+
+.home-body {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+}
+
+.home-all-contents {
+  height: 100%;
+}
+
+@media (max-width: 576px) {
+  .home-body {
+    flex-direction: column;
+  }
+}

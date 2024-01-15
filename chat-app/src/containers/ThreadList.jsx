@@ -1,3 +1,4 @@
+import './ThreadList.css'
 import SingleThread from "../components/SingleThread";
 import React, { useState, useContext, useEffect } from "react";
 import { doc, onSnapshot } from "firebase/firestore";

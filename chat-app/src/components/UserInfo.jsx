@@ -1,3 +1,5 @@
+import './UserInfo.css'
+
 const UserInfo = ({ onClick, value, displayName, uid, email, idx }) => {
   return (
     <div

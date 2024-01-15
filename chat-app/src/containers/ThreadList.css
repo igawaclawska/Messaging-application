@@ -1,0 +1,9 @@
+.thread-list {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--white);
+  height: 100vh;
+  overflow-y: scroll;
+  gap: 4px;
+  padding: 0 0 56px 0;
+}

@@ -1,3 +1,4 @@
+import './MailTag.css'
 import Button from "../components/Button";
 import ClearIcon from "@mui/icons-material/Clear";
 

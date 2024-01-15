@@ -1,3 +1,4 @@
+import './ChatArea.css'
 import ChatHeader from "./ChatHeader";
 import BubblesScrollable from "./BubblesScrollable";
 import SendMessage from "./SendMessage";

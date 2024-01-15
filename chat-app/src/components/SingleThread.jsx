@@ -1,3 +1,5 @@
+import './SingleThread.css'
+
 const SingleThread = ({
   onClick,
   receiver1,

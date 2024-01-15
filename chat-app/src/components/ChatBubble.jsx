@@ -1,3 +1,4 @@
+import "./ChatBubble.css"
 import React, { useContext, useEffect, useRef } from "react";
 import { ChatsContext } from "../context/ChatsContext";
 import { AuthContext } from "../context/AuthContext";

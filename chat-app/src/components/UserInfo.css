@@ -1,0 +1,20 @@
+.user-info {
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
+  color: var(--grey);
+  width: max-content;
+  margin: 1%;
+  background-color: var(--blue);
+}
+.user-info-name {
+  font-size: 12px;
+}
+.user-info-email {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-height: 18px;
+  height: 16px;
+  max-width: 100vh;
+  white-space: nowrap;
+}
