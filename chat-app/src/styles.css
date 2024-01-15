@@ -23,7 +23,7 @@
 }
 
 * {
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   margin: 0;
 }
 
@@ -50,7 +50,7 @@ body {
 }
 
 .logo {
-  font-family: 'Source Sans Pro', sans-serif;
+  font-family: "Source Sans Pro", sans-serif;
   font-weight: 300;
   letter-spacing: 6px;
   margin: 5% 0;
@@ -58,7 +58,7 @@ body {
   font-size: 40px;
 }
 
-.logo-small{
+.logo-small {
   margin: 0;
   color: var(--white);
   font-size: 20px;
@@ -104,7 +104,7 @@ input {
   cursor: pointer;
 }
 
-.login-link{
+.login-link {
   font-size: 14px;
 }
 
@@ -127,7 +127,7 @@ nav {
 }
 
 .home-container {
-  display:flex;
+  display: flex;
   flex-direction: column;
   background-color: var(--blue1);
   height: 100vh;
@@ -137,7 +137,7 @@ nav {
 .home-body {
   display: flex;
   flex-direction: row;
-  height: 100%
+  height: 100%;
 }
 
 .threads-bar {
@@ -184,8 +184,8 @@ nav {
   max-width: 100%;
 }
 
-.single-thread-header{
-  font-size: 12px;
+.single-thread-header {
+  font-size: 14px;
   max-width: 100vh;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -197,17 +197,16 @@ nav {
   overflow: hidden;
   text-overflow: ellipsis;
   max-height: 16px;
-  height:16px;
+  height: 16px;
   max-width: 100vh;
   white-space: nowrap;
 }
 
-.list-of-users{
+.list-of-users {
   height: 15vh;
   max-height: 50%;
   overflow-y: scroll;
   padding: 5px 0 0 0;
-
 }
 
 .user-info {
@@ -219,14 +218,14 @@ nav {
   margin: 1%;
   background-color: var(--blue);
 }
-.user-info-name{
+.user-info-name {
   font-size: 12px;
 }
 .user-info-email {
   overflow: hidden;
   text-overflow: ellipsis;
   max-height: 18px;
-  height:16px;
+  height: 16px;
   max-width: 100vh;
   white-space: nowrap;
 }
@@ -278,7 +277,7 @@ nav {
   font-size: 16px;
 }
 .chat-header-title-users {
-  font-weight: bold;
+  font-weight: 400;
   font-size: 14px;
   color: var(--grey);
 }
@@ -311,7 +310,7 @@ nav {
 .messageInput {
   margin: 1%;
   padding: 10px;
-  border: 1px solid var(--lightgrey);
+  border: 2px solid var(--lightgrey);
   border-radius: 16px;
   width: 90%;
   color: var(--grey);
@@ -385,7 +384,7 @@ nav {
   background-color: var(--white);
   width: 100%;
   padding: 10%;
- justify-content: center;
+  justify-content: center;
 }
 
 /* chat styling ends here */
@@ -422,14 +421,14 @@ nav {
 }
 
 .add-receivers {
-  display:block;
+  display: block;
   flex-direction: column;
   align-items: center;
   margin: 1%;
   padding: 20px 0 0 0;
 }
 
-.search-list{
+.search-list {
   margin-top: 2%;
   margin-bottom: 4%;
   display: flex;
@@ -444,19 +443,19 @@ nav {
   gap: 2px;
 }
 
-.tags-container{
-  width:fit-content;
+.tags-container {
+  width: fit-content;
   margin: 1%;
 }
 
-.users-selected{
-  width:fit-content;
+.users-selected {
+  width: fit-content;
   margin-top: 2%;
   padding: 1%;
   height: 10%;
   display: flex;
   flex-direction: row;
-  width:100%;
+  width: 100%;
   overflow-x: scroll;
 }
 
@@ -491,14 +490,9 @@ nav {
   }
 }
 @media (max-width: 576px) {
-.home-body{
-  flex-direction: column;
-}
-
-  .single-thread-header{
-    font-size: 14px;
+  .home-body {
+    flex-direction: column;
   }
-
   .chat-header-wrapper {
     padding: 14px;
   }
