@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import ChatBubble from "../components/ChatBubble";
-import "../styles.css";
+import "./BubblesScrollable.css";
 import { db } from "../firebase";
 import { doc, onSnapshot } from "firebase/firestore";
 import { ChatsContext } from "../context/ChatsContext";

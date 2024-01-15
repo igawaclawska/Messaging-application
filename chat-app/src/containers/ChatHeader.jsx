@@ -1,9 +1,10 @@
+import './ChatHeader.css'
 import React, { useContext } from "react";
 import Button from "../components/Button";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import { ChatsContext } from "../context/ChatsContext";
 import "../styles.css";
-import "../buttons.css";
+// import "../buttons.css";
 
 const ChatHeader = ({ onClick }) => {
   const { data } = useContext(ChatsContext);

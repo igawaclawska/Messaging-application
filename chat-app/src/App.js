@@ -5,7 +5,6 @@ import Register from "./pages/Register";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthContext } from "./context/AuthContext";
 import "./styles.css";
-import "./buttons.css";
 
 function App() {
   const { userLogged } = useContext(AuthContext);

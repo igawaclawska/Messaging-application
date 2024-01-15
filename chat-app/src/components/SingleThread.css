@@ -1,0 +1,43 @@
+.single-thread {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 12px 16px;
+    color: var(--grey);
+    width: 100%;
+    max-width: 100%;
+  }
+  
+  .single-thread-header {
+    font-size: 14px;
+    max-width: 100vh;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  
+  .single-thread-message {
+    font-weight: 400;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-height: 16px;
+    height: 16px;
+    max-width: 100vh;
+    white-space: nowrap;
+  }
+
+  .single-thread.active {
+    background-color: var(--grey3);
+  }
+  
+  .single-thread-new-message {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 12px 16px;
+    color: var(--grey);
+    width: 100%;
+    max-width: 100%;
+    border-left: solid 6px var(--turquoise);
+    margin-left: 4px;
+  }

@@ -1,0 +1,9 @@
+.messageInput {
+  margin: 1%;
+  padding: 10px;
+  border: 2px solid var(--lightgrey);
+  border-radius: 16px;
+  width: 90%;
+  color: var(--grey);
+  font-weight: 600;
+}

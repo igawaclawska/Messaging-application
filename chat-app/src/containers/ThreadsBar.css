@@ -1,0 +1,12 @@
+.threads-bar {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  min-width: 30%;
+}
+
+@media (max-width: 576px) {
+  .threads-bar {
+    width: 100%;
+  }
+}

@@ -1,3 +1,4 @@
+import './ThreadsBar.css'
 import ThreadHeader from "./ThreadHeader";
 import ThreadList from "./ThreadList";
 

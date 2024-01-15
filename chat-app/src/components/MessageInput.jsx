@@ -1,3 +1,5 @@
+import './MessageInput.css'
+
 const MessageInput = ({
   className,
   id,

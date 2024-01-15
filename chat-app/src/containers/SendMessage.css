@@ -1,0 +1,7 @@
+.send-message-wrapper {
+  background-color: var(--white);
+  display: flex;
+  flex-direction: row;
+  padding: 0px 8px 16px 8px;
+  transform: translateY(-48px);
+}

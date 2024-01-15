@@ -1,3 +1,4 @@
+import './MessageModal.css'
 import React, { useContext, useEffect, useState } from "react";
 import InputField from "../components/InputField";
 import Button from "../components/Button";
@@ -13,8 +14,6 @@ import {
   updateDoc,
   setDoc,
 } from "firebase/firestore";
-import "../styles.css";
-import "../buttons.css";
 import UserInfo from "../components/UserInfo";
 import MailTag from "../components/MailTag";
 
@@ -210,9 +209,11 @@ const MessageModal = ({ show }) => {
         <div className="create-message-header">
           <h2>Create new chat</h2>
         </div>
-        <div className="create-message-body">
+        {/* The class 'create-message-body' seems to not extst */}
+        <div className="create-message-body"> 
           <h3> Receivers:</h3>
           <div className="add-receivers">
+            {/* The class 'add-input' seems to not extst */}
             <InputField
               className="add-input"
               placeholder="Receiver's name"
@@ -250,7 +251,7 @@ const MessageModal = ({ show }) => {
         {usersSelected.length > 1 ? (
           <InputField
             className="add-group-name"
-            placeholder="Goup name"
+            placeholder="Group name"
             onKeyDown={handleKey}
             onChange={(e) => setGroupName(e.target.value)}
             value={groupname}
