@@ -17,7 +17,7 @@ const SingleThread = ({
         <b>
           {" "}
           {groupName}{" "}
-          {receiver2 == ""
+          {receiver2 === ""
             ? receiver1
             : " ( " +
               receiver1 +
