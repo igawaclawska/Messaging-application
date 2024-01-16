@@ -1,4 +1,4 @@
-import './SendMessage.css'
+import "./SendMessage.css";
 import React, { useContext, useState } from "react";
 import MessageButton from "../components/MessageButton";
 import MessageInput from "../components/MessageInput";
@@ -16,7 +16,6 @@ import { v4 as uuid } from "uuid";
 
 const SendMessage = () => {
   const [text, setText] = useState("");
-  const [err, setErr] = useState(false);
   const { userLogged } = useContext(AuthContext);
   const { data } = useContext(ChatsContext);
 
@@ -24,7 +23,7 @@ const SendMessage = () => {
     e.code === "Enter" && handleSend();
   };
   const handleSend = async () => {
-    if (text != "") {
+    if (text !== "") {
       try {
         await updateDoc(doc(db, "chats", data.chatsId), {
           messages: arrayUnion({
