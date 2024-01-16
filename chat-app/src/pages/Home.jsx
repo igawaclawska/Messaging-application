@@ -1,15 +1,13 @@
-import './Home.css'
+import "./Home.css";
 import { useState } from "react";
 import { useEffect } from "react";
 import Navbar from "../containers/Navbar";
 import ThreadsBar from "../containers/ThreadsBar";
 import ChatArea from "../containers/ChatArea";
-import { auth } from "../firebase";
-import { useAuthState } from "react-firebase-hooks/auth";
 
 export const Home = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const [user] = useAuthState(auth);
+
   // updates the width variable value in real time
   useEffect(() => {
     const handleResize = () => {

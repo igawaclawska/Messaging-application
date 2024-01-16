@@ -25,7 +25,7 @@ const ChatBubble = ({ message, text }) => {
             message.senderId === userLogged.uid ? "right-bubble" : "left-bubble"
           }
         >
-          {message.senderId != userLogged.uid && data.group != null ? (
+          {message.senderId !== userLogged.uid && data.group !== null ? (
             <p className="sender-name">{message.senderName}</p>
           ) : (
             <></>

@@ -1,4 +1,4 @@
-import './SendMessage.css'
+import "./SendMessage.css";
 import React, { useContext, useState } from "react";
 import MessageButton from "../components/MessageButton";
 import MessageInput from "../components/MessageInput";
@@ -16,7 +16,6 @@ import { v4 as uuid } from "uuid";
 
 const SendMessage = () => {
   const [text, setText] = useState("");
-  const [err, setErr] = useState(false);
   const { userLogged } = useContext(AuthContext);
   const { data } = useContext(ChatsContext);
 
@@ -24,7 +23,7 @@ const SendMessage = () => {
     e.code === "Enter" && handleSend();
   };
   const handleSend = async () => {
-    if (text != "") {
+    if (text !== "") {
       try {
         await updateDoc(doc(db, "chats", data.chatsId), {
           messages: arrayUnion({
@@ -80,7 +79,7 @@ const SendMessage = () => {
               date: serverTimestamp(),
             },
           });
-          if (data.user3 != "") {
+          if (data.user3 != null) {
             await updateDoc(doc(db, "groupChat", data.user3.uid), {
               [data.chatsId + ".lastMessage"]: {
                 message: text,
@@ -90,7 +89,7 @@ const SendMessage = () => {
               },
             });
           }
-          if (data.user4 != "") {
+          if (data.user4 != null) {
             await updateDoc(doc(db, "groupChat", data.user4.uid), {
               [data.chatsId + ".lastMessage"]: {
                 message: text,
@@ -100,7 +99,7 @@ const SendMessage = () => {
               },
             });
           }
-          if (data.user5 != "") {
+          if (data.user5 != null) {
             await updateDoc(doc(db, "groupChat", data.user5.uid), {
               [data.chatsId + ".lastMessage"]: {
                 message: text,
@@ -112,7 +111,7 @@ const SendMessage = () => {
           }
         }
       } catch (err) {
-        console.log("error");
+        console.log(err);
       }
       setText("");
     }

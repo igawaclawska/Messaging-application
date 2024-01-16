@@ -1,5 +1,5 @@
-import './MessageModal.css'
-import React, { useContext, useEffect, useState } from "react";
+import "./MessageModal.css";
+import React, { useContext, useState } from "react";
 import InputField from "../components/InputField";
 import Button from "../components/Button";
 import { AuthContext } from "../context/AuthContext";
@@ -23,12 +23,12 @@ const MessageModal = ({ show }) => {
   const [groupname, setGroupName] = useState("");
   const [usersSelected, setUserSelected] = useState([]);
   const [user, setUser] = useState({});
-  const [err, setErr] = useState(false);
+  const [error, setError] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
   const { userLogged } = useContext(AuthContext);
 
   const handleSearch = async () => {
-    if (username != "") {
+    if (username !== "") {
       let caseInsensitiveUsername = username.toLowerCase();
       const filter = query(
         collection(db, "users"),
@@ -36,12 +36,13 @@ const MessageModal = ({ show }) => {
       );
       try {
         const filteredDocs = await getDocs(filter);
-        await filteredDocs.forEach((doc) => {
+        filteredDocs.forEach((doc) => {
           searchResults.push(doc.data());
           setSearchResults(searchResults);
         });
       } catch (err) {
-        setErr(true);
+        setError(true);
+        console.log(`error status: ${error}`);
       } finally {
         if (searchResults.length > 0) {
           userFound(true);
@@ -111,7 +112,7 @@ const MessageModal = ({ show }) => {
     try {
       await updateDoc(doc(db, "groupChat", user.uid), data);
 
-      usersSelected.map((u, idx) => {
+      usersSelected.forEach((u, idx) => {
         updateGroup(u, idx);
       });
       console.log("success");
@@ -134,7 +135,7 @@ const MessageModal = ({ show }) => {
       },
     };
     try {
-      usersSelected.map((u, idx) => {
+      usersSelected.forEach((u, idx) => {
         updateDoc(doc(db, "groupChat", usersSelected[idx].uid), data);
       });
       console.log(
@@ -149,7 +150,7 @@ const MessageModal = ({ show }) => {
     if (
       usersSelected.length - 1 >= 1 &&
       usersSelected.length - 1 <= 5 &&
-      groupname != ""
+      groupname !== ""
     ) {
       //if there are 2 recievers
       const res = await getDoc(doc(db, "chats", groupname));
@@ -160,13 +161,10 @@ const MessageModal = ({ show }) => {
           alert("Please use another group name");
         } else {
           usersSelected.push(userLogged);
-
-          {
-            usersSelected.map((u) => createGroup(u));
-          }
+          usersSelected.map((u) => createGroup(u));
         }
       } catch (error) {}
-    } else if (usersSelected.length - 1 == 0) {
+    } else if (usersSelected.length - 1 === 0) {
       //if there's just 1
       await createChat();
     }
@@ -210,7 +208,7 @@ const MessageModal = ({ show }) => {
           <h2>Create new chat</h2>
         </div>
         {/* The class 'create-message-body' seems to not extst */}
-        <div className="create-message-body"> 
+        <div className="create-message-body">
           <h3> Receivers:</h3>
           <div className="add-receivers">
             {/* The class 'add-input' seems to not extst */}
