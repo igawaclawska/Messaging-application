@@ -9,11 +9,11 @@ import { useNavigate } from "react-router-dom";
 export const Register = () => {
   const [error, setError] = useState(false);
   const navigate = useNavigate();
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
-  const [displayName, setDisplayName] = useState(null);
-  const [displayNameLowerCase, setDisplayNameLowerCase] = useState(null);
-  const [passwordRepeated, setPasswordRepeated] = useState();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [displayName, setDisplayName] = useState("");
+  const [displayNameLowerCase, setDisplayNameLowerCase] = useState("");
+  const [passwordRepeated, setPasswordRepeated] = useState("");
 
   const writeUserData = async () => {
     try {
