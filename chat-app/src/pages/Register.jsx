@@ -3,15 +3,15 @@ import Button from "../components/Button";
 import InputField from "../components/InputField";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth, db } from "../firebase";
-import { addDoc, collection, doc, setDoc } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 
 export const Register = () => {
-  const [err, setErr] = useState(false);
+  const [error, setError] = useState(false);
   const navigate = useNavigate();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-  const [displayName, setName] = useState(null);
+  const [displayName, setDisplayName] = useState(null);
   const [displayNameLowerCase, setDisplayNameLowerCase] = useState(null);
   const [passwordRepeated, setPasswordRepeated] = useState();
 
@@ -24,30 +24,30 @@ export const Register = () => {
           // displayNameLowerCase,
         });
         console.log(res);
-        const addUser = await setDoc(doc(db, "users", res.user.uid), {
+        await setDoc(doc(db, "users", res.user.uid), {
           uid: res.user.uid,
           displayName,
           displayNameLowerCase,
           email,
         });
         //create empty chats
-        const addChat = await setDoc(doc(db, "userChats", res.user.uid), {});
+        await setDoc(doc(db, "userChats", res.user.uid), {});
         //create empty group chats
-        const addGroupChat = await setDoc(
+        await setDoc(
           doc(db, "groupChat", res.user.uid),
           {}
         );
-        toMain();
+        navigateToMain();
       } catch (err) {
-        console.log("error", err);
-        setErr(true);
+        console.log("error status:", error);
+        setError(true);
       }
     } catch (err) {
-      setErr(true);
+      setError(true);
     }
   };
 
-  function reg() {
+  function validateInput() {
     if (
       /^[A-Za-z0-9._%+-]+@itu\.dk$/.test(email) &&
       password.length >= 6 &&
@@ -77,13 +77,13 @@ export const Register = () => {
       return false;
     }
   }
-  const toMain = () => {
+  const navigateToMain = () => {
     let path = "/home";
     navigate(path);
   };
 
   function validateCredentials() {
-    if (reg()) {
+    if (validateInput()) {
       writeUserData();
     }
   }
@@ -103,7 +103,7 @@ export const Register = () => {
             type="text"
             onChange={(event) => {
               let name = event.target.value;
-              setName(name);
+              setDisplayName(name);
               let nameLowercase = name.toLowerCase();
               setDisplayNameLowerCase(nameLowercase);
             }}
