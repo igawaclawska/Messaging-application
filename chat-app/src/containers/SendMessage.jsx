@@ -80,7 +80,7 @@ const SendMessage = () => {
               date: serverTimestamp(),
             },
           });
-          if (data.user3 != "") {
+          if (data.user3 != null) {
             await updateDoc(doc(db, "groupChat", data.user3.uid), {
               [data.chatsId + ".lastMessage"]: {
                 message: text,
@@ -90,7 +90,7 @@ const SendMessage = () => {
               },
             });
           }
-          if (data.user4 != "") {
+          if (data.user4 != null) {
             await updateDoc(doc(db, "groupChat", data.user4.uid), {
               [data.chatsId + ".lastMessage"]: {
                 message: text,
@@ -100,7 +100,7 @@ const SendMessage = () => {
               },
             });
           }
-          if (data.user5 != "") {
+          if (data.user5 != null) {
             await updateDoc(doc(db, "groupChat", data.user5.uid), {
               [data.chatsId + ".lastMessage"]: {
                 message: text,
@@ -112,7 +112,7 @@ const SendMessage = () => {
           }
         }
       } catch (err) {
-        console.log("error");
+        console.log(err);
       }
       setText("");
     }
