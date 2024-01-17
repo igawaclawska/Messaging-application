@@ -21,7 +21,6 @@ export const Register = () => {
       try {
         await updateProfile(res.user, {
           displayName,
-          // displayNameLowerCase,
         });
         console.log(res);
         await setDoc(doc(db, "users", res.user.uid), {

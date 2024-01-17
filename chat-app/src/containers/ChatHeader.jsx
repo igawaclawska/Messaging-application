@@ -4,7 +4,6 @@ import Button from "../components/Button";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import { ChatsContext } from "../context/ChatsContext";
 import "../styles.css";
-// import "../buttons.css";
 
 const ChatHeader = ({ onClick }) => {
   const { data } = useContext(ChatsContext);
@@ -19,13 +18,7 @@ const ChatHeader = ({ onClick }) => {
           ></Button>{" "}
         </div>
         <span className="chat-header-title">
-          {data.group?.name && <div>{data.group?.name}: </div>}
-          <span className={data.group?.name && "chat-header-title-users"}>
-            {data.user1?.displayName} {data.user2?.displayName}{" "}
-            {data.user3?.displayName} {data.user4?.displayName}{" "}
-            {data.user5?.displayName}
-            {""}
-          </span>
+        {data.user1?.displayName}
         </span>
       </div>
     </header>

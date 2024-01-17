@@ -34,8 +34,7 @@ export const Login = () => {
         <form action="">
           <div className="input-element">
             <InputField
-              // this class seems to not exist
-              className="inputEmail"
+              className="input-email"
               id="email"
               label="e-mail"
               placeholder="example@itu.dk"
@@ -45,8 +44,7 @@ export const Login = () => {
           </div>
           <div className="input-element">
             <InputField
-              // this class seems to not exist
-              className="inputPassword"
+              className="input-password"
               id="password"
               label="password"
               placeholder="Enter a password"
