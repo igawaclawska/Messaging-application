@@ -20,7 +20,6 @@ import MailTag from "../components/MailTag";
 const MessageModal = ({ show }) => {
   const [foundUser, userFound] = useState(false);
   const [username, setUsername] = useState("");
-  const [groupname, setGroupName] = useState("");
   const [usersSelected, setUserSelected] = useState([]);
   const [user, setUser] = useState({});
   const [error, setError] = useState(false);
@@ -93,81 +92,8 @@ const MessageModal = ({ show }) => {
     userFound(false);
   };
 
-  const createGroup = async (user) => {
-    const chatsId = groupname.replace(/\s/g, "");
-    console.log("Creating chat for user " + user.displayName);
-    await setDoc(doc(db, "chats", chatsId), { messages: [] });
-
-    const data = {
-      [chatsId + ".groupName"]: {
-        name: groupname,
-      },
-      [chatsId + ".groupOwner"]: {
-        uid: userLogged.uid,
-      },
-      [chatsId + ".sender"]: {
-        name: user.displayName,
-      },
-    };
-    try {
-      await updateDoc(doc(db, "groupChat", user.uid), data);
-
-      usersSelected.forEach((u, idx) => {
-        updateGroup(u, idx);
-      });
-      console.log("success");
-    } catch (error) {
-      console.log("some error");
-    }
-    setUserSelected(null);
-    userFound(false);
-    setGroupName("");
-  };
-
-  const updateGroup = async (u, idx) => {
-    var str = ".messageReceiver" + idx;
-    const chatsId = groupname.replace(/\s/g, "");
-    const data = {
-      [chatsId + str]: {
-        uid: usersSelected[idx].uid,
-        displayName: usersSelected[idx].displayName,
-        email: usersSelected[idx].email,
-      },
-    };
-    try {
-      usersSelected.forEach((u, idx) => {
-        updateDoc(doc(db, "groupChat", usersSelected[idx].uid), data);
-      });
-      console.log(
-        "success second loop for user" + usersSelected[idx].displayName
-      );
-    } catch (error) {
-      console.log("some error");
-    }
-  };
-
   const handleChatCreation = async () => {
-    if (
-      usersSelected.length - 1 >= 1 &&
-      usersSelected.length - 1 <= 5 &&
-      groupname !== ""
-    ) {
-      //if there are 2 recievers
-      const res = await getDoc(doc(db, "chats", groupname));
-      try {
-        if (groupname.length < 5) {
-          alert("Please select group name with at least 5 characters");
-        } else if (res.exists()) {
-          alert("Please use another group name");
-        } else {
-          usersSelected.push(userLogged);
-          usersSelected.map((u) => createGroup(u));
-        }
-      } catch (error) {}
-    } else if (usersSelected.length - 1 === 0) {
-      //if there's just 1
-      await createChat();
-    }
+    await createChat();
     show(false);
   };
   const handleSelect = (u, idx) => {
@@ -246,17 +172,6 @@ const MessageModal = ({ show }) => {
             ) : null}
           </div>
         </div>
-        {usersSelected.length > 1 ? (
-          <InputField
-            className="add-group-name"
-            placeholder="Group name"
-            onKeyDown={handleKey}
-            onChange={(e) => setGroupName(e.target.value)}
-            value={groupname}
-          ></InputField>
-        ) : (
-          <></>
-        )}
         <div className="create-message-footer">
           <Button
             className="fluid-btn tertiary"

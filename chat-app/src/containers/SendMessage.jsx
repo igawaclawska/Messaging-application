@@ -53,62 +53,6 @@ const SendMessage = () => {
               date: serverTimestamp(),
             },
           });
-        } else {
-          await updateDoc(doc(db, "groupChat", userLogged.uid), {
-            [data.chatsId + ".lastMessage"]: {
-              message: text,
-            },
-            [data.chatsId + ".date"]: {
-              date: serverTimestamp(),
-            },
-          });
-
-          await updateDoc(doc(db, "groupChat", data.user1.uid), {
-            [data.chatsId + ".lastMessage"]: {
-              message: text,
-            },
-            [data.chatsId + ".date"]: {
-              date: serverTimestamp(),
-            },
-          });
-          await updateDoc(doc(db, "groupChat", data.user2.uid), {
-            [data.chatsId + ".lastMessage"]: {
-              message: text,
-            },
-            [data.chatsId + ".date"]: {
-              date: serverTimestamp(),
-            },
-          });
-          if (data.user3 != null) {
-            await updateDoc(doc(db, "groupChat", data.user3.uid), {
-              [data.chatsId + ".lastMessage"]: {
-                message: text,
-              },
-              [data.chatsId + ".date"]: {
-                date: serverTimestamp(),
-              },
-            });
-          }
-          if (data.user4 != null) {
-            await updateDoc(doc(db, "groupChat", data.user4.uid), {
-              [data.chatsId + ".lastMessage"]: {
-                message: text,
-              },
-              [data.chatsId + ".date"]: {
-                date: serverTimestamp(),
-              },
-            });
-          }
-          if (data.user5 != null) {
-            await updateDoc(doc(db, "groupChat", data.user5.uid), {
-              [data.chatsId + ".lastMessage"]: {
-                message: text,
-              },
-              [data.chatsId + ".date"]: {
-                date: serverTimestamp(),
-              },
-            });
-          }
         }
       } catch (err) {
         console.log(err);

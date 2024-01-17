@@ -1,10 +1,6 @@
 import './MessageInput.css'
 
 const MessageInput = ({
-  className,
-  id,
-  label,
-  placeholder,
   onKeyDown,
   value,
   type,
