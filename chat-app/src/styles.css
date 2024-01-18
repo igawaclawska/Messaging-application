@@ -28,8 +28,28 @@
 }
 
 body {
-  background-color: var(--blue1);
+  background: linear-gradient(
+    45deg,
+    #d65bad,
+    var(--blue2),
+    #39ade5
+  );
+  background-size: 400% 400%;
+  animation: gradientAnimation 15s infinite linear;
+  overflow: hidden;
   color: var(--grey);
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 .form-element {
@@ -51,12 +71,6 @@ p {
   overflow-y: scroll;
   padding: 5px 0 0 0;
 }
-
-/* thread styling ends here */
-
-/* chat styling stars here */
-
-/* chat styling ends here */
 
 /* modal styling starts here */
 .add-btn {
