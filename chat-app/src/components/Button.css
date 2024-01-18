@@ -40,7 +40,14 @@
 }
 
 .primary:hover {
-  background-color: var(--blue2);
+  background: linear-gradient( 
+    45deg,
+    #d65bad,
+    var(--blue2),
+    #39ade5
+  );
+  background-size: 400% 400%;
+  /* background-color: var(--blue2); */
 }
 
 .primary:active {

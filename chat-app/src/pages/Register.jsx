@@ -5,15 +5,23 @@ import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth, db } from "../firebase";
 import { doc, setDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
+import { useAuthFormData } from "../hooks/useAuthFormData.js";
 
 export const Register = () => {
   const [error, setError] = useState(false);
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [displayName, setDisplayName] = useState("");
-  const [displayNameLowerCase, setDisplayNameLowerCase] = useState("");
-  const [passwordRepeated, setPasswordRepeated] = useState("");
+
+  const {
+    email,
+    handleEmailInput,
+    password,
+    handlePasswordInput,
+    displayName,
+    handleDisplayNameInput,
+    displayNameLowerCase,
+    passwordRepeated,
+    handlePasswordRepeatedInput,
+  } = useAuthFormData();
 
   const writeUserData = async () => {
     try {
@@ -29,13 +37,7 @@ export const Register = () => {
           displayNameLowerCase,
           email,
         });
-        //create empty chats
         await setDoc(doc(db, "userChats", res.user.uid), {});
-        //create empty group chats
-        await setDoc(
-          doc(db, "groupChat", res.user.uid),
-          {}
-        );
         navigateToMain();
       } catch (err) {
         console.log("error status:", error);
@@ -94,45 +96,40 @@ export const Register = () => {
         <h2 className="title">Register</h2>
         <form className="form">
           <InputField
-            className="inputName"
-            id="fullname"
-            label="fullname"
+            className="input-name"
+            id="full-name"
+            label="full name"
             value={displayName}
             placeholder="Enter your name"
             type="text"
-            onChange={(event) => {
-              let name = event.target.value;
-              setDisplayName(name);
-              let nameLowercase = name.toLowerCase();
-              setDisplayNameLowerCase(nameLowercase);
-            }}
+            onChange={handleDisplayNameInput}
           ></InputField>
           <InputField
-            className="inputEmail"
+            className="input-email"
             id="email"
             value={email}
             label="e-mail"
             placeholder="example@itu.dk"
             type="email"
-            onChange={(event) => setEmail(event.target.value)}
+            onChange={handleEmailInput}
           ></InputField>
           <InputField
-            className="inputPassword"
+            className="input-password"
             id="password"
             value={password}
             label="password"
             placeholder="Enter a password"
             type="password"
-            onChange={(event) => setPassword(event.target.value)}
+            onChange={handlePasswordInput}
           ></InputField>
           <InputField
-            className="inputRepeatPassword"
-            id="repeatPassword"
+            className="input-repeat-password"
+            id="repeat-password"
             value={passwordRepeated}
             label="repeat password"
             placeholder="Repeat password"
             type="password"
-            onChange={(event) => setPasswordRepeated(event.target.value)}
+            onChange={handlePasswordRepeatedInput}
           ></InputField>
           <Button
             className="fluid-btn primary"

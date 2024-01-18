@@ -18,7 +18,7 @@ const NavBar = () => {
     // class nav-bar does not exist in css
     <nav className="nav-bar">
       <div className="navbar-wrapper">
-        <span className="logo logo-small">ITU CHAT</span>
+        <span className="logo logo-small">MINI CHAT</span>
         <Button
           text={userLogged.displayName}
           icon={<LogoutSharpIcon />}
