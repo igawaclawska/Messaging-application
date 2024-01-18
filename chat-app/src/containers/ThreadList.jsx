@@ -14,6 +14,10 @@ const ThreadList = ({ visibility }) => {
   const { dispatch } = useContext(ChatsContext);
 
   useEffect(() => {
+    console.log(`chats object: ${Object.entries(chats).length}`);
+  }, [chats]);
+
+  useEffect(() => {
     const getChats = () => {
       const unsub = onSnapshot(doc(db, "userChats", userLogged.uid), (doc) => {
         setChats(doc.data());
@@ -29,27 +33,47 @@ const ThreadList = ({ visibility }) => {
     dispatch({ type: "INDIVIDUAL_CHAT", payload: u });
   };
 
-  return (
-    //create dynamic thread components
-    <div className="thread-list">
-      {Object.entries(chats)
-        ?.sort((a, b) => b[1].date?.date - a[1].date?.date)
-        .map((chat) => (
-          <SingleThread
-            key={chat[0]}
-            className={`single-thread ${isActive === chat[1] && "active"}`}
-            receiver1={chat[1].messageReceiver.displayName}
-            receiver2={""}
-            message={chat[1]?.lastMessage?.message}
-            onClick={() => {
-              handleSelect(chat[1].messageReceiver);
-              setIsActive(chat[1]);
-              visibility && visibility();
-            }}
-          ></SingleThread>
-        ))}
-    </div>
-  );
+  //create dynamic thread components
+  const renderListOfChats = () => {
+    return (
+      <div className="thread-list">
+        {Object.entries(chats)
+          ?.sort((a, b) => b[1].date?.date - a[1].date?.date)
+          .map((chat) => (
+            <SingleThread
+              key={chat[0]}
+              className={`single-thread ${isActive === chat[1] && "active"}`}
+              receiver1={chat[1].messageReceiver.displayName}
+              receiver2={""}
+              message={chat[1]?.lastMessage?.message}
+              onClick={() => {
+                handleSelect(chat[1].messageReceiver);
+                setIsActive(chat[1]);
+                visibility && visibility();
+              }}
+            ></SingleThread>
+          ))}
+      </div>
+    );
+  };
+
+  const renderEmptyChatsMessage = () => {
+    return (
+      <div className="thread-list">
+        <div className="empty-chat-message">
+          <h4 className="empty-chat-message-header">No chats yet!</h4>
+          <p className="empty-chat-message-text">
+            To start chatting with someone <br></br>click on the{" "}
+            <b>"New Chat"</b> button
+          </p>
+        </div>
+      </div>
+    );
+  };
+
+  return Object?.entries(chats).length !== 0
+    ? renderListOfChats()
+    : renderEmptyChatsMessage();
 };
 
 export default ThreadList;

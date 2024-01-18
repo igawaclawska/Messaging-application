@@ -35,7 +35,7 @@ body {
     #39ade5
   );
   background-size: 400% 400%;
-  animation: gradientAnimation 15s infinite linear;
+  animation: gradientAnimation 12s infinite linear;
   overflow: hidden;
   color: var(--grey);
 }
