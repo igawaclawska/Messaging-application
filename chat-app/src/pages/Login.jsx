@@ -5,11 +5,14 @@ import { useNavigate } from "react-router-dom";
 import InputField from "../components/InputField";
 import { auth } from "../firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
+import { useAuthFormData } from "../hooks/useAuthFormData.js";
 
 export const Login = () => {
   const [error, setError] = useState(false);
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+
+  const { email, handleEmailInput, password, handlePasswordInput } =
+    useAuthFormData();
+
   const handleSubmit = async () => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
@@ -39,7 +42,7 @@ export const Login = () => {
               label="e-mail"
               placeholder="example@itu.dk"
               type="email"
-              onChange={(event) => setEmail(event.target.value)}
+              onChange={handleEmailInput}
             ></InputField>
           </div>
           <div className="input-element">
@@ -49,7 +52,7 @@ export const Login = () => {
               label="password"
               placeholder="Enter a password"
               type="password"
-              onChange={(event) => setPassword(event.target.value)}
+              onChange={handlePasswordInput}
             ></InputField>
           </div>
           <Button
