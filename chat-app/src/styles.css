@@ -26,21 +26,16 @@
   font-family: "Inter", sans-serif;
   margin: 0;
 }
-/* #ff7e5f, #feb47b, #ff7e5f,  #E539AD, var(--blue2), */
+
 body {
   background: linear-gradient(
     45deg,
     #d65bad,
-    #d65bad,
     var(--blue2),
-    #39ade5,
-    #39ade5,
-    var(--blue2),
-    #d65bad,
-    #d65bad
+    #39ade5
   );
-  background-size: 380% 380%;
-  animation: gradientAnimation 40s infinite;
+  background-size: 400% 400%;
+  animation: gradientAnimation 15s infinite linear;
   overflow: hidden;
   color: var(--grey);
 }
@@ -76,12 +71,6 @@ p {
   overflow-y: scroll;
   padding: 5px 0 0 0;
 }
-
-/* thread styling ends here */
-
-/* chat styling stars here */
-
-/* chat styling ends here */
 
 /* modal styling starts here */
 .add-btn {

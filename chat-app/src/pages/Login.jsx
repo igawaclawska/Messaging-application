@@ -29,7 +29,7 @@ export const Login = () => {
   return (
     <div className="form-container">
       <div className="form-wrapper">
-        <span className="logo">ITU CHAT</span>
+        <span className="logo">MINI CHAT</span>
         <h2 className="title">Login</h2>
         <form action="">
           <div className="input-element">

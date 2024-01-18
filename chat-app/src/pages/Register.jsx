@@ -90,7 +90,7 @@ export const Register = () => {
   return (
     <div className="form-container">
       <div className="form-wrapper">
-        <span className="logo">ITU CHAT</span>
+        <span className="logo">MINI CHAT</span>
         <h2 className="title">Register</h2>
         <form className="form">
           <InputField
