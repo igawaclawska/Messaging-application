@@ -1,9 +1,10 @@
 import "./MessageModal.css";
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import InputField from "../components/InputField";
 import Button from "../components/Button";
 import { AuthContext } from "../context/AuthContext";
 import { db } from "../firebase";
+import { onSnapshot } from "firebase/firestore";
 import {
   collection,
   doc,
@@ -21,10 +22,30 @@ const MessageModal = ({ show }) => {
   const [foundUser, userFound] = useState(false);
   const [username, setUsername] = useState("");
   const [usersSelected, setUserSelected] = useState([]);
+  const [users, setUsers] = useState([]);
   const [user, setUser] = useState({});
   const [error, setError] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
   const { userLogged } = useContext(AuthContext);
+
+
+
+    useEffect(() => {
+    const getUsers = () => {
+      const querya = query(collection(db, "users"), where("uid", "!=", userLogged.uid)); 
+      const unsubscribe = onSnapshot(querya, (querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+        setUsers((prev) => [...prev, doc.data() ])
+        console.log(`retriewed users${users}`)
+      }
+      );
+    });
+    return () => {
+      unsubscribe()
+    }
+    };
+   getUsers();
+  }, []);
 
   const handleSearch = async () => {
     if (username !== "") {
@@ -138,14 +159,14 @@ const MessageModal = ({ show }) => {
           <h3> Receivers:</h3>
           <div className="add-receivers">
             {/* The class 'add-input' seems to not extst */}
-            <InputField
+            {/* <InputField
               className="add-input"
               placeholder="Receiver's name"
               onKeyDown={handleKey}
               onChange={(e) => setUsername(e.target.value)}
               value={username}
-            ></InputField>
-            {usersSelected != null ? (
+            ></InputField> */}
+            {/* {usersSelected != null ? (
               <span className="users-selected">
                 {usersSelected.map((u, idx) => (
                   <MailTag
@@ -154,13 +175,13 @@ const MessageModal = ({ show }) => {
                   ></MailTag>
                 ))}
               </span>
-            ) : null}
-            {foundUser ? (
+            ) : null} */}
+            {/* {!foundUser ? ( */}
               <ul className="search-list">
-                {searchResults.map((u, idx) => (
+                {users.map((u, idx) => (
                   <UserInfo
                     onClick={() => handleSelect(u, idx)}
-                    key={u.uid}
+                    key={idx}
                     displayName={u.displayName}
                     uid={u.uid}
                     value={username}
@@ -169,7 +190,7 @@ const MessageModal = ({ show }) => {
                   />
                 ))}
               </ul>
-            ) : null}
+            {/* ) : null} */}
           </div>
         </div>
         <div className="create-message-footer">
