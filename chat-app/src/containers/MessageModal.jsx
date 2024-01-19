@@ -1,6 +1,5 @@
 import "./MessageModal.css";
 import React, { useContext, useState, useEffect } from "react";
-import InputField from "../components/InputField";
 import Button from "../components/Button";
 import { AuthContext } from "../context/AuthContext";
 import { db } from "../firebase";
@@ -10,138 +9,86 @@ import {
   doc,
   query,
   where,
-  getDocs,
   getDoc,
   updateDoc,
   setDoc,
 } from "firebase/firestore";
 import UserInfo from "../components/UserInfo";
-import MailTag from "../components/MailTag";
 
 const MessageModal = ({ show }) => {
-  const [foundUser, userFound] = useState(false);
-  const [username, setUsername] = useState("");
-  const [usersSelected, setUserSelected] = useState([]);
+  const [usersSelected, setUserSelected] = useState();
   const [users, setUsers] = useState([]);
-  const [user, setUser] = useState({});
-  const [error, setError] = useState(false);
-  const [searchResults, setSearchResults] = useState([]);
+  // const [error, setError] = useState(false);
   const { userLogged } = useContext(AuthContext);
+  const [isActive, setIsActive] = useState();
 
-
-
-    useEffect(() => {
+  useEffect(() => {
     const getUsers = () => {
-      const querya = query(collection(db, "users"), where("uid", "!=", userLogged.uid)); 
+      const querya = query(
+        collection(db, "users"),
+        where("uid", "!=", userLogged.uid)
+      );
       const unsubscribe = onSnapshot(querya, (querySnapshot) => {
         querySnapshot.forEach((doc) => {
-        setUsers((prev) => [...prev, doc.data() ])
-        console.log(`retriewed users${users}`)
-      }
-      );
-    });
-    return () => {
-      unsubscribe()
-    }
-    };
-   getUsers();
-  }, []);
-
-  const handleSearch = async () => {
-    if (username !== "") {
-      let caseInsensitiveUsername = username.toLowerCase();
-      const filter = query(
-        collection(db, "users"),
-        where("displayNameLowerCase", "==", caseInsensitiveUsername)
-      );
-      try {
-        const filteredDocs = await getDocs(filter);
-        filteredDocs.forEach((doc) => {
-          searchResults.push(doc.data());
-          setSearchResults(searchResults);
+          console.log(`retrieved users${JSON.stringify(users)}`);
+          console.log(doc.id, "=>", doc.data());
+          setUsers((prev) => [...prev, doc.data()]);
         });
-      } catch (err) {
-        setError(true);
-        console.log(`error status: ${error}`);
-      } finally {
-        if (searchResults.length > 0) {
-          userFound(true);
-        } else {
-          userFound(false);
-        }
-      }
-      setUsername("");
-    }
-  };
+      });
+      return () => {
+        unsubscribe();
+      };
+    };
+    userLogged.uid && getUsers();
+  }, [setUsers]);
 
-  const handleKey = (e) => {
-    e.code === "Enter" && handleSearch();
-  };
+  useEffect(() => {
+    console.log("new state", usersSelected);
+  }, [usersSelected]);
 
   const createChat = async () => {
     const chatsId =
-      userLogged.uid > usersSelected[0].uid
-        ? userLogged.uid + usersSelected[0].uid
-        : usersSelected[0].uid + userLogged.uid;
+      userLogged.uid > usersSelected.uid
+        ? userLogged.uid + usersSelected.uid
+        : usersSelected.uid + userLogged.uid;
     try {
       const res = await getDoc(doc(db, "chats", chatsId));
       if (!res.exists()) {
         await setDoc(doc(db, "chats", chatsId), { messages: [] });
         await updateDoc(doc(db, "userChats", userLogged.uid), {
           [chatsId + ".messageReceiver"]: {
-            uid: usersSelected[0].uid,
-            displayName: usersSelected[0].displayName,
-            email: usersSelected[0].email,
+            uid: usersSelected.uid,
+            displayName: usersSelected.displayName,
+            email: usersSelected.email,
           },
           [chatsId + ".sender"]: {
             name: userLogged.displayName,
           },
         });
-        await updateDoc(doc(db, "userChats", usersSelected[0].uid), {
+        await updateDoc(doc(db, "userChats", usersSelected.uid), {
           [chatsId + ".messageReceiver"]: {
             uid: userLogged.uid,
             displayName: userLogged.displayName,
             email: userLogged.email,
           },
           [chatsId + ".sender"]: {
-            name: usersSelected[0].displayName,
+            name: usersSelected.displayName,
           },
         });
       }
     } catch (err) {}
     setUserSelected(null);
-    userFound(false);
   };
 
   const handleChatCreation = async () => {
     await createChat();
     show(false);
   };
-  const handleSelect = (u, idx) => {
-    setUser(u);
-    if (!usersSelected.includes(u)) {
-      searchResults.splice(idx, 1); // remove object from the search Array
-      usersSelected.push(u); //adding the specific user from the searchResults to the usersSelected
-    }
-    setUserSelected(usersSelected);
+  const handleSelect = (user) => {
+    setUserSelected(user);
+    setIsActive(user);
     console.log(
-      "search array after selection:" +
-        JSON.stringify(searchResults) +
-        "length: " +
-        searchResults.length
-    );
-  };
-
-  const handleSelect2 = (u, idx) => {
-    setUser({});
-    if (!searchResults.includes(u)) {
-      usersSelected.splice(idx, 1); // remove object from the selectedUsers Array
-    }
-    console.log(
-      "usersSelected array after selection:" +
-        JSON.stringify(usersSelected) +
-        "length: " +
-        usersSelected.length
+      "search array after selection:" + JSON.stringify(usersSelected)
     );
   };
 
@@ -152,56 +99,38 @@ const MessageModal = ({ show }) => {
         className="create-message-wrapper"
       >
         <div className="create-message-header">
-          <h2>Create new chat</h2>
+          <h3>Create a new chat</h3>
         </div>
         {/* The class 'create-message-body' seems to not extst */}
         <div className="create-message-body">
-          <h3> Receivers:</h3>
+          <p> Select chat recipent from the list below.</p>
           <div className="add-receivers">
-            {/* The class 'add-input' seems to not extst */}
-            {/* <InputField
-              className="add-input"
-              placeholder="Receiver's name"
-              onKeyDown={handleKey}
-              onChange={(e) => setUsername(e.target.value)}
-              value={username}
-            ></InputField> */}
-            {/* {usersSelected != null ? (
-              <span className="users-selected">
-                {usersSelected.map((u, idx) => (
-                  <MailTag
-                    text={u.email}
-                    onClick={() => handleSelect2(u, idx)}
-                  ></MailTag>
-                ))}
-              </span>
-            ) : null} */}
-            {/* {!foundUser ? ( */}
-              <ul className="search-list">
-                {users.map((u, idx) => (
-                  <UserInfo
-                    onClick={() => handleSelect(u, idx)}
-                    key={idx}
-                    displayName={u.displayName}
-                    uid={u.uid}
-                    value={username}
-                    email={u.email}
-                    idx={idx}
-                  />
-                ))}
-              </ul>
-            {/* ) : null} */}
+            <ul className="search-list">
+              {/*TODO: Turn the list below into "radios" to improve accessibility */}
+              {users.map((user, idx) => (
+                <UserInfo
+                  className={`user-info ${isActive === user && "active"}`}
+                  onClick={() => handleSelect(user)}
+                  key={idx}
+                  displayName={user.displayName}
+                  uid={user.uid}
+                  value={user.username}
+                  email={user.email}
+                  idx={idx}
+                />
+              ))}
+            </ul>
           </div>
         </div>
         <div className="create-message-footer">
           <Button
-            className="fluid-btn tertiary"
+            className="fluid-btn secondary no-margin"
             onClick={() => show(false)}
             text="Cancel"
             icon=""
           ></Button>
           <Button
-            className="fluid-btn primary"
+            className="fluid-btn primary no-margin"
             onClick={() => handleChatCreation()}
             text="Create chat"
             icon=""
