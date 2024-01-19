@@ -6,7 +6,7 @@ import { ChatsContext } from "../context/ChatsContext";
 export const MessagesContext = createContext();
 
 export const MessagesContextProvider = ({ children }) => {
-  const [messages, setMessages] = useState({});
+  const [messages, setMessages] = useState(null);
   const { data } = useContext(ChatsContext);
 
   useEffect(() => {

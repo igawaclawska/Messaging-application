@@ -13,10 +13,6 @@
 }
 
 .user-info.active {
-  box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  /* background-color: var(--grey3); */
   outline: solid 1px var(--blue1);
 }
 

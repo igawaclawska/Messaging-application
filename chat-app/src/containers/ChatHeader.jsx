@@ -1,4 +1,4 @@
-import './ChatHeader.css'
+import "./ChatHeader.css";
 import React, { useContext } from "react";
 import Button from "../components/Button";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
@@ -7,6 +7,7 @@ import "../styles.css";
 
 const ChatHeader = ({ onClick }) => {
   const { data } = useContext(ChatsContext);
+
   return (
     <header className="chat-header">
       <div className="chat-header-wrapper">
@@ -17,9 +18,7 @@ const ChatHeader = ({ onClick }) => {
             icon={<ArrowBackIosIcon />}
           ></Button>{" "}
         </div>
-        <span className="chat-header-title">
-        {data.user1?.displayName}
-        </span>
+        <span className="chat-header-title">{data.user1?.displayName}</span>
       </div>
     </header>
   );
