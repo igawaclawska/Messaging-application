@@ -1,23 +1,10 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import ChatBubble from "../components/ChatBubble";
 import "./BubblesScrollable.css";
-import { db } from "../firebase";
-import { doc, onSnapshot } from "firebase/firestore";
-import { ChatsContext } from "../context/ChatsContext";
+import { MessagesContext } from "../context/MessagesContext";
 
 const BubblesScrollable = () => {
-  const [messages, setMessages] = useState([]);
-  const { data } = useContext(ChatsContext);
-
-  useEffect(() => {
-    const unSub = onSnapshot(doc(db, "chats", data.chatsId), (doc) => {
-      doc.exists() && setMessages(doc.data().messages);
-    });
-
-    return () => {
-      unSub();
-    };
-  }, [data.chatsId]);
+  const { messages } = useContext(MessagesContext);
 
   console.log(messages);
   return (
