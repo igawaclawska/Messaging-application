@@ -8,6 +8,10 @@
   font-weight: 600;
 }
 
+.no-margin {
+  margin: 0;
+}
+
 .fixed-btn {
   display: flex;
   padding: 8px 20px;
