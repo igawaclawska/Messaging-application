@@ -38,24 +38,19 @@
 }
 
 .primary {
-  background-color: var(--blue1);
+  background: var(--blue1);
   color: var(--white);
   border: none;
 }
 
 .primary:hover {
-  background: linear-gradient( 
-    45deg,
-    #d65bad,
-    var(--blue2),
-    #39ade5
-  );
+  background: linear-gradient(45deg, #d65bad, var(--blue2), #39ade5);
   background-size: 400% 400%;
   /* background-color: var(--blue2); */
 }
 
 .primary:active {
-  background-color: var(--blue3);
+  background: var(--blue3);
 }
 
 .secondary {

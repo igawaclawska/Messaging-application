@@ -1,7 +1,7 @@
 .messageInput {
   margin: 1%;
   padding: 10px;
-  border: 2px solid var(--lightgrey);
+  border: 2px solid var(--grey);
   border-radius: 16px;
   width: 90%;
   color: var(--grey);
