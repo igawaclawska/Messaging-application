@@ -7,59 +7,40 @@
   height: 100%;
   top: 0;
   z-index: 10;
-  background-color: var(--grayOpaque);
+  background: var(--grayOpaque);
+  backdrop-filter: blur(4px);
 }
 
 .create-message-wrapper {
-  padding: 24px;
+  padding: 32px;
   border-radius: 16px;
   background-color: #fafafa;
   width: 400px;
   max-height: 500px;
   margin: 12px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px;
 }
 
 .create-message-header {
-  padding-bottom: 32px;
-}
-
-.add-receivers {
-  display: block;
-  flex-direction: column;
-  align-items: center;
-  margin: 1%;
-  padding: 20px 0 0 0;
-}
-
-.users-selected {
-  width: fit-content;
-  margin-top: 2%;
-  padding: 1%;
-  height: 10%;
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  overflow-x: scroll;
+  padding-bottom: 20px;
 }
 
 .search-list {
-  margin-top: 2%;
-  margin-bottom: 4%;
+  margin: 16px 0;
+  margin-bottom: 4%; 
   display: flex;
-  flex-direction: row;
-  max-height: 70px;
+  flex-direction: column;
+  height:250px;
+  width: 100%;
   overflow-y: scroll;
 }
 
 .create-message-footer {
+  margin: 16px 0 0 0;
   display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
   padding-top: 8px;
-  gap: 2px;
-}
-
-@media (max-width: 576px) {
-  .create-message-footer {
-    flex-direction: column-reverse;
-    gap: 0px;
-  }
+  gap: 16px;
 }

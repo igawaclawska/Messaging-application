@@ -5,7 +5,7 @@ import Button from "../components/Button";
 import MessageModal from "./MessageModal";
 import MapsUgcIcon from "@mui/icons-material/MapsUgc";
 
-const ThreadHeader = ({ onLoad }) => {
+const ThreadHeader = () => {
   const [show, setShow] = useState(false);
 
   return (
@@ -16,10 +16,10 @@ const ThreadHeader = ({ onLoad }) => {
           className="fixed-btn primary small with-icon"
           text="New Chat"
           icon={<MapsUgcIcon />}
-          onClick={() => setShow(true)}
+          onClick={()=> setShow(true)}
         ></Button>
       </div>
-      {show && <MessageModal show={setShow} />}
+      {show && <MessageModal show={setShow} setShow={setShow} />}
     </header>
   );
 };
