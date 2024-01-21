@@ -1,9 +1,12 @@
 .messageInput {
-  margin: 1%;
-  padding: 10px;
-  border: 2px solid var(--grey);
+  margin: 16px 8px;
+  border: none;
+  /* padding: 10px; */
+  /* border: 1px solid var(--grey); */
   border-radius: 16px;
   width: 90%;
+  background-color: var(--grey4);
+  /* background-color: var(--lightgrey); */
   color: var(--grey);
   font-weight: 600;
 }
