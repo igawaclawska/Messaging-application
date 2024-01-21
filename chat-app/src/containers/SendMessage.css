@@ -1,5 +1,6 @@
 .send-message-wrapper {
   background-color: var(--white);
+  position: sticky;
   display: flex;
   flex-direction: row;
   padding: 0px 8px 16px 8px;
