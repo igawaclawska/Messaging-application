@@ -1,6 +1,7 @@
 import "./MessageModal.css";
 import React, { useContext, useState, useEffect } from "react";
 import Button from "../components/Button";
+import InputField from "../components/InputField";
 import { AuthContext } from "../context/AuthContext";
 import { db } from "../firebase";
 import { onSnapshot } from "firebase/firestore";
@@ -13,22 +14,24 @@ import {
   updateDoc,
   setDoc,
 } from "firebase/firestore";
+import "firebase/firestore";
 import UserInfo from "../components/UserInfo";
 
 const MessageModal = ({ show }) => {
   const [usersSelected, setUserSelected] = useState();
   const [users, setUsers] = useState([]);
+  const [filter, setFilter] = useState("");
   // const [error, setError] = useState(false);
   const { userLogged } = useContext(AuthContext);
   const [isActive, setIsActive] = useState();
 
   useEffect(() => {
     const getUsers = () => {
-      const querya = query(
+      const q = query(
         collection(db, "users"),
         where("uid", "!=", userLogged.uid)
       );
-      const unsubscribe = onSnapshot(querya, (querySnapshot) => {
+      const unsubscribe = onSnapshot(q, (querySnapshot) => {
         querySnapshot.forEach((doc) => {
           console.log(`retrieved users${JSON.stringify(users)}`);
           console.log(doc.id, "=>", doc.data());
@@ -40,11 +43,25 @@ const MessageModal = ({ show }) => {
       };
     };
     userLogged.uid && getUsers();
-  }, [setUsers]);
+  }, []);
 
   useEffect(() => {
     console.log("new state", usersSelected);
   }, [usersSelected]);
+
+  const handleSetFilter = (e) => {
+    let filter = e.target.value;
+    setFilter(filter);
+  };
+
+  const usersFiltered = users
+  //firebase retrieves duplicated data, .slice is only a temporary solution
+    .slice(Math.floor(users.length / 2), users.length)
+    .filter(
+      (user) =>
+        user.displayName.toLowerCase().includes(filter.toLowerCase()) ||
+        user.email.toLowerCase().includes(filter.toLowerCase())
+    );
 
   const createChat = async () => {
     const chatsId =
@@ -98,16 +115,24 @@ const MessageModal = ({ show }) => {
         onClick={(close) => close.stopPropagation()}
         className="create-message-wrapper"
       >
-        <div className="create-message-header">
+        <div className="create-chat-header">
           <h3>Create a new chat</h3>
         </div>
+        <InputField
+          onChange={handleSetFilter}
+          type={"text"}
+          placeholder={"Search"}
+        />
         {/* The class 'create-message-body' seems to not extst */}
         <div className="create-message-body">
-          <p> Select chat recipent from the list below.</p>
+          <p className="create-chat-instruction">
+            {" "}
+            Select chat recipent from the list below.
+          </p>
           <div className="add-receivers">
             <ul className="search-list">
               {/*TODO: Turn the list below into "radios" to improve accessibility */}
-              {users.map((user, idx) => (
+              {usersFiltered.map((user, idx) => (
                 <UserInfo
                   className={`user-info ${isActive === user && "active"}`}
                   onClick={() => handleSelect(user)}
