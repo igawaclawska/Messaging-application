@@ -37,9 +37,9 @@ const ThreadList = ({ visibility }) => {
   const renderListOfChats = () => {
     return (
       <div className="thread-list">
-        {Object.entries(chats)
+        {Object?.entries(chats)
           ?.sort((a, b) => b[1].date?.date - a[1].date?.date)
-          .map((chat) => (
+          ?.map((chat) => (
             <SingleThread
               key={chat[0]}
               className={`single-thread ${isActive === chat[1] && "active"}`}
@@ -71,7 +71,7 @@ const ThreadList = ({ visibility }) => {
     );
   };
 
-  return Object?.entries(chats).length !== 0
+  return Object?.entries(chats)?.length !== 0
     ? renderListOfChats()
     : renderEmptyChatsMessage();
 };
