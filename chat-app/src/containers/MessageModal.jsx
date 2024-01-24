@@ -132,7 +132,8 @@ const MessageModal = ({ show }) => {
           <div className="add-receivers">
             <ul className="search-list">
               {/*TODO: Turn the list below into "radios" to improve accessibility */}
-              {usersFiltered.map((user, idx) => (
+              
+              {usersFiltered.length !== 0 ? usersFiltered.map((user, idx) => (
                 <UserInfo
                   className={`user-info ${isActive === user && "active"}`}
                   onClick={() => handleSelect(user)}
@@ -143,7 +144,7 @@ const MessageModal = ({ show }) => {
                   email={user.email}
                   idx={idx}
                 />
-              ))}
+              )) : <div className="search-list-no-results">No users found</div>}
             </ul>
           </div>
         </div>
