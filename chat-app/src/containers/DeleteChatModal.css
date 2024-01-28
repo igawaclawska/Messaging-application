@@ -9,30 +9,29 @@
   left: 0;
   z-index: 20;
   background: var(--grayOpaque);
-  /* backdrop-filter: blur(4px); */
+  backdrop-filter: blur(4px);
 }
 
-.create-message-wrapper {
+.delete-chat-wrapper {
   padding: 32px;
   border-radius: 16px;
   background-color: #fafafa;
   width: 400px;
   max-height: 500px;
-  /* margin: 12px; */
   box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px;
 }
 
-.create-chat-header {
+.detete-chat-header {
   padding-bottom: 16px;
 }
 
-.instruction {
-  margin: 0px 0 4px 0;
+.delete-chat-instruction {
+  margin: 16px 0 4px 0;
   font-weight: 500;
   line-height: 150%;
 }
 
-.footer {
+.delete-chat-footer {
   margin: 16px 0 0 0;
   display: flex;
   flex-direction: row;

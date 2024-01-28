@@ -2,33 +2,19 @@ import "./DeleteChatModal.css";
 import React, { useContext } from "react";
 import Button from "../components/Button";
 import { ChatsContext } from "../context/ChatsContext";
-import { AuthContext } from "../context/AuthContext";
-import { MessagesContext } from "../context/MessagesContext";
-import { deleteDoc, deleteField, doc, updateDoc } from "firebase/firestore";
-import { db } from "../firebase";
 import "firebase/firestore";
+import { useDeleteChat } from "../hooks/useDeleteChat";
 
 const DeleteChatModal = ({ setIsOpen }) => {
-  const { data, dispatch } = useContext(ChatsContext);
-  const { userLogged } = useContext(AuthContext);
-  const { setMessages } = useContext(MessagesContext);
+  const { data } = useContext(ChatsContext);
+  const { handleDeleteChat } = useDeleteChat();
 
-  const handleDeleteChat = async () => {
+  const handleChatDeletion = async () => {
     try {
-      await updateDoc(doc(db, "userChats", userLogged.uid), {
-        [data.chatsId]: deleteField(),
-      });
-
-      await updateDoc(doc(db, "userChats", data.user1.uid), {
-        [data.chatsId]: deleteField(),
-      });
-
-      await deleteDoc(doc(db, "chats", data.chatsId));
-    } catch (e) {
-      console.log(e);
+      await handleDeleteChat();
+    } catch (err) {
+      console.log(err);
     }
-    dispatch({ type: "LOGOUT" });
-    setMessages(null);
     setIsOpen(false);
   };
 
@@ -36,18 +22,18 @@ const DeleteChatModal = ({ setIsOpen }) => {
     <div onClick={() => setIsOpen(false)} className="modal-wrapper">
       <div
         onClick={(close) => close.stopPropagation()}
-        className="create-message-wrapper"
+        className="delete-chat-wrapper"
       >
-        <div className="create-chat-header">
+        <div className="delete-chat-header">
           <h3>{`Delete chat with ${data.user1?.displayName}?`} </h3>
         </div>
         {/* The class 'create-message-body' seems to not extst */}
         <div className="create-message-body">
-          <p className="instruction">
+          <p className="delete-chat-instruction">
             {`Your chat with ${data.user1?.displayName} will be deleted along with all of its messages. This action can't be undone.`}
           </p>
         </div>
-        <div className="footer">
+        <div className="delete-chat-footer">
           <Button
             className="fluid-btn secondary no-margin"
             onClick={() => setIsOpen(false)}
@@ -56,7 +42,7 @@ const DeleteChatModal = ({ setIsOpen }) => {
           ></Button>
           <Button
             className="fluid-btn primary no-margin"
-            onClick={handleDeleteChat}
+            onClick={handleChatDeletion}
             text="Delete chat"
             icon=""
           ></Button>
