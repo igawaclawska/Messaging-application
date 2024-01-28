@@ -1,4 +1,4 @@
-.modal-div {
+.modal-wrapper {
   position: absolute;
   display: flex;
   justify-content: center;
@@ -6,51 +6,32 @@
   width: 100%;
   height: 100%;
   top: 0;
-  z-index: 10;
+  left: 0;
+  z-index: 20;
   background: var(--grayOpaque);
   backdrop-filter: blur(4px);
 }
 
-.create-message-wrapper {
+.delete-chat-wrapper {
   padding: 32px;
   border-radius: 16px;
   background-color: #fafafa;
   width: 400px;
   max-height: 500px;
-  margin: 12px;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px;
 }
 
-.create-chat-header {
+.detete-chat-header {
   padding-bottom: 16px;
 }
 
-.create-chat-instruction {
-  margin: 24px 0 4px 0;
+.delete-chat-instruction {
+  margin: 16px 0 4px 0;
   font-weight: 500;
+  line-height: 150%;
 }
 
-.search-list {
-  margin: 8px 0;
-  margin-bottom: 4%; 
-  display: flex;
-  flex-direction: column;
-  height:250px;
-  width: 100%;
-  overflow-y: scroll;
-}
-
-.search-list-no-results {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 4px;
-  background-color: var(--grey3);
-  color: var(--grey);
-  height: 100%;
-}
-
-.create-message-footer {
+.delete-chat-footer {
   margin: 16px 0 0 0;
   display: flex;
   flex-direction: row;

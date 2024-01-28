@@ -2,6 +2,7 @@
   padding: 12px;
   background-color: var(--white);
   display: flex;
+  justify-content: flex-start;
   align-items: center;
   flex-direction: row;
 }
@@ -13,7 +14,16 @@
 .chat-header-title-users {
   font-weight: 400;
   font-size: 14px;
-  color: var(--grey);
+  color: var(--grey3);
+}
+
+.delete-icon {
+  margin-left: auto;
+  cursor: pointer;
+}
+
+.delete-icon:hover {
+  color: var(--grayOpaque);
 }
 
 .back-btn {
