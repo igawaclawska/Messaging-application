@@ -31,6 +31,7 @@ const NavBar = () => {
       <div className="navbar-wrapper">
         <span className="logo logo-small">MINI CHAT</span>
         <Button
+          imageSource={true}
           text={userLogged.displayName}
           icon={<LogoutSharpIcon />}
           className="fixed-btn secondary-white small with-icon"

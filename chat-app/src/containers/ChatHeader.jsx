@@ -16,22 +16,30 @@ const ChatHeader = ({ onClick }) => {
   };
 
   return (
-      <header className="chat-header">
-        <div className="chat-header-wrapper">
-          <div onClick={onClick} className="back-btn">
-            <Button
-              className="fixed-btn tertiary with-icon"
-              text=""
-              icon={<ArrowBackIosIcon />}
-            ></Button>{" "}
-          </div>
-          <span className="chat-header-title">{data.user1?.displayName}</span>
-          {data.user1?.displayName && (
-            <DeleteIcon className="delete-icon" onClick={handleOpenModal} />
-          )}
+    <header className="chat-header">
+      <div className="chat-header-wrapper">
+        <div onClick={onClick} className="back-btn">
+          <Button
+            className="fixed-btn tertiary with-icon"
+            text=""
+            icon={<ArrowBackIosIcon />}
+          ></Button>{" "}
         </div>
-        {isOpen && <DeleteChatModal setIsOpen={setIsOpen}/>}
-      </header>
+
+        {data.user1?.displayName && (
+          <>
+            <img
+              className="chat-user-img"
+              src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=3088&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              alt=""
+            />
+            <span className="chat-header-title">{data.user1?.displayName}</span>
+            <DeleteIcon className="delete-icon" onClick={handleOpenModal} />
+          </>
+        )}
+      </div>
+      {isOpen && <DeleteChatModal setIsOpen={setIsOpen} />}
+    </header>
   );
 };
 

@@ -42,7 +42,7 @@ const ThreadList = ({ visibility }) => {
           ?.map((chat) => (
             <SingleThread
               key={chat[0]}
-              className={`single-thread ${isActive === chat[1] && "active"}`}
+              className={`single-thread-list-element ${isActive === chat[1] && "active"}`}
               receiver1={chat[1].messageReceiver.displayName}
               receiver2={""}
               message={chat[1]?.lastMessage?.message}
