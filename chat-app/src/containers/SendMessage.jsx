@@ -20,12 +20,12 @@ const SendMessage = () => {
   const { data } = useContext(ChatsContext);
 
   const handleKey = (e) => {
-    if (e.keyCode == 13 && !e.shiftKey) {
+    if (text.trim() !== "" && e.keyCode == 13 && !e.shiftKey) {
       handleSend();
     }
   };
   const handleSend = async () => {
-    if (text !== "") {
+    if (text.trim() !== "") {
       try {
         await updateDoc(doc(db, "chats", data.chatsId), {
           messages: arrayUnion({

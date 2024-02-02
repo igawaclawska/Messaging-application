@@ -2,7 +2,7 @@ import "./UserInfo.css";
 
 const UserInfo = ({ onClick, value, displayName, uid, email, idx, className }) => {
   return (
-    <div
+    <li
       className={className}
       value={value}
       onClick={onClick}
@@ -13,7 +13,7 @@ const UserInfo = ({ onClick, value, displayName, uid, email, idx, className }) =
         <b>{displayName}</b>
       </p>
       <p className="user-info-email">{email}</p>
-    </div>
+    </li>
   );
 };
 

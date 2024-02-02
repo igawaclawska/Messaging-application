@@ -7,14 +7,14 @@ const SingleThread = ({
   className,
 }) => {
   return (
-    <div className={className} onClick={onClick}>
+    <li className={className} onClick={onClick}>
       <p className="single-thread-header">
         <b>
           {receiver1 }
         </b>
       </p>
       <p className="single-thread-message">{message}</p>
-    </div>
+    </li>
   );
 };
 
