@@ -8,6 +8,7 @@ import { ChatsContext } from "../context/ChatsContext";
 import { auth } from "../firebase";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
+import UpdateProfilePictureModal from "./UpdateProfilePictureModal";
 
 const NavBar = () => {
   const { userLogged } = useContext(AuthContext);
@@ -16,6 +17,7 @@ const NavBar = () => {
   const menuRef = useRef(null);
 
   const [isOpen, setIsOpen] = useState(false);
+  const [isUpatePictureModalOpen, setIsUpatePictureModalOpen] = useState(false);
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -66,7 +68,12 @@ const NavBar = () => {
           {isOpen && (
             <ul className="dropdown-menu">
               <li className="menu-item">Remove profile picture</li>
-              <li className="menu-item">
+              <li
+                onClick={() => {
+                  setIsUpatePictureModalOpen(true);
+                }}
+                className="menu-item"
+              >
                 Update profile picture
                 {/* <form>
                   <input type="file" id="myFile" name="filename" />
@@ -87,6 +94,9 @@ const NavBar = () => {
             </ul>
           )}
         </div>
+        {isUpatePictureModalOpen && (
+          <UpdateProfilePictureModal setIsOpen={setIsUpatePictureModalOpen} />
+        )}
       </div>
     </nav>
   );
