@@ -2,6 +2,7 @@ import "./MessageModal.css";
 import React, { useContext, useState, useEffect } from "react";
 import Button from "../components/Button";
 import InputField from "../components/InputField";
+import Modal from "../components/shared/Modal";
 import { AuthContext } from "../context/AuthContext";
 import { db } from "../firebase";
 import { onSnapshot } from "firebase/firestore";
@@ -55,7 +56,7 @@ const MessageModal = ({ show }) => {
   };
 
   const usersFiltered = users
-  //firebase retrieves duplicated data, .slice is only a temporary solution
+    //firebase retrieves duplicated data, .slice is only a temporary solution
     .slice(Math.floor(users.length / 2), users.length)
     .filter(
       (user) =>
@@ -110,30 +111,27 @@ const MessageModal = ({ show }) => {
   };
 
   return (
-    <div onClick={() => show(false)} className="modal-div">
-      <div
-        onClick={(close) => close.stopPropagation()}
-        className="create-message-wrapper"
-      >
-        <div className="create-chat-header">
-          <h3>Create a new chat</h3>
-        </div>
-        <InputField
-          onChange={handleSetFilter}
-          type={"text"}
-          placeholder={"Search"}
-        />
-        {/* The class 'create-message-body' seems to not extst */}
-        <div className="create-message-body">
-          <p className="create-chat-instruction">
-            {" "}
-            Select chat recipent from the list below.
-          </p>
-          <div className="add-receivers">
-            <ul className="search-list">
-              {/*TODO: Turn the list below into "radios" to improve accessibility */}
-              
-              {usersFiltered.length !== 0 ? usersFiltered.map((user, idx) => (
+    <Modal setIsOpen={show}>
+      <div className="create-chat-header">
+        <h3>Create a new chat</h3>
+      </div>
+      <InputField
+        onChange={handleSetFilter}
+        type={"text"}
+        placeholder={"Search"}
+      />
+      {/* The class 'create-message-body' seems to not extst */}
+      <div className="create-message-body">
+        <p className="create-chat-instruction">
+          {" "}
+          Select chat recipent from the list below.
+        </p>
+        <div className="add-receivers">
+          <ul className="search-list">
+            {/*TODO: Turn the list below into "radios" to improve accessibility */}
+
+            {usersFiltered.length !== 0 ? (
+              usersFiltered.map((user, idx) => (
                 <UserInfo
                   className={`user-info ${isActive === user && "active"}`}
                   onClick={() => handleSelect(user)}
@@ -144,26 +142,28 @@ const MessageModal = ({ show }) => {
                   email={user.email}
                   idx={idx}
                 />
-              )) : <div className="search-list-no-results">No users found</div>}
-            </ul>
-          </div>
-        </div>
-        <div className="create-message-footer">
-          <Button
-            className="fluid-btn secondary no-margin"
-            onClick={() => show(false)}
-            text="Cancel"
-            icon=""
-          ></Button>
-          <Button
-            className="fluid-btn primary no-margin"
-            onClick={() => handleChatCreation()}
-            text="Create chat"
-            icon=""
-          ></Button>
+              ))
+            ) : (
+              <div className="search-list-no-results">No users found</div>
+            )}
+          </ul>
         </div>
       </div>
-    </div>
+      <div className="create-message-footer">
+        <Button
+          className="fluid-btn secondary no-margin"
+          onClick={() => show(false)}
+          text="Cancel"
+          icon=""
+        ></Button>
+        <Button
+          className="fluid-btn primary no-margin"
+          onClick={() => handleChatCreation()}
+          text="Create chat"
+          icon=""
+        ></Button>
+      </div>
+    </Modal>
   );
 };
 
