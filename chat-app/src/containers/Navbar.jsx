@@ -9,6 +9,7 @@ import { auth } from "../firebase";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import UpdateProfilePictureModal from "./UpdateProfilePictureModal";
+import RemoveProfilePictureModal from "./RemoveProfilePictureModal";
 
 const NavBar = () => {
   const { userLogged } = useContext(AuthContext);
@@ -18,6 +19,8 @@ const NavBar = () => {
 
   const [isOpen, setIsOpen] = useState(false);
   const [isUpatePictureModalOpen, setIsUpatePictureModalOpen] = useState(false);
+  const [isRemovePictureModalOpen, setIsRemovePictureModalOpen] =
+    useState(false);
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -71,7 +74,12 @@ const NavBar = () => {
           </button>
           {isOpen && (
             <ul className="dropdown-menu">
-              <li onClick={logImg} className="menu-item">
+              <li
+                onClick={() => {
+                  setIsRemovePictureModalOpen(true);
+                }}
+                className="menu-item"
+              >
                 Remove profile picture
               </li>
               <li
@@ -98,6 +106,9 @@ const NavBar = () => {
         </div>
         {isUpatePictureModalOpen && (
           <UpdateProfilePictureModal setIsOpen={setIsUpatePictureModalOpen} />
+        )}
+        {isRemovePictureModalOpen && (
+          <RemoveProfilePictureModal setIsOpen={setIsRemovePictureModalOpen} />
         )}
       </div>
     </nav>

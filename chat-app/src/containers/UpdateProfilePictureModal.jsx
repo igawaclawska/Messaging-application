@@ -63,7 +63,6 @@ const UpdateProfilePictureModal = ({ setIsOpen }) => {
       <div className="delete-chat-header">
         <h3>{`Update your profile picture`} </h3>
       </div>
-      <form>
         <input
           onChange={handleChange}
           type="file"
@@ -84,7 +83,6 @@ const UpdateProfilePictureModal = ({ setIsOpen }) => {
             onClick={addImage}
           ></Button>
         </div>
-      </form>
     </Modal>
   );
 };
