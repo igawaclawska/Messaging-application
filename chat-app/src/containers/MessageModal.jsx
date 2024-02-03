@@ -57,7 +57,7 @@ const MessageModal = ({ show }) => {
 
   const usersFiltered = users
     //firebase retrieves duplicated data, .slice is only a temporary solution
-    .slice(Math.floor(users.length / 2), users.length)
+    .slice(Math.ceil(users.length / 2), users.length)
     .filter(
       (user) =>
         user.displayName.toLowerCase().includes(filter.toLowerCase()) ||
@@ -138,6 +138,7 @@ const MessageModal = ({ show }) => {
                   key={idx}
                   displayName={user.displayName}
                   uid={user.uid}
+                  photo={user.photoURL}
                   value={user.username}
                   email={user.email}
                   idx={idx}

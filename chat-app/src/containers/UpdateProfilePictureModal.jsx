@@ -1,38 +1,61 @@
 import "./DeleteChatModal.css";
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import Button from "../components/Button";
 import Modal from "../components/shared/Modal";
-import { ChatsContext } from "../context/ChatsContext";
 import { AuthContext } from "../context/AuthContext";
 import "firebase/firestore";
-import { db } from "../firebase";
-import {
-  doc,
-  updateDoc,
-  deleteField,
-} from "firebase/firestore";
+import { db, storage } from "../firebase";
+import { doc, updateDoc } from "firebase/firestore";
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { updateProfile } from "firebase/auth";
 
 const UpdateProfilePictureModal = ({ setIsOpen }) => {
-  const { data } = useContext(ChatsContext);
   const { userLogged } = useContext(AuthContext);
+  const [file, setFile] = useState(null);
 
+  useEffect(() => {
+    console.log(file);
+  }, [file]);
+
+  const handleChange = (e) => {
+    const selectedFile = e.target.files[0];
+    setFile(selectedFile);
+  };
 
   const addImage = async () => {
     try {
-        await updateDoc(doc(db, "users", userLogged.uid), {
-            profileImg: "none",
+      const date = new Date().getTime();
+      const storageRef = ref(storage, `${userLogged.displayName + date}`);
+
+      await uploadBytesResumable(storageRef, file).then(() => {
+        getDownloadURL(storageRef).then(async (downloadUrl) => {
+          try {
+            await updateProfile(userLogged, {
+              photoURL: downloadUrl,
+            });
+            await updateDoc(doc(db, "users", userLogged.uid), {
+              photoURL: downloadUrl,
+            });
+          } catch (err) {
+            console.log(err);
+          }
         });
-      }
-     catch (err) {}
+      });
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const removeImage = async () => {
     try {
-        await updateDoc(doc(db, "users", userLogged.uid), {
-            profileImg: deleteField(),
-        });
-      }
-     catch (err) {}
+      await updateProfile(userLogged, {
+        photoURL: "",
+      });
+
+      await updateDoc(doc(db, "users", userLogged.uid), {
+        photoURL: "",
+      });
+    } catch (err) {}
   };
 
   return (
@@ -41,7 +64,12 @@ const UpdateProfilePictureModal = ({ setIsOpen }) => {
         <h3>{`Update your profile picture`} </h3>
       </div>
       <form>
-        <input type="file" id="myFile" name="filename" />
+        <input
+          onChange={handleChange}
+          type="file"
+          id="myFile"
+          name="filename"
+        />
         <div className="delete-chat-footer">
           <Button
             className="fluid-btn secondary no-margin"
@@ -53,7 +81,7 @@ const UpdateProfilePictureModal = ({ setIsOpen }) => {
             className="fluid-btn primary no-margin"
             text="Update image"
             icon=""
-            onClick={removeImage}
+            onClick={addImage}
           ></Button>
         </div>
       </form>

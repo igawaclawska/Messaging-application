@@ -1,16 +1,44 @@
 import "./SingleThread.css";
+import { useState, useEffect, useContext } from "react";
+import { db } from "../firebase";
+import { onSnapshot } from "firebase/firestore";
+import { collection, query, where } from "firebase/firestore";
+import { AuthContext } from "../context/AuthContext";
 
-const SingleThread = ({ onClick, receiver1, message, className }) => {
+const SingleThread = ({ onClick, message, className, receiver }) => {
+  let [user, setUser] = useState({});
+  const { userLogged } = useContext(AuthContext);
+
+  useEffect(() => {
+    const getUsers = async () => {
+      const q = query(
+        collection(db, "users"),
+        where("uid", "==", receiver.uid)
+      );
+      const unsubscribe = onSnapshot(q, (querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          console.log(doc.id, "=>", doc.data().photoURL);
+          setUser(doc.data());
+          console.log(`retrieved users ${user}`);
+        });
+      });
+      return () => {
+        unsubscribe();
+      };
+    };
+    userLogged.uid && getUsers();
+  }, []);
+
   return (
     <li className={className} onClick={onClick}>
       <img
         className="single-thread-img"
-        src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=3088&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+        src={user.photoURL || "blank-profile-picture.png"}
         alt=""
       />
       <div className="thread-text-content">
         <p className="single-thread-header">
-          <b>{receiver1}</b>
+          <b>{user.displayName}</b>
         </p>
         <p className="single-thread-message">{message}</p>
       </div>
