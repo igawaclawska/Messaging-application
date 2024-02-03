@@ -32,7 +32,7 @@ const RemoveProfilePictureModal = ({ setIsOpen }) => {
         <h3 className="heading">{`Delete your profile picture?`} </h3>
       </div>
       <div className="delete-img-content">
-        <img className="modal-image" src={userLogged.photoURL} alt="" />
+        <img className="modal-image" src={userLogged.photoURL || "blank-profile-picture.png"} alt="" />
       </div>
       <div className="delete-image-footer">
         <Button
