@@ -6,6 +6,24 @@
   border-left: 0.5px solid var(--lightgrey);
 }
 
+.chat-area-empty {
+  background-color: var(--white);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 70%;
+  border-left: 0.5px solid var(--lightgrey);
+}
+
+.nothing-selected-text{
+  font-size: 16px;
+  margin-bottom: 80px;
+  font-weight: 500;
+  color: var(--lightgrey);
+}
+
+
 @media (max-width: 576px) {
   .chat-area {
     width: 100%;
