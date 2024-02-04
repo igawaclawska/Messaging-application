@@ -42,9 +42,8 @@ const ThreadList = ({ visibility }) => {
           ?.map((chat) => (
             <SingleThread
               key={chat[0]}
-              className={`single-thread ${isActive === chat[1] && "active"}`}
-              receiver1={chat[1].messageReceiver.displayName}
-              receiver2={""}
+              receiver={chat[1].messageReceiver}
+              className={`single-thread-list-element ${isActive === chat[1] && "active"}`}
               message={chat[1]?.lastMessage?.message}
               onClick={() => {
                 handleSelect(chat[1].messageReceiver);

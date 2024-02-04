@@ -1,0 +1,39 @@
+.update-picture-header {
+  padding-bottom: 16px;
+}
+
+.update-picture-heading {
+  color: var(--grey);
+}
+
+.upload{
+  color: var(--grey);
+}
+
+.update-img-content{
+  width: 100%;
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+}
+
+.update-img-footer {
+  margin: 16px 0 0 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding-top: 8px;
+  gap: 16px;
+}
+
+.modal-update-image{
+  margin: 8px 0 0 0;
+  text-align: center;
+  width: 200px;
+  height: 200px;
+  border-radius: 100px;
+  object-fit: cover;
+}
