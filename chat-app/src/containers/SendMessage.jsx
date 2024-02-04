@@ -20,10 +20,12 @@ const SendMessage = () => {
   const { data } = useContext(ChatsContext);
 
   const handleKey = (e) => {
-    e.code === "Enter" && handleSend();
+    if (text.trim() !== "" && e.keyCode == 13 && !e.shiftKey) {
+      handleSend();
+    }
   };
   const handleSend = async () => {
-    if (text !== "") {
+    if (text.trim() !== "") {
       try {
         await updateDoc(doc(db, "chats", data.chatsId), {
           messages: arrayUnion({
@@ -69,7 +71,7 @@ const SendMessage = () => {
         onChange={(event) => setText(event.target.value)}
         value={text}
       ></MessageInput>
-      <MessageButton onClick={handleSend}></MessageButton>
+      <MessageButton onClick={handleSend}/>
     </div>
   );
 };

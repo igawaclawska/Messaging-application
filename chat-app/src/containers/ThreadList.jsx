@@ -36,15 +36,14 @@ const ThreadList = ({ visibility }) => {
   //create dynamic thread components
   const renderListOfChats = () => {
     return (
-      <div className="thread-list">
+      <ul className="thread-list">
         {Object?.entries(chats)
           ?.sort((a, b) => b[1].date?.date - a[1].date?.date)
           ?.map((chat) => (
             <SingleThread
               key={chat[0]}
-              className={`single-thread ${isActive === chat[1] && "active"}`}
-              receiver1={chat[1].messageReceiver.displayName}
-              receiver2={""}
+              receiver={chat[1].messageReceiver}
+              className={`single-thread-list-element ${isActive === chat[1] && "active"}`}
               message={chat[1]?.lastMessage?.message}
               onClick={() => {
                 handleSelect(chat[1].messageReceiver);
@@ -53,7 +52,7 @@ const ThreadList = ({ visibility }) => {
               }}
             ></SingleThread>
           ))}
-      </div>
+      </ul>
     );
   };
 

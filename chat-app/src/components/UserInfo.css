@@ -3,13 +3,24 @@
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   display: flex;
-  flex-direction: column;
-  padding: 8px 12px;
+  flex-direction: row;
+  gap: 6px;
+  align-items: center;
+  padding: 12px;
   color: var(--grey);
   width: 98%;
   margin: 4px 2px;
   background-color: var(--blue);
   border-radius: 4px;
+}
+
+.chat-user-info-img{
+  min-height: 32px;
+  min-width: 32px;
+  height: 32px;
+  width: 32px;
+  border-radius: 100px;
+  object-fit: cover;
 }
 
 .user-info.active {

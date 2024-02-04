@@ -1,0 +1,34 @@
+.detete-image-header {
+  padding-bottom: 16px;
+  color: var(--grey);
+}
+
+.heading{
+  color: var(--grey);
+}
+
+.delete-img-content{
+  width: 100%;
+  display:flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.delete-image-footer {
+  margin: 16px 0 0 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding-top: 8px;
+  gap: 16px;
+}
+
+.modal-image{
+  margin: 16px 0 0 0;
+  text-align: center;
+  width: 200px;
+  height: 200px;
+  border-radius: 100px;
+  object-fit: cover;
+}
