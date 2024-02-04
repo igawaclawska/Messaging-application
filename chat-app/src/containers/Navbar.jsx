@@ -35,6 +35,10 @@ const NavBar = () => {
     };
   }, []);
 
+  useEffect(() => {
+    console.log("test");
+  }, [setIsUpatePictureModalOpen]);
+
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
