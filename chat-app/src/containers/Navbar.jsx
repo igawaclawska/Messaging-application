@@ -10,6 +10,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import UpdateProfilePictureModal from "./UpdateProfilePictureModal";
 import RemoveProfilePictureModal from "./RemoveProfilePictureModal";
+import DropdownOptions from "../components/DropdownOptions";
 
 const NavBar = () => {
   const { userLogged } = useContext(AuthContext);
@@ -17,7 +18,7 @@ const NavBar = () => {
   const { dispatch } = useContext(ChatsContext);
   const menuRef = useRef(null);
 
-  const [isOpen, setIsOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isUpatePictureModalOpen, setIsUpatePictureModalOpen] = useState(false);
   const [isRemovePictureModalOpen, setIsRemovePictureModalOpen] =
     useState(false);
@@ -25,7 +26,7 @@ const NavBar = () => {
   useEffect(() => {
     function handleClickOutside(event) {
       if (menuRef.current && !menuRef.current.contains(event.target)) {
-        setIsOpen(false);
+        setIsDropdownOpen(false);
       }
     }
 
@@ -40,7 +41,7 @@ const NavBar = () => {
   }, [setIsUpatePictureModalOpen]);
 
   const toggleMenu = () => {
-    setIsOpen(!isOpen);
+    setIsDropdownOpen(!isDropdownOpen);
   };
 
   let navigate = useNavigate();
@@ -56,6 +57,33 @@ const NavBar = () => {
   const logImg = () => {
     console.log(userLogged);
   };
+
+  const menuOptions = [
+    {
+      id: 1,
+      label: "Remove profile picture",
+      onClick: () => {
+        setIsRemovePictureModalOpen(true);
+      },
+    },
+    {
+      id: 2,
+      label: "Update profile picture",
+      onClick: () => {
+        setIsUpatePictureModalOpen(true);
+      },
+    },
+    {
+      id: 3,
+      label: "Log-out",
+      onClick: () => {
+        signOut(auth);
+        setMessages(null);
+        handleClearRecipent();
+        toLogin();
+      },
+    },
+  ];
 
   return (
     // class nav-bar does not exist in css
@@ -74,39 +102,9 @@ const NavBar = () => {
               alt=""
             />
             {userLogged.displayName || "User"}
-            {isOpen ? <ExpandMoreIcon /> : <ExpandLessIcon />}
+            {isDropdownOpen ? <ExpandMoreIcon /> : <ExpandLessIcon />}
           </button>
-          {isOpen && (
-            <ul className="dropdown-menu">
-              <li
-                onClick={() => {
-                  setIsRemovePictureModalOpen(true);
-                }}
-                className="menu-item"
-              >
-                Remove profile picture
-              </li>
-              <li
-                onClick={() => {
-                  setIsUpatePictureModalOpen(true);
-                }}
-                className="menu-item"
-              >
-                Update profile picture
-              </li>
-              <li
-                onClick={() => {
-                  signOut(auth);
-                  setMessages(null);
-                  handleClearRecipent();
-                  toLogin();
-                }}
-                className="menu-item"
-              >
-                Log-out
-              </li>
-            </ul>
-          )}
+          <DropdownOptions isOpen={isDropdownOpen} options={menuOptions} />
         </div>
         {isUpatePictureModalOpen && (
           <UpdateProfilePictureModal setIsOpen={setIsUpatePictureModalOpen} />

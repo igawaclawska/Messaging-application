@@ -1,11 +1,12 @@
 import "./ChatHeader.css";
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect, useRef } from "react";
 import Button from "../components/Button";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import { ChatsContext } from "../context/ChatsContext";
 import "../styles.css";
-import DeleteIcon from "@mui/icons-material/Delete";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
 import DeleteChatModal from "./DeleteChatModal";
+import DropdownOptions from "../components/DropdownOptions";
 import { db } from "../firebase";
 import { onSnapshot } from "firebase/firestore";
 import { collection, query, where } from "firebase/firestore";
@@ -15,6 +16,23 @@ const ChatHeader = ({ onClick }) => {
   let [isOpen, setIsOpen] = useState(false);
 
   let [user, setUser] = useState({});
+
+  const menuRef = useRef(null);
+
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setIsDropdownOpen(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   useEffect(() => {
     const getUsers = async () => {
@@ -40,6 +58,18 @@ const ChatHeader = ({ onClick }) => {
     setIsOpen(true);
   };
 
+  const toggleMenu = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  const menuOptions = [
+    {
+      id: 1,
+      label: "Remove chat",
+      onClick: handleOpenModal,
+    },
+  ];
+
   return (
     <header className="chat-header">
       <div className="chat-header-wrapper">
@@ -53,9 +83,16 @@ const ChatHeader = ({ onClick }) => {
 
         {data.user1?.displayName && (
           <>
-            <img className="chat-user-img" src={user.photoURL || "blank-profile-picture.png"} alt="" />
+            <img
+              className="chat-user-img"
+              src={user.photoURL || "blank-profile-picture.png"}
+              alt=""
+            />
             <span className="chat-header-title">{user.displayName}</span>
-            <DeleteIcon className="delete-icon" onClick={handleOpenModal} />
+            <div className="delete-icon" ref={menuRef}>
+              <MoreVertIcon onClick={toggleMenu} />
+              <DropdownOptions isOpen={isDropdownOpen} options={menuOptions} />
+            </div>
           </>
         )}
       </div>
