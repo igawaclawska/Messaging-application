@@ -1,20 +1,19 @@
 import "./ChatHeader.css";
-import React, { useContext, useState, useEffect } from "react";
+import { useContext, useState, useEffect } from "react";
 import Button from "../components/Button";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
-import { ChatsContext } from "../context/ChatsContext";
-import "../styles.css";
-import DeleteIcon from "@mui/icons-material/Delete";
 import DeleteChatModal from "./DeleteChatModal";
+import DropdownMenu from "../components/DropdownMenu";
+import { ChatsContext } from "../context/ChatsContext";
 import { db } from "../firebase";
-import { onSnapshot } from "firebase/firestore";
-import { collection, query, where } from "firebase/firestore";
+import { onSnapshot, collection, query, where } from "firebase/firestore";
 
 const ChatHeader = ({ onClick }) => {
   const { data } = useContext(ChatsContext);
-  let [isOpen, setIsOpen] = useState(false);
 
   let [user, setUser] = useState({});
+  let [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   useEffect(() => {
     const getUsers = async () => {
@@ -37,8 +36,20 @@ const ChatHeader = ({ onClick }) => {
   }, [data]);
 
   const handleOpenModal = () => {
-    setIsOpen(true);
+    setIsModalOpen(true);
   };
+
+  const toggleMenu = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  const menuOptions = [
+    {
+      id: 1,
+      label: "Remove chat",
+      onClick: handleOpenModal,
+    },
+  ];
 
   return (
     <header className="chat-header">
@@ -53,13 +64,26 @@ const ChatHeader = ({ onClick }) => {
 
         {data.user1?.displayName && (
           <>
-            <img className="chat-user-img" src={user.photoURL || "blank-profile-picture.png"} alt="" />
+            <img
+              className="chat-user-img"
+              src={user.photoURL || "blank-profile-picture.png"}
+              alt=""
+            />
             <span className="chat-header-title">{user.displayName}</span>
-            <DeleteIcon className="delete-icon" onClick={handleOpenModal} />
+
+            <div className="delete-icon">
+              <DropdownMenu
+                toggleMenu={toggleMenu}
+                setIsDropdownOpen={setIsDropdownOpen}
+                isDropdownOpen={isDropdownOpen}
+                menuOptions={menuOptions}
+                btnType={"icon"}
+              />
+            </div>
           </>
         )}
       </div>
-      {isOpen && <DeleteChatModal setIsOpen={setIsOpen} />}
+      {isModalOpen && <DeleteChatModal setIsOpen={setIsModalOpen} />}
     </header>
   );
 };

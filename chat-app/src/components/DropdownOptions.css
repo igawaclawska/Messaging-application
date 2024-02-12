@@ -1,0 +1,11 @@
+.menu-item {
+  list-style-type: none;
+  cursor: pointer;
+  padding: 8px 12px;
+  color: var(--grey);
+  border-radius: 2px;
+}
+
+.menu-item:hover {
+  background-color: var(--grey3);
+}

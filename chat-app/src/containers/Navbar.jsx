@@ -1,46 +1,31 @@
 import "./Navbar.css";
-import React, { useContext, useState, useRef, useEffect } from "react";
+import { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { signOut } from "firebase/auth";
 import { AuthContext } from "../context/AuthContext";
 import { MessagesContext } from "../context/MessagesContext";
 import { ChatsContext } from "../context/ChatsContext";
 import { auth } from "../firebase";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import UpdateProfilePictureModal from "./UpdateProfilePictureModal";
 import RemoveProfilePictureModal from "./RemoveProfilePictureModal";
+import DropdownMenu from "../components/DropdownMenu";
 
 const NavBar = () => {
   const { userLogged } = useContext(AuthContext);
   const { setMessages } = useContext(MessagesContext);
   const { dispatch } = useContext(ChatsContext);
-  const menuRef = useRef(null);
 
-  const [isOpen, setIsOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isUpatePictureModalOpen, setIsUpatePictureModalOpen] = useState(false);
   const [isRemovePictureModalOpen, setIsRemovePictureModalOpen] =
     useState(false);
-
-  useEffect(() => {
-    function handleClickOutside(event) {
-      if (menuRef.current && !menuRef.current.contains(event.target)) {
-        setIsOpen(false);
-      }
-    }
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
 
   useEffect(() => {
     console.log("test");
   }, [setIsUpatePictureModalOpen]);
 
   const toggleMenu = () => {
-    setIsOpen(!isOpen);
+    setIsDropdownOpen(!isDropdownOpen);
   };
 
   let navigate = useNavigate();
@@ -53,61 +38,46 @@ const NavBar = () => {
     dispatch({ type: "LOGOUT" });
   };
 
-  const logImg = () => {
-    console.log(userLogged);
-  };
+  const menuOptions = [
+    {
+      id: 1,
+      label: "Remove profile picture",
+      onClick: () => {
+        setIsRemovePictureModalOpen(true);
+      },
+    },
+    {
+      id: 2,
+      label: "Update profile picture",
+      onClick: () => {
+        setIsUpatePictureModalOpen(true);
+      },
+    },
+    {
+      id: 3,
+      label: "Log-out",
+      onClick: () => {
+        signOut(auth);
+        setMessages(null);
+        handleClearRecipent();
+        toLogin();
+      },
+    },
+  ];
 
   return (
     // class nav-bar does not exist in css
     <nav className="nav-bar">
       <div className="navbar-wrapper">
         <span className="logo logo-small">MINI CHAT</span>
-        <div ref={menuRef}>
-          <button
-            type="button"
-            className={"fixed-btn secondary-white small with-icon"}
-            onClick={toggleMenu}
-          >
-            <img
-              className="profile-img"
-              src={userLogged.photoURL || "blank-profile-picture.png"}
-              alt=""
-            />
-            {userLogged.displayName || "User"}
-            {isOpen ? <ExpandMoreIcon /> : <ExpandLessIcon />}
-          </button>
-          {isOpen && (
-            <ul className="dropdown-menu">
-              <li
-                onClick={() => {
-                  setIsRemovePictureModalOpen(true);
-                }}
-                className="menu-item"
-              >
-                Remove profile picture
-              </li>
-              <li
-                onClick={() => {
-                  setIsUpatePictureModalOpen(true);
-                }}
-                className="menu-item"
-              >
-                Update profile picture
-              </li>
-              <li
-                onClick={() => {
-                  signOut(auth);
-                  setMessages(null);
-                  handleClearRecipent();
-                  toLogin();
-                }}
-                className="menu-item"
-              >
-                Log-out
-              </li>
-            </ul>
-          )}
-        </div>
+        <DropdownMenu
+          toggleMenu={toggleMenu}
+          isDropdownOpen={isDropdownOpen}
+          setIsDropdownOpen={setIsDropdownOpen}
+          btnText={userLogged.displayName}
+          imgSrc={userLogged.photoURL}
+          menuOptions={menuOptions}
+        />
         {isUpatePictureModalOpen && (
           <UpdateProfilePictureModal setIsOpen={setIsUpatePictureModalOpen} />
         )}
