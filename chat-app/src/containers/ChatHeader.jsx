@@ -1,38 +1,19 @@
 import "./ChatHeader.css";
-import React, { useContext, useState, useEffect, useRef } from "react";
+import { useContext, useState, useEffect } from "react";
 import Button from "../components/Button";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
-import { ChatsContext } from "../context/ChatsContext";
-import "../styles.css";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
 import DeleteChatModal from "./DeleteChatModal";
-import DropdownOptions from "../components/DropdownOptions";
+import DropdownMenu from "../components/DropdownMenu";
+import { ChatsContext } from "../context/ChatsContext";
 import { db } from "../firebase";
-import { onSnapshot } from "firebase/firestore";
-import { collection, query, where } from "firebase/firestore";
+import { onSnapshot, collection, query, where } from "firebase/firestore";
 
 const ChatHeader = ({ onClick }) => {
   const { data } = useContext(ChatsContext);
-  let [isOpen, setIsOpen] = useState(false);
 
   let [user, setUser] = useState({});
-
-  const menuRef = useRef(null);
-
+  let [isModalOpen, setIsModalOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-
-  useEffect(() => {
-    function handleClickOutside(event) {
-      if (menuRef.current && !menuRef.current.contains(event.target)) {
-        setIsDropdownOpen(false);
-      }
-    }
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
 
   useEffect(() => {
     const getUsers = async () => {
@@ -55,7 +36,7 @@ const ChatHeader = ({ onClick }) => {
   }, [data]);
 
   const handleOpenModal = () => {
-    setIsOpen(true);
+    setIsModalOpen(true);
   };
 
   const toggleMenu = () => {
@@ -89,14 +70,20 @@ const ChatHeader = ({ onClick }) => {
               alt=""
             />
             <span className="chat-header-title">{user.displayName}</span>
-            <div className="delete-icon" ref={menuRef}>
-              <MoreVertIcon onClick={toggleMenu} />
-              <DropdownOptions isOpen={isDropdownOpen} options={menuOptions} />
+
+            <div className="delete-icon">
+              <DropdownMenu
+                toggleMenu={toggleMenu}
+                setIsDropdownOpen={setIsDropdownOpen}
+                isDropdownOpen={isDropdownOpen}
+                menuOptions={menuOptions}
+                btnType={"icon"}
+              />
             </div>
           </>
         )}
       </div>
-      {isOpen && <DeleteChatModal setIsOpen={setIsOpen} />}
+      {isModalOpen && <DeleteChatModal setIsOpen={setIsModalOpen} />}
     </header>
   );
 };

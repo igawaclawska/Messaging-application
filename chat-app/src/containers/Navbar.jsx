@@ -1,40 +1,24 @@
 import "./Navbar.css";
-import React, { useContext, useState, useRef, useEffect } from "react";
+import { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { signOut } from "firebase/auth";
 import { AuthContext } from "../context/AuthContext";
 import { MessagesContext } from "../context/MessagesContext";
 import { ChatsContext } from "../context/ChatsContext";
 import { auth } from "../firebase";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import UpdateProfilePictureModal from "./UpdateProfilePictureModal";
 import RemoveProfilePictureModal from "./RemoveProfilePictureModal";
-import DropdownOptions from "../components/DropdownOptions";
+import DropdownMenu from "../components/DropdownMenu";
 
 const NavBar = () => {
   const { userLogged } = useContext(AuthContext);
   const { setMessages } = useContext(MessagesContext);
   const { dispatch } = useContext(ChatsContext);
-  const menuRef = useRef(null);
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isUpatePictureModalOpen, setIsUpatePictureModalOpen] = useState(false);
   const [isRemovePictureModalOpen, setIsRemovePictureModalOpen] =
     useState(false);
-
-  useEffect(() => {
-    function handleClickOutside(event) {
-      if (menuRef.current && !menuRef.current.contains(event.target)) {
-        setIsDropdownOpen(false);
-      }
-    }
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
 
   useEffect(() => {
     console.log("test");
@@ -52,10 +36,6 @@ const NavBar = () => {
 
   const handleClearRecipent = () => {
     dispatch({ type: "LOGOUT" });
-  };
-
-  const logImg = () => {
-    console.log(userLogged);
   };
 
   const menuOptions = [
@@ -90,22 +70,14 @@ const NavBar = () => {
     <nav className="nav-bar">
       <div className="navbar-wrapper">
         <span className="logo logo-small">MINI CHAT</span>
-        <div ref={menuRef}>
-          <button
-            type="button"
-            className={"fixed-btn secondary-white small with-icon"}
-            onClick={toggleMenu}
-          >
-            <img
-              className="profile-img"
-              src={userLogged.photoURL || "blank-profile-picture.png"}
-              alt=""
-            />
-            {userLogged.displayName || "User"}
-            {isDropdownOpen ? <ExpandMoreIcon /> : <ExpandLessIcon />}
-          </button>
-          <DropdownOptions isOpen={isDropdownOpen} options={menuOptions} />
-        </div>
+        <DropdownMenu
+          toggleMenu={toggleMenu}
+          isDropdownOpen={isDropdownOpen}
+          setIsDropdownOpen={setIsDropdownOpen}
+          btnText={userLogged.displayName}
+          imgSrc={userLogged.photoURL}
+          menuOptions={menuOptions}
+        />
         {isUpatePictureModalOpen && (
           <UpdateProfilePictureModal setIsOpen={setIsUpatePictureModalOpen} />
         )}
