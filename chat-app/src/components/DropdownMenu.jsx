@@ -1,18 +1,11 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import DropdownOptions from "./DropdownOptions";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
 
-const DropdownMenu = ({
-  isDropdownOpen,
-  setIsDropdownOpen,
-  menuOptions,
-  toggleMenu,
-  imgSrc,
-  btnText,
-  btnType,
-}) => {
+const DropdownMenu = ({ menuOptions, hasCaret, children }) => {
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
   const menuRef = useRef(null);
 
   useEffect(() => {
@@ -28,33 +21,21 @@ const DropdownMenu = ({
     };
   }, []);
 
-  const renderButton = () => {
-    let btnWithImage = (
-      <button
-        type="button"
-        className={"fixed-btn secondary-white small with-icon"}
-        onClick={toggleMenu}
-      >
-        <img
-          className="profile-img"
-          src={imgSrc || "blank-profile-picture.png"}
-          alt=""
-        />
-        {btnText || "User"}
-        {isDropdownOpen ? <ExpandMoreIcon /> : <ExpandLessIcon />}
-      </button>
-    );
-
-    let iconBtn = <MoreVertIcon className="delete-icon" onClick={toggleMenu} />;
-
-    if (btnType === "icon") {
-      return iconBtn;
-    } else return btnWithImage;
+  const toggleMenu = () => {
+    setIsDropdownOpen(!isDropdownOpen);
   };
 
   return (
     <div ref={menuRef}>
-      {renderButton()}
+      <button
+        type="button"
+        className="fixed-btn secondary-white small with-icon"
+        onClick={toggleMenu}
+      >
+        {children}
+        {hasCaret === true &&
+          (isDropdownOpen ? <ExpandMoreIcon /> : <ExpandLessIcon />)}
+      </button>
       {isDropdownOpen && (
         <DropdownOptions isOpen={isDropdownOpen} options={menuOptions} />
       )}

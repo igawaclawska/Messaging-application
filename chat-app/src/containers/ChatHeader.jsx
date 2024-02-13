@@ -2,6 +2,7 @@ import "./ChatHeader.css";
 import { useContext, useState, useEffect } from "react";
 import Button from "../components/Button";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
 import DeleteChatModal from "./DeleteChatModal";
 import DropdownMenu from "../components/DropdownMenu";
 import { ChatsContext } from "../context/ChatsContext";
@@ -13,7 +14,6 @@ const ChatHeader = ({ onClick }) => {
 
   let [user, setUser] = useState({});
   let [isModalOpen, setIsModalOpen] = useState(false);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   useEffect(() => {
     const getUsers = async () => {
@@ -37,10 +37,6 @@ const ChatHeader = ({ onClick }) => {
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
-  };
-
-  const toggleMenu = () => {
-    setIsDropdownOpen(!isDropdownOpen);
   };
 
   const menuOptions = [
@@ -72,13 +68,9 @@ const ChatHeader = ({ onClick }) => {
             <span className="chat-header-title">{user.displayName}</span>
 
             <div className="delete-icon">
-              <DropdownMenu
-                toggleMenu={toggleMenu}
-                setIsDropdownOpen={setIsDropdownOpen}
-                isDropdownOpen={isDropdownOpen}
-                menuOptions={menuOptions}
-                btnType={"icon"}
-              />
+              <DropdownMenu menuOptions={menuOptions}>
+                <MoreVertIcon className="delete-icon" />
+              </DropdownMenu>
             </div>
           </>
         )}
