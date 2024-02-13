@@ -1,9 +1,9 @@
 import "./DropdownOptions.css";
 import DropdownOptionsBg from "./shared/DropdownOptionsBg";
 
-const DropdownOptions = ({ isOpen, options }) => {
+const DropdownOptions = ({ options }) => {
   return (
-    <DropdownOptionsBg isOpen={isOpen}>
+    <DropdownOptionsBg>
       {options?.map((option) => (
         <li
           key={option.id}

@@ -55,7 +55,9 @@ const DropdownMenu = ({
   return (
     <div ref={menuRef}>
       {renderButton()}
-      <DropdownOptions isOpen={isDropdownOpen} options={menuOptions} />
+      {isDropdownOpen && (
+        <DropdownOptions isOpen={isDropdownOpen} options={menuOptions} />
+      )}
     </div>
   );
 };
