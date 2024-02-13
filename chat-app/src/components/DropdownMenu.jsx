@@ -37,7 +37,11 @@ const DropdownMenu = ({ menuOptions, hasCaret, children }) => {
           (isDropdownOpen ? <ExpandMoreIcon /> : <ExpandLessIcon />)}
       </button>
       {isDropdownOpen && (
-        <DropdownOptions isOpen={isDropdownOpen} options={menuOptions} />
+        <DropdownOptions
+          setIsDropdownOpen={setIsDropdownOpen}
+          isOpen={isDropdownOpen}
+          options={menuOptions}
+        />
       )}
     </div>
   );
