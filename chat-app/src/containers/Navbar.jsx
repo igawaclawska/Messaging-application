@@ -14,8 +14,6 @@ const NavBar = () => {
   const { userLogged } = useContext(AuthContext);
   const { setMessages } = useContext(MessagesContext);
   const { dispatch } = useContext(ChatsContext);
-
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isUpatePictureModalOpen, setIsUpatePictureModalOpen] = useState(false);
   const [isRemovePictureModalOpen, setIsRemovePictureModalOpen] =
     useState(false);
@@ -23,10 +21,6 @@ const NavBar = () => {
   useEffect(() => {
     console.log("test");
   }, [setIsUpatePictureModalOpen]);
-
-  const toggleMenu = () => {
-    setIsDropdownOpen(!isDropdownOpen);
-  };
 
   let navigate = useNavigate();
   const toLogin = () => {
@@ -70,14 +64,14 @@ const NavBar = () => {
     <nav className="nav-bar">
       <div className="navbar-wrapper">
         <span className="logo logo-small">MINI CHAT</span>
-        <DropdownMenu
-          toggleMenu={toggleMenu}
-          isDropdownOpen={isDropdownOpen}
-          setIsDropdownOpen={setIsDropdownOpen}
-          btnText={userLogged.displayName}
-          imgSrc={userLogged.photoURL}
-          menuOptions={menuOptions}
-        />
+        <DropdownMenu menuOptions={menuOptions} hasCaret={true}>
+          <img
+            className="profile-img"
+            src={userLogged.photoURL || "blank-profile-picture.png"}
+            alt=""
+          />
+          {userLogged.displayName}
+        </DropdownMenu>
         {isUpatePictureModalOpen && (
           <UpdateProfilePictureModal setIsOpen={setIsUpatePictureModalOpen} />
         )}

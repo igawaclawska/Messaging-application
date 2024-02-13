@@ -1,8 +1,8 @@
 import "./DropdownOptionsBg.css";
 
-const DropdownOptionsBg = ({ children, isOpen }) => {
+const DropdownOptionsBg = ({ children }) => {
   {
-    return isOpen && <ul className="dropdown-menu">{children}</ul>;
+    return <ul className="dropdown-menu">{children}</ul>;
   }
 };
 
