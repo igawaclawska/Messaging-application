@@ -17,6 +17,7 @@ import {
 } from "firebase/firestore";
 import "firebase/firestore";
 import UserInfo from "../components/UserInfo";
+import { Player } from "@lottiefiles/react-lottie-player";
 
 const MessageModal = ({ show }) => {
   const [usersSelected, setUserSelected] = useState();
@@ -145,7 +146,17 @@ const MessageModal = ({ show }) => {
                 />
               ))
             ) : (
-              <div className="search-list-no-results">No users found</div>
+              <div className="search-list-no-results">
+                <Player
+                  src="user-not-found.json"
+                  className="player"
+                  loop
+                  autoplay
+                  style={{ height: "200px", width: "200px" }}
+                  speed={0.7}
+                />
+                User not found
+              </div>
             )}
           </ul>
         </div>
