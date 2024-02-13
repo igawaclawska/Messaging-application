@@ -24,6 +24,7 @@ const DropdownOptions = ({ options, setIsDropdownOpen }) => {
           onClick={() => handleClick(option)}
           className="menu-item"
         >
+          {option.icon}
           {option.label}
         </li>
       ))}
