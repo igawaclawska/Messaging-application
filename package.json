@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@lottiefiles/react-lottie-player": "^3.5.3",
     "firebase": "^9.14.0",
     "react-router": "^6.4.3"
   }
