@@ -1,5 +1,5 @@
 import "./RemoveProfilePictureModal.css";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import Button from "../components/Button";
 import Modal from "../components/shared/Modal";
 import { AuthContext } from "../context/AuthContext";
@@ -32,7 +32,11 @@ const RemoveProfilePictureModal = ({ setIsOpen }) => {
         <h3 className="heading">{`Delete your profile picture?`} </h3>
       </div>
       <div className="delete-img-content">
-        <img className="modal-image" src={userLogged.photoURL || "blank-profile-picture.png"} alt="" />
+        <img
+          className="modal-image"
+          src={userLogged.photoURL || "blank-profile-picture.png"}
+          alt=""
+        />
       </div>
       <div className="delete-image-footer">
         <Button

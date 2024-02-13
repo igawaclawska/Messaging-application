@@ -14,13 +14,14 @@ const NavBar = () => {
   const { userLogged } = useContext(AuthContext);
   const { setMessages } = useContext(MessagesContext);
   const { dispatch } = useContext(ChatsContext);
-  const [isUpatePictureModalOpen, setIsUpatePictureModalOpen] = useState(false);
+  const [isUpdatePictureModalOpen, setIsUpdatePictureModalOpen] =
+    useState(false);
   const [isRemovePictureModalOpen, setIsRemovePictureModalOpen] =
     useState(false);
 
   useEffect(() => {
     console.log("test");
-  }, [setIsUpatePictureModalOpen]);
+  }, [setIsUpdatePictureModalOpen]);
 
   let navigate = useNavigate();
   const toLogin = () => {
@@ -32,30 +33,36 @@ const NavBar = () => {
     dispatch({ type: "LOGOUT" });
   };
 
+  const handleOpenUpdatePictureModal = () => {
+    setIsUpdatePictureModalOpen(true);
+  };
+
+  const handleOpenRemovePictureModal = () => {
+    setIsRemovePictureModalOpen(true);
+  };
+
+  const handleLogOut = () => {
+    signOut(auth);
+    setMessages(null);
+    handleClearRecipent();
+    toLogin();
+  };
+
   const menuOptions = [
     {
       id: 1,
       label: "Remove profile picture",
-      onClick: () => {
-        setIsRemovePictureModalOpen(true);
-      },
+      onClick: handleOpenRemovePictureModal,
     },
     {
       id: 2,
       label: "Update profile picture",
-      onClick: () => {
-        setIsUpatePictureModalOpen(true);
-      },
+      onClick: handleOpenUpdatePictureModal,
     },
     {
       id: 3,
       label: "Log-out",
-      onClick: () => {
-        signOut(auth);
-        setMessages(null);
-        handleClearRecipent();
-        toLogin();
-      },
+      onClick: handleLogOut,
     },
   ];
 
@@ -72,8 +79,8 @@ const NavBar = () => {
           />
           {userLogged.displayName}
         </DropdownMenu>
-        {isUpatePictureModalOpen && (
-          <UpdateProfilePictureModal setIsOpen={setIsUpatePictureModalOpen} />
+        {isUpdatePictureModalOpen && (
+          <UpdateProfilePictureModal setIsOpen={setIsUpdatePictureModalOpen} />
         )}
         {isRemovePictureModalOpen && (
           <RemoveProfilePictureModal setIsOpen={setIsRemovePictureModalOpen} />
