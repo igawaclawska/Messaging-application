@@ -3,6 +3,7 @@ import { useContext, useState, useEffect } from "react";
 import Button from "../components/Button";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
+import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import DeleteChatModal from "./DeleteChatModal";
 import DropdownMenu from "../components/DropdownMenu";
 import { ChatsContext } from "../context/ChatsContext";
@@ -44,6 +45,7 @@ const ChatHeader = ({ onClick }) => {
       id: 1,
       label: "Remove chat",
       onClick: handleOpenModal,
+      icon: <DeleteOutlineOutlinedIcon fontSize="small"/>
     },
   ];
 
