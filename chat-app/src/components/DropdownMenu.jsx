@@ -2,6 +2,7 @@ import { useRef, useEffect, useState } from "react";
 import DropdownOptions from "./DropdownOptions";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
+import Button from "./Button";
 
 const DropdownMenu = ({ menuOptions, hasCaret, children }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -27,7 +28,7 @@ const DropdownMenu = ({ menuOptions, hasCaret, children }) => {
 
   return (
     <div ref={menuRef}>
-      <button
+      <Button
         type="button"
         className="fixed-btn secondary-white small with-icon"
         onClick={toggleMenu}
@@ -35,7 +36,7 @@ const DropdownMenu = ({ menuOptions, hasCaret, children }) => {
         {children}
         {hasCaret === true &&
           (isDropdownOpen ? <ExpandMoreIcon /> : <ExpandLessIcon />)}
-      </button>
+      </Button>
       {isDropdownOpen && (
         <DropdownOptions
           setIsDropdownOpen={setIsDropdownOpen}

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Button from "../components/Button";
 import InputField from "../components/InputField";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
@@ -131,12 +131,9 @@ export const Register = () => {
             type="password"
             onChange={handlePasswordRepeatedInput}
           ></InputField>
-          <Button
-            className="fluid-btn primary"
-            text="Create account"
-            icon=""
-            onClick={validateCredentials}
-          ></Button>
+          <Button className="fluid-btn primary" onClick={validateCredentials}>
+            Create account
+          </Button>
         </form>
         <span className="login-link">
           Already have an account? <a href="/login">Login</a>

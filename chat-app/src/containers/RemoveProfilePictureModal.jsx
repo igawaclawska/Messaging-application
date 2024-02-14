@@ -1,5 +1,5 @@
 import "./RemoveProfilePictureModal.css";
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import Button from "../components/Button";
 import Modal from "../components/shared/Modal";
 import { AuthContext } from "../context/AuthContext";
@@ -42,15 +42,12 @@ const RemoveProfilePictureModal = ({ setIsOpen }) => {
         <Button
           className="fluid-btn secondary no-margin"
           onClick={() => setIsOpen(false)}
-          text="Cancel"
-          icon=""
-        ></Button>
-        <Button
-          className="fluid-btn primary no-margin"
-          text="Delete image"
-          icon=""
-          onClick={removeImage}
-        ></Button>
+        >
+          Cancel
+        </Button>
+        <Button className="fluid-btn primary no-margin" onClick={removeImage}>
+          Delete image
+        </Button>
       </div>
     </Modal>
   );

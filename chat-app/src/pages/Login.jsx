@@ -1,8 +1,8 @@
 import "./Login.css";
-import React, { useState } from "react";
+import { useState } from "react";
 import Button from "../components/Button";
-import { useNavigate } from "react-router-dom";
 import InputField from "../components/InputField";
+import { useNavigate } from "react-router-dom";
 import { auth } from "../firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useAuthFormData } from "../hooks/useAuthFormData.js";
@@ -55,12 +55,9 @@ export const Login = () => {
               onChange={handlePasswordInput}
             ></InputField>
           </div>
-          <Button
-            className="fluid-btn primary"
-            text="Login"
-            icon=""
-            onClick={handleSubmit}
-          ></Button>
+          <Button className="fluid-btn primary" onClick={handleSubmit}>
+            Login
+          </Button>
         </form>
         <span className="login-link">
           Don't have an account yet? <a href="/Register">Create an account</a>

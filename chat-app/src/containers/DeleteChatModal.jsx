@@ -3,7 +3,6 @@ import React, { useContext } from "react";
 import Button from "../components/Button";
 import Modal from "../components/shared/Modal";
 import { ChatsContext } from "../context/ChatsContext";
-import "firebase/firestore";
 import { useDeleteChat } from "../hooks/useDeleteChat";
 
 const DeleteChatModal = ({ setIsOpen }) => {
@@ -20,7 +19,7 @@ const DeleteChatModal = ({ setIsOpen }) => {
   };
 
   return (
-    <Modal setIsOpen={setIsOpen} >
+    <Modal setIsOpen={setIsOpen}>
       <div className="delete-chat-header">
         <h3>{`Delete chat with ${data.user1?.displayName}?`} </h3>
       </div>
@@ -34,15 +33,15 @@ const DeleteChatModal = ({ setIsOpen }) => {
         <Button
           className="fluid-btn secondary no-margin"
           onClick={() => setIsOpen(false)}
-          text="Cancel"
-          icon=""
-        ></Button>
+        >
+          Cancel
+        </Button>
         <Button
           className="fluid-btn primary no-margin"
           onClick={handleChatDeletion}
-          text="Delete chat"
-          icon=""
-        ></Button>
+        >
+          Delete chat
+        </Button>
       </div>
     </Modal>
   );
