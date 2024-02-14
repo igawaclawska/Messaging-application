@@ -3,7 +3,6 @@ import React, { useContext, useState, useEffect } from "react";
 import Button from "../components/Button";
 import Modal from "../components/shared/Modal";
 import { AuthContext } from "../context/AuthContext";
-import "firebase/firestore";
 import { db, storage } from "../firebase";
 import { doc, updateDoc } from "firebase/firestore";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
@@ -85,15 +84,12 @@ const UpdateProfilePictureModal = ({ setIsOpen }) => {
         <Button
           className="fluid-btn secondary no-margin"
           onClick={() => setIsOpen(false)}
-          text="Cancel"
-          icon=""
-        ></Button>
-        <Button
-          className="fluid-btn primary no-margin"
-          text="Update image"
-          icon=""
-          onClick={addImage}
-        ></Button>
+        >
+          Cancel
+        </Button>
+        <Button className="fluid-btn primary no-margin" onClick={addImage}>
+          Update image
+        </Button>
       </div>
     </Modal>
   );

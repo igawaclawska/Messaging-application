@@ -1,5 +1,5 @@
 import "./MessageModal.css";
-import React, { useContext, useState, useEffect } from "react";
+import { useContext, useState, useEffect } from "react";
 import Button from "../components/Button";
 import InputField from "../components/InputField";
 import Modal from "../components/shared/Modal";
@@ -164,16 +164,16 @@ const MessageModal = ({ show }) => {
       <div className="create-message-footer">
         <Button
           className="fluid-btn secondary no-margin"
-          onClick={() => show(false)}
-          text="Cancel"
-          icon=""
-        ></Button>
+          onClick={() => show(false)} 
+        >
+          Cancel
+        </Button>
         <Button
           className="fluid-btn primary no-margin"
           onClick={() => handleChatCreation()}
-          text="Create chat"
-          icon=""
-        ></Button>
+        >
+          Create chat
+        </Button>
       </div>
     </Modal>
   );

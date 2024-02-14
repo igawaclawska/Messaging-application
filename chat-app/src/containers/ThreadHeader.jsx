@@ -14,10 +14,11 @@ const ThreadHeader = () => {
         <span className="thread-header-title">Chats</span>
         <Button
           className="fixed-btn primary small with-icon"
-          text="New Chat"
-          icon={<MapsUgcIcon />}
-          onClick={()=> setShow(true)}
-        ></Button>
+          endIcon={<MapsUgcIcon />}
+          onClick={() => setShow(true)}
+        >
+          New Chat
+        </Button>
       </div>
       {show && <MessageModal show={setShow} setShow={setShow} />}
     </header>

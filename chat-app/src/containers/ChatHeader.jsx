@@ -55,8 +55,7 @@ const ChatHeader = ({ onClick }) => {
         <div onClick={onClick} className="back-btn">
           <Button
             className="fixed-btn tertiary with-icon"
-            text=""
-            icon={<ArrowBackIosIcon />}
+            startIcon={<ArrowBackIosIcon />}
           ></Button>{" "}
         </div>
 
