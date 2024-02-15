@@ -1,24 +1,12 @@
 import "./Home.css";
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useContext } from "react";
+import { WindowSizeContext } from "../context/WindowSizeContext";
 import Navbar from "../containers/Navbar";
 import ThreadsBar from "../containers/ThreadsBar";
 import ChatArea from "../containers/ChatArea";
 
 export const Home = () => {
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
-  // updates the width variable value in real time
-  useEffect(() => {
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth);
-    };
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
+  const { windowWidth } = useContext(WindowSizeContext);
   const [isThreadsBarVisible, setIsThreadsBarVisible] = useState(true);
 
   // toggles visibility between <ChatArea> and <ThreadsBar> components, is called only when the screen withh is <= 576px
