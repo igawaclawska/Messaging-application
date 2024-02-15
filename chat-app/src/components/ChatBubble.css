@@ -53,17 +53,12 @@
     max-width: 60%;
     transition: 400ms;
   }
-  .left-bubble-wrapper,
-  .right-bubble-wrapper {
-    padding: 2px 16px;
-  }
 }
 
 @media (max-width: 768px) {
   .left-bubble,
   .right-bubble {
     max-width: 70%;
-    padding: 8px;
     transition: 400ms;
   }
 }

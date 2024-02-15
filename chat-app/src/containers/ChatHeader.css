@@ -1,5 +1,5 @@
 .chat-header-wrapper {
-  padding: 16px 12px;
+  padding: 12px 16px;
   background-color: var(--white);
   display: flex;
   justify-content: flex-start;
@@ -45,16 +45,7 @@
   display: none;
 }
 
-@media (max-width: 768px) {
-  .chat-header-wrapper {
-    padding: 14px;
-  }
-}
-
 @media (max-width: 576px) {
-  .chat-header-wrapper {
-    padding: 14px;
-  }
   .back-btn {
     display: inline-block;
   }
