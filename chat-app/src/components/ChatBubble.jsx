@@ -1,11 +1,9 @@
-import "./ChatBubble.css"
+import "./ChatBubble.css";
 import React, { useContext, useEffect, useRef } from "react";
-import { ChatsContext } from "../context/ChatsContext";
 import { AuthContext } from "../context/AuthContext";
 
-const ChatBubble = ({ message, text }) => {
+const ChatBubble = ({ message }) => {
   const { userLogged } = useContext(AuthContext);
-  const { data } = useContext(ChatsContext);
   const ref = useRef();
 
   useEffect(() => {
@@ -25,9 +23,6 @@ const ChatBubble = ({ message, text }) => {
             message.senderId === userLogged.uid ? "right-bubble" : "left-bubble"
           }
         >
-          {/* {message.senderId !== userLogged.uid && data.group !== null && (
-            <p className="sender-name">{message.senderName}</p>
-          )} */}
           <span className="message-sent">{message.text}</span>
         </div>
       </div>{" "}

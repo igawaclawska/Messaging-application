@@ -40,7 +40,7 @@
   text-overflow: ellipsis;
   max-height: 16px;
   height: 16px;
-  max-width: 20vw;
+  max-width: 18vw;
   white-space: nowrap;
 }
 
@@ -58,4 +58,16 @@
   max-width: 100%;
   border-left: solid 6px var(--turquoise);
   margin-left: 4px;
+}
+
+@media (max-width: 768px) {
+  .single-thread-message {
+    max-width: 12vw;
+  }
+}
+
+@media (max-width: 576px) {
+  .single-thread-message {
+    max-width: 65vw;
+  }
 }

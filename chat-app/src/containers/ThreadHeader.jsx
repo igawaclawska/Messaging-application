@@ -1,12 +1,14 @@
 import "./ThreadHeader.css";
 import React from "react";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { WindowSizeContext } from "../context/WindowSizeContext";
 import Button from "../components/Button";
 import MessageModal from "./MessageModal";
 import MapsUgcIcon from "@mui/icons-material/MapsUgc";
 
 const ThreadHeader = () => {
   const [show, setShow] = useState(false);
+  const { windowWidth } = useContext(WindowSizeContext);
 
   return (
     <header className="thread-header">
@@ -14,10 +16,10 @@ const ThreadHeader = () => {
         <span className="thread-header-title">Chats</span>
         <Button
           className="fixed-btn primary small with-icon"
-          endIcon={<MapsUgcIcon />}
           onClick={() => setShow(true)}
         >
-          New Chat
+          {windowWidth >= 800 && "New Chat"}
+          <MapsUgcIcon />
         </Button>
       </div>
       {show && <MessageModal show={setShow} setShow={setShow} />}
