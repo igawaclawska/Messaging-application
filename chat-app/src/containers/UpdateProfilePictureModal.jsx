@@ -2,6 +2,7 @@ import "./UpdateProfilePictureModal.css";
 import React, { useContext, useState, useEffect } from "react";
 import Button from "../components/Button";
 import Modal from "../components/shared/Modal";
+import ProfileImage from "../components/ProfileImage";
 import { AuthContext } from "../context/AuthContext";
 import { db, storage } from "../firebase";
 import { doc, updateDoc } from "firebase/firestore";
@@ -65,13 +66,7 @@ const UpdateProfilePictureModal = ({ setIsOpen }) => {
         </h3>
       </div>
       <div className="update-img-content">
-        {imageUrl && (
-          <img
-            className="modal-update-image"
-            src={imageUrl || "blank-profile-picture.png"}
-            alt=""
-          />
-        )}
+        {imageUrl && <ProfileImage src={imageUrl} className={"large-image"} />}
         <input
           className="upload"
           onChange={handleChange}

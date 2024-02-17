@@ -1,4 +1,5 @@
 import "./UserInfo.css";
+import ProfileImage from "./ProfileImage";
 
 const UserInfo = ({
   onClick,
@@ -18,11 +19,7 @@ const UserInfo = ({
       uid={uid}
       idx={idx}
     >
-      <img
-        className="chat-user-info-img"
-        src={photo || "blank-profile-picture.png"}
-        alt=""
-      />
+      <ProfileImage src={photo} className={"small-image"} />
       <div>
         <p className="user-info-name">
           <b>{displayName}</b>

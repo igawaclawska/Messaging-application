@@ -4,6 +4,7 @@ import { db } from "../firebase";
 import { onSnapshot } from "firebase/firestore";
 import { collection, query, where } from "firebase/firestore";
 import { AuthContext } from "../context/AuthContext";
+import ProfileImage from "./ProfileImage";
 
 const SingleThread = ({ onClick, message, className, receiver }) => {
   let [user, setUser] = useState({});
@@ -31,11 +32,7 @@ const SingleThread = ({ onClick, message, className, receiver }) => {
 
   return (
     <li className={className} onClick={onClick}>
-      <img
-        className="single-thread-img"
-        src={user.photoURL || "blank-profile-picture.png"}
-        alt=""
-      />
+      <ProfileImage src={user.photoURL} className={"medium-image"} />
       <div className="thread-text-content">
         <p className="single-thread-header">
           <b>{user.displayName}</b>

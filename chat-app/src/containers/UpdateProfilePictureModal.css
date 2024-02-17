@@ -28,12 +28,3 @@
   padding-top: 8px;
   gap: 16px;
 }
-
-.modal-update-image{
-  margin: 8px 0 0 0;
-  text-align: center;
-  width: 200px;
-  height: 200px;
-  border-radius: 100px;
-  object-fit: cover;
-}
