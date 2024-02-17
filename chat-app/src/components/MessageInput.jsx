@@ -28,7 +28,7 @@ const MessageInput = ({ onKeyDown, value, type, onChange }) => {
         onChange={onChange}
         required={true}
         value={value}
-        id="scallable-text"
+        id="scalable-text"
       />
     </>
   );
