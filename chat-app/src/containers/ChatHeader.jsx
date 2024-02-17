@@ -3,9 +3,10 @@ import { useContext, useState, useEffect } from "react";
 import Button from "../components/Button";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
+import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import DeleteChatModal from "./DeleteChatModal";
 import DropdownMenu from "../components/DropdownMenu";
+import ProfileImage from "../components/ProfileImage";
 import { ChatsContext } from "../context/ChatsContext";
 import { db } from "../firebase";
 import { onSnapshot, collection, query, where } from "firebase/firestore";
@@ -45,7 +46,7 @@ const ChatHeader = ({ onClick }) => {
       id: 1,
       label: "Remove chat",
       onClick: handleOpenModal,
-      icon: <DeleteOutlineOutlinedIcon fontSize="small"/>
+      icon: <DeleteOutlineOutlinedIcon fontSize="small" />,
     },
   ];
 
@@ -61,11 +62,7 @@ const ChatHeader = ({ onClick }) => {
 
         {data.user1?.displayName && (
           <>
-            <img
-              className="chat-user-img"
-              src={user.photoURL || "blank-profile-picture.png"}
-              alt=""
-            />
+            <ProfileImage src={user.photoURL} className={"small-image"} />
             <span className="chat-header-title">{user.displayName}</span>
 
             <div className="delete-icon">

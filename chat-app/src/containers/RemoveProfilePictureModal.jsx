@@ -2,6 +2,7 @@ import "./RemoveProfilePictureModal.css";
 import React, { useContext } from "react";
 import Button from "../components/Button";
 import Modal from "../components/shared/Modal";
+import ProfileImage from "../components/ProfileImage";
 import { AuthContext } from "../context/AuthContext";
 import "firebase/firestore";
 import { db } from "../firebase";
@@ -32,11 +33,7 @@ const RemoveProfilePictureModal = ({ setIsOpen }) => {
         <h3 className="heading">{`Delete your profile picture?`} </h3>
       </div>
       <div className="delete-img-content">
-        <img
-          className="modal-image"
-          src={userLogged.photoURL || "blank-profile-picture.png"}
-          alt=""
-        />
+        <ProfileImage src={userLogged.photoURL} className={"large-image"} />
       </div>
       <div className="delete-image-footer">
         <Button

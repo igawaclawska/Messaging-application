@@ -9,9 +9,10 @@ import { auth } from "../firebase";
 import UpdateProfilePictureModal from "./UpdateProfilePictureModal";
 import RemoveProfilePictureModal from "./RemoveProfilePictureModal";
 import DropdownMenu from "../components/DropdownMenu";
-import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
-import DoDisturbAltRoundedIcon from '@mui/icons-material/DoDisturbAltRounded';
-import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
+import ProfileImage from "../components/ProfileImage";
+import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
+import DoDisturbAltRoundedIcon from "@mui/icons-material/DoDisturbAltRounded";
+import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 
 const NavBar = () => {
   const { userLogged } = useContext(AuthContext);
@@ -56,19 +57,19 @@ const NavBar = () => {
       id: 1,
       label: "Remove profile picture",
       onClick: handleOpenRemovePictureModal,
-      icon: <DoDisturbAltRoundedIcon fontSize="small"/>
+      icon: <DoDisturbAltRoundedIcon fontSize="small" />,
     },
     {
       id: 2,
       label: "Update profile picture",
       onClick: handleOpenUpdatePictureModal,
-      icon: <AccountCircleOutlinedIcon fontSize="small"/>
+      icon: <AccountCircleOutlinedIcon fontSize="small" />,
     },
     {
       id: 3,
       label: "Log-out",
       onClick: handleLogOut,
-      icon: <LogoutRoundedIcon fontSize="small"/>
+      icon: <LogoutRoundedIcon fontSize="small" />,
     },
   ];
 
@@ -78,11 +79,7 @@ const NavBar = () => {
       <div className="navbar-wrapper">
         <span className="logo logo-small">MINI CHAT</span>
         <DropdownMenu menuOptions={menuOptions} hasCaret={true}>
-          <img
-            className="profile-img"
-            src={userLogged.photoURL || "blank-profile-picture.png"}
-            alt=""
-          />
+          <ProfileImage src={userLogged.photoURL} className={"small-image"} />
           {userLogged.displayName}
         </DropdownMenu>
         {isUpdatePictureModalOpen && (

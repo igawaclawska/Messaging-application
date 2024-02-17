@@ -13,16 +13,6 @@
   font-size: 16px;
 }
 
-.chat-user-img{
-  min-height: 32px;
-  min-width: 32px;
-  height: 32px;
-  width: 32px;
-  border-radius: 100px;
-  object-fit: cover;
-}
-
-
 .chat-header-title-users {
   font-weight: 400;
   font-size: 14px;
