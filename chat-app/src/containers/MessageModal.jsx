@@ -137,11 +137,7 @@ const MessageModal = ({ show }) => {
                   className={`user-info ${isActive === user && "active"}`}
                   onClick={() => handleSelect(user)}
                   key={idx}
-                  displayName={user.displayName}
-                  uid={user.uid}
-                  photo={user.photoURL}
-                  value={user.username}
-                  email={user.email}
+                  user={user}
                   idx={idx}
                 />
               ))
@@ -164,7 +160,7 @@ const MessageModal = ({ show }) => {
       <div className="create-message-footer">
         <Button
           className="fluid-btn secondary no-margin"
-          onClick={() => show(false)} 
+          onClick={() => show(false)}
         >
           Cancel
         </Button>

@@ -20,7 +20,7 @@ const SendMessage = () => {
   const { data } = useContext(ChatsContext);
 
   const handleKey = (e) => {
-    if (text.trim() !== "" && e.keyCode == 13 && !e.shiftKey) {
+    if (text.trim() !== "" && e.keyCode === 13 && !e.shiftKey) {
       handleSend();
     }
   };
@@ -71,7 +71,7 @@ const SendMessage = () => {
         onChange={(event) => setText(event.target.value)}
         value={text}
       ></MessageInput>
-      <MessageButton onClick={handleSend}/>
+      <MessageButton onClick={handleSend} />
     </div>
   );
 };
