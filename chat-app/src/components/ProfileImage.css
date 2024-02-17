@@ -1,3 +1,12 @@
+.small-image {
+  min-height: 32px;
+  min-width: 32px;
+  height: 32px;
+  width: 32px;
+  border-radius: 100px;
+  object-fit: cover;
+}
+
 .medium-image {
   min-height: 50px;
   min-width: 50px;
@@ -12,15 +21,6 @@
   text-align: center;
   width: 200px;
   height: 200px;
-  border-radius: 100px;
-  object-fit: cover;
-}
-
-.small-image {
-  min-height: 32px;
-  min-width: 32px;
-  height: 32px;
-  width: 32px;
   border-radius: 100px;
   object-fit: cover;
 }
