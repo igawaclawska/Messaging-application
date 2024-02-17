@@ -3,6 +3,7 @@
   position: sticky;
   display: flex;
   flex-direction: row;
+  align-items: end;
   padding: 0px 8px 24px 8px;
   transform: translateY(-48px);
 }
