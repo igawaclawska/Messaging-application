@@ -10,20 +10,17 @@
   color: var(--grey);
   width: 98%;
   margin: 4px 2px;
-  background-color: var(--blue);
+  outline: solid 1px #e8e8e8;
   border-radius: 4px;
+  cursor: pointer;
 }
 
-.chat-user-info-img{
-  min-height: 32px;
-  min-width: 32px;
-  height: 32px;
-  width: 32px;
-  border-radius: 100px;
-  object-fit: cover;
+.user-info:hover {
+  background-color: var(--grey3);
 }
 
 .user-info.active {
+  background-color: var(--blue);
   outline: solid 1px var(--blue1);
 }
 
