@@ -7,14 +7,14 @@
   color: var(--grey);
   width: 100%;
   max-width: 100%;
+  cursor: pointer;
 }
 
-.thread-text-content{
+.thread-text-content {
   flex: 2;
   display: flex;
   flex-direction: column;
   gap: 6px;
-  /* width: 80%; */
 }
 
 .single-thread-header {
@@ -36,6 +36,10 @@
 }
 
 .single-thread-list-element.active {
+  background-color: var(--grey3);
+}
+
+.single-thread-list-element:hover {
   background-color: var(--grey3);
 }
 
