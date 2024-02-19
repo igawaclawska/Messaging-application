@@ -29,6 +29,11 @@ export const Login = () => {
     navigate(path);
   };
 
+  const toRegister = () => {
+    let path = "/register";
+    navigate(path);
+  };
+
   return (
     <div className="form-container">
       <div className="form-wrapper">
@@ -39,8 +44,7 @@ export const Login = () => {
             <InputField
               className="input-email"
               id="email"
-              label="e-mail"
-              placeholder="example@itu.dk"
+              label="E-mail"
               type="email"
               onChange={handleEmailInput}
             ></InputField>
@@ -49,8 +53,7 @@ export const Login = () => {
             <InputField
               className="input-password"
               id="password"
-              label="password"
-              placeholder="Enter a password"
+              label="Password"
               type="password"
               onChange={handlePasswordInput}
             ></InputField>
@@ -59,9 +62,9 @@ export const Login = () => {
             Login
           </Button>
         </form>
-        <span className="login-link">
-          Don't have an account yet? <a href="/Register">Create an account</a>
-        </span>
+        <button onClick={toRegister} className="button-link-text">
+          Don't have an account yet? Create an account
+        </button>
       </div>
     </div>
   );

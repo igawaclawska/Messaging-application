@@ -1,4 +1,5 @@
-import './InputField.css'
+import "./InputField.css";
+import { TextField } from "@mui/material";
 
 const InputField = ({
   value,
@@ -10,27 +11,29 @@ const InputField = ({
   onChange,
   onKeyDown,
 }) => (
-  <>
-    <div className="input-element">
-      {label && (
-        <label className="form-label" htmlFor={id}>
-          {capitalizeFirstLetter(label)}
-        </label>
-      )}
-      <input
-        type={type}
-        className={className}
-        placeholder={placeholder}
-        onChange={onChange}
-        onKeyDown={onKeyDown}
-        value={value}
-      />
-    </div>
-  </>
+  <div className="input-element">
+    <TextField
+      sx={{
+        "& .MuiInputLabel-root": { color: "var(--grey)" }, //styles the label
+        "& .MuiInputLabel-root.Mui-focused": { color: "var(--blue1)" }, //styles the label
+        "& .MuiOutlinedInput-root.Mui-focused": {
+          "& > fieldset": {
+            borderColor: "var(--blue1)",
+          },
+        },
+      }}
+      className={className}
+      size="small"
+      id={id}
+      label={label}
+      variant="outlined"
+      type={type && type}
+      value={value && value}
+      onChange={onChange}
+      onKeyDown={onKeyDown}
+      placeholder={placeholder}
+    />
+  </div>
 );
-
-function capitalizeFirstLetter(input) {
-  return input.charAt(0).toUpperCase() + input.slice(1);
-}
 
 export default InputField;

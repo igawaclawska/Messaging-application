@@ -118,8 +118,9 @@ const MessageModal = ({ show }) => {
       </div>
       <InputField
         onChange={handleSetFilter}
-        type={"text"}
-        placeholder={"Search"}
+        type={"search"}
+        label={"Search user"}
+        autoComplete="off"
       />
       {/* The class 'create-message-body' seems to not extst */}
       <div className="create-message-body">
