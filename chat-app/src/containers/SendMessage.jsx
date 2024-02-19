@@ -1,7 +1,9 @@
 import "./SendMessage.css";
 import React, { useContext, useState } from "react";
 import MessageButton from "../components/MessageButton";
+import SentimentSatisfiedAltRoundedIcon from "@mui/icons-material/SentimentSatisfiedAltRounded";
 import MessageInput from "../components/MessageInput";
+import EmojiPicker from "emoji-picker-react";
 import { AuthContext } from "../context/AuthContext";
 import { ChatsContext } from "../context/ChatsContext";
 import {
@@ -18,6 +20,7 @@ const SendMessage = () => {
   const [text, setText] = useState("");
   const { userLogged } = useContext(AuthContext);
   const { data } = useContext(ChatsContext);
+  const [showPicker, setShowPicker] = useState(false);
 
   const handleKey = (e) => {
     if (text.trim() !== "" && e.keyCode === 13 && !e.shiftKey) {
@@ -63,6 +66,11 @@ const SendMessage = () => {
     }
   };
 
+  const onEmojiClick = (event) => {
+    setText((prevInput) => prevInput + " " + event.emoji + " ");
+    setShowPicker(false);
+  };
+
   return (
     <div className="send-message-wrapper">
       <MessageInput
@@ -72,6 +80,13 @@ const SendMessage = () => {
         value={text}
       ></MessageInput>
       <MessageButton onClick={handleSend} />
+      <MessageButton onClick={() => setShowPicker((val) => !val)} />
+      {showPicker && (
+        <EmojiPicker
+          pickerStyle={{ width: "100%" }}
+          onEmojiClick={onEmojiClick}
+        />
+      )}
     </div>
   );
 };
