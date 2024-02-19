@@ -1,16 +1,7 @@
 .input-element {
   display: flex;
   flex-direction: column;
-  gap: 6px;
-}
-
-.form-label {
-  font-weight: 400;
-  display: flex;
-  gap: 10px;
-  color: var(--grey);
-  font-size: 16px;
-  cursor: pointer;
+  margin: 2px 0;
 }
 
 input {

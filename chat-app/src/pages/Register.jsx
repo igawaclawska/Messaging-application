@@ -83,7 +83,12 @@ export const Register = () => {
     navigate(path);
   };
 
-  function validateCredentials() {
+  const navigateToLogIn = () => {
+    let path = "/login";
+    navigate(path);
+  };
+
+  function registerUser() {
     if (validateInput()) {
       writeUserData();
     }
@@ -98,9 +103,8 @@ export const Register = () => {
           <InputField
             className="input-name"
             id="full-name"
-            label="full name"
+            label="Full name"
             value={displayName}
-            placeholder="Enter your name"
             type="text"
             onChange={handleDisplayNameInput}
           ></InputField>
@@ -108,7 +112,7 @@ export const Register = () => {
             className="input-email"
             id="email"
             value={email}
-            label="e-mail"
+            label="E-mail"
             placeholder="example@itu.dk"
             type="email"
             onChange={handleEmailInput}
@@ -117,8 +121,7 @@ export const Register = () => {
             className="input-password"
             id="password"
             value={password}
-            label="password"
-            placeholder="Enter a password"
+            label="Password"
             type="password"
             onChange={handlePasswordInput}
           ></InputField>
@@ -126,18 +129,17 @@ export const Register = () => {
             className="input-repeat-password"
             id="repeat-password"
             value={passwordRepeated}
-            label="repeat password"
-            placeholder="Repeat password"
+            label="Repeat password"
             type="password"
             onChange={handlePasswordRepeatedInput}
           ></InputField>
-          <Button className="fluid-btn primary" onClick={validateCredentials}>
+          <Button className="fluid-btn primary" onClick={registerUser}>
             Create account
           </Button>
         </form>
-        <span className="login-link">
-          Already have an account? <a href="/login">Login</a>
-        </span>
+        <button onClick={navigateToLogIn} className="button-link-text">
+          Already have an account? Login
+        </button>
       </div>
     </div>
   );
