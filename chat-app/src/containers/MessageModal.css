@@ -6,7 +6,7 @@
   margin: 24px 0 4px 0;
   font-weight: 500;
   color: var(--lightgrey);
-  font-weight: 400;
+  font-weight: 500;
 }
 
 .search-list {
@@ -27,6 +27,7 @@
   border-radius: 4px;
   color: var(--lightgrey);
   font-weight: 400;
+  font-size: 14px;
   height: 100%;
 }
 

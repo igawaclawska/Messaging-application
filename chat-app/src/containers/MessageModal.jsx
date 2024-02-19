@@ -126,7 +126,7 @@ const MessageModal = ({ show }) => {
       <div className="create-message-body">
         <p className="create-chat-instruction">
           {" "}
-          Select chat recipent from the list below.
+          Available users:
         </p>
         <div className="add-receivers">
           <ul className="search-list">
@@ -149,7 +149,7 @@ const MessageModal = ({ show }) => {
                   className="player"
                   loop
                   autoplay
-                  style={{ height: "200px", width: "200px" }}
+                  style={{ height: "170px", width: "200px" }}
                   speed={0.7}
                 />
                 User not found
