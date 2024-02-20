@@ -1,26 +1,17 @@
-import { useRef, useEffect, useState } from "react";
+import { useRef } from "react";
+import { useDropdownHandler } from "../hooks/useDropdownHandler";
 import DropdownOptions from "./DropdownOptions";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import Button from "./Button";
 
 const DropdownMenu = ({ menuOptions, hasCaret, children }) => {
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-
   const menuRef = useRef(null);
 
-  useEffect(() => {
-    function handleClickOutside(event) {
-      if (menuRef.current && !menuRef.current.contains(event.target)) {
-        setIsDropdownOpen(false);
-      }
-    }
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
+  const { isDropdownOpen, setIsDropdownOpen } = useDropdownHandler(
+    false,
+    menuRef
+  );
 
   const toggleMenu = () => {
     setIsDropdownOpen(!isDropdownOpen);
