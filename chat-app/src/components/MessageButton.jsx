@@ -1,10 +1,11 @@
 import './MessageButton.css'
 import SendIcon from "@mui/icons-material/Send";
 
-const MessageButton = ({ onClick }) => {
+const MessageButton = ({ onClick, icon, snapshot, children }) => {
   return (
-    <button type="button" className="send-btn" onClick={onClick}>
-      <SendIcon />{" "}
+    <button ref={snapshot} type="button" className="send-btn" onClick={onClick}>
+      {children}
+     {icon ? icon : <SendIcon />}
     </button>
   );
 };

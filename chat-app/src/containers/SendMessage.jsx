@@ -1,7 +1,5 @@
 import "./SendMessage.css";
 import React, { useContext, useState } from "react";
-import MessageButton from "../components/MessageButton";
-import MessageInput from "../components/MessageInput";
 import { AuthContext } from "../context/AuthContext";
 import { ChatsContext } from "../context/ChatsContext";
 import {
@@ -13,6 +11,9 @@ import {
 } from "firebase/firestore";
 import { db } from "../firebase";
 import { v4 as uuid } from "uuid";
+import MessageButton from "../components/MessageButton";
+import MessageInput from "../components/MessageInput";
+import EmojiPickerDropdown from "./EmojiPicker";
 
 const SendMessage = () => {
   const [text, setText] = useState("");
@@ -24,9 +25,11 @@ const SendMessage = () => {
       handleSend();
     }
   };
+  
   const handleSend = async () => {
     if (text.trim() !== "") {
       try {
+        setText("");
         await updateDoc(doc(db, "chats", data.chatsId), {
           messages: arrayUnion({
             id: uuid(),
@@ -37,29 +40,27 @@ const SendMessage = () => {
           }),
         });
 
-        if (data.user2 == null) {
-          await updateDoc(doc(db, "userChats", userLogged.uid), {
-            [data.chatsId + ".lastMessage"]: {
-              message: text,
-            },
-            [data.chatsId + ".date"]: {
-              date: serverTimestamp(),
-            },
-          });
+        await updateDoc(doc(db, "userChats", userLogged.uid), {
+          [data.chatsId + ".lastMessage"]: {
+            message: text,
+          },
+          [data.chatsId + ".date"]: {
+            date: serverTimestamp(),
+          },
+        });
 
-          await updateDoc(doc(db, "userChats", data.user1.uid), {
-            [data.chatsId + ".lastMessage"]: {
-              message: text,
-            },
-            [data.chatsId + ".date"]: {
-              date: serverTimestamp(),
-            },
-          });
-        }
+        await updateDoc(doc(db, "userChats", data.user1.uid), {
+          [data.chatsId + ".lastMessage"]: {
+            message: text,
+          },
+          [data.chatsId + ".date"]: {
+            date: serverTimestamp(),
+          },
+        });
+        setText("");
       } catch (err) {
         console.log(err);
       }
-      setText("");
     }
   };
 
@@ -70,7 +71,8 @@ const SendMessage = () => {
         onKeyDown={handleKey}
         onChange={(event) => setText(event.target.value)}
         value={text}
-      ></MessageInput>
+      />
+      <EmojiPickerDropdown setText={setText} />
       <MessageButton onClick={handleSend} />
     </div>
   );
