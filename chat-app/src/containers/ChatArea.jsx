@@ -6,7 +6,7 @@ import SendMessage from "./SendMessage";
 import Button from "../components/Button";
 import { ChatsContext } from "../context/ChatsContext";
 import { useContext } from "react";
-import { Player } from "@lottiefiles/react-lottie-player";
+import LottiePlayer from "../components/LottiePlayer";
 
 const ChatArea = ({ visibility }) => {
   const { data } = useContext(ChatsContext);
@@ -27,12 +27,11 @@ const ChatArea = ({ visibility }) => {
           ></Button>{" "}
         </div>
       )}
-      <Player
-        src="nothing-selected.json"
-        className="player playerLt"
-        loop
-        autoplay
-        style={{ height: "300px", width: "300px" }}
+      <LottiePlayer
+        src={"nothing-selected.json"}
+        height={"300px"}
+        width={"300px"}
+        className={"player playerLt"}
         speed={0.7}
       />
       <p className="nothing-selected-text">No chat selected</p>

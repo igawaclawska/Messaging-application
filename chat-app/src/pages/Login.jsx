@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { auth } from "../firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useAuthFormData } from "../hooks/useAuthFormData.js";
-import { Player } from "@lottiefiles/react-lottie-player";
+import LottiePlayer from "../components/LottiePlayer.jsx";
 
 export const Login = () => {
   const [error, setError] = useState(false);
@@ -65,13 +65,10 @@ export const Login = () => {
           </div>
           <Button className="fluid-btn primary" onClick={handleSubmit}>
             {loading ? (
-              <Player
-                src="spinner.json"
-                className="player"
-                loop
-                autoplay
-                style={{ height: "19px", width: "19px" }}
-                speed={1.5}
+              <LottiePlayer
+                src={"spinner.json"}
+                width={"19px"}
+                height={"19px"}
               />
             ) : (
               "Log in"

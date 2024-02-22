@@ -18,6 +18,7 @@ import {
 import "firebase/firestore";
 import UserInfo from "../components/UserInfo";
 import { Player } from "@lottiefiles/react-lottie-player";
+import LottiePlayer from "../components/LottiePlayer";
 
 const MessageModal = ({ show }) => {
   const [usersSelected, setUserSelected] = useState();
@@ -149,12 +150,10 @@ const MessageModal = ({ show }) => {
               ))
             ) : (
               <div className="search-list-no-results">
-                <Player
-                  src="user-not-found.json"
-                  className="player"
-                  loop
-                  autoplay
-                  style={{ height: "170px", width: "200px" }}
+                <LottiePlayer
+                  src={"user-not-found.json"}
+                  height={"170px"}
+                  width={"200px"}
                   speed={0.7}
                 />
                 User not found
@@ -175,14 +174,7 @@ const MessageModal = ({ show }) => {
           onClick={() => handleChatCreation()}
         >
           {loading ? (
-            <Player
-              src="spinner.json"
-              className="player"
-              loop
-              autoplay
-              style={{ height: "19px", width: "19px" }}
-              speed={1.6}
-            />
+            <LottiePlayer src={"spinner.json"} height={"19px"} width={"19px"} />
           ) : (
             "Create chat"
           )}

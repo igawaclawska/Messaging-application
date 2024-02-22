@@ -7,6 +7,7 @@ import { doc, setDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import { useAuthFormData } from "../hooks/useAuthFormData.js";
 import { Player } from "@lottiefiles/react-lottie-player";
+import LottiePlayer from "../components/LottiePlayer.jsx";
 
 export const Register = () => {
   const [error, setError] = useState(false);
@@ -140,13 +141,10 @@ export const Register = () => {
           ></InputField>
           <Button className="fluid-btn primary" onClick={registerUser}>
             {loading ? (
-              <Player
-                src="spinner.json"
-                className="player"
-                loop
-                autoplay
-                style={{ height: "19px", width: "19px" }}
-                speed={1.5}
+              <LottiePlayer
+                src={"spinner.json"}
+                width={"19px"}
+                height={"19px"}
               />
             ) : (
               "Create account"
