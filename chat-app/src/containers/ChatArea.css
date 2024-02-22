@@ -58,5 +58,6 @@
 
   .chat-area-empty {
     width: 100%;
+    justify-content: space-between;
   }
 }
