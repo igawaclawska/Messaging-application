@@ -12,6 +12,7 @@ export const MessagesContextProvider = ({ children }) => {
   useEffect(() => {
     const unSub = onSnapshot(doc(db, "chats", data.chatsId), (doc) => {
       doc.exists() && setMessages(doc.data().messages);
+      console.log("messages rendered");
     });
 
     return () => {
