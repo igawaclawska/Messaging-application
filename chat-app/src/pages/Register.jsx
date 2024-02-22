@@ -6,8 +6,6 @@ import { auth, db } from "../firebase";
 import { doc, setDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import { useAuthFormData } from "../hooks/useAuthFormData.js";
-import { Player } from "@lottiefiles/react-lottie-player";
-import LottiePlayer from "../components/LottiePlayer.jsx";
 
 export const Register = () => {
   const [error, setError] = useState(false);
@@ -139,16 +137,12 @@ export const Register = () => {
             type="password"
             onChange={handlePasswordRepeatedInput}
           ></InputField>
-          <Button className="fluid-btn primary" onClick={registerUser}>
-            {loading ? (
-              <LottiePlayer
-                src={"spinner.json"}
-                width={"19px"}
-                height={"19px"}
-              />
-            ) : (
-              "Create account"
-            )}
+          <Button
+            className="fluid-btn primary"
+            onClick={registerUser}
+            loading={loading}
+          >
+            Create account
           </Button>
         </form>
         <button onClick={navigateToLogIn} className="button-link-text">

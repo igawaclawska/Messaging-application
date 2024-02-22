@@ -17,7 +17,6 @@ import {
 } from "firebase/firestore";
 import "firebase/firestore";
 import UserInfo from "../components/UserInfo";
-import { Player } from "@lottiefiles/react-lottie-player";
 import LottiePlayer from "../components/LottiePlayer";
 
 const MessageModal = ({ show }) => {
@@ -172,12 +171,9 @@ const MessageModal = ({ show }) => {
         <Button
           className="fluid-btn primary no-margin"
           onClick={() => handleChatCreation()}
+          loading={loading}
         >
-          {loading ? (
-            <LottiePlayer src={"spinner.json"} height={"19px"} width={"19px"} />
-          ) : (
-            "Create chat"
-          )}
+          Create chat
         </Button>
       </div>
     </Modal>

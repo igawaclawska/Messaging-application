@@ -8,8 +8,6 @@ import { db, storage } from "../firebase";
 import { doc, updateDoc } from "firebase/firestore";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { updateProfile } from "firebase/auth";
-import { Player } from "@lottiefiles/react-lottie-player";
-import LottiePlayer from "../components/LottiePlayer";
 
 const UpdateProfilePictureModal = ({ setIsOpen }) => {
   const { userLogged } = useContext(AuthContext);
@@ -88,12 +86,12 @@ const UpdateProfilePictureModal = ({ setIsOpen }) => {
         >
           Cancel
         </Button>
-        <Button className="fluid-btn primary no-margin" onClick={addImage}>
-          {loading ? (
-            <LottiePlayer src={"spinner.json"} width={"19px"} height={"19px"} />
-          ) : (
-            "Update image"
-          )}
+        <Button
+          className="fluid-btn primary no-margin"
+          onClick={addImage}
+          loading={loading}
+        >
+          Update image
         </Button>
       </div>
     </Modal>

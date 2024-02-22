@@ -4,7 +4,6 @@ import Button from "../components/Button";
 import Modal from "../components/shared/Modal";
 import { ChatsContext } from "../context/ChatsContext";
 import { useDeleteChat } from "../hooks/useDeleteChat";
-import { Player } from "@lottiefiles/react-lottie-player";
 
 const DeleteChatModal = ({ setIsOpen }) => {
   const { data } = useContext(ChatsContext);
@@ -40,19 +39,9 @@ const DeleteChatModal = ({ setIsOpen }) => {
         <Button
           className="fluid-btn primary no-margin"
           onClick={handleChatDeletion}
+          loading={loading}
         >
-          {loading ? (
-            <Player
-              src="spinner.json"
-              className="player"
-              loop
-              autoplay
-              style={{ height: "19px", width: "19px" }}
-              speed={1.5}
-            />
-          ) : (
-            "Delete chat"
-          )}
+          Delete chat
         </Button>
       </div>
     </Modal>

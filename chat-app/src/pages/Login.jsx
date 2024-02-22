@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 import { auth } from "../firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useAuthFormData } from "../hooks/useAuthFormData.js";
-import LottiePlayer from "../components/LottiePlayer.jsx";
 
 export const Login = () => {
   const [error, setError] = useState(false);
@@ -63,16 +62,12 @@ export const Login = () => {
               onChange={handlePasswordInput}
             ></InputField>
           </div>
-          <Button className="fluid-btn primary" onClick={handleSubmit}>
-            {loading ? (
-              <LottiePlayer
-                src={"spinner.json"}
-                width={"19px"}
-                height={"19px"}
-              />
-            ) : (
-              "Log in"
-            )}
+          <Button
+            className="fluid-btn primary"
+            onClick={handleSubmit}
+            loading={loading}
+          >
+            Log in
           </Button>
         </form>
         <button onClick={toRegister} className="button-link-text">

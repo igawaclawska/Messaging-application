@@ -8,7 +8,6 @@ import "firebase/firestore";
 import { db } from "../firebase";
 import { doc, updateDoc } from "firebase/firestore";
 import { updateProfile } from "firebase/auth";
-import LottiePlayer from "../components/LottiePlayer";
 
 const RemoveProfilePictureModal = ({ setIsOpen }) => {
   const { userLogged } = useContext(AuthContext);
@@ -47,12 +46,12 @@ const RemoveProfilePictureModal = ({ setIsOpen }) => {
         >
           Cancel
         </Button>
-        <Button className="fluid-btn primary no-margin" onClick={removeImage}>
-          {loading ? (
-            <LottiePlayer src={"spinner.json"} width={"19px"} height={"19px"} />
-          ) : (
-            "Delete image"
-          )}
+        <Button
+          className="fluid-btn primary no-margin"
+          onClick={removeImage}
+          loading={loading}
+        >
+          Delete image
         </Button>
       </div>
     </Modal>
