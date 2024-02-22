@@ -7,12 +7,15 @@ export const MessagesContext = createContext();
 
 export const MessagesContextProvider = ({ children }) => {
   const [messages, setMessages] = useState(null);
+  const [loading, setLoading] = useState(false);
   const { data } = useContext(ChatsContext);
 
   useEffect(() => {
+    setLoading(true);
     const unSub = onSnapshot(doc(db, "chats", data.chatsId), (doc) => {
       doc.exists() && setMessages(doc.data().messages);
-      console.log("messages rendered");
+      setLoading(false);
+
     });
 
     return () => {
@@ -21,7 +24,7 @@ export const MessagesContextProvider = ({ children }) => {
   }, [data.chatsId]);
 
   return (
-    <MessagesContext.Provider value={{ messages, setMessages }}>
+    <MessagesContext.Provider value={{ messages, setMessages, loading }}>
       {children}
     </MessagesContext.Provider>
   );

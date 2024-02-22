@@ -1,5 +1,5 @@
 import "./RemoveProfilePictureModal.css";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import Button from "../components/Button";
 import Modal from "../components/shared/Modal";
 import ProfileImage from "../components/ProfileImage";
@@ -11,9 +11,11 @@ import { updateProfile } from "firebase/auth";
 
 const RemoveProfilePictureModal = ({ setIsOpen }) => {
   const { userLogged } = useContext(AuthContext);
+  const [loading, setLoading] = useState(false);
 
   const removeImage = async () => {
     try {
+      setLoading(true);
       await updateProfile(userLogged, {
         photoURL: "",
       });
@@ -23,8 +25,10 @@ const RemoveProfilePictureModal = ({ setIsOpen }) => {
       });
     } catch (err) {
       console.log(err);
+    } finally {
+      setIsOpen(false);
+      setLoading(false);
     }
-    setIsOpen(false);
   };
 
   return (
@@ -42,7 +46,11 @@ const RemoveProfilePictureModal = ({ setIsOpen }) => {
         >
           Cancel
         </Button>
-        <Button className="fluid-btn primary no-margin" onClick={removeImage}>
+        <Button
+          className="fluid-btn primary no-margin"
+          onClick={removeImage}
+          loading={loading}
+        >
           Delete image
         </Button>
       </div>

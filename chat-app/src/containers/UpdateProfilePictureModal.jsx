@@ -13,6 +13,7 @@ const UpdateProfilePictureModal = ({ setIsOpen }) => {
   const { userLogged } = useContext(AuthContext);
   const [file, setFile] = useState(null);
   const [imageUrl, setImageUrl] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     console.log(file);
@@ -32,6 +33,7 @@ const UpdateProfilePictureModal = ({ setIsOpen }) => {
   const addImage = async () => {
     if (file !== null) {
       try {
+        setLoading(true);
         const date = new Date().getTime();
         const storageRef = ref(storage, `${userLogged.displayName + date}`);
         if (file !== undefined) {
@@ -53,9 +55,11 @@ const UpdateProfilePictureModal = ({ setIsOpen }) => {
         }
       } catch (err) {
         console.log(err);
+      } finally {
       }
     }
     setIsOpen(false);
+    setLoading(false);
   };
 
   return (
@@ -82,7 +86,11 @@ const UpdateProfilePictureModal = ({ setIsOpen }) => {
         >
           Cancel
         </Button>
-        <Button className="fluid-btn primary no-margin" onClick={addImage}>
+        <Button
+          className="fluid-btn primary no-margin"
+          onClick={addImage}
+          loading={loading}
+        >
           Update image
         </Button>
       </div>
