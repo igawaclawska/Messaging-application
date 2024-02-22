@@ -1,5 +1,5 @@
 import "./RemoveProfilePictureModal.css";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import Button from "../components/Button";
 import Modal from "../components/shared/Modal";
 import ProfileImage from "../components/ProfileImage";
@@ -8,12 +8,15 @@ import "firebase/firestore";
 import { db } from "../firebase";
 import { doc, updateDoc } from "firebase/firestore";
 import { updateProfile } from "firebase/auth";
+import { Player } from "@lottiefiles/react-lottie-player";
 
 const RemoveProfilePictureModal = ({ setIsOpen }) => {
   const { userLogged } = useContext(AuthContext);
+  const [loading, setLoading] = useState(false);
 
   const removeImage = async () => {
     try {
+      setLoading(true);
       await updateProfile(userLogged, {
         photoURL: "",
       });
@@ -23,8 +26,10 @@ const RemoveProfilePictureModal = ({ setIsOpen }) => {
       });
     } catch (err) {
       console.log(err);
+    } finally {
+      setIsOpen(false);
+      setLoading(false);
     }
-    setIsOpen(false);
   };
 
   return (
@@ -43,7 +48,18 @@ const RemoveProfilePictureModal = ({ setIsOpen }) => {
           Cancel
         </Button>
         <Button className="fluid-btn primary no-margin" onClick={removeImage}>
-          Delete image
+          {loading ? (
+            <Player
+              src="spinner.json"
+              className="player"
+              loop
+              autoplay
+              style={{ height: "19px", width: "19px" }}
+              speed={1.6}
+            />
+          ) : (
+            "Delete image"
+          )}
         </Button>
       </div>
     </Modal>

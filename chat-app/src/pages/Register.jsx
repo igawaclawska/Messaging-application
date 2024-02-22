@@ -6,9 +6,11 @@ import { auth, db } from "../firebase";
 import { doc, setDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import { useAuthFormData } from "../hooks/useAuthFormData.js";
+import { Player } from "@lottiefiles/react-lottie-player";
 
 export const Register = () => {
   const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const {
@@ -25,6 +27,7 @@ export const Register = () => {
 
   const writeUserData = async () => {
     try {
+      setLoading(true);
       const res = await createUserWithEmailAndPassword(auth, email, password);
       try {
         await updateProfile(res.user, {
@@ -45,6 +48,8 @@ export const Register = () => {
       }
     } catch (err) {
       setError(true);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -134,7 +139,18 @@ export const Register = () => {
             onChange={handlePasswordRepeatedInput}
           ></InputField>
           <Button className="fluid-btn primary" onClick={registerUser}>
-            Create account
+            {loading ? (
+              <Player
+                src="spinner.json"
+                className="player"
+                loop
+                autoplay
+                style={{ height: "19px", width: "19px" }}
+                speed={1.5}
+              />
+            ) : (
+              "Create account"
+            )}
           </Button>
         </form>
         <button onClick={navigateToLogIn} className="button-link-text">

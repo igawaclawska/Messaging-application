@@ -8,11 +8,13 @@ import { db, storage } from "../firebase";
 import { doc, updateDoc } from "firebase/firestore";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { updateProfile } from "firebase/auth";
+import { Player } from "@lottiefiles/react-lottie-player";
 
 const UpdateProfilePictureModal = ({ setIsOpen }) => {
   const { userLogged } = useContext(AuthContext);
   const [file, setFile] = useState(null);
   const [imageUrl, setImageUrl] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     console.log(file);
@@ -32,6 +34,7 @@ const UpdateProfilePictureModal = ({ setIsOpen }) => {
   const addImage = async () => {
     if (file !== null) {
       try {
+        setLoading(true);
         const date = new Date().getTime();
         const storageRef = ref(storage, `${userLogged.displayName + date}`);
         if (file !== undefined) {
@@ -53,9 +56,11 @@ const UpdateProfilePictureModal = ({ setIsOpen }) => {
         }
       } catch (err) {
         console.log(err);
+      } finally {
       }
     }
     setIsOpen(false);
+    setLoading(false);
   };
 
   return (
@@ -83,7 +88,18 @@ const UpdateProfilePictureModal = ({ setIsOpen }) => {
           Cancel
         </Button>
         <Button className="fluid-btn primary no-margin" onClick={addImage}>
-          Update image
+          {loading ? (
+            <Player
+              src="spinner.json"
+              className="player"
+              loop
+              autoplay
+              style={{ height: "19px", width: "19px" }}
+              speed={1.6}
+            />
+          ) : (
+            "Update image"
+          )}
         </Button>
       </div>
     </Modal>
