@@ -9,9 +9,10 @@ const BubblesScrollable = () => {
   console.log(messages);
   return (
     <div className="bubbles-scrollable">
-      {messages && messages?.map((message) => (
-        <ChatBubble message={message} key={message.id} />
-      ))}
+      {messages &&
+        messages?.map((message) => (
+          <ChatBubble message={message} key={message.id} />
+        ))}
     </div>
   );
 };

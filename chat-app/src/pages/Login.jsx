@@ -9,11 +9,13 @@ import { useAuthFormData } from "../hooks/useAuthFormData.js";
 
 export const Login = () => {
   const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const { email, handleEmailInput, password, handlePasswordInput } =
     useAuthFormData();
 
   const handleSubmit = async () => {
+    setLoading(true);
     try {
       await signInWithEmailAndPassword(auth, email, password);
       toMain();
@@ -21,6 +23,8 @@ export const Login = () => {
       alert("Please enter an existing user");
       setError(true);
       console.log(`error status:${error}`);
+    } finally {
+      setLoading(false);
     }
   };
   let navigate = useNavigate();
@@ -58,8 +62,12 @@ export const Login = () => {
               onChange={handlePasswordInput}
             ></InputField>
           </div>
-          <Button className="fluid-btn primary" onClick={handleSubmit}>
-            Login
+          <Button
+            className="fluid-btn primary"
+            onClick={handleSubmit}
+            loading={loading}
+          >
+            Log in
           </Button>
         </form>
         <button onClick={toRegister} className="button-link-text">

@@ -17,7 +17,7 @@ import {
 } from "firebase/firestore";
 import "firebase/firestore";
 import UserInfo from "../components/UserInfo";
-import { Player } from "@lottiefiles/react-lottie-player";
+import LottiePlayer from "../components/LottiePlayer";
 
 const MessageModal = ({ show }) => {
   const [usersSelected, setUserSelected] = useState();
@@ -26,6 +26,7 @@ const MessageModal = ({ show }) => {
   // const [error, setError] = useState(false);
   const { userLogged } = useContext(AuthContext);
   const [isActive, setIsActive] = useState();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const getUsers = () => {
@@ -66,6 +67,7 @@ const MessageModal = ({ show }) => {
     );
 
   const createChat = async () => {
+    setLoading(true);
     const chatsId =
       userLogged.uid > usersSelected.uid
         ? userLogged.uid + usersSelected.uid
@@ -94,14 +96,20 @@ const MessageModal = ({ show }) => {
             name: usersSelected.displayName,
           },
         });
+        setLoading(false);
       }
-    } catch (err) {}
-    setUserSelected(null);
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setUserSelected(null);
+    }
   };
 
   const handleChatCreation = async () => {
-    await createChat();
-    show(false);
+    if (usersSelected.length !== 0) {
+      await createChat();
+      show(false);
+    }
   };
   const handleSelect = (user) => {
     setUserSelected(user);
@@ -124,10 +132,7 @@ const MessageModal = ({ show }) => {
       />
       {/* The class 'create-message-body' seems to not extst */}
       <div className="create-message-body">
-        <p className="create-chat-instruction">
-          {" "}
-          Available users:
-        </p>
+        <p className="create-chat-instruction"> Available users:</p>
         <div className="add-receivers">
           <ul className="search-list">
             {/*TODO: Turn the list below into "radios" to improve accessibility */}
@@ -144,12 +149,10 @@ const MessageModal = ({ show }) => {
               ))
             ) : (
               <div className="search-list-no-results">
-                <Player
-                  src="user-not-found.json"
-                  className="player"
-                  loop
-                  autoplay
-                  style={{ height: "170px", width: "200px" }}
+                <LottiePlayer
+                  src={"user-not-found.json"}
+                  height={"170px"}
+                  width={"200px"}
                   speed={0.7}
                 />
                 User not found
@@ -168,6 +171,7 @@ const MessageModal = ({ show }) => {
         <Button
           className="fluid-btn primary no-margin"
           onClick={() => handleChatCreation()}
+          loading={loading}
         >
           Create chat
         </Button>

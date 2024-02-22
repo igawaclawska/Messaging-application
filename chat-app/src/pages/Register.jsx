@@ -9,6 +9,7 @@ import { useAuthFormData } from "../hooks/useAuthFormData.js";
 
 export const Register = () => {
   const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const {
@@ -25,6 +26,7 @@ export const Register = () => {
 
   const writeUserData = async () => {
     try {
+      setLoading(true);
       const res = await createUserWithEmailAndPassword(auth, email, password);
       try {
         await updateProfile(res.user, {
@@ -45,6 +47,8 @@ export const Register = () => {
       }
     } catch (err) {
       setError(true);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -133,7 +137,11 @@ export const Register = () => {
             type="password"
             onChange={handlePasswordRepeatedInput}
           ></InputField>
-          <Button className="fluid-btn primary" onClick={registerUser}>
+          <Button
+            className="fluid-btn primary"
+            onClick={registerUser}
+            loading={loading}
+          >
             Create account
           </Button>
         </form>

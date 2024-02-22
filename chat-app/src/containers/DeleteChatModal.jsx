@@ -7,7 +7,7 @@ import { useDeleteChat } from "../hooks/useDeleteChat";
 
 const DeleteChatModal = ({ setIsOpen }) => {
   const { data } = useContext(ChatsContext);
-  const { handleDeleteChat } = useDeleteChat();
+  const { handleDeleteChat, loading } = useDeleteChat();
 
   const handleChatDeletion = async () => {
     try {
@@ -39,6 +39,7 @@ const DeleteChatModal = ({ setIsOpen }) => {
         <Button
           className="fluid-btn primary no-margin"
           onClick={handleChatDeletion}
+          loading={loading}
         >
           Delete chat
         </Button>

@@ -1,4 +1,4 @@
-import  { useContext } from "react";
+import { useContext, useState } from "react";
 import { ChatsContext } from "../context/ChatsContext";
 import { AuthContext } from "../context/AuthContext";
 import { MessagesContext } from "../context/MessagesContext";
@@ -9,9 +9,11 @@ export const useDeleteChat = () => {
   const { data, dispatch } = useContext(ChatsContext);
   const { userLogged } = useContext(AuthContext);
   const { setMessages } = useContext(MessagesContext);
+  const [loading, setLoading] = useState(false);
 
   const handleDeleteChat = async () => {
     try {
+      setLoading(true);
       await updateDoc(doc(db, "userChats", userLogged.uid), {
         [data.chatsId]: deleteField(),
       });
@@ -23,10 +25,12 @@ export const useDeleteChat = () => {
       await deleteDoc(doc(db, "chats", data.chatsId));
     } catch (e) {
       console.log(e);
+    } finally {
+      dispatch({ type: "LOGOUT" });
+      setMessages(null);
+      setLoading(false);
     }
-    dispatch({ type: "LOGOUT" });
-    setMessages(null);
   };
 
-  return { handleDeleteChat };
+  return { handleDeleteChat, loading };
 };
