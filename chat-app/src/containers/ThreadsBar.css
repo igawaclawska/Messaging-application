@@ -1,6 +1,7 @@
 .threads-bar {
   display: flex;
   flex-direction: column;
+  height: 92dvh;
   width: 30%;
   min-width: 30%;
 }

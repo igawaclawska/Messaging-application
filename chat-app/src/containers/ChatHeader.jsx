@@ -41,6 +41,10 @@ const ChatHeader = ({ onClick }) => {
     setIsModalOpen(true);
   };
 
+  const handleExitChatOnMobile = () => {
+    onClick();
+  };
+
   const menuOptions = [
     {
       id: 1,
@@ -53,7 +57,7 @@ const ChatHeader = ({ onClick }) => {
   return (
     <header className="chat-header">
       <div className="chat-header-wrapper">
-        <div onClick={onClick} className="back-btn">
+        <div onClick={handleExitChatOnMobile} className="back-btn">
           <Button
             className="fixed-btn tertiary with-icon"
             startIcon={<ArrowBackIosIcon />}

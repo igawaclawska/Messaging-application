@@ -2,22 +2,17 @@
   display: flex;
   flex-direction: column;
   background-color: var(--white);
-  height: 100vh;
+  height: 100dvh;
   overflow: hidden;
+  overflow: clip;
 }
 
 .home-body {
   display: flex;
   flex-direction: row;
-  height: 100%;
+  height: stretch;
 }
 
 .home-all-contents {
   height: 100%;
-}
-
-@media (max-width: 576px) {
-  .home-body {
-    flex-direction: column;
-  }
 }

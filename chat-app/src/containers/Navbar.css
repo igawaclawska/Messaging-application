@@ -3,6 +3,7 @@ nav {
   width: 100%;
 }
 .navbar-wrapper {
+  height: 68px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -25,4 +26,3 @@ nav {
   color: var(--white);
   font-size: 20px;
 }
-

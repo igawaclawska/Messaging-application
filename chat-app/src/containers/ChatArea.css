@@ -1,7 +1,7 @@
 .chat-area {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  height: 92dvh;
   width: 70%;
   border-left: 0.5px solid var(--lightgrey);
 }
@@ -43,6 +43,10 @@
   animation-fill-mode: forwards;
 }
 
+.back-btn-empty-chat {
+  margin: 16px auto 0 14px;
+}
+
 @media (max-width: 576px) {
   .chat-area {
     width: 100%;
@@ -50,5 +54,9 @@
   }
   .chat-area.invisible {
     display: none;
+  }
+
+  .chat-area-empty {
+    width: 100%;
   }
 }
