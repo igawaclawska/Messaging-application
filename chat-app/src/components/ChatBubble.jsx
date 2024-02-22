@@ -7,10 +7,16 @@ const ChatBubble = ({ message }) => {
   const ref = useRef();
 
   useEffect(() => {
-    ref.current?.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    ref.current?.scrollIntoView({
+      block: "start",
+      inline: "center",
+      behavior: "smooth",
+      alignToTop: false,
+    });
   }, [message]);
+
   return (
-    <div ref={ref} className={`message ${message.senderId === userLogged.uid}`}>
+    <div className={`message ${message.senderId === userLogged.uid}`}>
       <div
         className={
           message.senderId === userLogged.uid
@@ -19,6 +25,7 @@ const ChatBubble = ({ message }) => {
         }
       >
         <div
+          ref={ref}
           className={
             message.senderId === userLogged.uid ? "right-bubble" : "left-bubble"
           }

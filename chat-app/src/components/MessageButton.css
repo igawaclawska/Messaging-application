@@ -1,6 +1,6 @@
 .send-btn {
   margin: 16px 12px 24px 0px;
-  background-color: var(--white);
+  background-color: transparent;
   color: var(--blue1);
   padding: 6px;
   border: none;
