@@ -11,8 +11,16 @@ export const Login = () => {
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const { email, handleEmailInput, password, handlePasswordInput } =
-    useAuthFormData();
+  const {
+    email,
+    emailErrorMsg,
+    handleEmailInput,
+    handleEmailOnBlur,
+    password,
+    passwordErrorMsg,
+    handlePasswordInput,
+    handlePasswordOnBlur,
+  } = useAuthFormData();
 
   const handleSubmit = async () => {
     setLoading(true);
@@ -50,7 +58,9 @@ export const Login = () => {
               id="email"
               label="E-mail"
               type="email"
+              helperText={emailErrorMsg}
               onChange={handleEmailInput}
+              onBlur={handleEmailOnBlur}
             ></InputField>
           </div>
           <div className="input-element">
@@ -59,7 +69,9 @@ export const Login = () => {
               id="password"
               label="Password"
               type="password"
+              helperText={passwordErrorMsg}
               onChange={handlePasswordInput}
+              onBlur={handlePasswordOnBlur}
             ></InputField>
           </div>
           <Button
