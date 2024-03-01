@@ -17,6 +17,8 @@ const InputField = ({
   onChange,
   onKeyDown,
   error,
+  helperText,
+  onBlur,
 }) => (
   <div className="input-element">
     <TextField
@@ -40,6 +42,8 @@ const InputField = ({
       onKeyDown={onKeyDown}
       placeholder={placeholder}
       error={error ? true : false}
+      helperText={helperText && helperText}
+      onBlur={onBlur&& onBlur}
     />
   </div>
 );
