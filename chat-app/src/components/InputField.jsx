@@ -1,11 +1,11 @@
 import "./InputField.css";
 import { TextField } from "@mui/material";
 
-const isMobile = () => {
-  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-    navigator.userAgent
-  );
-};
+// const isMobile = () => {
+//   return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+//     navigator.userAgent
+//   );
+// };
 
 const InputField = ({
   value,
@@ -16,6 +16,7 @@ const InputField = ({
   type,
   onChange,
   onKeyDown,
+  error,
 }) => (
   <div className="input-element">
     <TextField
@@ -38,6 +39,7 @@ const InputField = ({
       onChange={onChange}
       onKeyDown={onKeyDown}
       placeholder={placeholder}
+      error={error ? true : false}
     />
   </div>
 );
