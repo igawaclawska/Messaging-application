@@ -30,6 +30,10 @@ form {
   font-weight: 600;
 }
 
+.error-msg {
+  color: rgb(196, 0, 0);
+}
+
 .button-link-text {
   font-size: 12px;
   font-weight: 600;

@@ -1,30 +1,38 @@
 import "./Login.css";
 import { useState } from "react";
-import Button from "../components/Button";
-import InputField from "../components/InputField";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useAuthFormData } from "../hooks/useAuthFormData.js";
+import Button from "../components/Button";
+import InputField from "../components/InputField";
 
 export const Login = () => {
-  const [error, setError] = useState(false);
+  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const { email, handleEmailInput, password, handlePasswordInput } =
-    useAuthFormData();
+  const {
+    email,
+    emailErrorMsg,
+    handleEmailInput,
+    handleEmailOnBlur,
+    password,
+    passwordErrorMsg,
+    handleExistingPasswordInput,
+    handleExistingPasswordOnBlur,
+  } = useAuthFormData();
 
   const handleSubmit = async () => {
-    setLoading(true);
-    try {
-      await signInWithEmailAndPassword(auth, email, password);
-      toMain();
-    } catch (err) {
-      alert("Please enter an existing user");
-      setError(true);
-      console.log(`error status:${error}`);
-    } finally {
-      setLoading(false);
+    if (email && password && !emailErrorMsg && !passwordErrorMsg) {
+      setLoading(true);
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+        toMain();
+      } catch (err) {
+        setError("Invalid password or email");
+      } finally {
+        setLoading(false);
+      }
     }
   };
   let navigate = useNavigate();
@@ -50,7 +58,10 @@ export const Login = () => {
               id="email"
               label="E-mail"
               type="email"
+              helperText={emailErrorMsg}
               onChange={handleEmailInput}
+              onBlur={handleEmailOnBlur}
+              error={emailErrorMsg}
             ></InputField>
           </div>
           <div className="input-element">
@@ -59,9 +70,13 @@ export const Login = () => {
               id="password"
               label="Password"
               type="password"
-              onChange={handlePasswordInput}
+              helperText={passwordErrorMsg}
+              onChange={handleExistingPasswordInput}
+              onBlur={handleExistingPasswordOnBlur}
+              error={passwordErrorMsg}
             ></InputField>
           </div>
+          {error && <p className="error-msg">{error}</p>}
           <Button
             className="fluid-btn primary"
             onClick={handleSubmit}

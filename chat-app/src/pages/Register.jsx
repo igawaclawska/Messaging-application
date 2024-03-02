@@ -1,11 +1,11 @@
 import { useState } from "react";
-import Button from "../components/Button";
-import InputField from "../components/InputField";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth, db } from "../firebase";
 import { doc, setDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import { useAuthFormData } from "../hooks/useAuthFormData.js";
+import Button from "../components/Button";
+import InputField from "../components/InputField";
 
 export const Register = () => {
   const [error, setError] = useState(false);
@@ -14,14 +14,18 @@ export const Register = () => {
 
   const {
     email,
+    emailErrorMsg,
     handleEmailInput,
+    handleEmailOnBlur,
     password,
+    passwordErrorMsg,
     handlePasswordInput,
+    handlePasswordOnBlur,
     displayName,
+    displayNameErrorMsg,
     handleDisplayNameInput,
+    handleDisplayNameOnBlur,
     displayNameLowerCase,
-    passwordRepeated,
-    handlePasswordRepeatedInput,
   } = useAuthFormData();
 
   const writeUserData = async () => {
@@ -52,36 +56,6 @@ export const Register = () => {
     }
   };
 
-  function validateInput() {
-    if (
-      /^[A-Za-z0-9._%+-]+@itu\.dk$/.test(email) &&
-      password.length >= 6 &&
-      password === passwordRepeated &&
-      displayName !== null
-    ) {
-      return true;
-    } else if (password.length < 6) {
-      alert("Password needs to be at least 6 characters long");
-      return false;
-    } else if (password !== passwordRepeated) {
-      alert("Passwords don't match");
-      return false;
-    } else if (
-      email.length === 0 ||
-      /^[A-Za-z0-9._%+-]+@itu\.dk$/.test(email) === false
-    ) {
-      alert("Your email must end up with @itu.dk");
-      return false;
-    } else if (displayName === null) {
-      alert("Name field can't be blank.");
-      return false;
-    } else {
-      alert(
-        "You have entered an invalid email or a password with less than 5 characters."
-      );
-      return false;
-    }
-  }
   const navigateToMain = () => {
     let path = "/home";
     navigate(path);
@@ -92,8 +66,13 @@ export const Register = () => {
     navigate(path);
   };
 
-  function registerUser() {
-    if (validateInput()) {
+  function registerUser(e) {
+    e.preventDefault();
+    if (
+      displayName &&
+      email &&
+      password & !displayNameErrorMsg & !emailErrorMsg & !passwordErrorMsg
+    ) {
       writeUserData();
     }
   }
@@ -103,7 +82,7 @@ export const Register = () => {
       <div className="form-wrapper">
         <span className="logo">MINI CHAT</span>
         <h2 className="title">Register</h2>
-        <form className="form">
+        <form onSubmit={registerUser} className="form">
           <InputField
             className="input-name"
             id="full-name"
@@ -111,31 +90,33 @@ export const Register = () => {
             value={displayName}
             type="text"
             onChange={handleDisplayNameInput}
+            helperText={displayNameErrorMsg}
+            onBlur={handleDisplayNameOnBlur}
+            error={displayNameErrorMsg}
           ></InputField>
           <InputField
             className="input-email"
             id="email"
             value={email}
             label="E-mail"
-            placeholder="example@itu.dk"
+            placeholder="example@email.com"
             type="email"
             onChange={handleEmailInput}
+            helperText={emailErrorMsg}
+            onBlur={handleEmailOnBlur}
+            error={emailErrorMsg}
           ></InputField>
           <InputField
             className="input-password"
             id="password"
             value={password}
             label="Password"
+            placeholder="6 or more characters"
             type="password"
             onChange={handlePasswordInput}
-          ></InputField>
-          <InputField
-            className="input-repeat-password"
-            id="repeat-password"
-            value={passwordRepeated}
-            label="Repeat password"
-            type="password"
-            onChange={handlePasswordRepeatedInput}
+            onBlur={handlePasswordOnBlur}
+            helperText={passwordErrorMsg}
+            error={passwordErrorMsg}
           ></InputField>
           <Button
             className="fluid-btn primary"
