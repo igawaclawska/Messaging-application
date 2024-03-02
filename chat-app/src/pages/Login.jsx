@@ -63,6 +63,7 @@ export const Login = () => {
               helperText={emailErrorMsg}
               onChange={handleEmailInput}
               onBlur={handleEmailOnBlur}
+              error={emailErrorMsg}
             ></InputField>
           </div>
           <div className="input-element">
@@ -74,6 +75,7 @@ export const Login = () => {
               helperText={passwordErrorMsg}
               onChange={handleExistingPasswordInput}
               onBlur={handleExistingPasswordOnBlur}
+              error={passwordErrorMsg}
             ></InputField>
           </div>
           <Button

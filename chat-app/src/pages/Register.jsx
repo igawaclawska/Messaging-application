@@ -92,27 +92,31 @@ export const Register = () => {
             onChange={handleDisplayNameInput}
             helperText={displayNameErrorMsg}
             onBlur={handleDisplayNameOnBlur}
+            error={displayNameErrorMsg}
           ></InputField>
           <InputField
             className="input-email"
             id="email"
             value={email}
             label="E-mail"
-            placeholder="example@itu.dk"
+            placeholder="example@email.com"
             type="email"
             onChange={handleEmailInput}
             helperText={emailErrorMsg}
             onBlur={handleEmailOnBlur}
+            error={emailErrorMsg}
           ></InputField>
           <InputField
             className="input-password"
             id="password"
             value={password}
             label="Password"
+            placeholder="6 or more characters"
             type="password"
             onChange={handlePasswordInput}
             onBlur={handlePasswordOnBlur}
             helperText={passwordErrorMsg}
+            error={passwordErrorMsg}
           ></InputField>
           <Button
             className="fluid-btn primary"

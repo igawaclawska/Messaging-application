@@ -24,8 +24,10 @@ const InputField = ({
     <TextField
       sx={{
         "& .MuiInputLabel-root": { color: "var(--grey)" }, //styles the label
-        "& .MuiInputLabel-root.Mui-focused": { color: "var(--blue1)" }, //styles the label
-        "& .MuiOutlinedInput-root.Mui-focused": {
+        "& .MuiInputLabel-root.Mui-focused:not(.Mui-disabled, .Mui-error)": {
+          color: "var(--blue1)",
+        }, //styles the label
+        "& .MuiOutlinedInput-root.Mui-focused:": {
           "& > fieldset": {
             borderColor: "var(--blue1)",
           },
@@ -43,7 +45,7 @@ const InputField = ({
       placeholder={placeholder}
       error={error ? true : false}
       helperText={helperText && helperText}
-      onBlur={onBlur&& onBlur}
+      onBlur={onBlur && onBlur}
     />
   </div>
 );
