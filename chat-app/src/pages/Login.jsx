@@ -8,7 +8,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { useAuthFormData } from "../hooks/useAuthFormData.js";
 
 export const Login = () => {
-  const [error, setError] = useState(false);
+  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
   const {
@@ -29,9 +29,7 @@ export const Login = () => {
         await signInWithEmailAndPassword(auth, email, password);
         toMain();
       } catch (err) {
-        alert("Please enter an existing user");
-        setError(true);
-        console.log(`error status:${error}`);
+        setError("Invalid password or email");
       } finally {
         setLoading(false);
       }
@@ -78,6 +76,7 @@ export const Login = () => {
               error={passwordErrorMsg}
             ></InputField>
           </div>
+          {error && <p className="error-msg">{error}</p>}
           <Button
             className="fluid-btn primary"
             onClick={handleSubmit}
