@@ -1,0 +1,28 @@
+.picker-container {
+  position: relative;
+}
+
+.icon-button {
+  color: var(--blue1);
+  margin: 10px 0;
+  border: none;
+  cursor: pointer;
+}
+
+.icon-button:hover {
+  color: var(--blue2);
+}
+
+.icon-button:active {
+  color: var(--blue3);
+}
+
+.emoji-picker-wrapper {
+  right: 80px;
+  bottom: 48px;
+  right: 0;
+  position: absolute;
+  border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 10px 50px;
+  z-index: 10;
+}

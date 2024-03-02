@@ -15,22 +15,7 @@
   );
 }
 
-.emoji-picker-wrapper {
-  right: 80px;
-  bottom: 0;
-  transform: translateY(-88px);
-  position: absolute;
-  border-radius: 8px;
-  box-shadow: rgba(0, 0, 0, 0.2) 0px 10px 50px;
-  z-index: 10;
-}
-
 @media (max-width: 576px) {
-  .emoji-picker-wrapper {
-    right: 0;
-    transform: translateY(-104px);
-  }
-
   .send-message-wrapper {
     width: 100dvw;
   }

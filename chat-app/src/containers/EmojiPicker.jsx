@@ -1,7 +1,7 @@
+import "./EmojiPicker.css"
 import { useRef } from "react";
 import { useDropdownHandler } from "../hooks/useDropdownHandler";
 import EmojiPicker from "emoji-picker-react";
-import MessageButton from "../components/MessageButton";
 import SentimentSatisfiedAltRoundedIcon from "@mui/icons-material/SentimentSatisfiedAltRounded";
 
 const EmojiPickerDropdown = ({ setText }) => {
@@ -20,11 +20,9 @@ const EmojiPickerDropdown = ({ setText }) => {
   };
 
   return (
-    <div ref={pickerRef}>
-      <MessageButton
-        icon={<SentimentSatisfiedAltRoundedIcon />}
-        onClick={handleClick}
-      />
+    <div className="picker-container" ref={pickerRef}>
+      <SentimentSatisfiedAltRoundedIcon className="icon-button" onClick={handleClick} />
+
       <div className="emoji-picker-wrapper">
         {isDropdownOpen && (
           <EmojiPicker
