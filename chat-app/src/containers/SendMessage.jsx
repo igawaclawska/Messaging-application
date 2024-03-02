@@ -20,12 +20,13 @@ const SendMessage = () => {
   const { userLogged } = useContext(AuthContext);
   const { data } = useContext(ChatsContext);
 
-  const handleKey = (e) => {
+  const handleKey = async (e) => {
     if (text.trim() !== "" && e.keyCode === 13 && !e.shiftKey) {
-      handleSend();
+      e.preventDefault();
+      await handleSend();
     }
   };
-  
+
   const handleSend = async () => {
     if (text.trim() !== "") {
       try {
@@ -71,8 +72,9 @@ const SendMessage = () => {
         onKeyDown={handleKey}
         onChange={(event) => setText(event.target.value)}
         value={text}
+        endButtons={<EmojiPickerDropdown setText={setText} />}
       />
-      <EmojiPickerDropdown setText={setText} />
+
       <MessageButton onClick={handleSend} />
     </div>
   );

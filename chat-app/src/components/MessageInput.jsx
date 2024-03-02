@@ -1,7 +1,7 @@
 import "./MessageInput.css";
 import { useEffect, useRef } from "react";
 
-const MessageInput = ({ onKeyDown, value, type, onChange }) => {
+const MessageInput = ({ onKeyDown, value, type, onChange, endButtons }) => {
   const textAreaHeightRef = useRef(null);
 
   useEffect(() => {
@@ -19,17 +19,21 @@ const MessageInput = ({ onKeyDown, value, type, onChange }) => {
 
   return (
     <>
-      <textarea
-        ref={textAreaHeightRef}
-        onKeyDown={onKeyDown}
-        type={type}
-        className={"messageInput"}
-        placeholder={"Type a message..."}
-        onChange={onChange}
-        required={true}
-        value={value}
-        id="scalable-text"
-      />
+      <div className="text-area-wrapper">
+        <textarea
+          rows={1}
+          ref={textAreaHeightRef}
+          onKeyDown={onKeyDown}
+          type={type}
+          className={"messageInput"}
+          placeholder={"Type a message..."}
+          onChange={onChange}
+          required={true}
+          value={value}
+          id="scalable-text"
+        />
+        {endButtons}
+      </div>
     </>
   );
 };
