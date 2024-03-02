@@ -26,25 +26,27 @@ export const useAuthFormData = () => {
     return value.trim() !== "";
   };
 
-  const validateEmail = (email) => {
+  const testEmail = (email) => {
     if (!isValue(email)) {
-      setEmailErrorMsg("Email is required");
+      return "Email is required";
     } else if (!isEmailValid(email)) {
-      setEmailErrorMsg("Invalid format");
-    } else setEmailErrorMsg("");
+      return "Invalid format";
+    } else return "";
   };
 
   const handleEmailInput = (e) => {
     const email = e.target.value;
     setEmail(email);
     if (emailAttempt > 0) {
-      validateEmail(email);
+      let errorMsg = testEmail(email);
+      setEmailErrorMsg(errorMsg);
     }
   };
 
   const handleEmailOnBlur = (e) => {
     const email = e.target.value;
-    validateEmail(email);
+    let errorMsg = testEmail(email);
+    setEmailErrorMsg(errorMsg);
     setEmailAttempt((prev) => prev + 1);
   };
 
@@ -52,32 +54,56 @@ export const useAuthFormData = () => {
     return password.length >= 6;
   };
 
-  const validatePassword = (password) => {
+  const testPassword = (password) => {
     if (!isValue(password)) {
-      setPasswordErrorMsg("Password is required");
+      return "Password is required";
     } else if (!isPasswordValid(password)) {
-      setPasswordErrorMsg("Use password that has 6 or more characters");
-    } else setPasswordErrorMsg("");
+      return "Use password that has 6 or more characters";
+    } else return "";
+  };
+
+  const testPasswordExistence = (password) => {
+    if (!isValue(password)) {
+      return "Password is required";
+    } else return "";
   };
 
   const handlePasswordInput = (e) => {
     const password = e.target.value;
     setPassword(password);
     if (passwordAttempt > 0) {
-      validatePassword(password);
+      let errorMsg = testPassword(password);
+      setPasswordErrorMsg(errorMsg);
     }
   };
 
   const handlePasswordOnBlur = (e) => {
     const password = e.target.value;
-    validatePassword(password);
+    let errorMsg = testPassword(password);
+    setPasswordErrorMsg(errorMsg);
     setPasswordAttempt((prev) => prev + 1);
   };
 
-  const validateDisplayName = (userName) => {
+  const handleExistingPasswordInput = (e) => {
+    const password = e.target.value;
+    setPassword(password);
+    if (passwordAttempt > 0) {
+      let errorMsg = testPasswordExistence(password);
+      setPasswordErrorMsg(errorMsg);
+    }
+  };
+
+  const handleExistingPasswordOnBlur = (e) => {
+    const password = e.target.value;
+    let errorMsg = testPasswordExistence(password);
+    setPasswordErrorMsg(errorMsg);
+    setPasswordAttempt((prev) => prev + 1);
+  };
+
+  const testDisplayName = (userName) => {
     if (!isValue(userName)) {
-      setDisplayNameErrorMsg("Name is required");
-    } else setDisplayNameErrorMsg("");
+      return "Name is required";
+    } else return "";
   };
 
   const handleDisplayNameInput = (e) => {
@@ -88,13 +114,15 @@ export const useAuthFormData = () => {
     setDisplayNameLowerCase(nameLowercase);
 
     if (displayNameAttempt > 0) {
-      validateDisplayName(name);
+      let errorMsg = testDisplayName(name);
+      setDisplayNameErrorMsg(errorMsg);
     }
   };
 
   const handleDisplayNameOnBlur = (e) => {
     const userName = e.target.value;
-    validateDisplayName(userName);
+    let errorMsg = testDisplayName(userName);
+    setDisplayNameErrorMsg(errorMsg);
     setDisplayNameAttempt((prev) => prev + 1);
   };
 
@@ -107,6 +135,8 @@ export const useAuthFormData = () => {
     passwordErrorMsg,
     handlePasswordInput,
     handlePasswordOnBlur,
+    handleExistingPasswordInput,
+    handleExistingPasswordOnBlur,
     displayName,
     displayNameErrorMsg,
     handleDisplayNameInput,

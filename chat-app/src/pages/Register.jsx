@@ -68,7 +68,11 @@ export const Register = () => {
 
   function registerUser(e) {
     e.preventDefault();
-    if (displayName && email && password) {
+    if (
+      displayName &&
+      email &&
+      password & !displayNameErrorMsg & !emailErrorMsg & !passwordErrorMsg
+    ) {
       writeUserData();
     }
   }

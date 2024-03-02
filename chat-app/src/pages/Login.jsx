@@ -18,21 +18,23 @@ export const Login = () => {
     handleEmailOnBlur,
     password,
     passwordErrorMsg,
-    handlePasswordInput,
-    handlePasswordOnBlur,
+    handleExistingPasswordInput,
+    handleExistingPasswordOnBlur,
   } = useAuthFormData();
 
   const handleSubmit = async () => {
-    setLoading(true);
-    try {
-      await signInWithEmailAndPassword(auth, email, password);
-      toMain();
-    } catch (err) {
-      alert("Please enter an existing user");
-      setError(true);
-      console.log(`error status:${error}`);
-    } finally {
-      setLoading(false);
+    if (email && password && !emailErrorMsg && !passwordErrorMsg) {
+      setLoading(true);
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+        toMain();
+      } catch (err) {
+        alert("Please enter an existing user");
+        setError(true);
+        console.log(`error status:${error}`);
+      } finally {
+        setLoading(false);
+      }
     }
   };
   let navigate = useNavigate();
@@ -70,8 +72,8 @@ export const Login = () => {
               label="Password"
               type="password"
               helperText={passwordErrorMsg}
-              onChange={handlePasswordInput}
-              onBlur={handlePasswordOnBlur}
+              onChange={handleExistingPasswordInput}
+              onBlur={handleExistingPasswordOnBlur}
             ></InputField>
           </div>
           <Button
