@@ -1,8 +1,8 @@
-import './ThreadsBar.css'
+import "./ThreadsBar.css";
 import ThreadHeader from "./ThreadHeader";
 import ThreadList from "./ThreadList";
 
-const ThreadsBar = ({ onLoad, visibility }) => {
+const ThreadsBar = ({ visibility }) => {
   return (
     <div className="threads-bar">
       <ThreadHeader></ThreadHeader>

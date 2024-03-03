@@ -1,5 +1,8 @@
 import "./ChatHeader.css";
 import { useContext, useState, useEffect } from "react";
+import { db } from "../firebase";
+import { onSnapshot, collection, query, where } from "firebase/firestore";
+import { ChatsContext } from "../context/ChatsContext";
 import Button from "../components/Button";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
@@ -7,9 +10,6 @@ import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined
 import DeleteChatModal from "./DeleteChatModal";
 import DropdownMenu from "../components/DropdownMenu";
 import ProfileImage from "../components/ProfileImage";
-import { ChatsContext } from "../context/ChatsContext";
-import { db } from "../firebase";
-import { onSnapshot, collection, query, where } from "firebase/firestore";
 
 const ChatHeader = ({ onClick }) => {
   const { data } = useContext(ChatsContext);

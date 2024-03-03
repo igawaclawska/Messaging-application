@@ -1,8 +1,7 @@
 import "./SingleThread.css";
 import { useState, useEffect, useContext } from "react";
 import { db } from "../firebase";
-import { onSnapshot } from "firebase/firestore";
-import { collection, query, where } from "firebase/firestore";
+import { collection, query, where, onSnapshot } from "firebase/firestore";
 import { AuthContext } from "../context/AuthContext";
 import ProfileImage from "./ProfileImage";
 

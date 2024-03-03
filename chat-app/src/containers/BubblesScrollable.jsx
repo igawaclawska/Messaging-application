@@ -1,6 +1,7 @@
-import React, { useContext } from "react";
-import ChatBubble from "../components/ChatBubble";
 import "./BubblesScrollable.css";
+import { useContext } from "react";
+import ChatBubble from "../components/ChatBubble";
+
 import { MessagesContext } from "../context/MessagesContext";
 
 const BubblesScrollable = () => {

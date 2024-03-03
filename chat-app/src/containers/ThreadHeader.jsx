@@ -1,5 +1,4 @@
 import "./ThreadHeader.css";
-import React from "react";
 import { useState, useContext } from "react";
 import { WindowSizeContext } from "../context/WindowSizeContext";
 import Button from "../components/Button";

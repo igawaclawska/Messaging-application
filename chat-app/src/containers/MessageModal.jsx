@@ -1,11 +1,7 @@
 import "./MessageModal.css";
 import { useContext, useState, useEffect } from "react";
-import Button from "../components/Button";
-import InputField from "../components/InputField";
-import Modal from "../components/shared/Modal";
 import { AuthContext } from "../context/AuthContext";
 import { db } from "../firebase";
-import { onSnapshot } from "firebase/firestore";
 import {
   collection,
   doc,
@@ -14,9 +10,12 @@ import {
   getDoc,
   updateDoc,
   setDoc,
+  onSnapshot,
 } from "firebase/firestore";
-import "firebase/firestore";
 import UserInfo from "../components/UserInfo";
+import Button from "../components/Button";
+import InputField from "../components/InputField";
+import Modal from "../components/shared/Modal";
 import LottiePlayer from "../components/LottiePlayer";
 
 const MessageModal = ({ show }) => {
@@ -99,7 +98,7 @@ const MessageModal = ({ show }) => {
         setLoading(false);
       }
     } catch (err) {
-      console.log(err);
+      console.error(err);
     } finally {
       setUserSelected(null);
     }

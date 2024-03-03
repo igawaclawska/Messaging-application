@@ -1,10 +1,10 @@
 import "./ThreadList.css";
-import SingleThread from "../components/SingleThread";
-import React, { useState, useContext, useEffect } from "react";
+import { useState, useContext, useEffect } from "react";
 import { doc, onSnapshot } from "firebase/firestore";
 import { AuthContext } from "../context/AuthContext";
 import { ChatsContext } from "../context/ChatsContext";
 import { db } from "../firebase";
+import SingleThread from "../components/SingleThread";
 
 const ThreadList = ({ visibility }) => {
   const [isActive, setIsActive] = useState(null);
@@ -29,8 +29,8 @@ const ThreadList = ({ visibility }) => {
     userLogged.uid && getChats();
   }, [userLogged.uid]);
 
-  const handleSelect = (u) => {
-    dispatch({ type: "INDIVIDUAL_CHAT", payload: u });
+  const handleSelect = (user) => {
+    dispatch({ type: "INDIVIDUAL_CHAT", payload: user });
   };
 
   //create dynamic thread components
@@ -43,7 +43,9 @@ const ThreadList = ({ visibility }) => {
             <SingleThread
               key={chat[0]}
               receiver={chat[1].messageReceiver}
-              className={`single-thread-list-element ${isActive === chat[1] && "active"}`}
+              className={`single-thread-list-element ${
+                isActive === chat[1] && "active"
+              }`}
               message={chat[1]?.lastMessage?.message}
               onClick={() => {
                 handleSelect(chat[1].messageReceiver);
