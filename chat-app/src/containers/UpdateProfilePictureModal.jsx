@@ -1,13 +1,13 @@
 import "./UpdateProfilePictureModal.css";
-import React, { useContext, useState, useEffect } from "react";
-import Button from "../components/Button";
-import Modal from "../components/shared/Modal";
-import ProfileImage from "../components/ProfileImage";
+import { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { db, storage } from "../firebase";
 import { doc, updateDoc } from "firebase/firestore";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { updateProfile } from "firebase/auth";
+import Button from "../components/Button";
+import Modal from "../components/shared/Modal";
+import ProfileImage from "../components/ProfileImage";
 
 const UpdateProfilePictureModal = ({ setIsOpen }) => {
   const { userLogged } = useContext(AuthContext);
@@ -48,13 +48,13 @@ const UpdateProfilePictureModal = ({ setIsOpen }) => {
                 });
                 window.location.reload();
               } catch (err) {
-                console.log(err);
+                console.error(err);
               }
             });
           });
         }
       } catch (err) {
-        console.log(err);
+        console.error(err);
       } finally {
       }
     }

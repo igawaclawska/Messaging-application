@@ -46,10 +46,11 @@ export const Register = () => {
         await setDoc(doc(db, "userChats", res.user.uid), {});
         navigateToMain();
       } catch (err) {
-        console.log("error status:", error);
+        console.error(err);
         setError(true);
       }
     } catch (err) {
+      console.error(err);
       setError(true);
     } finally {
       setLoading(false);

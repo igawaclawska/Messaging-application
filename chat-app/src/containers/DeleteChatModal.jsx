@@ -1,9 +1,9 @@
 import "./DeleteChatModal.css";
-import React, { useContext } from "react";
-import Button from "../components/Button";
-import Modal from "../components/shared/Modal";
+import { useContext } from "react";
 import { ChatsContext } from "../context/ChatsContext";
 import { useDeleteChat } from "../hooks/useDeleteChat";
+import Button from "../components/Button";
+import Modal from "../components/shared/Modal";
 
 const DeleteChatModal = ({ setIsOpen }) => {
   const { data } = useContext(ChatsContext);
@@ -13,7 +13,7 @@ const DeleteChatModal = ({ setIsOpen }) => {
     try {
       await handleDeleteChat();
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
     setIsOpen(false);
   };

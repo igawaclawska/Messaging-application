@@ -1,5 +1,5 @@
 import "./SendMessage.css";
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { ChatsContext } from "../context/ChatsContext";
 import {
@@ -60,7 +60,7 @@ const SendMessage = () => {
         });
         setText("");
       } catch (err) {
-        console.log(err);
+        console.error(err);
       }
     }
   };

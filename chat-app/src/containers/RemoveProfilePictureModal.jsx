@@ -1,13 +1,12 @@
 import "./RemoveProfilePictureModal.css";
-import React, { useContext, useState } from "react";
-import Button from "../components/Button";
-import Modal from "../components/shared/Modal";
-import ProfileImage from "../components/ProfileImage";
-import { AuthContext } from "../context/AuthContext";
-import "firebase/firestore";
+import { useContext, useState } from "react";
 import { db } from "../firebase";
 import { doc, updateDoc } from "firebase/firestore";
 import { updateProfile } from "firebase/auth";
+import { AuthContext } from "../context/AuthContext";
+import Button from "../components/Button";
+import Modal from "../components/shared/Modal";
+import ProfileImage from "../components/ProfileImage";
 
 const RemoveProfilePictureModal = ({ setIsOpen }) => {
   const { userLogged } = useContext(AuthContext);
@@ -24,7 +23,7 @@ const RemoveProfilePictureModal = ({ setIsOpen }) => {
         photoURL: "",
       });
     } catch (err) {
-      console.log(err);
+      console.error(err);
     } finally {
       setIsOpen(false);
       setLoading(false);

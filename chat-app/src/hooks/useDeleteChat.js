@@ -24,7 +24,7 @@ export const useDeleteChat = () => {
 
       await deleteDoc(doc(db, "chats", data.chatsId));
     } catch (e) {
-      console.log(e);
+      console.error(e);
     } finally {
       dispatch({ type: "LOGOUT" });
       setMessages(null);

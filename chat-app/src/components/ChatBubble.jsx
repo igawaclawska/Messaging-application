@@ -1,5 +1,5 @@
 import "./ChatBubble.css";
-import React, { useContext, useEffect, useRef } from "react";
+import { useContext, useEffect, useRef } from "react";
 import { AuthContext } from "../context/AuthContext";
 
 const ChatBubble = ({ message }) => {
