@@ -14,34 +14,31 @@ export const Register = () => {
 
   const {
     email,
-    emailErrorMsg,
-    handleEmailInput,
-    handleEmailOnBlur,
+    handleEmail,
     password,
-    passwordErrorMsg,
-    handlePasswordInput,
-    handlePasswordOnBlur,
+    handlePassword,
     displayName,
-    displayNameErrorMsg,
-    handleDisplayNameInput,
-    handleDisplayNameOnBlur,
-    displayNameLowerCase,
+    handleDisplayName,
   } = useAuthFormData();
 
   const writeUserData = async () => {
     try {
       setLoading(true);
-      const res = await createUserWithEmailAndPassword(auth, email, password);
+      const res = await createUserWithEmailAndPassword(
+        auth,
+        email.value,
+        password.value
+      );
       try {
         await updateProfile(res.user, {
-          displayName,
+          displayName: displayName.value,
         });
         console.log(res);
         await setDoc(doc(db, "users", res.user.uid), {
           uid: res.user.uid,
-          displayName,
-          displayNameLowerCase,
-          email,
+          displayName: displayName.value,
+          displayNameLowerCase: displayName.value.toLowerCase(),
+          email: email.value,
         });
         await setDoc(doc(db, "userChats", res.user.uid), {});
         navigateToMain();
@@ -70,9 +67,12 @@ export const Register = () => {
   function registerUser(e) {
     e.preventDefault();
     if (
-      displayName &&
-      email &&
-      password & !displayNameErrorMsg & !emailErrorMsg & !passwordErrorMsg
+      displayName.value &&
+      email.value &&
+      password.value &&
+      !displayName.error &&
+      !email.error &&
+      !password.error
     ) {
       writeUserData();
     }
@@ -88,36 +88,33 @@ export const Register = () => {
             className="input-name"
             id="full-name"
             label="Full name"
-            value={displayName}
             type="text"
-            onChange={handleDisplayNameInput}
-            helperText={displayNameErrorMsg}
-            onBlur={handleDisplayNameOnBlur}
-            error={displayNameErrorMsg}
+            onChange={handleDisplayName}
+            helperText={displayName.error}
+            onBlur={handleDisplayName}
+            error={displayName.error}
           ></InputField>
           <InputField
             className="input-email"
             id="email"
-            value={email}
             label="E-mail"
             placeholder="example@email.com"
             type="email"
-            onChange={handleEmailInput}
-            helperText={emailErrorMsg}
-            onBlur={handleEmailOnBlur}
-            error={emailErrorMsg}
+            onChange={handleEmail}
+            helperText={email.error}
+            onBlur={handleEmail}
+            error={email.error}
           ></InputField>
           <InputField
             className="input-password"
             id="password"
-            value={password}
             label="Password"
             placeholder="6 or more characters"
             type="password"
-            onChange={handlePasswordInput}
-            onBlur={handlePasswordOnBlur}
-            helperText={passwordErrorMsg}
-            error={passwordErrorMsg}
+            onChange={handlePassword}
+            onBlur={handlePassword}
+            helperText={password.error}
+            error={password.error}
           ></InputField>
           <Button
             className="fluid-btn primary"
