@@ -21,82 +21,43 @@ export const useAuthFormData = () => {
 
   const [displayName, setDisplayName] = useState({
     value: "",
-    valueLowerCase: "",
     error: "",
     firstAttempt: true,
   });
 
-  const handleEmail = (e) => {
-    const emailInput = e.target.value;
-    let errorMsg = testEmail(emailInput);
-    setEmail((prevState) => ({
-      ...prevState,
-      value: emailInput,
-    }));
-    if (email.firstAttempt !== true) {
-      setEmail((prevState) => ({ ...prevState, error: errorMsg }));
+  const adaptState = (prevState, event, testFunction) => {
+    const input = event.target.value;
+    let errorMsg = testFunction(input);
+    let newState = { ...prevState, value: input };
+
+    if (prevState.firstAttempt !== true) {
+      newState = { ...newState, error: errorMsg };
     }
-    if (e.type === "blur") {
-      setEmail((prevState) => ({
-        ...prevState,
-        error: errorMsg,
-        firstAttempt: false,
-      }));
+    if (event.type === "blur") {
+      newState = { ...newState, error: errorMsg, firstAttempt: false };
     }
+
+    return newState;
   };
 
-  const handlePassword = (e) => {
-    const passwordInput = e.target.value;
-    let errorMsg = testPassword(passwordInput);
-    setPassword((prevState) => ({ ...prevState, value: passwordInput }));
-    if (password.firstAttempt !== true) {
-      setPassword((prevState) => ({ ...prevState, error: errorMsg }));
-    }
-    if (e.type === "blur") {
-      setPassword((prevState) => ({
-        ...prevState,
-        error: errorMsg,
-        firstAttempt: false,
-      }));
-    }
+  const handleEmail = (event) => {
+    setEmail((prevState) => adaptState(prevState, event, testEmail));
   };
 
-  const handleExistingPassword = (e) => {
-    const passwordInput = e.target.value;
-    let errorMsg = testPasswordExistence(passwordInput);
-    setPassword((prevState) => ({ ...prevState, value: passwordInput }));
-    if (password.firstAttempt !== true) {
-      setPassword((prevState) => ({ ...prevState, error: errorMsg }));
-    }
-    if (e.type === "blur") {
-      setPassword((prevState) => ({
-        ...prevState,
-        error: errorMsg,
-        firstAttempt: false,
-      }));
-    }
+  const handlePassword = (event) => {
+    setPassword((prevState) => adaptState(prevState, event, testPassword));
   };
 
-  const handleDisplayName = (e) => {
-    let nameInput = e.target.value;
-    let nameLowercase = nameInput.toLowerCase();
-    let errorMsg = testDisplayName(nameInput);
+  const handleExistingPassword = (event) => {
+    setPassword((prevState) =>
+      adaptState(prevState, event, testPasswordExistence)
+    );
+  };
 
-    setDisplayName((prevState) => ({
-      ...prevState,
-      value: nameInput,
-      valueLowerCase: nameLowercase,
-    }));
-    if (displayName.firstAttempt !== true) {
-      setDisplayName((prevState) => ({ ...prevState, error: errorMsg }));
-    }
-    if (e.type === "blur") {
-      setDisplayName((prevState) => ({
-        ...prevState,
-        error: errorMsg,
-        firstAttempt: false,
-      }));
-    }
+  const handleDisplayName = (event) => {
+    setDisplayName((prevState) =>
+      adaptState(prevState, event, testDisplayName)
+    );
   };
 
   return {

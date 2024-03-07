@@ -31,13 +31,13 @@ export const Register = () => {
       );
       try {
         await updateProfile(res.user, {
-          displayName,
+          displayName: displayName.value,
         });
         console.log(res);
         await setDoc(doc(db, "users", res.user.uid), {
           uid: res.user.uid,
           displayName: displayName.value,
-          displayNameLowerCase: displayName.valueLowerCase,
+          displayNameLowerCase: displayName.value.toLowerCase(),
           email: email.value,
         });
         await setDoc(doc(db, "userChats", res.user.uid), {});
@@ -69,7 +69,10 @@ export const Register = () => {
     if (
       displayName.value &&
       email.value &&
-      password.value & !displayName.error & !email.error & !password.error
+      password.value &&
+      !displayName.error &&
+      !email.error &&
+      !password.error
     ) {
       writeUserData();
     }
