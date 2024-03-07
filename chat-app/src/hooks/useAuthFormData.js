@@ -7,103 +7,122 @@ import {
 } from "../utils/validation";
 
 export const useAuthFormData = () => {
-  const [email, setEmail] = useState("");
-  const [emailErrorMsg, setEmailErrorMsg] = useState("");
-  const [emailAttempt, setEmailAttempt] = useState(0);
+  const [email, setEmail] = useState({
+    value: "",
+    error: "",
+    firstAttempt: true,
+  });
 
-  const [password, setPassword] = useState("");
-  const [passwordErrorMsg, setPasswordErrorMsg] = useState("");
-  const [passwordAttempt, setPasswordAttempt] = useState(0);
+  const [password, setPassword] = useState({
+    value: "",
+    error: "",
+    firstAttempt: true,
+  });
 
-  const [displayName, setDisplayName] = useState("");
-  const [displayNameErrorMsg, setDisplayNameErrorMsg] = useState("");
-  const [displayNameAttempt, setDisplayNameAttempt] = useState(0);
-
-  const [displayNameLowerCase, setDisplayNameLowerCase] = useState("");
+  const [displayName, setDisplayName] = useState({
+    value: "",
+    valueLowerCase: "",
+    error: "",
+    firstAttempt: true,
+  });
 
   const handleEmailInput = (e) => {
-    const email = e.target.value;
-    setEmail(email);
-    if (emailAttempt > 0) {
-      let errorMsg = testEmail(email);
-      setEmailErrorMsg(errorMsg);
+    const emailInput = e.target.value;
+    setEmail((prevState) => ({
+      ...prevState,
+      value: emailInput,
+    }));
+    if (email.firstAttempt !== true) {
+      let errorMsg = testEmail(emailInput);
+      setEmail((prevState) => ({ ...prevState, error: errorMsg }));
     }
   };
 
   const handleEmailOnBlur = (e) => {
-    const email = e.target.value;
-    let errorMsg = testEmail(email);
-    setEmailErrorMsg(errorMsg);
-    setEmailAttempt((prev) => prev + 1);
+    const emailInput = e.target.value;
+    let errorMsg = testEmail(emailInput);
+    setEmail((prevState) => ({
+      ...prevState,
+      error: errorMsg,
+      firstAttempt: false,
+    }));
   };
 
   const handlePasswordInput = (e) => {
-    const password = e.target.value;
-    setPassword(password);
-    if (passwordAttempt > 0) {
-      let errorMsg = testPassword(password);
-      setPasswordErrorMsg(errorMsg);
+    const passwordInput = e.target.value;
+    setPassword((prevState) => ({ ...prevState, value: passwordInput }));
+    if (password.firstAttempt !== true) {
+      let errorMsg = testPassword(passwordInput);
+      setPassword((prevState) => ({ ...prevState, error: errorMsg }));
     }
   };
 
   const handlePasswordOnBlur = (e) => {
-    const password = e.target.value;
-    let errorMsg = testPassword(password);
-    setPasswordErrorMsg(errorMsg);
-    setPasswordAttempt((prev) => prev + 1);
+    const passwordInput = e.target.value;
+    let errorMsg = testPassword(passwordInput);
+    setPassword((prevState) => ({
+      ...prevState,
+      error: errorMsg,
+      firstAttempt: false,
+    }));
   };
 
   const handleExistingPasswordInput = (e) => {
-    const password = e.target.value;
-    setPassword(password);
-    if (passwordAttempt > 0) {
-      let errorMsg = testPasswordExistence(password);
-      setPasswordErrorMsg(errorMsg);
+    const passwordInput = e.target.value;
+    setPassword((prevState) => ({ ...prevState, value: passwordInput }));
+    if (password.firstAttempt !== true) {
+      let errorMsg = testPasswordExistence(passwordInput);
+      setPassword((prevState) => ({ ...prevState, error: errorMsg }));
     }
   };
 
   const handleExistingPasswordOnBlur = (e) => {
-    const password = e.target.value;
-    let errorMsg = testPasswordExistence(password);
-    setPasswordErrorMsg(errorMsg);
-    setPasswordAttempt((prev) => prev + 1);
+    const passwordInput = e.target.value;
+    let errorMsg = testPasswordExistence(passwordInput);
+    setPassword((prevState) => ({
+      ...prevState,
+      error: errorMsg,
+      firstAttempt: false,
+    }));
   };
 
   const handleDisplayNameInput = (e) => {
-    let name = e.target.value;
-    let nameLowercase = name.toLowerCase();
+    let nameInput = e.target.value;
+    let nameLowercase = nameInput.toLowerCase();
 
-    setDisplayName(name);
-    setDisplayNameLowerCase(nameLowercase);
+    setDisplayName((prevState) => ({
+      ...prevState,
+      value: nameInput,
+      valueLowerCase: nameLowercase,
+    }));
 
-    if (displayNameAttempt > 0) {
-      let errorMsg = testDisplayName(name);
-      setDisplayNameErrorMsg(errorMsg);
+    if (displayName.firstAttempt !== true) {
+      let errorMsg = testDisplayName(nameInput);
+      setDisplayName((prevState) => ({ ...prevState, error: errorMsg }));
     }
   };
 
   const handleDisplayNameOnBlur = (e) => {
-    const userName = e.target.value;
-    let errorMsg = testDisplayName(userName);
-    setDisplayNameErrorMsg(errorMsg);
-    setDisplayNameAttempt((prev) => prev + 1);
+    const nameInput = e.target.value;
+    let errorMsg = testDisplayName(nameInput);
+    setDisplayName((prevState) => ({
+      ...prevState,
+      error: errorMsg,
+      firstAttempt: false,
+    }));
   };
 
   return {
     email,
-    emailErrorMsg,
     handleEmailInput,
     handleEmailOnBlur,
     password,
-    passwordErrorMsg,
     handlePasswordInput,
     handlePasswordOnBlur,
     handleExistingPasswordInput,
     handleExistingPasswordOnBlur,
     displayName,
-    displayNameErrorMsg,
     handleDisplayNameInput,
     handleDisplayNameOnBlur,
-    displayNameLowerCase,
   };
 };
