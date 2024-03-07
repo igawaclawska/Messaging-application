@@ -14,15 +14,11 @@ export const Register = () => {
 
   const {
     email,
-    handleEmailInput,
-    handleEmailOnBlur,
+    handleEmail,
     password,
-    handlePasswordInput,
-    handlePasswordOnBlur,
+    handlePassword,
     displayName,
-    displayNameErrorMsg,
-    handleDisplayNameInput,
-    handleDisplayNameOnBlur,
+    handleDisplayName,
   } = useAuthFormData();
 
   const writeUserData = async () => {
@@ -73,7 +69,7 @@ export const Register = () => {
     if (
       displayName.value &&
       email.value &&
-      password.value & !displayNameErrorMsg & !email.error & !password.error
+      password.value & !displayName.error & !email.error & !password.error
     ) {
       writeUserData();
     }
@@ -90,9 +86,9 @@ export const Register = () => {
             id="full-name"
             label="Full name"
             type="text"
-            onChange={handleDisplayNameInput}
+            onChange={handleDisplayName}
             helperText={displayName.error}
-            onBlur={handleDisplayNameOnBlur}
+            onBlur={handleDisplayName}
             error={displayName.error}
           ></InputField>
           <InputField
@@ -101,9 +97,9 @@ export const Register = () => {
             label="E-mail"
             placeholder="example@email.com"
             type="email"
-            onChange={handleEmailInput}
+            onChange={handleEmail}
             helperText={email.error}
-            onBlur={handleEmailOnBlur}
+            onBlur={handleEmail}
             error={email.error}
           ></InputField>
           <InputField
@@ -112,8 +108,8 @@ export const Register = () => {
             label="Password"
             placeholder="6 or more characters"
             type="password"
-            onChange={handlePasswordInput}
-            onBlur={handlePasswordOnBlur}
+            onChange={handlePassword}
+            onBlur={handlePassword}
             helperText={password.error}
             error={password.error}
           ></InputField>

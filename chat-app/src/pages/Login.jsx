@@ -13,11 +13,9 @@ export const Login = () => {
 
   const {
     email,
-    handleEmailInput,
-    handleEmailOnBlur,
+    handleEmail,
     password,
-    handleExistingPasswordInput,
-    handleExistingPasswordOnBlur,
+    handleExistingPassword,
   } = useAuthFormData();
 
   const handleSubmit = async () => {
@@ -58,8 +56,8 @@ export const Login = () => {
               label="E-mail"
               type="email"
               helperText={email.error}
-              onChange={handleEmailInput}
-              onBlur={handleEmailOnBlur}
+              onChange={handleEmail}
+              onBlur={handleEmail}
               error={email.error}
             ></InputField>
           </div>
@@ -70,8 +68,8 @@ export const Login = () => {
               label="Password"
               type="password"
               helperText={password.error}
-              onChange={handleExistingPasswordInput}
-              onBlur={handleExistingPasswordOnBlur}
+              onChange={handleExistingPassword}
+              onBlur={handleExistingPassword}
               error={password.error}
             ></InputField>
           </div>
