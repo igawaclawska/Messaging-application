@@ -1,5 +1,5 @@
 import "./DropdownOptions.css";
-import DropdownOptionsBg from "./shared/DropdownOptionsBg";
+import DropdownOptionsBg from "../shared/DropdownOptionsBg";
 
 const DropdownOptions = ({ options, setIsDropdownOpen }) => {
   const handleClick = (option) => {
