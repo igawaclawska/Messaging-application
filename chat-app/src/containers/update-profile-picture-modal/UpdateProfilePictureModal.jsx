@@ -5,7 +5,7 @@ import { db, storage } from "../../firebase";
 import { doc, updateDoc } from "firebase/firestore";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { updateProfile } from "firebase/auth";
-import Button from "../../components/Button/Button";
+import Button from "../../components/button/Button";
 import Modal from "../../components/shared/Modal";
 import ProfileImage from "../../components/profile-image/ProfileImage";
 
