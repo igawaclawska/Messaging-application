@@ -1,11 +1,11 @@
-import "./ThreadHeader.css";
+import "./ThreadsHeader.css";
 import { useState, useContext } from "react";
-import { WindowSizeContext } from "../context/WindowSizeContext";
-import Button from "../components/button/Button";
-import MessageModal from "./create-chat-modal/CreateChatModal";
+import { WindowSizeContext } from "../../context/WindowSizeContext";
+import Button from "../../components/button/Button";
+import MessageModal from "../create-chat-modal/CreateChatModal";
 import MapsUgcIcon from "@mui/icons-material/MapsUgc";
 
-const ThreadHeader = () => {
+const ThreadsHeader = () => {
   const [show, setShow] = useState(false);
   const { windowWidth } = useContext(WindowSizeContext);
 
@@ -26,4 +26,4 @@ const ThreadHeader = () => {
   );
 };
 
-export default ThreadHeader;
+export default ThreadsHeader;
