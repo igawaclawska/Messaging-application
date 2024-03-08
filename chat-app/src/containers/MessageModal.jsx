@@ -12,7 +12,7 @@ import {
   setDoc,
   onSnapshot,
 } from "firebase/firestore";
-import UserInfo from "../components/UserInfo";
+import UserInfo from "../components/user-info/UserInfo";
 import Button from "../components/button/Button";
 import InputField from "../components/input-field/InputField";
 import Modal from "../components/shared/Modal";
