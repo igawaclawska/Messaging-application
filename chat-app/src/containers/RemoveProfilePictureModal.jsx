@@ -4,7 +4,7 @@ import { db } from "../firebase";
 import { doc, updateDoc } from "firebase/firestore";
 import { updateProfile } from "firebase/auth";
 import { AuthContext } from "../context/AuthContext";
-import Button from "../components/Button";
+import Button from "../components/Button/Button";
 import Modal from "../components/shared/Modal";
 import ProfileImage from "../components/ProfileImage";
 

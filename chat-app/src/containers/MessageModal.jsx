@@ -13,7 +13,7 @@ import {
   onSnapshot,
 } from "firebase/firestore";
 import UserInfo from "../components/UserInfo";
-import Button from "../components/Button";
+import Button from "../components/Button/Button";
 import InputField from "../components/InputField";
 import Modal from "../components/shared/Modal";
 import LottiePlayer from "../components/LottiePlayer";
