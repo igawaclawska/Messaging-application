@@ -13,7 +13,7 @@ import { db } from "../firebase";
 import { v4 as uuid } from "uuid";
 import MessageButton from "../components/message-button/MessageButton";
 import MessageInput from "../components/message-input/MessageInput";
-import EmojiPickerDropdown from "./EmojiPicker";
+import EmojiPickerDropdown from "./emoji-picker/EmojiPicker";
 
 const SendMessage = () => {
   const [text, setText] = useState("");

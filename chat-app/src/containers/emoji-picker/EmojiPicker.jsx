@@ -1,6 +1,6 @@
 import "./EmojiPicker.css"
 import { useRef } from "react";
-import { useDropdownHandler } from "../hooks/useDropdownHandler";
+import { useDropdownHandler } from "../../hooks/useDropdownHandler";
 import EmojiPicker from "emoji-picker-react";
 import SentimentSatisfiedAltRoundedIcon from "@mui/icons-material/SentimentSatisfiedAltRounded";
 
