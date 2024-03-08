@@ -3,7 +3,7 @@ import { useContext, useState, useEffect } from "react";
 import { db } from "../../firebase";
 import { onSnapshot, collection, query, where } from "firebase/firestore";
 import { ChatsContext } from "../../context/ChatsContext";
-import Button from "../../components/btn/Button";
+import Button from "../../components/button/Button";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
