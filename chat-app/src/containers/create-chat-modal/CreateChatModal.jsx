@@ -1,7 +1,7 @@
-import "./MessageModal.css";
+import "./CreateChatModal.css";
 import { useContext, useState, useEffect } from "react";
-import { AuthContext } from "../context/AuthContext";
-import { db } from "../firebase";
+import { AuthContext } from "../../context/AuthContext";
+import { db } from "../../firebase";
 import {
   collection,
   doc,
@@ -12,11 +12,11 @@ import {
   setDoc,
   onSnapshot,
 } from "firebase/firestore";
-import UserInfo from "../components/user-info/UserInfo";
-import Button from "../components/button/Button";
-import InputField from "../components/input-field/InputField";
-import Modal from "../components/shared/Modal";
-import LottiePlayer from "../components/lottie-player/LottiePlayer";
+import UserInfo from "../../components/user-info/UserInfo";
+import Button from "../../components/button/Button";
+import InputField from "../../components/input-field/InputField";
+import Modal from "../../components/shared/Modal";
+import LottiePlayer from "../../components/lottie-player/LottiePlayer";
 
 const MessageModal = ({ show }) => {
   const [usersSelected, setUserSelected] = useState();

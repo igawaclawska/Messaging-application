@@ -2,7 +2,7 @@ import "./ThreadHeader.css";
 import { useState, useContext } from "react";
 import { WindowSizeContext } from "../context/WindowSizeContext";
 import Button from "../components/button/Button";
-import MessageModal from "./MessageModal";
+import MessageModal from "./create-chat-modal/CreateChatModal";
 import MapsUgcIcon from "@mui/icons-material/MapsUgc";
 
 const ThreadHeader = () => {
