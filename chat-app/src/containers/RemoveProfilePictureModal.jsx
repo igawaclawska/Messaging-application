@@ -6,7 +6,7 @@ import { updateProfile } from "firebase/auth";
 import { AuthContext } from "../context/AuthContext";
 import Button from "../components/button/Button";
 import Modal from "../components/shared/Modal";
-import ProfileImage from "../components/ProfileImage";
+import ProfileImage from "../components/profile-image/ProfileImage";
 
 const RemoveProfilePictureModal = ({ setIsOpen }) => {
   const { userLogged } = useContext(AuthContext);

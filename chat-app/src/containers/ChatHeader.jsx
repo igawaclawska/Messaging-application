@@ -9,7 +9,7 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import DeleteChatModal from "./DeleteChatModal";
 import DropdownMenu from "../components/dropdown-menu/DropdownMenu";
-import ProfileImage from "../components/ProfileImage";
+import ProfileImage from "../components/profile-image/ProfileImage";
 
 const ChatHeader = ({ onClick }) => {
   const { data } = useContext(ChatsContext);

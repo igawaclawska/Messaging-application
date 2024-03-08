@@ -1,5 +1,5 @@
 import "./UserInfo.css";
-import ProfileImage from "./ProfileImage";
+import ProfileImage from "./profile-image/ProfileImage";
 
 const UserInfo = ({ onClick, value, idx, className, user }) => {
   return (

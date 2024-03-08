@@ -9,7 +9,7 @@ import { auth } from "../firebase";
 import UpdateProfilePictureModal from "./UpdateProfilePictureModal";
 import RemoveProfilePictureModal from "./RemoveProfilePictureModal";
 import DropdownMenu from "../components/dropdown-menu/DropdownMenu";
-import ProfileImage from "../components/ProfileImage";
+import ProfileImage from "../components/profile-image/ProfileImage";
 import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
 import DoDisturbAltRoundedIcon from "@mui/icons-material/DoDisturbAltRounded";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
