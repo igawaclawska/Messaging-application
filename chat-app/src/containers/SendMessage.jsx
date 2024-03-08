@@ -11,7 +11,7 @@ import {
 } from "firebase/firestore";
 import { db } from "../firebase";
 import { v4 as uuid } from "uuid";
-import MessageButton from "../components/MessageButton";
+import MessageButton from "../components/message-button/MessageButton";
 import MessageInput from "../components/MessageInput";
 import EmojiPickerDropdown from "./EmojiPicker";
 
