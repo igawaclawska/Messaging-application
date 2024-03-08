@@ -1,7 +1,7 @@
 import "./Home.css";
 import { useState, useContext } from "react";
 import { WindowSizeContext } from "../context/WindowSizeContext";
-import Navbar from "../containers/Navbar";
+import Navbar from "../containers/navbar/Navbar";
 import ThreadsBar from "../containers/ThreadsBar";
 import ChatArea from "../containers/chat-area/ChatArea";
 
