@@ -4,7 +4,7 @@ import { doc, onSnapshot } from "firebase/firestore";
 import { AuthContext } from "../context/AuthContext";
 import { ChatsContext } from "../context/ChatsContext";
 import { db } from "../firebase";
-import SingleThread from "../components/SingleThread";
+import SingleThread from "../components/single-thread/SingleThread";
 
 const ThreadList = ({ visibility }) => {
   const [isActive, setIsActive] = useState(null);

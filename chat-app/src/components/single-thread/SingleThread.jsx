@@ -1,9 +1,9 @@
 import "./SingleThread.css";
 import { useState, useEffect, useContext } from "react";
-import { db } from "../firebase";
+import { db } from "../../firebase";
 import { collection, query, where, onSnapshot } from "firebase/firestore";
-import { AuthContext } from "../context/AuthContext";
-import ProfileImage from "./profile-image/ProfileImage";
+import { AuthContext } from "../../context/AuthContext";
+import ProfileImage from "../profile-image/ProfileImage";
 
 const SingleThread = ({ onClick, message, className, receiver }) => {
   let [user, setUser] = useState({});
