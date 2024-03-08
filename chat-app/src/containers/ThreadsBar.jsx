@@ -1,12 +1,12 @@
 import "./ThreadsBar.css";
 import ThreadsHeader from "./threads-header/ThreadsHeader";
-import ThreadList from "./ThreadList";
+import ThreadsList from "./threads-list/ThreadsList";
 
 const ThreadsBar = ({ visibility }) => {
   return (
     <div className="threads-bar">
       <ThreadsHeader />
-      <ThreadList visibility={visibility}></ThreadList>
+      <ThreadsList visibility={visibility} />
     </div>
   );
 };

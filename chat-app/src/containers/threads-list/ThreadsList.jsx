@@ -1,12 +1,12 @@
-import "./ThreadList.css";
+import "./ThreadsList.css";
 import { useState, useContext, useEffect } from "react";
 import { doc, onSnapshot } from "firebase/firestore";
-import { AuthContext } from "../context/AuthContext";
-import { ChatsContext } from "../context/ChatsContext";
-import { db } from "../firebase";
-import SingleThread from "../components/single-thread/SingleThread";
+import { AuthContext } from "../../context/AuthContext";
+import { ChatsContext } from "../../context/ChatsContext";
+import { db } from "../../firebase";
+import SingleThread from "../../components/single-thread/SingleThread";
 
-const ThreadList = ({ visibility }) => {
+const ThreadsList = ({ visibility }) => {
   const [isActive, setIsActive] = useState(null);
   const [chats, setChats] = useState([]);
 
@@ -77,4 +77,4 @@ const ThreadList = ({ visibility }) => {
     : renderEmptyChatsMessage();
 };
 
-export default ThreadList;
+export default ThreadsList;
