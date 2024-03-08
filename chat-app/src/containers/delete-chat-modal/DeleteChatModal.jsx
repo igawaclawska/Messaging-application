@@ -1,9 +1,9 @@
 import "./DeleteChatModal.css";
 import { useContext } from "react";
-import { ChatsContext } from "../context/ChatsContext";
-import { useDeleteChat } from "../hooks/useDeleteChat";
-import Button from "../components/button/Button";
-import Modal from "../components/shared/Modal";
+import { ChatsContext } from "../../context/ChatsContext";
+import { useDeleteChat } from "../../hooks/useDeleteChat";
+import Button from "../../components/button/Button";
+import Modal from "../../components/shared/Modal";
 
 const DeleteChatModal = ({ setIsOpen }) => {
   const { data } = useContext(ChatsContext);

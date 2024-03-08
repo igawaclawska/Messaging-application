@@ -7,7 +7,7 @@ import Button from "../../components/button/Button";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
-import DeleteChatModal from "../DeleteChatModal";
+import DeleteChatModal from "../delete-chat-modal/DeleteChatModal";
 import DropdownMenu from "../../components/dropdown-menu/DropdownMenu";
 import ProfileImage from "../../components/profile-image/ProfileImage";
 
