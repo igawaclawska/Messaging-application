@@ -3,7 +3,7 @@ import { useDropdownHandler } from "../hooks/useDropdownHandler";
 import DropdownOptions from "./DropdownOptions";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
-import Button from "./Button/Button";
+import Button from "./button/Button";
 
 const DropdownMenu = ({ menuOptions, hasCaret, children }) => {
   const menuRef = useRef(null);

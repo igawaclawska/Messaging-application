@@ -1,7 +1,7 @@
 import "./ThreadHeader.css";
 import { useState, useContext } from "react";
 import { WindowSizeContext } from "../context/WindowSizeContext";
-import Button from "../components/Button/Button";
+import Button from "../components/button/Button";
 import MessageModal from "./MessageModal";
 import MapsUgcIcon from "@mui/icons-material/MapsUgc";
 
