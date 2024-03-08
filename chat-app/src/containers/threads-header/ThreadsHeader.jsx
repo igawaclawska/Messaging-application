@@ -1,7 +1,7 @@
 import "./ThreadsHeader.css";
 import { useState, useContext } from "react";
 import { WindowSizeContext } from "../../context/WindowSizeContext";
-import Button from "../../components/button/Button";
+import Button from "../../components/Button/Button";
 import MessageModal from "../create-chat-modal/CreateChatModal";
 import MapsUgcIcon from "@mui/icons-material/MapsUgc";
 
