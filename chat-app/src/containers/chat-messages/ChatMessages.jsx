@@ -1,10 +1,10 @@
-import "./BubblesScrollable.css";
+import "./ChatMessages.css";
 import { useContext } from "react";
-import ChatBubble from "../components/chat-bubble/ChatBubble";
+import ChatBubble from "../../components/chat-bubble/ChatBubble";
 
-import { MessagesContext } from "../context/MessagesContext";
+import { MessagesContext } from "../../context/MessagesContext";
 
-const BubblesScrollable = () => {
+const ChatMessages = () => {
   const { messages } = useContext(MessagesContext);
 
   console.log(messages);
@@ -18,4 +18,4 @@ const BubblesScrollable = () => {
   );
 };
 
-export default BubblesScrollable;
+export default ChatMessages;

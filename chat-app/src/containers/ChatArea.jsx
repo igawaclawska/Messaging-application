@@ -2,7 +2,7 @@ import "./ChatArea.css";
 import { ChatsContext } from "../context/ChatsContext";
 import { useContext } from "react";
 import ChatHeader from "./ChatHeader";
-import BubblesScrollable from "./BubblesScrollable";
+import ChatMessages from "./chat-messages/ChatMessages";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import SendMessage from "./SendMessage";
 import Button from "../components/button/Button";
@@ -14,7 +14,7 @@ const ChatArea = ({ visibility }) => {
   return data.chatsId !== "null" ? (
     <div className="chat-area">
       <ChatHeader onClick={visibility} />
-      <BubblesScrollable />
+      <ChatMessages />
       <SendMessage />
     </div>
   ) : (
