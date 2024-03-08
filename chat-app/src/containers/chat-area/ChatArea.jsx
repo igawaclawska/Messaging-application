@@ -5,7 +5,7 @@ import ChatHeader from "../chat-header/ChatHeader";
 import ChatMessages from "../chat-messages/ChatMessages";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import SendMessage from "../send-message/SendMessage";
-import Button from "../../components/button/Button";
+import Button from "../../components/btn/Button";
 import LottiePlayer from "../../components/lottie-player/LottiePlayer";
 
 const ChatArea = ({ visibility }) => {

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { auth } from "../../firebase.js";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useAuthFormData } from "../../hooks/useAuthFormData.js";
-import Button from "../../components/button/Button.jsx";
+import Button from "../../components/btn/Button.jsx";
 import InputField from "../../components/input-field/InputField.jsx";
 
 export const Login = () => {
