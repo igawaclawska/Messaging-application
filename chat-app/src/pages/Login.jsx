@@ -5,7 +5,7 @@ import { auth } from "../firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useAuthFormData } from "../hooks/useAuthFormData.js";
 import Button from "../components/button/Button.jsx";
-import InputField from "../components/InputField";
+import InputField from "../components/input-field/InputField.jsx";
 
 export const Login = () => {
   const [error, setError] = useState("");

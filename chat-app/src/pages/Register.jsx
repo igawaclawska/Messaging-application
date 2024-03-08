@@ -5,7 +5,7 @@ import { doc, setDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import { useAuthFormData } from "../hooks/useAuthFormData.js";
 import Button from "../components/button/Button.jsx";
-import InputField from "../components/InputField";
+import InputField from "../components/input-field/InputField.jsx";
 
 export const Register = () => {
   const [error, setError] = useState(false);
