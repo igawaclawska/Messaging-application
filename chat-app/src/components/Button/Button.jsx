@@ -1,5 +1,5 @@
 import "./Button.css";
-import LottiePlayer from "../LottiePlayer";
+import LottiePlayer from "../lottie-player/LottiePlayer";
 
 const Button = ({
   children,

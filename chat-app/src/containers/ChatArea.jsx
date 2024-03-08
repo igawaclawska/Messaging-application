@@ -6,7 +6,7 @@ import BubblesScrollable from "./BubblesScrollable";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import SendMessage from "./SendMessage";
 import Button from "../components/button/Button";
-import LottiePlayer from "../components/LottiePlayer";
+import LottiePlayer from "../components/lottie-player/LottiePlayer";
 
 const ChatArea = ({ visibility }) => {
   const { data } = useContext(ChatsContext);

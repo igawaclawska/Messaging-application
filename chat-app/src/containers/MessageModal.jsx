@@ -16,7 +16,7 @@ import UserInfo from "../components/UserInfo";
 import Button from "../components/button/Button";
 import InputField from "../components/input-field/InputField";
 import Modal from "../components/shared/Modal";
-import LottiePlayer from "../components/LottiePlayer";
+import LottiePlayer from "../components/lottie-player/LottiePlayer";
 
 const MessageModal = ({ show }) => {
   const [usersSelected, setUserSelected] = useState();
