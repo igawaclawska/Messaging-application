@@ -6,7 +6,7 @@ import { AuthContext } from "../../context/AuthContext";
 import { MessagesContext } from "../../context/MessagesContext";
 import { ChatsContext } from "../../context/ChatsContext";
 import { auth } from "../../firebase";
-import UpdateProfilePictureModal from "../UpdateProfilePictureModal";
+import UpdateProfilePictureModal from "../update-profile-picture-modal/UpdateProfilePictureModal";
 import RemoveProfilePictureModal from "../remove-profile-picture-modal/RemoveProfilePictureModal";
 import DropdownMenu from "../../components/dropdown-menu/DropdownMenu";
 import ProfileImage from "../../components/profile-image/ProfileImage";

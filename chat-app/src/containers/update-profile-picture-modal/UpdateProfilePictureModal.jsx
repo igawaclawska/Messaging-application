@@ -1,13 +1,13 @@
 import "./UpdateProfilePictureModal.css";
 import { useContext, useState, useEffect } from "react";
-import { AuthContext } from "../context/AuthContext";
-import { db, storage } from "../firebase";
+import { AuthContext } from "../../context/AuthContext";
+import { db, storage } from "../../firebase";
 import { doc, updateDoc } from "firebase/firestore";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { updateProfile } from "firebase/auth";
-import Button from "../components/button/Button";
-import Modal from "../components/shared/Modal";
-import ProfileImage from "../components/profile-image/ProfileImage";
+import Button from "../../components/button/Button";
+import Modal from "../../components/shared/Modal";
+import ProfileImage from "../../components/profile-image/ProfileImage";
 
 const UpdateProfilePictureModal = ({ setIsOpen }) => {
   const { userLogged } = useContext(AuthContext);
