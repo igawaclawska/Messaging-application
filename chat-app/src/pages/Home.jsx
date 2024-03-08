@@ -2,7 +2,7 @@ import "./Home.css";
 import { useState, useContext } from "react";
 import { WindowSizeContext } from "../context/WindowSizeContext";
 import Navbar from "../containers/navbar/Navbar";
-import ThreadsBar from "../containers/ThreadsBar";
+import ThreadsBar from "../containers/threads-bar/ThreadsBar";
 import ChatArea from "../containers/chat-area/ChatArea";
 
 export const Home = () => {
