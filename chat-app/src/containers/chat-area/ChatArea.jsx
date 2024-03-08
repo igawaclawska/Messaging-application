@@ -1,7 +1,7 @@
 import "./ChatArea.css";
 import { ChatsContext } from "../../context/ChatsContext";
 import { useContext } from "react";
-import ChatHeader from "../ChatHeader";
+import ChatHeader from "../chat-header/ChatHeader";
 import ChatMessages from "../chat-messages/ChatMessages";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import SendMessage from "../SendMessage";
