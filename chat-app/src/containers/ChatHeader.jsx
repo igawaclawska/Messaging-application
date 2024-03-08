@@ -8,7 +8,7 @@ import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import DeleteChatModal from "./DeleteChatModal";
-import DropdownMenu from "../components/DropdownMenu";
+import DropdownMenu from "../components/dropdown-menu/DropdownMenu";
 import ProfileImage from "../components/ProfileImage";
 
 const ChatHeader = ({ onClick }) => {

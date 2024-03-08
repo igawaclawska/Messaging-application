@@ -8,7 +8,7 @@ import { ChatsContext } from "../context/ChatsContext";
 import { auth } from "../firebase";
 import UpdateProfilePictureModal from "./UpdateProfilePictureModal";
 import RemoveProfilePictureModal from "./RemoveProfilePictureModal";
-import DropdownMenu from "../components/DropdownMenu";
+import DropdownMenu from "../components/dropdown-menu/DropdownMenu";
 import ProfileImage from "../components/ProfileImage";
 import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
 import DoDisturbAltRoundedIcon from "@mui/icons-material/DoDisturbAltRounded";
