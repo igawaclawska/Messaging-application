@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { auth, db } from "../firebase";
+import { auth, db } from "../../firebase.js";
 import { doc, setDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
-import { useAuthFormData } from "../hooks/useAuthFormData.js";
-import Button from "../components/button/Button.jsx";
-import InputField from "../components/input-field/InputField.jsx";
+import { useAuthFormData } from "../../hooks/useAuthFormData.js";
+import Button from "../../components/button/Button.jsx";
+import InputField from "../../components/input-field/InputField.jsx";
 
 export const Register = () => {
   const [error, setError] = useState(false);
