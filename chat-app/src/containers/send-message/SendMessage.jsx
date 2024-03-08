@@ -1,7 +1,7 @@
 import "./SendMessage.css";
 import { useContext, useState } from "react";
-import { AuthContext } from "../context/AuthContext";
-import { ChatsContext } from "../context/ChatsContext";
+import { AuthContext } from "../../context/AuthContext";
+import { ChatsContext } from "../../context/ChatsContext";
 import {
   arrayUnion,
   updateDoc,
@@ -9,11 +9,11 @@ import {
   Timestamp,
   doc,
 } from "firebase/firestore";
-import { db } from "../firebase";
+import { db } from "../../firebase";
 import { v4 as uuid } from "uuid";
-import MessageButton from "../components/message-button/MessageButton";
-import MessageInput from "../components/message-input/MessageInput";
-import EmojiPickerDropdown from "./emoji-picker/EmojiPicker";
+import MessageButton from "../../components/message-button/MessageButton";
+import MessageInput from "../../components/message-input/MessageInput";
+import EmojiPickerDropdown from "../emoji-picker/EmojiPicker";
 
 const SendMessage = () => {
   const [text, setText] = useState("");
