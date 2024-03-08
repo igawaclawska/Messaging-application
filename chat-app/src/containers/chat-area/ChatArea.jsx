@@ -1,12 +1,12 @@
 import "./ChatArea.css";
-import { ChatsContext } from "../context/ChatsContext";
+import { ChatsContext } from "../../context/ChatsContext";
 import { useContext } from "react";
-import ChatHeader from "./ChatHeader";
-import ChatMessages from "./chat-messages/ChatMessages";
+import ChatHeader from "../ChatHeader";
+import ChatMessages from "../chat-messages/ChatMessages";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
-import SendMessage from "./SendMessage";
-import Button from "../components/button/Button";
-import LottiePlayer from "../components/lottie-player/LottiePlayer";
+import SendMessage from "../SendMessage";
+import Button from "../../components/button/Button";
+import LottiePlayer from "../../components/lottie-player/LottiePlayer";
 
 const ChatArea = ({ visibility }) => {
   const { data } = useContext(ChatsContext);

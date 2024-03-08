@@ -3,7 +3,7 @@ import { useState, useContext } from "react";
 import { WindowSizeContext } from "../context/WindowSizeContext";
 import Navbar from "../containers/Navbar";
 import ThreadsBar from "../containers/ThreadsBar";
-import ChatArea from "../containers/ChatArea";
+import ChatArea from "../containers/chat-area/ChatArea";
 
 export const Home = () => {
   const { windowWidth } = useContext(WindowSizeContext);
