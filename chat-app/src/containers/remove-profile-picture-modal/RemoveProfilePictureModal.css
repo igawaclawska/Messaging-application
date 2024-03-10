@@ -5,6 +5,7 @@
 
 .heading{
   color: var(--grey);
+  font-size: 24px;
 }
 
 .delete-img-content{

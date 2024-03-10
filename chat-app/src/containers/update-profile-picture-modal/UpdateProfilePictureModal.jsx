@@ -64,11 +64,11 @@ const UpdateProfilePictureModal = ({ setIsOpen }) => {
 
   return (
     <Modal setIsOpen={setIsOpen}>
-      <div className="update-picture-header">
-        <h3 className="update-picture-heading">
+      <header className="update-picture-header">
+        <h1 className="update-picture-heading">
           {`Update your profile picture`}{" "}
-        </h3>
-      </div>
+        </h1>
+      </header>
       <div className="update-img-content">
         {imageUrl && <ProfileImage src={imageUrl} className={"large-image"} />}
         <input

@@ -20,9 +20,9 @@ const DeleteChatModal = ({ setIsOpen }) => {
 
   return (
     <Modal setIsOpen={setIsOpen}>
-      <div className="delete-chat-header">
-        <h3>{`Delete chat with ${data.user1?.displayName}?`} </h3>
-      </div>
+      <header className="delete-chat-header">
+        <h1>{`Delete chat with ${data.user1?.displayName}?`} </h1>
+      </header>
       {/* The class 'create-message-body' seems to not extst */}
       <div className="create-message-body">
         <p className="delete-chat-instruction">

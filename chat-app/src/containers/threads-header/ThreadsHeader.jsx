@@ -2,7 +2,7 @@ import "./ThreadsHeader.css";
 import { useState, useContext } from "react";
 import { WindowSizeContext } from "../../context/WindowSizeContext";
 import Button from "../../components/button/Button";
-import MessageModal from "../create-chat-modal/CreateChatModal";
+import CreateChatModal from "../create-chat-modal/CreateChatModal";
 import MapsUgcIcon from "@mui/icons-material/MapsUgc";
 
 const ThreadsHeader = () => {
@@ -19,7 +19,7 @@ const ThreadsHeader = () => {
         {windowWidth >= 800 && "New Chat"}
         <MapsUgcIcon />
       </Button>
-      {show && <MessageModal show={setShow} setShow={setShow} />}
+      {show && <CreateChatModal show={setShow} setShow={setShow} />}
     </header>
   );
 };

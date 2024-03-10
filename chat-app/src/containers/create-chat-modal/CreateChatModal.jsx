@@ -18,7 +18,7 @@ import InputField from "../../components/input-field/InputField";
 import Modal from "../../components/shared/Modal";
 import LottiePlayer from "../../components/lottie-player/LottiePlayer";
 
-const MessageModal = ({ show }) => {
+const CreateChatModal = ({ show }) => {
   const [usersSelected, setUserSelected] = useState();
   const [users, setUsers] = useState([]);
   const [filter, setFilter] = useState("");
@@ -114,9 +114,9 @@ const MessageModal = ({ show }) => {
 
   return (
     <Modal setIsOpen={show}>
-      <div className="create-chat-header">
-        <h3>Create a new chat</h3>
-      </div>
+      <header className="create-chat-header">
+        <h1>Create a new chat</h1>
+      </header>
       <InputField
         onChange={handleSetFilter}
         type={"search"}
@@ -128,7 +128,6 @@ const MessageModal = ({ show }) => {
         <p className="create-chat-instruction"> Available users:</p>
         <div className="add-receivers">
           <ul className="search-list">
-
             {usersFiltered.length !== 0 ? (
               usersFiltered.map((user, idx) => (
                 <UserInfo
@@ -172,4 +171,4 @@ const MessageModal = ({ show }) => {
   );
 };
 
-export default MessageModal;
+export default CreateChatModal;
