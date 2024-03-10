@@ -1,8 +1,8 @@
-nav {
+header {
   background-color: var(--grey);
   width: 100%;
 }
-.navbar-wrapper {
+.navbar {
   height: 68px;
   display: flex;
   flex-direction: row;

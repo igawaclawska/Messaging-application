@@ -1,9 +1,7 @@
 import "./DropdownOptionsBg.css";
 
 const DropdownOptionsBg = ({ children }) => {
-  {
-    return <ul className="dropdown-menu">{children}</ul>;
-  }
+  return <menu className="dropdown-menu">{children}</menu>;
 };
 
 export default DropdownOptionsBg;

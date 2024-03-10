@@ -37,7 +37,7 @@ export const Home = () => {
   return (
     <div className="home-container">
       <Navbar />
-      <div className="home-body">{renderHomePage()}</div>
+      <main className="home-body">{renderHomePage()}</main>
     </div>
   );
 };

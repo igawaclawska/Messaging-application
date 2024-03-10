@@ -16,19 +16,19 @@ const DropdownOptions = ({ options, setIsDropdownOpen }) => {
   };
 
   return (
-    <DropdownOptionsBg>
-      {options?.map((option) => (
-        <li
-          key={option.id}
-          value={option.id}
-          onClick={() => handleClick(option)}
-          className="menu-item"
-        >
-          {option.icon}
-          {option.label}
-        </li>
-      ))}
-    </DropdownOptionsBg>
+      <DropdownOptionsBg>
+        {options?.map((option) => (
+          <li
+            key={option.id}
+            value={option.id}
+            onClick={() => handleClick(option)}
+            className="menu-item"
+          >
+            {option.icon}
+            {option.label}
+          </li>
+        ))}
+      </DropdownOptionsBg>
   );
 };
 

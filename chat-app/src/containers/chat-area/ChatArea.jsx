@@ -12,13 +12,13 @@ const ChatArea = ({ visibility }) => {
   const { data } = useContext(ChatsContext);
 
   return data.chatsId !== "null" ? (
-    <div className="chat-area">
+    <section className="chat-area">
       <ChatHeader onClick={visibility} />
       <ChatMessages />
       <SendMessage />
-    </div>
+    </section>
   ) : (
-    <div className="chat-area-empty">
+    <section className="chat-area-empty">
       {visibility && (
         <div onClick={visibility} className="back-btn-empty-chat">
           <Button
@@ -35,7 +35,7 @@ const ChatArea = ({ visibility }) => {
         speed={0.7}
       />
       <p className="nothing-selected-text">No chat selected</p>
-    </div>
+    </section>
   );
 };
 
