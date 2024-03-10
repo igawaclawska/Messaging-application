@@ -4,10 +4,10 @@ import ThreadsList from "../threads-list/ThreadsList";
 
 const ThreadsBar = ({ visibility }) => {
   return (
-    <div className="threads-bar">
+    <section className="threads-bar">
       <ThreadsHeader />
       <ThreadsList visibility={visibility} />
-    </div>
+    </section>
   );
 };
 

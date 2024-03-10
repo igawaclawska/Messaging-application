@@ -74,22 +74,19 @@ const NavBar = () => {
   ];
 
   return (
-    // class nav-bar does not exist in css
-    <nav className="nav-bar">
-      <div className="navbar-wrapper">
-        <span className="logo logo-small">MINI CHAT</span>
-        <DropdownMenu menuOptions={menuOptions} hasCaret={true}>
-          <ProfileImage src={userLogged.photoURL} className={"small-image"} />
-          {userLogged.displayName}
-        </DropdownMenu>
-        {isUpdatePictureModalOpen && (
-          <UpdateProfilePictureModal setIsOpen={setIsUpdatePictureModalOpen} />
-        )}
-        {isRemovePictureModalOpen && (
-          <RemoveProfilePictureModal setIsOpen={setIsRemovePictureModalOpen} />
-        )}
-      </div>
-    </nav>
+    <header className="navbar">
+      <span className="logo logo-small">MINI CHAT</span>
+      <DropdownMenu menuOptions={menuOptions} hasCaret={true}>
+        <ProfileImage src={userLogged.photoURL} className={"small-image"} />
+        {userLogged.displayName}
+      </DropdownMenu>
+      {isUpdatePictureModalOpen && (
+        <UpdateProfilePictureModal setIsOpen={setIsUpdatePictureModalOpen} />
+      )}
+      {isRemovePictureModalOpen && (
+        <RemoveProfilePictureModal setIsOpen={setIsRemovePictureModalOpen} />
+      )}
+    </header>
   );
 };
 

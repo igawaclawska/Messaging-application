@@ -36,7 +36,7 @@ const ThreadsList = ({ visibility }) => {
   //create dynamic thread components
   const renderListOfChats = () => {
     return (
-      <ul className="thread-list">
+      <nav className="thread-list">
         {Object?.entries(chats)
           ?.sort((a, b) => b[1].date?.date - a[1].date?.date)
           ?.map((chat) => (
@@ -54,7 +54,7 @@ const ThreadsList = ({ visibility }) => {
               }}
             ></SingleThread>
           ))}
-      </ul>
+      </nav>
     );
   };
 

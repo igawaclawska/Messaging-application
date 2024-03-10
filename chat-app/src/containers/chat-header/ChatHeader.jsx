@@ -56,27 +56,25 @@ const ChatHeader = ({ onClick }) => {
 
   return (
     <header className="chat-header">
-      <div className="chat-header-wrapper">
-        <div onClick={handleExitChatOnMobile} className="back-btn">
-          <Button
-            className="fixed-btn tertiary with-icon"
-            startIcon={<ArrowBackIosIcon />}
-          ></Button>{" "}
-        </div>
-
-        {data.user1?.displayName && (
-          <>
-            <ProfileImage src={user.photoURL} className={"small-image"} />
-            <span className="chat-header-title">{user.displayName}</span>
-
-            <div className="delete-icon">
-              <DropdownMenu menuOptions={menuOptions}>
-                <MoreVertIcon className="delete-icon" />
-              </DropdownMenu>
-            </div>
-          </>
-        )}
+      <div onClick={handleExitChatOnMobile} className="back-btn">
+        <Button
+          className="fixed-btn tertiary with-icon"
+          startIcon={<ArrowBackIosIcon />}
+        ></Button>{" "}
       </div>
+
+      {data.user1?.displayName && (
+        <>
+          <ProfileImage src={user.photoURL} className={"small-image"} />
+          <h2 className="chat-header-title">{user.displayName}</h2>
+
+          <div className="dropdown-icon-wrapper">
+            <DropdownMenu menuOptions={menuOptions}>
+              <MoreVertIcon className="dropdown-icon" />
+            </DropdownMenu>
+          </div>
+        </>
+      )}
       {isModalOpen && <DeleteChatModal setIsOpen={setIsModalOpen} />}
     </header>
   );
