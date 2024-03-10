@@ -10,17 +10,15 @@ const ThreadsHeader = () => {
   const { windowWidth } = useContext(WindowSizeContext);
 
   return (
-    <header className="thread-header">
-      <div className="thread-header-wrapper">
-        <span className="thread-header-title">Chats</span>
-        <Button
-          className="fixed-btn primary small with-icon"
-          onClick={() => setShow(true)}
-        >
-          {windowWidth >= 800 && "New Chat"}
-          <MapsUgcIcon />
-        </Button>
-      </div>
+    <header className="threads-header">
+      <span className="thread-header-title">Chats</span>
+      <Button
+        className="fixed-btn primary small with-icon"
+        onClick={() => setShow(true)}
+      >
+        {windowWidth >= 800 && "New Chat"}
+        <MapsUgcIcon />
+      </Button>
       {show && <MessageModal show={setShow} setShow={setShow} />}
     </header>
   );
