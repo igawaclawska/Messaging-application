@@ -34,11 +34,8 @@ const MessageModal = ({ show }) => {
         where("uid", "!=", userLogged.uid)
       );
       const unsubscribe = onSnapshot(q, (querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          console.log(`retrieved users${JSON.stringify(users)}`);
-          console.log(doc.id, "=>", doc.data());
-          setUsers((prev) => [...prev, doc.data()]);
-        });
+        const fetchedUsers = querySnapshot.docs.map((doc) => doc.data());
+        setUsers(fetchedUsers);
       });
       return () => {
         unsubscribe();
@@ -56,14 +53,11 @@ const MessageModal = ({ show }) => {
     setFilter(filter);
   };
 
-  const usersFiltered = users
-    //firebase retrieves duplicated data, .slice is only a temporary solution
-    .slice(Math.ceil(users.length / 2), users.length)
-    .filter(
-      (user) =>
-        user.displayName.toLowerCase().includes(filter.toLowerCase()) ||
-        user.email.toLowerCase().includes(filter.toLowerCase())
-    );
+  const usersFiltered = users.filter(
+    (user) =>
+      user.displayName.toLowerCase().includes(filter.toLowerCase()) ||
+      user.email.toLowerCase().includes(filter.toLowerCase())
+  );
 
   const createChat = async () => {
     setLoading(true);
@@ -134,7 +128,6 @@ const MessageModal = ({ show }) => {
         <p className="create-chat-instruction"> Available users:</p>
         <div className="add-receivers">
           <ul className="search-list">
-            {/*TODO: Turn the list below into "radios" to improve accessibility */}
 
             {usersFiltered.length !== 0 ? (
               usersFiltered.map((user, idx) => (
