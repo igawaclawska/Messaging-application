@@ -9,7 +9,8 @@
 }
 
 .chat-header-title {
-  font-weight: bolder;
+  color: var(--grey);
+  font-weight: bold;
   font-size: 16px;
 }
 
@@ -19,14 +20,18 @@
   color: var(--grey3);
 }
 
-.delete-icon {
+.dropdown-icon-wrapper {
   margin-left: auto;
+}
+
+.dropdown-icon {
   cursor: pointer;
   color: var(--grey);
 }
 
-.delete-icon:hover {
-  color: var(--grayOpaque);
+.dropdown-icon:hover {
+  background-color: var(--grey4);
+  border-radius: 50%;
 }
 
 .back-btn {

@@ -66,11 +66,11 @@ const ChatHeader = ({ onClick }) => {
       {data.user1?.displayName && (
         <>
           <ProfileImage src={user.photoURL} className={"small-image"} />
-          <span className="chat-header-title">{user.displayName}</span>
+          <h2 className="chat-header-title">{user.displayName}</h2>
 
-          <div className="delete-icon">
+          <div className="dropdown-icon-wrapper">
             <DropdownMenu menuOptions={menuOptions}>
-              <MoreVertIcon className="delete-icon" />
+              <MoreVertIcon className="dropdown-icon" />
             </DropdownMenu>
           </div>
         </>

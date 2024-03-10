@@ -11,7 +11,7 @@ const ThreadsHeader = () => {
 
   return (
     <header className="threads-header">
-      <span className="thread-header-title">Chats</span>
+      <h2 className="thread-header-title">Chats</h2>
       <Button
         className="fixed-btn primary small with-icon"
         onClick={() => setShow(true)}
