@@ -18,19 +18,30 @@ const ChatBubble = ({ message }) => {
   return (
     <div className={`message ${message.senderId === userLogged.uid}`}>
       <div
-        className={
-          message.senderId === userLogged.uid
-            ? "right-bubble-wrapper"
-            : "left-bubble-wrapper"
-        }
+        className={`bubble-wrapper
+          ${message.senderId === userLogged.uid ? "right" : "left"}
+        `}
       >
         <div
           ref={ref}
-          className={
-            message.senderId === userLogged.uid ? "right-bubble" : "left-bubble"
-          }
+          className={`bubble ${
+            message.senderId === userLogged.uid ? "right" : "left"
+          } `}
         >
-          <span className="message-sent">{message.text}</span>
+          {message.image ? (
+            <img
+              alt="attached"
+              className="sent-image"
+              src={message?.image}
+            ></img>
+          ) : (
+            <img
+              alt="attached"
+              className="sent-image"
+              src="blank-profile-picture.png"
+            ></img>
+          )}
+          <div className="message-sent">{message.text}</div>
         </div>
       </div>{" "}
     </div>
