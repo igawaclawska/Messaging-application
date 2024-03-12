@@ -1,18 +1,42 @@
 import "./SendMessage.css";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { ChatsContext } from "../../context/ChatsContext";
 import { arrayUnion, updateDoc, Timestamp, doc } from "firebase/firestore";
-import { db } from "../../firebase";
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { db, storage } from "../../firebase";
 import { v4 as uuid } from "uuid";
 import MessageButton from "../../components/message-button/MessageButton";
 import MessageInput from "../../components/message-input/MessageInput";
 import EmojiPickerDropdown from "../emoji-picker/EmojiPicker";
+import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 
 const SendMessage = () => {
   const [text, setText] = useState("");
   const { userLogged } = useContext(AuthContext);
   const { data } = useContext(ChatsContext);
+  const [file, setFile] = useState(null);
+  const [downloadUrl, setDownloadUrl] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const uploadFile = async () => {
+      const date = new Date().getTime();
+      const storageRef = ref(storage, `${userLogged.displayName + date}`);
+      if (file) {
+        try {
+          // Upload file to storage
+          await uploadBytesResumable(storageRef, file);
+          // Get download URL
+          const url = await getDownloadURL(storageRef);
+          setDownloadUrl(url);
+        } catch (error) {
+          console.error("Error uploading file:", error);
+        }
+      }
+    };
+    uploadFile();
+  }, [file, userLogged.displayName]);
 
   const handleKey = async (e) => {
     if (text.trim() !== "" && e.keyCode === 13 && !e.shiftKey) {
@@ -21,7 +45,12 @@ const SendMessage = () => {
     }
   };
 
-  const createMessageObject = (text, userLogged, img = "") => ({
+  const handleChange = (e) => {
+    const selectedFile = e.target.files[0];
+    setFile(selectedFile);
+  };
+
+  const createMessageObject = (text, userLogged, img = null) => ({
     id: uuid(),
     text: text,
     senderId: userLogged.uid,
@@ -43,9 +72,9 @@ const SendMessage = () => {
   }
 
   const handleSend = async () => {
-    let message = createMessageObject(text, userLogged);
+    let message = createMessageObject(text, userLogged, downloadUrl);
 
-    if (text.trim() !== "") {
+    if (text.trim() !== "" || downloadUrl !== null) {
       try {
         setText("");
         await updateDoc(doc(db, "chats", data.chatsId), {
@@ -62,6 +91,8 @@ const SendMessage = () => {
           generateUpdatedThreadContent(message, data.chatsId)
         );
         setText("");
+        setDownloadUrl(null);
+        setFile(null);
       } catch (err) {
         console.error(err);
       }
@@ -77,7 +108,16 @@ const SendMessage = () => {
         value={text}
         endButtons={
           <>
-            <EmojiPickerDropdown setText={setText} />
+            <label for="image-upload">
+              <AddPhotoAlternateIcon className="icon-button" />
+            </label>
+            <input
+              className="upload"
+              onChange={handleChange}
+              type="file"
+              id="image-upload"
+              name="filename"
+            />
             <EmojiPickerDropdown setText={setText} />
           </>
         }
