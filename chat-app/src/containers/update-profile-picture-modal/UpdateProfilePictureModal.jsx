@@ -13,53 +13,54 @@ const UpdateProfilePictureModal = ({ setIsOpen }) => {
   const { userLogged } = useContext(AuthContext);
   const [file, setFile] = useState(null);
   const [imageUrl, setImageUrl] = useState(null);
+  const [downloadUrl, setDownloadUrl] = useState(null);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    console.log(file);
+    const uploadFile = async () => {
+      const date = new Date().getTime();
+      const storageRef = ref(storage, `${userLogged.displayName + date}`);
+      if (file !== undefined) {
+        try {
+          // Upload file to storage
+          await uploadBytesResumable(storageRef, file);
+          // Get download URL
+          const url = await getDownloadURL(storageRef);
+          setDownloadUrl(url);
+        } catch (error) {
+          console.error("Error uploading file:", error);
+        }
+      }
+    };
+
+    uploadFile();
   }, [file]);
 
   const handleChange = (e) => {
-    setImageUrl(null);
+    setImageUrl(null); //reset image
     const selectedFile = e.target.files[0];
     setFile(selectedFile);
-
     const imageUrl = URL.createObjectURL(selectedFile);
     setImageUrl(imageUrl);
-
-    console.log(selectedFile);
   };
 
   const addImage = async () => {
     if (file !== null) {
+      setLoading(true);
       try {
-        setLoading(true);
-        const date = new Date().getTime();
-        const storageRef = ref(storage, `${userLogged.displayName + date}`);
-        if (file !== undefined) {
-          await uploadBytesResumable(storageRef, file).then(() => {
-            getDownloadURL(storageRef).then(async (downloadUrl) => {
-              try {
-                await updateProfile(userLogged, {
-                  photoURL: downloadUrl,
-                });
-                await updateDoc(doc(db, "users", userLogged.uid), {
-                  photoURL: downloadUrl,
-                });
-                window.location.reload();
-              } catch (err) {
-                console.error(err);
-              }
-            });
-          });
-        }
+        await updateProfile(userLogged, {
+          photoURL: downloadUrl,
+        });
+        await updateDoc(doc(db, "users", userLogged.uid), {
+          photoURL: downloadUrl,
+        });
       } catch (err) {
         console.error(err);
       } finally {
+        setLoading(false);
       }
     }
     setIsOpen(false);
-    setLoading(false);
   };
 
   return (
