@@ -26,6 +26,7 @@ const SendMessage = () => {
       if (file) {
         try {
           // Upload file to storage
+          setLoading(true);
           await uploadBytesResumable(storageRef, file);
           // Get download URL
           const url = await getDownloadURL(storageRef);
@@ -33,6 +34,7 @@ const SendMessage = () => {
         } catch (error) {
           console.error("Error uploading file:", error);
         }
+        setLoading(false);
       }
     };
     uploadFile();
@@ -78,6 +80,7 @@ const SendMessage = () => {
     if (text.trim() !== "" || downloadUrl !== null) {
       try {
         setText("");
+        setDownloadUrl(null);
         await updateDoc(doc(db, "chats", data.chatsId), {
           messages: arrayUnion(message),
         });
@@ -108,6 +111,7 @@ const SendMessage = () => {
         onChange={(event) => setText(event.target.value)}
         value={text}
         src={downloadUrl}
+        loading={loading}
         endButtons={
           <>
             <label for="image-upload">

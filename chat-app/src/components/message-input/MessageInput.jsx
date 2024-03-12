@@ -1,7 +1,16 @@
 import "./MessageInput.css";
 import { useEffect, useRef } from "react";
+import LottiePlayer from "../lottie-player/LottiePlayer";
 
-const MessageInput = ({ onKeyDown, value, type, onChange, endButtons, src }) => {
+const MessageInput = ({
+  onKeyDown,
+  value,
+  type,
+  onChange,
+  endButtons,
+  src,
+  loading,
+}) => {
   const textAreaHeightRef = useRef(null);
 
   useEffect(() => {
@@ -20,7 +29,20 @@ const MessageInput = ({ onKeyDown, value, type, onChange, endButtons, src }) => 
   return (
     <>
       <div className="text-area-wrapper">
-       {src && <img className="image-to-be-sent" src={src}></img>} 
+        {src && (
+          <div className="img-div">
+            {loading ? (
+              <LottiePlayer
+                src={"spinner.json"}
+                height={"20px"}
+                width={"20px"}
+                speed={0.7}
+              />
+            ) : (
+              <img className="image-to-be-sent" src={src}></img>
+            )}
+          </div>
+        )}
         <textarea
           rows={1}
           ref={textAreaHeightRef}
