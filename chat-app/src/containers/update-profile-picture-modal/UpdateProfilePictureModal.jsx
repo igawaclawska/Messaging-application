@@ -12,7 +12,6 @@ import ProfileImage from "../../components/profile-image/ProfileImage";
 const UpdateProfilePictureModal = ({ setIsOpen }) => {
   const { userLogged } = useContext(AuthContext);
   const [file, setFile] = useState(null);
-  const [imageUrl, setImageUrl] = useState(null);
   const [downloadUrl, setDownloadUrl] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -20,7 +19,7 @@ const UpdateProfilePictureModal = ({ setIsOpen }) => {
     const uploadFile = async () => {
       const date = new Date().getTime();
       const storageRef = ref(storage, `${userLogged.displayName + date}`);
-      if (file !== undefined) {
+      if (file) {
         try {
           // Upload file to storage
           await uploadBytesResumable(storageRef, file);
@@ -32,33 +31,32 @@ const UpdateProfilePictureModal = ({ setIsOpen }) => {
         }
       }
     };
-
     uploadFile();
-  }, [file]);
+  }, [file, userLogged.displayName ]);
 
   const handleChange = (e) => {
-    setImageUrl(null); //reset image
     const selectedFile = e.target.files[0];
     setFile(selectedFile);
-    const imageUrl = URL.createObjectURL(selectedFile);
-    setImageUrl(imageUrl);
+  };
+
+  const updateDatabase = async () => {
+    setLoading(true);
+    try {
+      await updateProfile(userLogged, {
+        photoURL: downloadUrl,
+      });
+      await updateDoc(doc(db, "users", userLogged.uid), {
+        photoURL: downloadUrl,
+      });
+    } catch (err) {
+      console.error(err);
+    }
+    setLoading(false);
   };
 
   const addImage = async () => {
     if (file !== null) {
-      setLoading(true);
-      try {
-        await updateProfile(userLogged, {
-          photoURL: downloadUrl,
-        });
-        await updateDoc(doc(db, "users", userLogged.uid), {
-          photoURL: downloadUrl,
-        });
-      } catch (err) {
-        console.error(err);
-      } finally {
-        setLoading(false);
-      }
+      await updateDatabase();
     }
     setIsOpen(false);
   };
@@ -71,7 +69,9 @@ const UpdateProfilePictureModal = ({ setIsOpen }) => {
         </h1>
       </header>
       <div className="update-img-content">
-        {imageUrl && <ProfileImage src={imageUrl} className={"large-image"} />}
+        {downloadUrl && (
+          <ProfileImage src={downloadUrl} className={"large-image"} />
+        )}
         <input
           className="upload"
           onChange={handleChange}
