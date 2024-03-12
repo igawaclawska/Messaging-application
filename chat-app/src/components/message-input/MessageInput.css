@@ -31,3 +31,8 @@
 textarea:focus, input:focus{
   outline: none;
 }
+
+.image-to-be-sent{
+  height: 40px;
+  width: auto;
+}

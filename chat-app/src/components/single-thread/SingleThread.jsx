@@ -5,7 +5,7 @@ import { collection, query, where, onSnapshot } from "firebase/firestore";
 import { AuthContext } from "../../context/AuthContext";
 import ProfileImage from "../profile-image/ProfileImage";
 
-const SingleThread = ({ onClick, message, className, receiver }) => {
+const SingleThread = ({ onClick, message, className, receiver, image }) => {
   let [user, setUser] = useState({});
   const { userLogged } = useContext(AuthContext);
 
@@ -36,7 +36,9 @@ const SingleThread = ({ onClick, message, className, receiver }) => {
         <p className="single-thread-header">
           <b>{user.displayName}</b>
         </p>
-        <p className="single-thread-message">{message}</p>
+        <p className="single-thread-message">
+          {image ? "📷 image content" : message}
+        </p>
       </div>
     </li>
   );

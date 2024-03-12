@@ -63,6 +63,7 @@ const SendMessage = () => {
     const updateData = {
       [chatsId + ".lastMessage"]: {
         message: message.text,
+        img: message.img,
       },
       [chatsId + ".date"]: {
         date: message.date,
@@ -106,13 +107,14 @@ const SendMessage = () => {
         onKeyDown={handleKey}
         onChange={(event) => setText(event.target.value)}
         value={text}
+        src={downloadUrl}
         endButtons={
           <>
             <label for="image-upload">
               <AddPhotoAlternateIcon className="icon-button" />
             </label>
             <input
-              className="upload"
+              className="uploadmsg"
               onChange={handleChange}
               type="file"
               id="image-upload"

@@ -1,7 +1,7 @@
 import "./MessageInput.css";
 import { useEffect, useRef } from "react";
 
-const MessageInput = ({ onKeyDown, value, type, onChange, endButtons }) => {
+const MessageInput = ({ onKeyDown, value, type, onChange, endButtons, src }) => {
   const textAreaHeightRef = useRef(null);
 
   useEffect(() => {
@@ -20,6 +20,7 @@ const MessageInput = ({ onKeyDown, value, type, onChange, endButtons }) => {
   return (
     <>
       <div className="text-area-wrapper">
+       {src && <img className="image-to-be-sent" src={src}></img>} 
         <textarea
           rows={1}
           ref={textAreaHeightRef}
