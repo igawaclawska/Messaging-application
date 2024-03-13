@@ -8,7 +8,7 @@ const ChatBubble = ({ message }) => {
 
   useEffect(() => {
     ref.current?.scrollIntoView({
-      block: "start",
+      block: "nearest",
       inline: "center",
       behavior: "smooth",
       alignToTop: false,
@@ -18,19 +18,20 @@ const ChatBubble = ({ message }) => {
   return (
     <div className={`message ${message.senderId === userLogged.uid}`}>
       <div
-        className={
-          message.senderId === userLogged.uid
-            ? "right-bubble-wrapper"
-            : "left-bubble-wrapper"
-        }
+        className={`bubble-wrapper
+          ${message.senderId === userLogged.uid ? "right" : "left"}
+        `}
       >
         <div
           ref={ref}
-          className={
-            message.senderId === userLogged.uid ? "right-bubble" : "left-bubble"
-          }
+          className={`bubble ${
+            message.senderId === userLogged.uid ? "right" : "left"
+          } `}
         >
-          <span className="message-sent">{message.text}</span>
+          {message.img && (
+            <img alt="attached" className="sent-image" src={message?.img}></img>
+          )}
+          <div className="message-sent">{message.text}</div>
         </div>
       </div>{" "}
     </div>

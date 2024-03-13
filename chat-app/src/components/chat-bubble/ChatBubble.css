@@ -3,69 +3,78 @@
   font-weight: 400;
   padding-bottom: 2px;
 }
-.right-bubble-wrapper {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  padding: 4px 16px;
-  justify-content: right;
-}
 
-.right-bubble {
-  background-color: var(--blue1);
+.bubble {
+  gap: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   padding: 12px;
-  color: var(--white);
-  border-radius: 16px 16px 2px 16px;
   width: fit-content;
   max-width: 50%;
   transition: 400ms;
+  color: var(--white);
+}
+
+.bubble.left {
+  background-color: var(--grey);
+  border-radius: 16px 16px 16px 2px;
+}
+
+.bubble.right {
+  background-color: var(--blue1);
+  border-radius: 16px 16px 2px 16px;
+}
+
+.sent-image {
+  width: 100%;
+  border-radius: 6px;
+  height: auto;
+  display: block;
 }
 
 .message-sent {
   word-break: break-word;
   height: fit-content;
   font-size: 14px;
-  line-height: 1;
+  line-height: 1.4;
   font-weight: 400;
 }
 
-.left-bubble-wrapper {
+.bubble-wrapper {
   display: flex;
   flex-direction: row;
   width: 100%;
   padding: 4px 16px;
+}
+
+.bubble-wrapper.left {
   justify-content: left;
 }
 
-.left-bubble {
-  background-color: var(--grey);
-  padding: 12px;
-  color: var(--white);
-  border-radius: 16px 16px 16px 2px;
-  width: fit-content;
-  max-width: 50%;
-  transition: 400ms;
+.bubble-wrapper.right {
+  justify-content: right;
 }
 
 @media (max-width: 992px) {
-  .left-bubble,
-  .right-bubble {
+  .bubble.left,
+  .bubble.right {
     max-width: 60%;
     transition: 400ms;
   }
 }
 
 @media (max-width: 768px) {
-  .left-bubble,
-  .right-bubble {
+  .bubble.left,
+  .bubble.right {
     max-width: 70%;
     transition: 400ms;
   }
 }
 
 @media (max-width: 576px) {
-  .left-bubble,
-  .right-bubble {
+  .bubble.left,
+  .bubble.right {
     max-width: 85%;
     transition: 400ms;
   }
