@@ -46,6 +46,7 @@ const ThreadsList = ({ visibility }) => {
               className={`single-thread-list-element ${
                 isActive === chat[1] && "active"
               }`}
+              image={chat[1]?.lastMessage?.img}
               message={chat[1]?.lastMessage?.message}
               onClick={() => {
                 handleSelect(chat[1].messageReceiver);

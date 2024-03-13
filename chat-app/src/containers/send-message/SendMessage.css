@@ -15,6 +15,25 @@
   );
 }
 
+.icon-button {
+  color: var(--blue1);
+  margin:  0 0 8px 0;
+  border: none;
+  cursor: pointer;
+}
+
+.icon-button:hover {
+  color: var(--blue2);
+}
+
+.icon-button:active {
+  color: var(--blue3);
+}
+
+.uploadmsg{
+  display: none;
+}
+
 @media (max-width: 576px) {
   .send-message-wrapper {
     width: 100dvw;

@@ -12,54 +12,53 @@ import ProfileImage from "../../components/profile-image/ProfileImage";
 const UpdateProfilePictureModal = ({ setIsOpen }) => {
   const { userLogged } = useContext(AuthContext);
   const [file, setFile] = useState(null);
-  const [imageUrl, setImageUrl] = useState(null);
+  const [downloadUrl, setDownloadUrl] = useState(null);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    console.log(file);
-  }, [file]);
+    const uploadFile = async () => {
+      const date = new Date().getTime();
+      const storageRef = ref(storage, `${userLogged.displayName + date}`);
+      if (file) {
+        try {
+          // Upload file to storage
+          await uploadBytesResumable(storageRef, file);
+          // Get download URL
+          const url = await getDownloadURL(storageRef);
+          setDownloadUrl(url);
+        } catch (error) {
+          console.error("Error uploading file:", error);
+        }
+      }
+    };
+    uploadFile();
+  }, [file, userLogged.displayName ]);
 
   const handleChange = (e) => {
-    setImageUrl(null);
     const selectedFile = e.target.files[0];
     setFile(selectedFile);
+  };
 
-    const imageUrl = URL.createObjectURL(selectedFile);
-    setImageUrl(imageUrl);
-
-    console.log(selectedFile);
+  const updateDatabase = async () => {
+    setLoading(true);
+    try {
+      await updateProfile(userLogged, {
+        photoURL: downloadUrl,
+      });
+      await updateDoc(doc(db, "users", userLogged.uid), {
+        photoURL: downloadUrl,
+      });
+    } catch (err) {
+      console.error(err);
+    }
+    setLoading(false);
   };
 
   const addImage = async () => {
     if (file !== null) {
-      try {
-        setLoading(true);
-        const date = new Date().getTime();
-        const storageRef = ref(storage, `${userLogged.displayName + date}`);
-        if (file !== undefined) {
-          await uploadBytesResumable(storageRef, file).then(() => {
-            getDownloadURL(storageRef).then(async (downloadUrl) => {
-              try {
-                await updateProfile(userLogged, {
-                  photoURL: downloadUrl,
-                });
-                await updateDoc(doc(db, "users", userLogged.uid), {
-                  photoURL: downloadUrl,
-                });
-                window.location.reload();
-              } catch (err) {
-                console.error(err);
-              }
-            });
-          });
-        }
-      } catch (err) {
-        console.error(err);
-      } finally {
-      }
+      await updateDatabase();
     }
     setIsOpen(false);
-    setLoading(false);
   };
 
   return (
@@ -70,7 +69,9 @@ const UpdateProfilePictureModal = ({ setIsOpen }) => {
         </h1>
       </header>
       <div className="update-img-content">
-        {imageUrl && <ProfileImage src={imageUrl} className={"large-image"} />}
+        {downloadUrl && (
+          <ProfileImage src={downloadUrl} className={"large-image"} />
+        )}
         <input
           className="upload"
           onChange={handleChange}
