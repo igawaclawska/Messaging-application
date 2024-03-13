@@ -1,6 +1,7 @@
 import "./MessageInput.css";
 import { useEffect, useRef } from "react";
 import LottiePlayer from "../lottie-player/LottiePlayer";
+import CancelIcon from '@mui/icons-material/Cancel';
 
 const MessageInput = ({
   onKeyDown,
@@ -10,6 +11,7 @@ const MessageInput = ({
   endButtons,
   src,
   loading,
+  onClick
 }) => {
   const textAreaHeightRef = useRef(null);
 
@@ -33,13 +35,16 @@ const MessageInput = ({
           <div className="img-div">
             {loading ? (
               <LottiePlayer
-                src={"spinner.json"}
-                height={"20px"}
-                width={"20px"}
+                src={"spinner-grey.json"}
+                height={"24px"}
+                width={"24px"}
                 speed={0.7}
               />
             ) : (
+              <>
+              <CancelIcon onClick={onClick} fontSize="small" className="remove-img"/>
               <img className="image-to-be-sent" src={src}></img>
+              </>
             )}
           </div>
         )}

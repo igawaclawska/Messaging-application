@@ -3,7 +3,13 @@ import { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { ChatsContext } from "../../context/ChatsContext";
 import { arrayUnion, updateDoc, Timestamp, doc } from "firebase/firestore";
-import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import {
+  getStorage,
+  deleteObject,
+  ref,
+  uploadBytesResumable,
+  getDownloadURL,
+} from "firebase/storage";
 import { db, storage } from "../../firebase";
 import { v4 as uuid } from "uuid";
 import MessageButton from "../../components/message-button/MessageButton";
@@ -21,14 +27,14 @@ const SendMessage = () => {
 
   useEffect(() => {
     const uploadFile = async () => {
-      const date = new Date().getTime();
-      const storageRef = ref(storage, `${userLogged.displayName + date}`);
+      const storageRef = ref(
+        storage,
+        `ImageSentViaChat-by-${userLogged.displayName}-${uuid()}`
+      );
       if (file) {
         try {
-          // Upload file to storage
           setLoading(true);
           await uploadBytesResumable(storageRef, file);
-          // Get download URL
           const url = await getDownloadURL(storageRef);
           setDownloadUrl(url);
         } catch (error) {
@@ -38,7 +44,7 @@ const SendMessage = () => {
       }
     };
     uploadFile();
-  }, [file, userLogged.displayName]);
+  }, [file]);
 
   const handleKey = async (e) => {
     if (text.trim() !== "" && e.keyCode === 13 && !e.shiftKey) {
@@ -50,6 +56,22 @@ const SendMessage = () => {
   const handleChange = (e) => {
     const selectedFile = e.target.files[0];
     setFile(selectedFile);
+    console.log(file);
+  };
+
+  const resetImage = async () => {
+    const storage = getStorage();
+    const desertRef = ref(storage, downloadUrl);
+    deleteObject(desertRef)
+      .then(() => {
+        console.log("file deleted");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+
+    setDownloadUrl(null);
+    setFile(null);
   };
 
   const createMessageObject = (text, userLogged, img = null) => ({
@@ -108,6 +130,7 @@ const SendMessage = () => {
       <MessageInput
         type="text"
         onKeyDown={handleKey}
+        onClick={resetImage}
         onChange={(event) => setText(event.target.value)}
         value={text}
         src={downloadUrl}
@@ -121,8 +144,13 @@ const SendMessage = () => {
               className="uploadmsg"
               onChange={handleChange}
               type="file"
+              accept="image/png, image/gif, image/jpeg"
               id="image-upload"
               name="filename"
+              //reason for the onclick below https://stackoverflow.com/questions/4109276/how-to-detect-input-type-file-change-for-the-same-file
+              onClick={(e) => {
+                e.target.value = "";
+              }}
             />
             <EmojiPickerDropdown setText={setText} />
           </>
