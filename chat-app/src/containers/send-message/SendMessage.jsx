@@ -1,16 +1,10 @@
 import "./SendMessage.css";
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { ChatsContext } from "../../context/ChatsContext";
 import { arrayUnion, updateDoc, Timestamp, doc } from "firebase/firestore";
-import {
-  getStorage,
-  deleteObject,
-  ref,
-  uploadBytesResumable,
-  getDownloadURL,
-} from "firebase/storage";
-import { db, storage } from "../../firebase";
+import { useUploadFiles } from "../../hooks/useUploadFile";
+import { db } from "../../firebase";
 import { v4 as uuid } from "uuid";
 import MessageButton from "../../components/message-button/MessageButton";
 import MessageInput from "../../components/message-input/MessageInput";
@@ -21,30 +15,15 @@ const SendMessage = () => {
   const [text, setText] = useState("");
   const { userLogged } = useContext(AuthContext);
   const { data } = useContext(ChatsContext);
-  const [file, setFile] = useState(null);
-  const [downloadUrl, setDownloadUrl] = useState(null);
-  const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    const uploadFile = async () => {
-      const storageRef = ref(
-        storage,
-        `ImageSentViaChat-by-${userLogged.displayName}-${uuid()}`
-      );
-      if (file) {
-        try {
-          setLoading(true);
-          await uploadBytesResumable(storageRef, file);
-          const url = await getDownloadURL(storageRef);
-          setDownloadUrl(url);
-        } catch (error) {
-          console.error("Error uploading file:", error);
-        }
-        setLoading(false);
-      }
-    };
-    uploadFile();
-  }, [file]);
+  const {
+    loadingImg,
+    downloadUrl,
+    setDownloadUrl,
+    setFile,
+    cancelUpload,
+    handleSelectFile,
+  } = useUploadFiles(userLogged);
 
   const handleKey = async (e) => {
     if (text.trim() !== "" && e.keyCode === 13 && !e.shiftKey) {
@@ -53,41 +32,20 @@ const SendMessage = () => {
     }
   };
 
-  const handleChange = (e) => {
-    const selectedFile = e.target.files[0];
-    setFile(selectedFile);
-    console.log(file);
-  };
-
-  const resetImage = async () => {
-    const storage = getStorage();
-    const desertRef = ref(storage, downloadUrl);
-    deleteObject(desertRef)
-      .then(() => {
-        console.log("file deleted");
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-
-    setDownloadUrl(null);
-    setFile(null);
-  };
-
-  const createMessageObject = (text, userLogged, img = null) => ({
+  const createMessageObject = (text, userLogged, imgUrl = null) => ({
     id: uuid(),
     text: text,
     senderId: userLogged.uid,
     senderName: userLogged.displayName,
     date: Timestamp.now(),
-    img: img,
+    img: imgUrl,
   });
 
   function generateUpdatedThreadContent(message, chatsId) {
     const updateData = {
       [chatsId + ".lastMessage"]: {
         message: message.text,
-        img: message.img,
+        img: message.imgUrl,
       },
       [chatsId + ".date"]: {
         date: message.date,
@@ -130,11 +88,11 @@ const SendMessage = () => {
       <MessageInput
         type="text"
         onKeyDown={handleKey}
-        onClick={resetImage}
+        onClick={cancelUpload}
         onChange={(event) => setText(event.target.value)}
         value={text}
         src={downloadUrl}
-        loading={loading}
+        loading={loadingImg}
         endButtons={
           <>
             <label for="image-upload">
@@ -142,7 +100,7 @@ const SendMessage = () => {
             </label>
             <input
               className="uploadmsg"
-              onChange={handleChange}
+              onChange={handleSelectFile}
               type="file"
               accept="image/png, image/gif, image/jpeg"
               id="image-upload"
