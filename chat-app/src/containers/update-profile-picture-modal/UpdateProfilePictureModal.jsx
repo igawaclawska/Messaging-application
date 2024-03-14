@@ -1,43 +1,24 @@
 import "./UpdateProfilePictureModal.css";
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
-import { db, storage } from "../../firebase";
+import { db } from "../../firebase";
 import { doc, updateDoc } from "firebase/firestore";
-import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { updateProfile } from "firebase/auth";
+import { useUploadFiles } from "../../hooks/useUploadFile";
 import Button from "../../components/button/Button";
 import Modal from "../../components/shared/Modal";
 import ProfileImage from "../../components/profile-image/ProfileImage";
 
 const UpdateProfilePictureModal = ({ setIsOpen }) => {
   const { userLogged } = useContext(AuthContext);
-  const [file, setFile] = useState(null);
-  const [downloadUrl, setDownloadUrl] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    const uploadFile = async () => {
-      const date = new Date().getTime();
-      const storageRef = ref(storage, `${userLogged.displayName + date}`);
-      if (file) {
-        try {
-          // Upload file to storage
-          await uploadBytesResumable(storageRef, file);
-          // Get download URL
-          const url = await getDownloadURL(storageRef);
-          setDownloadUrl(url);
-        } catch (error) {
-          console.error("Error uploading file:", error);
-        }
-      }
-    };
-    uploadFile();
-  }, [file, userLogged.displayName ]);
-
-  const handleChange = (e) => {
-    const selectedFile = e.target.files[0];
-    setFile(selectedFile);
-  };
+  const {
+    file,
+    downloadUrl,
+    cancelUpload,
+    handleSelectFile,
+  } = useUploadFiles(userLogged);
 
   const updateDatabase = async () => {
     setLoading(true);
@@ -74,7 +55,7 @@ const UpdateProfilePictureModal = ({ setIsOpen }) => {
         )}
         <input
           className="upload"
-          onChange={handleChange}
+          onChange={handleSelectFile}
           type="file"
           id="myFile"
           name="filename"
@@ -83,7 +64,7 @@ const UpdateProfilePictureModal = ({ setIsOpen }) => {
       <div className="delete-chat-footer">
         <Button
           className="fluid-btn secondary no-margin"
-          onClick={() => setIsOpen(false)}
+          onClick={() => {setIsOpen(false); cancelUpload()}}
         >
           Cancel
         </Button>
