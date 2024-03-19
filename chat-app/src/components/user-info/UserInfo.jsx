@@ -1,21 +1,23 @@
 import "./UserInfo.css";
 import ProfileImage from "../profile-image/ProfileImage";
 
-const UserInfo = ({ onClick, value, idx, className, user }) => {
+const UserInfo = ({
+  onClick,
+  value,
+  className,
+  photoURL,
+  email,
+  displayName,
+  uid,
+}) => {
   return (
-    <li
-      className={className}
-      value={value}
-      onClick={onClick}
-      uid={user?.uid}
-      idx={idx}
-    >
-      <ProfileImage src={user?.photoURL} className={"small-image"} />
+    <li className={className} value={value} onClick={onClick} uid={uid}>
+      <ProfileImage src={photoURL} className={"small-image"} />
       <div>
         <p className="user-info-name">
-          <b>{user?.displayName}</b>
+          <b>{displayName}</b>
         </p>
-        <p className="user-info-email">{user?.email}</p>
+        <p className="user-info-email">{email}</p>
       </div>
     </li>
   );
