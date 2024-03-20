@@ -33,9 +33,9 @@ const ThreadsList = ({ visibility }) => {
     dispatch({ type: "INDIVIDUAL_CHAT", payload: user });
   };
 
-  const handleClick = (chat) => {
+  const handleClick = (chat, idx) => {
     handleSelect(chat[1].messageReceiver);
-    setIsActive(chat[1]);
+    setIsActive(idx);
     visibility && visibility();
   };
 
@@ -45,15 +45,15 @@ const ThreadsList = ({ visibility }) => {
       <nav className="thread-list">
         {Object?.entries(chats)
           ?.sort((a, b) => b[1].date?.date - a[1].date?.date)
-          ?.map((chat) => (
+          ?.map((chat, idx) => (
             <SingleThread
               {...chat[1]}
-              key={chat[0]}
+              key={idx}
               className={`single-thread-list-element ${
-                isActive === chat[1] && "active"
+                isActive === idx && "active"
               }`}
               onClick={() => {
-                handleClick(chat);
+                handleClick(chat, idx);
               }}
             ></SingleThread>
           ))}
