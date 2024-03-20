@@ -8,10 +8,10 @@ const ChatBubble = ({ senderId, text, img }) => {
 
   useEffect(() => {
     ref.current?.scrollIntoView({
-      block: "nearest",
-      inline: "center",
+      block: "end",
+      inline: "nearest",
       behavior: "smooth",
-      alignToTop: false,
+      // alignToTop: false,
     });
   }, [text, img]);
 
