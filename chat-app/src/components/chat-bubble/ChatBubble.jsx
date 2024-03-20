@@ -11,8 +11,9 @@ const ChatBubble = ({ senderId, text, img }) => {
       block: "end",
       inline: "nearest",
       behavior: "smooth",
-      // alignToTop: false,
+      alignToTop: false,
     });
+    console.log(`allignment rendered`);
   }, [text, img]);
 
   return (
