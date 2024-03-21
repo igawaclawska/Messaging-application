@@ -50,7 +50,7 @@ const ThreadsList = ({ visibility }) => {
               {...chat[1]}
               key={chat[0]}
               className={`single-thread-list-element ${
-                isActive === idx && "active"
+                isActive === chat[0] && "active"
               }`}
               onClick={() => {
                 handleClick(chat);
