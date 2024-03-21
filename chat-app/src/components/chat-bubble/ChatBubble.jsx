@@ -2,36 +2,35 @@ import "./ChatBubble.css";
 import { useContext, useEffect, useRef } from "react";
 import { AuthContext } from "../../context/AuthContext";
 
-const ChatBubble = ({ message }) => {
+const ChatBubble = ({ senderId, text, img }) => {
   const { userLogged } = useContext(AuthContext);
   const ref = useRef();
 
   useEffect(() => {
-    ref.current?.scrollIntoView({
-      block: "nearest",
-      inline: "center",
+    ref.current.scrollIntoView({
+      block: "end",
+      inline: "nearest",
       behavior: "smooth",
       alignToTop: false,
     });
-  }, [message]);
+    console.log(`allignment rendered`);
+  }, [ref.current]);
 
   return (
-    <div className={`message ${message.senderId === userLogged.uid}`}>
+    <div className={`message ${senderId === userLogged.uid}`}>
       <div
         className={`bubble-wrapper
-          ${message.senderId === userLogged.uid ? "right" : "left"}
+          ${senderId === userLogged.uid ? "right" : "left"}
         `}
       >
         <div
           ref={ref}
           className={`bubble ${
-            message.senderId === userLogged.uid ? "right" : "left"
+            senderId === userLogged.uid ? "right" : "left"
           } `}
         >
-          {message.img && (
-            <img alt="attached" className="sent-image" src={message?.img}></img>
-          )}
-          <div className="message-sent">{message.text}</div>
+          {img && <img alt="attached" className="sent-image" src={img}></img>}
+          <div className="message-sent">{text}</div>
         </div>
       </div>{" "}
     </div>

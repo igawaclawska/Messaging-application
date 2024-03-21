@@ -45,7 +45,7 @@ const SendMessage = () => {
     const updateData = {
       [chatsId + ".lastMessage"]: {
         message: message.text,
-        img: message.imgUrl,
+        img: message.img,
       },
       [chatsId + ".date"]: {
         date: message.date,

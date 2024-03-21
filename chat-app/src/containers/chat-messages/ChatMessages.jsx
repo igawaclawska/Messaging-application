@@ -12,7 +12,7 @@ const ChatMessages = () => {
     <div className="bubbles-scrollable">
       {messages &&
         messages?.map((message) => (
-          <ChatBubble message={message} key={message.id} />
+          <ChatBubble { ...message } key={message.id} />
         ))}
     </div>
   );

@@ -5,7 +5,12 @@ import { collection, query, where, onSnapshot } from "firebase/firestore";
 import { AuthContext } from "../../context/AuthContext";
 import ProfileImage from "../profile-image/ProfileImage";
 
-const SingleThread = ({ onClick, message, className, receiver, image }) => {
+const SingleThread = ({
+  onClick,
+  className,
+  messageReceiver,
+  lastMessage,
+}) => {
   let [user, setUser] = useState({});
   const { userLogged } = useContext(AuthContext);
 
@@ -13,7 +18,7 @@ const SingleThread = ({ onClick, message, className, receiver, image }) => {
     const getUsers = async () => {
       const q = query(
         collection(db, "users"),
-        where("uid", "==", receiver.uid)
+        where("uid", "==", messageReceiver.uid)
       );
       const unsubscribe = onSnapshot(q, (querySnapshot) => {
         querySnapshot.forEach((doc) => {
@@ -37,7 +42,7 @@ const SingleThread = ({ onClick, message, className, receiver, image }) => {
           <b>{user.displayName}</b>
         </p>
         <p className="single-thread-message">
-          {image ? "📷 image content" : message}
+          {lastMessage?.img ? "📷 image content" : lastMessage?.message}
         </p>
       </div>
     </li>
@@ -48,7 +53,7 @@ SingleThread.defaultProps = {
   groupName: "",
   className: "single-thread",
   receiver1: "name1",
-  message: "Start conversation with this user...",
+  lastMessage: { message: "Start conversation with this user..." },
 };
 
 export default SingleThread;

@@ -131,11 +131,10 @@ const CreateChatModal = ({ show }) => {
             {usersFiltered.length !== 0 ? (
               usersFiltered.map((user, idx) => (
                 <UserInfo
+                  {...user}
                   className={`user-info ${isActive === user && "active"}`}
                   onClick={() => handleSelect(user)}
                   key={idx}
-                  user={user}
-                  idx={idx}
                 />
               ))
             ) : (
