@@ -7,14 +7,14 @@ const ChatBubble = ({ senderId, text, img }) => {
   const ref = useRef();
 
   useEffect(() => {
-    ref.current?.scrollIntoView({
+    ref.current.scrollIntoView({
       block: "end",
       inline: "nearest",
       behavior: "smooth",
       alignToTop: false,
     });
     console.log(`allignment rendered`);
-  }, [text, img]);
+  }, [ref.current]);
 
   return (
     <div className={`message ${senderId === userLogged.uid}`}>

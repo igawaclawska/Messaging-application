@@ -1,8 +1,9 @@
 .chat-area {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  height: 92dvh;
+  justify-content: flex-start;
+  height: calc(100dvh - 56px); 
+  padding-bottom: 104px;
   width: 70%;
   border-left: 0.5px solid var(--lightgrey);
 }

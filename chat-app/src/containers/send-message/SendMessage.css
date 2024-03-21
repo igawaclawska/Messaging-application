@@ -1,18 +1,12 @@
 .send-message-wrapper {
   background-color: var(--white);
-  /* position: absolute; */
-  /* bottom: 0; */
+  position: absolute;
+  bottom: 0;
   display: flex;
   flex-direction: row;
   align-items: flex-end;
   padding: 0px 8px 8px 8px;
-  /* width: 70dvw; */
-  /* background: linear-gradient(
-    to bottom,
-    rgba(255, 255, 255, 0.9) 0%,
-    rgba(255, 255, 255, 1) 100%,
-    rgba(255, 255, 255, 1) 100%
-  ); */
+  width: 70dvw;
 }
 
 .icon-button {
