@@ -33,9 +33,9 @@ const ThreadsList = ({ visibility }) => {
     dispatch({ type: "INDIVIDUAL_CHAT", payload: user });
   };
 
-  const handleClick = (chat, idx) => {
+  const handleClick = (chat) => {
     handleSelect(chat[1].messageReceiver);
-    setIsActive(idx);
+    setIsActive(chat[0]);
     visibility && visibility();
   };
 
@@ -48,12 +48,12 @@ const ThreadsList = ({ visibility }) => {
           ?.map((chat, idx) => (
             <SingleThread
               {...chat[1]}
-              key={idx}
+              key={chat[0]}
               className={`single-thread-list-element ${
                 isActive === idx && "active"
               }`}
               onClick={() => {
-                handleClick(chat, idx);
+                handleClick(chat);
               }}
             ></SingleThread>
           ))}
