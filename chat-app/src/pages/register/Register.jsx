@@ -19,7 +19,7 @@ export const Register = () => {
     handlePassword,
     displayName,
     handleDisplayName,
-  } = useAuthFormData();
+   } = useAuthFormData();
 
   const writeUserData = async () => {
     try {
@@ -89,6 +89,7 @@ export const Register = () => {
             id="full-name"
             label="Full name"
             type="text"
+            value={displayName.value}
             onChange={handleDisplayName}
             helperText={displayName.error}
             onBlur={handleDisplayName}
