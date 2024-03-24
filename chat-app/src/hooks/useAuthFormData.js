@@ -25,12 +25,12 @@ export const useAuthFormData = () => {
     firstAttempt: true,
   });
 
-  const adaptState = (prevState, event, testFunction) => {
+  const adaptState = (state, event, testFunction) => {
     const input = event.target.value;
     let errorMsg = testFunction(input);
-    let newState = { ...prevState, value: input };
+    let newState = { ...state, value: input };
 
-    if (prevState.firstAttempt !== true) {
+    if (state.firstAttempt !== true) {
       newState = { ...newState, error: errorMsg };
     }
     if (event.type === "blur") {
@@ -41,23 +41,19 @@ export const useAuthFormData = () => {
   };
 
   const handleEmail = (event) => {
-    setEmail((prevState) => adaptState(prevState, event, testEmail));
+    setEmail(adaptState(email, event, testEmail));
   };
 
   const handlePassword = (event) => {
-    setPassword((prevState) => adaptState(prevState, event, testPassword));
+    setPassword(adaptState(password, event, testPassword));
   };
 
   const handleExistingPassword = (event) => {
-    setPassword((prevState) =>
-      adaptState(prevState, event, testPasswordExistence)
-    );
+    setPassword(adaptState(password, event, testPasswordExistence));
   };
 
   const handleDisplayName = (event) => {
-    setDisplayName((prevState) =>
-      adaptState(prevState, event, testDisplayName)
-    );
+    setDisplayName(adaptState(displayName, event, testDisplayName));
   };
 
   return {
