@@ -11,23 +11,20 @@ export const Login = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const { email, handleEmail, existingPassword, handleExistingPassword } =
-    useAuthFormData();
+  const {
+    email,
+    emailError,
+    handleEmail,
+    existingPassword,
+    existingPasswordError,
+    handleExistingPassword,
+  } = useAuthFormData();
 
   const handleSubmit = async () => {
-    if (
-      email.value &&
-      existingPassword.value &&
-      !email.error &&
-      !existingPassword.error
-    ) {
+    if (email && existingPassword && !emailError && !existingPasswordError) {
       setLoading(true);
       try {
-        await signInWithEmailAndPassword(
-          auth,
-          email.value,
-          existingPassword.value
-        );
+        await signInWithEmailAndPassword(auth, email, existingPassword);
         toMain();
       } catch (err) {
         console.error(err);
@@ -60,10 +57,10 @@ export const Login = () => {
               id="email"
               label="E-mail"
               type="email"
-              helperText={email.error}
+              helperText={emailError}
               onChange={handleEmail}
               onBlur={handleEmail}
-              error={email.error}
+              error={emailError}
             ></InputField>
           </div>
           <div className="input-element">
@@ -72,10 +69,10 @@ export const Login = () => {
               id="password"
               label="Password"
               type="password"
-              helperText={existingPassword.error}
+              helperText={existingPasswordError}
               onChange={handleExistingPassword}
               onBlur={handleExistingPassword}
-              error={existingPassword.error}
+              error={existingPasswordError}
             ></InputField>
           </div>
           {error && <p className="error-msg">{error}</p>}

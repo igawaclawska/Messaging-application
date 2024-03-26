@@ -7,25 +7,30 @@ import {
 } from "../utils/validation";
 
 export const useAuthFormData = () => {
-  const [email, handleEmail] = useAuthInputField("", testEmail);
-  const [password, handlePassword] = useAuthInputField("", testPassword);
-  const [existingPassword, handleExistingPassword] = useAuthInputField(
+  const [email, emailError, handleEmail] = useAuthInputField("", testEmail);
+  const [password, passwordError, handlePassword] = useAuthInputField(
     "",
-    testPasswordExistence
+    testPassword
   );
-  const [displayName, handleDisplayName] = useAuthInputField(
+  const [existingPassword, existingPasswordError, handleExistingPassword] =
+    useAuthInputField("", testPasswordExistence);
+  const [displayName, displayNameError, handleDisplayName] = useAuthInputField(
     "",
     testDisplayName
   );
 
   return {
     email,
+    emailError,
     handleEmail,
     password,
+    passwordError,
     handlePassword,
     existingPassword,
+    existingPasswordError,
     handleExistingPassword,
     displayName,
+    displayNameError,
     handleDisplayName,
   };
 };

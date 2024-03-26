@@ -28,7 +28,7 @@ const useAuthInputField = (initialValue, validationFunction) => {
     return newState;
   };
 
-  return [state, handleState];
+  return [state.value, state.error, handleState];
 };
 
 export default useAuthInputField;
