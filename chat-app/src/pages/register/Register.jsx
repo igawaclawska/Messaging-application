@@ -14,21 +14,20 @@ export const Register = () => {
 
   const {
     email,
+    emailError,
     handleEmail,
     password,
+    passwordError,
     handlePassword,
     displayName,
+    displayNameError,
     handleDisplayName,
   } = useAuthFormData();
 
   const writeUserData = async () => {
     try {
       setLoading(true);
-      const res = await createUserWithEmailAndPassword(
-        auth,
-        email.value,
-        password.value
-      );
+      const res = await createUserWithEmailAndPassword(auth, email, password);
       try {
         await updateProfile(res.user, {
           displayName: displayName.value,
@@ -36,9 +35,9 @@ export const Register = () => {
         console.log(res);
         await setDoc(doc(db, "users", res.user.uid), {
           uid: res.user.uid,
-          displayName: displayName.value,
-          displayNameLowerCase: displayName.value.toLowerCase(),
-          email: email.value,
+          displayName: displayName,
+          displayNameLowerCase: displayName.toLowerCase(),
+          email: email,
         });
         await setDoc(doc(db, "userChats", res.user.uid), {});
         navigateToMain();
@@ -67,12 +66,12 @@ export const Register = () => {
   function registerUser(e) {
     e.preventDefault();
     if (
-      displayName.value &&
-      email.value &&
-      password.value &&
-      !displayName.error &&
-      !email.error &&
-      !password.error
+      displayName &&
+      email &&
+      password &&
+      !displayNameError &&
+      !emailError &&
+      !passwordError
     ) {
       writeUserData();
     }
@@ -89,10 +88,11 @@ export const Register = () => {
             id="full-name"
             label="Full name"
             type="text"
+            value={displayName}
             onChange={handleDisplayName}
-            helperText={displayName.error}
+            helperText={displayNameError}
             onBlur={handleDisplayName}
-            error={displayName.error}
+            error={displayNameError}
           ></InputField>
           <InputField
             className="input-email"
@@ -101,9 +101,9 @@ export const Register = () => {
             placeholder="example@email.com"
             type="email"
             onChange={handleEmail}
-            helperText={email.error}
+            helperText={emailError}
             onBlur={handleEmail}
-            error={email.error}
+            error={emailError}
           ></InputField>
           <InputField
             className="input-password"
@@ -113,8 +113,8 @@ export const Register = () => {
             type="password"
             onChange={handlePassword}
             onBlur={handlePassword}
-            helperText={password.error}
-            error={password.error}
+            helperText={passwordError}
+            error={passwordError}
           ></InputField>
           <Button
             className="fluid-btn primary"

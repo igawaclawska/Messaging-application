@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState, useLayoutEffect } from "react";
 
 export const WindowSizeContext = createContext();
 
@@ -6,7 +6,7 @@ export const WindowSizeContextProvider = ({ children }) => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   // updates the width variable value in real time
-  useEffect(() => {
+  useLayoutEffect(() => {
     const handleResize = () => {
       setWindowWidth(window.innerWidth);
     };
